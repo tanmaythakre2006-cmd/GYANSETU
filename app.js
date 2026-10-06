@@ -178,6 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
       updatePlayIcons(true);
       heroVisualizer.classList.add('active');
       highlightActiveCard();
+      if (typeof trackEpisodePlay === 'function') {
+        trackEpisodePlay(currentEpisodeIndex);
+      }
     }).catch(err => {
       console.warn('Playback error or user gesture required:', err);
       isPlaying = false;
@@ -453,8 +456,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 8. REAL-TIME LISTENER & GEOLOCATION ANALYTICS ENGINE
+  // 8. REAL-TIME LISTENER & GEOLOCATION ANALYTICS ENGINE (POWERED BY FIREBASE)
   // ==========================================================================
+  const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyB4XlBzKLUoORea4MYiGBXvM7Ul0VEJ-8Y",
+    authDomain: "gyansetu-be409.firebaseapp.com",
+    databaseURL: "https://gyansetu-be409-default-rtdb.firebaseio.com",
+    projectId: "gyansetu-be409",
+    storageBucket: "gyansetu-be409.firebasestorage.app",
+    messagingSenderId: "340853834749",
+    appId: "1:340853834749:web:c80e36bbbcecf3b5260f94",
+    measurementId: "G-K1P7HPG0DW"
+  };
+
   const BASELINE_DATA = {
     total: 215,
     countries: {
@@ -468,6 +482,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const STORAGE_KEY = 'gyansetu_live_analytics_v3';
   let analyticsState = loadAnalyticsState();
+  let userDetectedCountry = 'IN';
+  let lastTrackedEpisodeId = null;
+  let lastTrackedTime = 0;
+  let firebaseDb = null;
+  let isFirebaseConnected = false;
 
   function loadAnalyticsState() {
     try {
@@ -503,14 +522,35 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  function renderAnalyticsUI(highlightCountry = null) {
+  function updateStatusBadge(message) {
+    const statusBadge = document.getElementById('live-status-text');
+    if (statusBadge) {
+      statusBadge.innerHTML = `<span class="pulse-beacon-teal-inline"></span> ${message}`;
+      if (statusBadge._timer) clearTimeout(statusBadge._timer);
+      statusBadge._timer = setTimeout(() => {
+        statusBadge.innerHTML = `<span class="pulse-beacon-teal-inline"></span> Live Stream Sync`;
+      }, 4000);
+    }
+  }
+
+  function renderAnalyticsUI(highlightCountry = null, triggerFlash = false) {
+    if (!analyticsState.countries || !analyticsState.countries.IN) {
+      analyticsState.countries = BASELINE_DATA.countries;
+    }
     const pcts = calculatePercentages(analyticsState);
 
     // KPI values
     const kpiIndiaPct = document.getElementById('kpi-india-pct');
     const kpiTotalViews = document.getElementById('kpi-total-views');
     if (kpiIndiaPct) kpiIndiaPct.textContent = `${pcts.IN}%`;
-    if (kpiTotalViews) kpiTotalViews.textContent = Number(analyticsState.total).toLocaleString();
+    if (kpiTotalViews) {
+      kpiTotalViews.textContent = Number(analyticsState.total).toLocaleString();
+      if (triggerFlash) {
+        kpiTotalViews.classList.remove('kpi-updated-pulse');
+        void kpiTotalViews.offsetWidth; // trigger reflow
+        kpiTotalViews.classList.add('kpi-updated-pulse');
+      }
+    }
 
     // Unified distribution bar segments
     const segIndia = document.getElementById('seg-india');
@@ -617,6 +657,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('GeoIP lookup fallback to local baseline');
     }
 
+    userDetectedCountry = countryCode;
+
     // Update detected region badge
     const detectedRegionElem = document.getElementById('kpi-detected-country');
     const flagEmojis = { IN: '🇮🇳', ZM: '🇿🇲', UG: '🇺🇬', US: '🇺🇸', AU: '🇦🇺' };
@@ -635,21 +677,115 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function recordListenerPing(countryCode, flashCard = true) {
+  function recordListenerPing(countryCode, flashCard = true, episodeId = null) {
     const validCodes = ['IN', 'ZM', 'UG', 'US', 'AU'];
     const targetCode = validCodes.includes(countryCode) ? countryCode : 'IN';
 
-    analyticsState.total += 1;
-    analyticsState.countries[targetCode].count += 1;
-    saveAnalyticsState();
-    renderAnalyticsUI(flashCard ? targetCode : null);
+    if (firebaseDb && isFirebaseConnected) {
+      // 1. Atomic increment total
+      firebaseDb.ref('analytics/total').transaction((curr) => {
+        return (typeof curr === 'number') ? curr + 1 : 216;
+      });
 
-    const statusBadge = document.getElementById('live-status-text');
-    if (statusBadge) {
-      statusBadge.innerHTML = `<span class="pulse-beacon-teal-inline"></span> Ping Logged (${analyticsState.countries[targetCode].flag} ${analyticsState.countries[targetCode].name})`;
-      setTimeout(() => {
-        statusBadge.innerHTML = `<span class="pulse-beacon-teal-inline"></span> Live Stream Sync`;
-      }, 4000);
+      // 2. Atomic increment country count
+      firebaseDb.ref(`analytics/countries/${targetCode}/count`).transaction((curr) => {
+        return (typeof curr === 'number') ? curr + 1 : 1;
+      });
+
+      // 3. Atomic increment episode listens if episode provided
+      if (episodeId) {
+        firebaseDb.ref(`analytics/episodes/${episodeId}/listens`).transaction((curr) => {
+          return (typeof curr === 'number') ? curr + 1 : 1;
+        });
+      }
+
+      // 4. Update last ping metadata
+      firebaseDb.ref('analytics/last_updated').set(Date.now());
+      firebaseDb.ref('analytics/last_country').set(targetCode);
+
+      if (flashCard) {
+        renderAnalyticsUI(targetCode, true);
+      }
+    } else {
+      // Local fallback
+      analyticsState.total = (analyticsState.total || 215) + 1;
+      if (!analyticsState.countries[targetCode]) {
+        analyticsState.countries[targetCode] = { name: targetCode, count: 0, flag: '🌐' };
+      }
+      analyticsState.countries[targetCode].count += 1;
+      saveAnalyticsState();
+      renderAnalyticsUI(flashCard ? targetCode : null, true);
+    }
+
+    const flag = (analyticsState.countries && analyticsState.countries[targetCode]) ? analyticsState.countries[targetCode].flag : '🌐';
+    const name = (analyticsState.countries && analyticsState.countries[targetCode]) ? analyticsState.countries[targetCode].name : targetCode;
+    updateStatusBadge(`Stream Ping Logged (${flag} ${name})`);
+  }
+
+  function trackEpisodePlay(epIndex) {
+    const ep = GYAN_SETU_EPISODES[epIndex];
+    if (!ep) return;
+    const now = Date.now();
+    if (lastTrackedEpisodeId === ep.id && (now - lastTrackedTime) < 2500) {
+      return;
+    }
+    lastTrackedEpisodeId = ep.id;
+    lastTrackedTime = now;
+
+    recordListenerPing(userDetectedCountry, true, ep.id);
+  }
+
+  function initFirebaseRealtimeSync() {
+    try {
+      if (typeof firebase !== 'undefined') {
+        if (!firebase.apps || !firebase.apps.length) {
+          firebase.initializeApp(FIREBASE_CONFIG);
+          try {
+            if (typeof firebase.analytics === 'function') {
+              firebase.analytics();
+            }
+          } catch (e) { /* analytics optional */ }
+        }
+        firebaseDb = firebase.database();
+        isFirebaseConnected = true;
+
+        const analyticsRef = firebaseDb.ref('analytics');
+        let initialLoadDone = false;
+
+        // WebSocket Real-time listener: triggers whenever ANY client mutates data
+        analyticsRef.on('value', (snapshot) => {
+          const val = snapshot.val();
+          if (val && typeof val.total === 'number') {
+            const previousTotal = analyticsState ? analyticsState.total : 0;
+            const isRemoteIncrease = initialLoadDone && (val.total > previousTotal);
+
+            analyticsState = {
+              total: val.total,
+              countries: (val.countries && val.countries.IN) ? val.countries : BASELINE_DATA.countries,
+              episodes: val.episodes || {},
+              last_country: val.last_country || 'IN',
+              last_updated: val.last_updated || Date.now()
+            };
+
+            saveAnalyticsState();
+            renderAnalyticsUI(val.last_country || null, isRemoteIncrease);
+
+            if (isRemoteIncrease) {
+              const countryInfo = analyticsState.countries[val.last_country] || analyticsState.countries.IN;
+              updateStatusBadge(`Live Cloud Sync (+1 ${countryInfo.flag} ${countryInfo.name})`);
+            } else if (!initialLoadDone) {
+              updateStatusBadge('Cloud Sync Connected');
+            }
+            initialLoadDone = true;
+          }
+        }, (error) => {
+          console.warn('Firebase RTDB sync listener notice:', error);
+          isFirebaseConnected = false;
+        });
+      }
+    } catch (err) {
+      console.warn('Firebase init error, using local fallback:', err);
+      isFirebaseConnected = false;
     }
   }
 
@@ -657,8 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const simulateBtn = document.getElementById('simulate-visit-btn');
   if (simulateBtn) {
     simulateBtn.addEventListener('click', () => {
-      // Realistic weighted distribution for demo:
-      // ~84% India, ~7% Zambia, ~5% Uganda, ~3% USA, ~1% Australia
+      // Weighted distribution: ~84% India, ~7% Zambia, ~5% Uganda, ~3% USA, ~1% Australia
       const rand = Math.random();
       let picked = 'IN';
       if (rand > 0.99) picked = 'AU';
@@ -670,8 +805,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial detection & render
+  // Hook up external stream links to track clicks
+  document.querySelectorAll('.stream-url-link, #qr-modal-link-btn').forEach(link => {
+    link.addEventListener('click', () => {
+      recordListenerPing(userDetectedCountry, true);
+    });
+  });
+
+  // Initial detection, Firebase connection, & render
   renderAnalyticsUI();
+  initFirebaseRealtimeSync();
   detectAndRecordVisit();
 });
 
