@@ -2,8 +2,8 @@
 
 > **Mission:** Demystifying Complex Ideas • Igniting Curiosity Across the World  
 > **Student Creators & Founders:**  
-> 1. **Simran Ailani** — Lead Host, Head of Content & Co-Founder  
-> 2. **Tanmay Rambhau Thakre** — Technical Architect, Digital Production & Co-Founder  
+> 1. **Simran Ailani** — Founder and Lead Host  
+> 2. **Tanmay Rambhau Thakre** — Technical Architect, Digital Production, and Co-Founder  
 > **Aesthetic Philosophy:** Apple-Standard Liquid Glass & VisionOS Frosted Glassmorphism  
 
 ---

@@ -8,13 +8,13 @@ const GYAN_SETU_SHOW = {
   founders: [
     {
       name: "Simran Ailani",
-      role: "Lead Host, Head of Content & Co-Founder",
+      role: "Founder and Lead Host",
       initials: "SA",
       bio: "Passionate student communicator dedicated to breaking down intricate, daunting concepts into engaging, intuitive discussions for learners everywhere."
     },
     {
       name: "Tanmay Rambhau Thakre",
-      role: "Technical Architect, Digital Production & Co-Founder",
+      role: "Technical Architect, Digital Production, and Co-Founder",
       initials: "TT",
       bio: "Visionary student builder leading platform architecture, audio systems, and digital transmission to deliver open knowledge to all corners of the earth."
     }
