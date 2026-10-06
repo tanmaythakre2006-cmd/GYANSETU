@@ -2276,6 +2276,7 @@ body.liquid-theme {
 .app-download-section {
   position: relative;
   scroll-margin-top: 110px;
+  padding-bottom: 120px;
 }
 
 .app-master-card {
@@ -2514,13 +2515,143 @@ body.liquid-theme {
   margin-bottom: 4px;
 }
 
+/* Mobile Responsive Optimization for GyanSetu App Section */
 @media (max-width: 900px) {
+  .app-download-section {
+    padding-bottom: 140px; /* Generous bottom clearance above floating dock */
+  }
+
   .app-card-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 22px;
   }
+
+  /* Elevate the download terminal to the top on mobile devices */
+  .app-download-col {
+    order: -1;
+  }
+
   .app-master-card {
-    padding: 28px 20px;
+    padding: 24px 16px;
+    border-radius: 22px;
+  }
+
+  .app-device-frame {
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
+
+  .app-emblem-badge-wrap {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 12px;
+  }
+
+  .app-download-name {
+    font-size: 1.6rem;
+  }
+
+  .app-download-tag {
+    margin-bottom: 18px;
+    font-size: 0.8rem;
+  }
+
+  .app-specs-grid {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .spec-pill {
+    padding: 7px 10px;
+  }
+
+  .spec-label {
+    font-size: 0.65rem;
+  }
+
+  .spec-val {
+    font-size: 0.8rem;
+  }
+
+  .btn-download-action {
+    padding: 13px 20px;
+    font-size: 0.94rem;
+  }
+
+  .install-steps-capsule {
+    padding: 12px 14px;
+  }
+
+  .app-security-status-banner {
+    padding: 12px 14px;
+    gap: 12px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+
+  .shield-beacon {
+    font-size: 1.5rem;
+  }
+
+  .security-banner-title {
+    font-size: 0.96rem;
+  }
+
+  .security-banner-sub {
+    font-size: 0.74rem;
+  }
+
+  .app-feature-list {
+    gap: 12px;
+  }
+
+  .app-feature-item {
+    padding: 14px 14px;
+    gap: 12px;
+    border-radius: 14px;
+  }
+
+  .app-feature-icon {
+    font-size: 1.25rem;
+  }
+
+  .app-feature-title {
+    font-size: 0.92rem;
+  }
+
+  .app-feature-desc {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-master-card {
+    padding: 20px 12px;
+    border-radius: 18px;
+  }
+
+  .app-device-frame {
+    padding: 20px 12px;
+    border-radius: 16px;
+  }
+
+  .app-download-name {
+    font-size: 1.45rem;
+  }
+
+  .spec-pill {
+    padding: 6px 8px;
+  }
+
+  .spec-val {
+    font-size: 0.76rem;
+  }
+
+  .btn-download-action {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    gap: 6px;
   }
 }
 
