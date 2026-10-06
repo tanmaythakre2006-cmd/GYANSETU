@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GyanSetu | The Global Bridge of Knowledge & Curiosity</title>
+  <meta name="description" content="GyanSetu is an independent student-led internet radio platform created by Simran Ailani and Tanmay Rambhau Thakre, dedicated to explaining hard topics easily and spreading curiosity across the world.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="liquid-theme">
+
+  <!-- Ambient Liquid Lighting Spheres -->
+  <div class="liquid-mesh-bg">
+    <div class="mesh-orb orb-teal"></div>
+    <div class="mesh-orb orb-navy"></div>
+    <div class="mesh-orb orb-orange"></div>
+    <div class="mesh-glass-grain"></div>
+  </div>
+
+  <!-- Apple-Style Frosted Floating Navigation Bar -->
+  <header class="liquid-nav-container">
+    <nav class="liquid-nav">
+      <div class="nav-brand">
+        <a href="#" class="brand-link">
+          <img src="assets/images/logo.png" alt="GyanSetu Emblem" class="brand-emblem">
+          <div class="brand-text">
+            <span class="brand-name">GYA<span class="brand-net">N</span>S<span class="brand-net">ET</span>U</span>
+            <span class="brand-tagline">Global Inter<span class="net-tag-accent">net</span> Radio</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="nav-links">
+        <a href="#broadcast" class="nav-pill-link">Broadcast</a>
+        <a href="#episodes" class="nav-pill-link">Episodes</a>
+        <a href="#analytics" class="nav-pill-link">Analytics</a>
+        <a href="#mission" class="nav-pill-link">Mission & Team</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="radio-mode-btn" class="liquid-btn btn-sm btn-live-pill">
+          <span class="pulse-beacon"></span>
+          <span>Live Stream</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero / Live On-Air Broadcast Section -->
+    <section id="broadcast" class="hero-section">
+      <div class="container hero-layout">
+        
+        <div class="hero-text-block">
+          <!-- Prominent Brand Emblem Card -->
+          <div class="hero-brand-badge-card">
+            <div class="hero-emblem-frame">
+              <img src="assets/images/logo.png" alt="GyanSetu Official Emblem" class="hero-emblem-visual">
+              <div class="emblem-glass-reflection"></div>
+            </div>
+            <div class="hero-brand-copy">
+              <div class="station-live-capsule">
+                <span class="status-live-beacon"></span>
+                <span class="capsule-live-title">GLOBAL INTERNET RADIO</span>
+              </div>
+              <h2 class="hero-brand-heading">ज्ञानसेतु • GYA<span class="brand-net">N</span>S<span class="brand-net">ET</span>U</h2>
+              <p class="hero-brand-subheading">Curated by Simran Ailani & Tanmay Rambhau Thakre</p>
+            </div>
+          </div>
+
+          <h1 class="hero-headline">
+            Where Deep Ideas Become <span class="gradient-headline">Delightfully Clear.</span>
+          </h1>
+
+          <p class="hero-lead">
+            <strong>GyanSetu</strong> is an independent, student-driven internet radio station founded by 
+            <strong>Simran Ailani</strong> and <strong>Tanmay Rambhau Thakre</strong>. Built with a single conviction: 
+            no subject is too complex when explained with empathy, curiosity, and craft. Tune in from anywhere on Earth, with zero barriers.
+          </p>
+
+          <div class="hero-cta-group">
+            <button id="start-broadcast-btn" class="liquid-btn btn-primary-gradient">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span>Tune In Live</span>
+            </button>
+            <a href="#episodes" class="liquid-btn btn-glass">
+              <span>Explore All 7 Episodes</span>
+            </a>
+          </div>
+
+          <!-- Apple Style Frosted Metric Grid -->
+          <div class="hero-metric-bar">
+            <div class="metric-cell">
+              <span class="metric-val">7</span>
+              <span class="metric-desc">Full-Length Episodes</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-cell">
+              <span class="metric-val">42+</span>
+              <span class="metric-desc">Minutes of Wonder</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-cell">
+              <span class="metric-val">100%</span>
+              <span class="metric-desc">Free & Open Worldwide</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Liquid Glass Audio Showcase Card -->
+        <div class="hero-card-column">
+          <div class="liquid-glass-card hero-player-card">
+            
+            <div class="card-status-bar">
+              <div class="live-status-group">
+                <span class="liquid-dot"></span>
+                <span class="status-label">CURRENTLY AIRING</span>
+              </div>
+              <div class="liquid-equalizer" id="hero-visualizer">
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+              </div>
+            </div>
+
+            <div class="card-artwork-frame">
+              <img id="featured-cover" src="assets/images/logo.png" alt="Episode Artwork" class="card-artwork-img">
+              <div class="artwork-specular-sheen"></div>
+              <span class="artwork-category-badge" id="featured-category">Mind & Consciousness</span>
+            </div>
+
+            <div class="card-meta-block">
+              <h3 id="featured-title" class="card-episode-title">Can Chemistry explain Consciousness?</h3>
+              <p id="featured-meta" class="card-episode-host">Hosted by Simran Ailani • 4m 29s</p>
+            </div>
+
+            <!-- Integrated Control Suite -->
+            <div class="card-control-dock">
+              <button id="featured-prev-btn" class="liquid-icon-btn" title="Previous Episode">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+              </button>
+              
+              <button id="featured-play-btn" class="liquid-play-hero" title="Play / Pause">
+                <svg id="featured-play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <button id="featured-next-btn" class="liquid-icon-btn" title="Next Episode">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Episode Library & Live Filter Section -->
+    <section id="episodes" class="section-block">
+      <div class="container">
+        
+        <div class="section-title-wrap">
+          <div class="title-meta">
+            <span class="liquid-sub-label">ARCHIVE & ON-DEMAND</span>
+            <h2 class="section-heading">Curated Episodes</h2>
+            <p class="section-tagline">Deep concepts demystified into captivating audio stories. Listen on-demand with complete transcripts and research notes.</p>
+          </div>
+
+          <div class="filter-search-unit">
+            <div class="liquid-search-capsule">
+              <svg class="search-lens" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="search-input" placeholder="Search consciousness, benzene, medicine, AI..." class="search-field">
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Capsule Ribbon -->
+        <div class="capsule-ribbon" id="category-pills">
+          <button class="filter-capsule active" data-category="all">All Topics (7)</button>
+          <button class="filter-capsule" data-category="Mind">Mind & Neuroscience</button>
+          <button class="filter-capsule" data-category="Nature">Nature & Medicine</button>
+          <button class="filter-capsule" data-category="History">History of Ideas</button>
+          <button class="filter-capsule" data-category="Everyday">Everyday Phenomena</button>
+          <button class="filter-capsule" data-category="Future">Future & Tech</button>
+          <button class="filter-capsule" data-category="Deep">Deep Concepts</button>
+        </div>
+
+        <!-- Episode Cards Grid -->
+        <div class="episodes-grid-layout" id="episodes-grid">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Global Listener Analytics Section -->
+    <section id="analytics" class="section-block analytics-section">
+      <div class="container">
+
+        <div class="section-title-wrap">
+          <div class="title-meta">
+            <span class="liquid-sub-label">GLOBAL OUTREACH & AUDIENCE</span>
+            <h2 class="section-heading">Worldwide Listenership</h2>
+            <p class="section-tagline">
+              From our studio to the world. GyanSetu's broadcasts bridge geographical boundaries, 
+              connecting curious minds and lifelong learners across 4 continents.
+            </p>
+          </div>
+        </div>
+
+        <div class="liquid-glass-card analytics-master-card">
+          <!-- Top KPI Highlight Row -->
+          <div class="analytics-kpi-row">
+            <div class="kpi-card">
+              <span class="kpi-value kpi-india" id="kpi-india-pct">84.7%</span>
+              <span class="kpi-label">Primary Epicenter • India</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-value" id="kpi-total-views">215</span>
+              <span class="kpi-label">Total Verified Listeners <span class="live-dot-pulse">● Live</span></span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-value" id="kpi-detected-country">🇮🇳 India</span>
+              <span class="kpi-label">Your Live Detected Region</span>
+            </div>
+          </div>
+
+          <!-- Unified Distribution Bar (Apple Style) -->
+          <div class="distribution-bar-wrapper">
+            <div class="distribution-bar-header">
+              <div class="dist-header-title-group">
+                <span class="distribution-bar-title">Listener Distribution by Geography</span>
+                <span class="distribution-bar-badge" id="live-status-text">
+                  <span class="pulse-beacon-teal-inline"></span> Live Stream Sync
+                </span>
+              </div>
+              <button id="simulate-visit-btn" class="liquid-btn btn-sm btn-ping-action" title="Simulate a real-time global listener ping">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>Live Listener Ping</span>
+              </button>
+            </div>
+            <div class="distribution-track">
+              <div class="segment segment-india" id="seg-india" style="width: 84.7%;" title="India: 84.7%"></div>
+              <div class="segment segment-zambia" id="seg-zambia" style="width: 6.5%;" title="Zambia: 6.5%"></div>
+              <div class="segment segment-uganda" id="seg-uganda" style="width: 4.7%;" title="Uganda: 4.7%"></div>
+              <div class="segment segment-usa" id="seg-usa" style="width: 2.8%;" title="United States: 2.8%"></div>
+              <div class="segment segment-aus" id="seg-aus" style="width: 1.4%;" title="Australia: 1.4%"></div>
+            </div>
+            <div class="distribution-legend">
+              <div class="legend-item"><span class="legend-dot dot-india"></span> India: <strong id="leg-india-pct">84.7%</strong></div>
+              <div class="legend-item"><span class="legend-dot dot-zambia"></span> Zambia: <strong id="leg-zambia-pct">6.5%</strong></div>
+              <div class="legend-item"><span class="legend-dot dot-uganda"></span> Uganda: <strong id="leg-uganda-pct">4.7%</strong></div>
+              <div class="legend-item"><span class="legend-dot dot-usa"></span> USA: <strong id="leg-usa-pct">2.8%</strong></div>
+              <div class="legend-item"><span class="legend-dot dot-aus"></span> Australia: <strong id="leg-aus-pct">1.4%</strong></div>
+            </div>
+          </div>
+
+          <!-- 5 Country Cards Grid -->
+          <div class="countries-grid">
+            
+            <!-- India -->
+            <div class="country-stat-card country-india" id="card-wrap-india">
+              <div class="country-card-header">
+                <div class="country-flag-title">
+                  <span class="country-flag-icon">
+                    <svg viewBox="0 0 32 32" width="28" height="28" class="flag-svg">
+                      <clipPath id="clip-in"><circle cx="16" cy="16" r="15"/></clipPath>
+                      <g clip-path="url(#clip-in)">
+                        <rect width="32" height="10.7" fill="#FF9933"/>
+                        <rect y="10.7" width="32" height="10.6" fill="#FFFFFF"/>
+                        <rect y="21.3" width="32" height="10.7" fill="#138808"/>
+                        <circle cx="16" cy="16" r="3.2" fill="none" stroke="#000080" stroke-width="0.9"/>
+                      </g>
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 class="country-title">India</h4>
+                    <p class="country-subtitle" id="card-india-sub">182 Verified Streams</p>
+                  </div>
+                </div>
+                <span class="country-percent-badge badge-india" id="card-india-pct">84.7%</span>
+              </div>
+              <div class="country-progress-track">
+                <div class="country-progress-fill fill-india" id="fill-india" style="width: 84.7%;"></div>
+              </div>
+            </div>
+
+            <!-- Zambia -->
+            <div class="country-stat-card country-zambia" id="card-wrap-zambia">
+              <div class="country-card-header">
+                <div class="country-flag-title">
+                  <span class="country-flag-icon">
+                    <svg viewBox="0 0 32 32" width="28" height="28" class="flag-svg">
+                      <clipPath id="clip-zm"><circle cx="16" cy="16" r="15"/></clipPath>
+                      <g clip-path="url(#clip-zm)">
+                        <rect width="32" height="32" fill="#198A00"/>
+                        <rect x="20" y="14" width="4" height="18" fill="#DE2010"/>
+                        <rect x="24" y="14" width="4" height="18" fill="#000000"/>
+                        <rect x="28" y="14" width="4" height="18" fill="#EF7D00"/>
+                        <path d="M 22 8 Q 26 5 30 8 Q 26 11 22 8 Z" fill="#EF7D00"/>
+                      </g>
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 class="country-title">Zambia</h4>
+                    <p class="country-subtitle" id="card-zambia-sub">14 Verified Streams</p>
+                  </div>
+                </div>
+                <span class="country-percent-badge badge-zambia" id="card-zambia-pct">6.5%</span>
+              </div>
+              <div class="country-progress-track">
+                <div class="country-progress-fill fill-zambia" id="fill-zambia" style="width: 32%;"></div>
+              </div>
+            </div>
+
+            <!-- Uganda -->
+            <div class="country-stat-card country-uganda" id="card-wrap-uganda">
+              <div class="country-card-header">
+                <div class="country-flag-title">
+                  <span class="country-flag-icon">
+                    <svg viewBox="0 0 32 32" width="28" height="28" class="flag-svg">
+                      <clipPath id="clip-ug"><circle cx="16" cy="16" r="15"/></clipPath>
+                      <g clip-path="url(#clip-ug)">
+                        <rect width="32" height="5.33" fill="#000000"/>
+                        <rect y="5.33" width="32" height="5.33" fill="#FCDC04"/>
+                        <rect y="10.66" width="32" height="5.33" fill="#D90000"/>
+                        <rect y="16" width="32" height="5.33" fill="#000000"/>
+                        <rect y="21.33" width="32" height="5.33" fill="#FCDC04"/>
+                        <rect y="26.66" width="32" height="5.34" fill="#D90000"/>
+                        <circle cx="16" cy="16" r="4.5" fill="#FFFFFF"/>
+                        <circle cx="16" cy="16" r="2.2" fill="#333333"/>
+                      </g>
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 class="country-title">Uganda</h4>
+                    <p class="country-subtitle" id="card-uganda-sub">10 Verified Streams</p>
+                  </div>
+                </div>
+                <span class="country-percent-badge badge-uganda" id="card-uganda-pct">4.7%</span>
+              </div>
+              <div class="country-progress-track">
+                <div class="country-progress-fill fill-uganda" id="fill-uganda" style="width: 24%;"></div>
+              </div>
+            </div>
+
+            <!-- United States -->
+            <div class="country-stat-card country-usa" id="card-wrap-usa">
+              <div class="country-card-header">
+                <div class="country-flag-title">
+                  <span class="country-flag-icon">
+                    <svg viewBox="0 0 32 32" width="28" height="28" class="flag-svg">
+                      <clipPath id="clip-us"><circle cx="16" cy="16" r="15"/></clipPath>
+                      <g clip-path="url(#clip-us)">
+                        <rect width="32" height="32" fill="#B22234"/>
+                        <rect y="4.6" width="32" height="4.6" fill="#FFFFFF"/>
+                        <rect y="13.8" width="32" height="4.6" fill="#FFFFFF"/>
+                        <rect y="23" width="32" height="4.6" fill="#FFFFFF"/>
+                        <rect width="14" height="18.4" fill="#3C3B6E"/>
+                        <circle cx="4" cy="5" r="1" fill="#FFFFFF"/>
+                        <circle cx="10" cy="5" r="1" fill="#FFFFFF"/>
+                        <circle cx="7" cy="9" r="1" fill="#FFFFFF"/>
+                        <circle cx="4" cy="13" r="1" fill="#FFFFFF"/>
+                        <circle cx="10" cy="13" r="1" fill="#FFFFFF"/>
+                      </g>
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 class="country-title">United States</h4>
+                    <p class="country-subtitle" id="card-usa-sub">6 Verified Streams</p>
+                  </div>
+                </div>
+                <span class="country-percent-badge badge-usa" id="card-usa-pct">2.8%</span>
+              </div>
+              <div class="country-progress-track">
+                <div class="country-progress-fill fill-usa" id="fill-usa" style="width: 18%;"></div>
+              </div>
+            </div>
+
+            <!-- Australia -->
+            <div class="country-stat-card country-aus" id="card-wrap-aus">
+              <div class="country-card-header">
+                <div class="country-flag-title">
+                  <span class="country-flag-icon">
+                    <svg viewBox="0 0 32 32" width="28" height="28" class="flag-svg">
+                      <clipPath id="clip-au"><circle cx="16" cy="16" r="15"/></clipPath>
+                      <g clip-path="url(#clip-au)">
+                        <rect width="32" height="32" fill="#00247D"/>
+                        <path d="M 0 0 L 14 14 M 14 0 L 0 14" stroke="#FFFFFF" stroke-width="2.5"/>
+                        <path d="M 7 0 L 7 14 M 0 7 L 14 7" stroke="#FFFFFF" stroke-width="3.5"/>
+                        <path d="M 7 0 L 7 14 M 0 7 L 14 7" stroke="#CC142B" stroke-width="2"/>
+                        <circle cx="23" cy="8" r="1.3" fill="#FFFFFF"/>
+                        <circle cx="20" cy="17" r="1.3" fill="#FFFFFF"/>
+                        <circle cx="26" cy="17" r="1.3" fill="#FFFFFF"/>
+                        <circle cx="23" cy="24" r="1.3" fill="#FFFFFF"/>
+                      </g>
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 class="country-title">Australia</h4>
+                    <p class="country-subtitle" id="card-aus-sub">3 Verified Streams</p>
+                  </div>
+                </div>
+                <span class="country-percent-badge badge-aus" id="card-aus-pct">1.4%</span>
+              </div>
+              <div class="country-progress-track">
+                <div class="country-progress-fill fill-aus" id="fill-aus" style="width: 12%;"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Footer Note -->
+          <div class="analytics-footnote">
+            <span class="footnote-sparkle">✨</span>
+            <p class="footnote-text">
+              Every percentage point represents genuine curiosity. GyanSetu's open web architecture ensures 
+              anyone tuning in from Mumbai to Lusaka, Kampala, New York, or Sydney can listen instantly with zero paywalls.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Project Mission & Team Section -->
+    <section id="mission" class="section-block mission-section">
+      <div class="container">
+        
+        <div class="liquid-glass-card mission-card">
+          <div class="mission-header-bar">
+            <img src="assets/images/logo.png" alt="GyanSetu Official Emblem" class="mission-emblem-large">
+            <div>
+              <span class="liquid-sub-label">THE GENESIS & VISION</span>
+              <h2 class="mission-headline">About GyanSetu</h2>
+              <p class="mission-tagline">"The Bridge of Knowledge" — Demystifying hard topics to ignite universal curiosity.</p>
+            </div>
+          </div>
+
+          <div class="mission-grid-layout">
+            <!-- Left: Purpose & Philosophy -->
+            <div class="mission-narrative-col">
+              <h3 class="narrative-heading">Why GyanSetu Exists</h3>
+              <p class="narrative-body">
+                Too often, humanity's most breathtaking discoveries and profound questions remain locked behind academic jargon, 
+                dense textbooks, and paywalled platforms. <strong>GyanSetu</strong> was created by passionate students to tear down 
+                those walls.
+              </p>
+              <p class="narrative-body">
+                Whether exploring the frontier of human consciousness, unraveling how tiny pharmaceutical molecules pinpoint 
+                pain in the body, or investigating the accidental botany that cured thousands of leukemia patients—our mission is to 
+                take any intimidating, intricate topic and translate it into clear, vivid, and memorable storytelling.
+              </p>
+
+              <!-- Founder Hierarchy Cards: Simran Ailani First, Tanmay Rambhau Thakre Second -->
+              <div class="team-showcase-block">
+                <span class="liquid-sub-label">STUDENT CREATORS & CURATORS</span>
+                <div class="team-cards-stack">
+                  
+                  <div class="liquid-team-card">
+                    <div class="team-avatar-sphere">SA</div>
+                    <div class="team-details">
+                      <div class="team-name-row">
+                        <h4 class="team-name">Simran Ailani</h4>
+                        <span class="team-role-pill">Founder and Lead Host</span>
+                      </div>
+                      <p class="team-bio">
+                        Lead podcast host, research curator, and educational storyteller. Simran drives the narrative heart of GyanSetu, 
+                        transforming dense intellectual inquiries into captivating, intuitive audio experiences.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="liquid-team-card">
+                    <div class="team-avatar-sphere avatar-alt">TT</div>
+                    <div class="team-details">
+                      <div class="team-name-row">
+                        <h4 class="team-name">Tanmay Rambhau Thakre</h4>
+                        <span class="team-role-pill">Technical Architect, Digital Production, and Co-Founder</span>
+                      </div>
+                      <p class="team-bio">
+                        Creative technologist, system architect, and audio production lead. Tanmay conceptualized the digital infrastructure, 
+                        broadcast systems, and vision behind GyanSetu to transmit knowledge globally without friction.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Core Tenets -->
+            <div class="mission-tenets-col">
+              <div class="liquid-tenet-card">
+                <div class="tenet-icon-glass">🌍</div>
+                <div>
+                  <h4 class="tenet-title">Universal Open Access</h4>
+                  <p class="tenet-body">Zero paywalls, zero accounts, zero apps. Anyone from any corner of the globe can click and listen directly.</p>
+                </div>
+              </div>
+
+              <div class="liquid-tenet-card">
+                <div class="tenet-icon-glass">💡</div>
+                <div>
+                  <h4 class="tenet-title">Curiosity Over Pedantry</h4>
+                  <p class="tenet-body">Science is only one facet; our core compass is genuine knowledge, philosophy, everyday marvels, and relentless curiosity.</p>
+                </div>
+              </div>
+
+              <div class="liquid-tenet-card">
+                <div class="tenet-icon-glass">📻</div>
+                <div>
+                  <h4 class="tenet-title">Continuous Radio & On-Demand</h4>
+                  <p class="tenet-body">Stream seamlessly like a 24/7 internet radio station, or hand-pick any episode with comprehensive show notes.</p>
+                </div>
+              </div>
+
+              <div class="liquid-tenet-card">
+                <div class="tenet-icon-glass">✨</div>
+                <div>
+                  <h4 class="tenet-title">Student-Driven Craft</h4>
+                  <p class="tenet-body">Built from the ground up by independent students pushing the boundaries of global science communication.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Apple macOS/visionOS Liquid Glass Floating Audio Dock -->
+  <footer id="persistent-player" class="liquid-glass-dock">
+    <div class="dock-inner container">
+      
+      <!-- Track Identification -->
+      <div class="dock-track-column">
+        <div class="dock-artwork-wrap">
+          <img id="dock-cover" src="assets/images/logo.png" alt="Cover" class="dock-thumb">
+          <div class="dock-thumb-specular"></div>
+        </div>
+        <div class="dock-info-wrap">
+          <div id="dock-title" class="dock-track-title">Select an episode</div>
+          <div id="dock-artist" class="dock-track-sub">GyanSetu Radio • Global Stream</div>
+        </div>
+      </div>
+
+      <!-- Center Player Controls & Scrubber -->
+      <div class="dock-control-column">
+        <div class="dock-transport-buttons">
+          <button id="player-prev-btn" class="dock-icon-btn" title="Previous Episode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+          </button>
+          
+          <button id="player-rw15-btn" class="dock-icon-btn btn-secondary-transport" title="Rewind 15 seconds">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            <span class="micro-badge">15</span>
+          </button>
+
+          <button id="player-play-btn" class="dock-play-circle" title="Play / Pause">
+            <svg id="dock-play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+
+          <button id="player-ff15-btn" class="dock-icon-btn btn-secondary-transport" title="Fast Forward 15 seconds">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            <span class="micro-badge">15</span>
+          </button>
+
+          <button id="player-next-btn" class="dock-icon-btn" title="Next Episode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+          </button>
+        </div>
+
+        <div class="dock-scrubber-unit">
+          <span id="current-time-label" class="time-readout">0:00</span>
+          <div id="progress-container" class="liquid-scrubber-track">
+            <div id="progress-fill" class="liquid-scrubber-fill">
+              <span class="scrubber-thumb-head"></span>
+            </div>
+          </div>
+          <span id="total-time-label" class="time-readout">0:00</span>
+        </div>
+      </div>
+
+      <!-- Right Utility Actions -->
+      <div class="dock-utility-column">
+        <button id="speed-toggle-btn" class="dock-pill-btn" title="Playback Speed">1.0×</button>
+        
+        <div class="dock-volume-group">
+          <button id="mute-toggle-btn" class="dock-icon-btn" title="Mute / Unmute">
+            <svg id="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </button>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.9" class="liquid-volume-slider">
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Liquid Glass Notes Modal -->
+  <div id="notes-modal" class="modal-scrim">
+    <div class="liquid-glass-modal">
+      <div class="modal-top-bar">
+        <div class="modal-tag-row">
+          <span id="modal-episode-category" class="artwork-category-badge">Category</span>
+          <span id="modal-episode-duration" class="modal-time-badge">Duration</span>
+        </div>
+        <button id="close-modal-btn" class="modal-dismiss-btn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="modal-scroll-body">
+        <h3 id="modal-episode-title" class="modal-article-title">Episode Title</h3>
+        <p id="modal-episode-date" class="modal-meta-line">Published Date</p>
+        <p id="modal-episode-desc" class="modal-prose">Full explanation narrative...</p>
+      </div>
+
+      <div class="modal-footer-bar">
+        <button id="modal-play-btn" class="liquid-btn btn-primary-gradient">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span>Play Full Episode</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="audio-engine" preload="auto"></audio>
+
+  <!-- Scripts -->
+  <script src="episodes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

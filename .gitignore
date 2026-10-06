@@ -9,3 +9,7 @@ __pycache__/
 # OS metadata
 Thumbs.db
 .DS_Store
+
+# Android build intermediates
+android/build/
+android/*.keystore

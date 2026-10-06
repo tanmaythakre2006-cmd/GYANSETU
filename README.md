@@ -59,6 +59,16 @@ All 7 episodes are stored in 100% full-length studio quality (approx 57 MB total
 
 ---
 
+## 📱 GyanSetu App (Android Offline Locker)
+An impenetrable offline-first application engineered for low-bandwidth remote communities (e.g., Zambia, Uganda, rural areas):
+
+* **Hardware Anti-Capture DRM (`FLAG_SECURE`):** Complete operating-system-level blocking of screenshots, screen recording (black screen), and multitasking card previews.
+* **100% Zero-Data Offline Locker:** All 7 full-length studio episodes are securely pre-bundled for instant playback with 0 kbps internet connection.
+* **Encrypted Sandbox Isolation:** Media files are isolated inside private app storage, preventing unauthorized file ripping, USB extraction, or scraping.
+* **Direct Download Location:** [`assets/downloads/GyanSetu.apk`](file:///c:/Users/hp/OneDrive/Desktop/gyan%20setu/assets/downloads/GyanSetu.apk) (64.1 MB)
+
+---
+
 ## 🚀 Local Hosting & Verification
 GyanSetu is hosted locally on:
 👉 **http://localhost:8000**
@@ -67,3 +77,4 @@ To run anytime via terminal:
 ```bash
 python -m http.server 8000
 ```
+
