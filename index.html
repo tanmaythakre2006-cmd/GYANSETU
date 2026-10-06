@@ -650,24 +650,59 @@
                   <span>Download GyanSetu APK</span>
                 </a>
 
-                <div class="install-steps-capsule">
-                  <span class="steps-title">Easy 3-Step Setup:</span>
-                  <ol class="steps-list">
+                <!-- Sleek Dual Web Stream Options -->
+                <div class="sleek-dual-streams">
+                  <!-- Option 1: Vercel -->
+                  <div class="stream-option-bar">
+                    <button type="button" class="stream-qr-thumb-btn" data-qr="vercel" title="Scan or view Vercel QR Code">
+                      <img src="assets/images/gyansetu_qr_vercel.png" alt="Vercel QR Code" class="stream-qr-thumb-img">
+                      <span class="stream-qr-zoom-glyph">⛶</span>
+                    </button>
+                    <div class="stream-meta">
+                      <div class="stream-meta-top">
+                        <span class="stream-badge-vercel">Vercel Stream</span>
+                        <span class="stream-hint-tag">Primary</span>
+                      </div>
+                      <a href="https://gyansetu-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="stream-url-link">
+                        <span>gyansetu-five.vercel.app</span>
+                        <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- Option 2: Netlify -->
+                  <div class="stream-option-bar">
+                    <button type="button" class="stream-qr-thumb-btn" data-qr="netlify" title="Scan or view Netlify QR Code">
+                      <img src="assets/images/gyansetu_qr_netlify.png" alt="Netlify QR Code" class="stream-qr-thumb-img">
+                      <span class="stream-qr-zoom-glyph">⛶</span>
+                    </button>
+                    <div class="stream-meta">
+                      <div class="stream-meta-top">
+                        <span class="stream-badge-netlify">Netlify Mirror</span>
+                        <span class="stream-hint-tag">Mirror</span>
+                      </div>
+                      <a href="https://imaginative-centaur-0c2b59.netlify.app/" target="_blank" rel="noopener noreferrer" class="stream-url-link">
+                        <span>imaginative-centaur-0c2b59.netlify.app</span>
+                        <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <details class="install-steps-accordion">
+                  <summary class="steps-accordion-summary">
+                    <span class="accordion-summary-text">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                      Installation Guide (3 steps)
+                    </span>
+                    <span class="accordion-arrow">▾</span>
+                  </summary>
+                  <ol class="steps-compact-list">
                     <li>Tap <strong>Download GyanSetu APK</strong> above.</li>
                     <li>Allow <em>"Install unknown apps"</em> when prompted by Android.</li>
                     <li>Open <strong>GyanSetu</strong> and enjoy full offline knowledge anytime!</li>
                   </ol>
-                </div>
-
-                <div class="qr-scan-preview-card">
-                  <div class="qr-preview-frame">
-                    <img src="assets/images/gyansetu_qr_code.png" alt="Scan GyanSetu QR Code" class="qr-inline-img">
-                  </div>
-                  <div class="qr-preview-text">
-                    <span class="qr-preview-label">Scan to Stream Live on Phone</span>
-                    <a href="https://imaginative-centaur-0c2b59.netlify.app/" target="_blank" class="qr-url-link">imaginative-centaur-0c2b59.netlify.app</a>
-                  </div>
-                </div>
+                </details>
               </div>
             </div>
 
@@ -768,6 +803,35 @@
           <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           <span>Play Full Episode</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liquid Glass Dual QR Lightbox Modal -->
+  <div id="qr-modal" class="modal-scrim">
+    <div class="liquid-glass-modal qr-lightbox-modal">
+      <div class="modal-top-bar">
+        <div class="qr-modal-tabs">
+          <button type="button" class="qr-tab-btn active" id="modal-tab-vercel" data-qr="vercel">Vercel Stream</button>
+          <button type="button" class="qr-tab-btn" id="modal-tab-netlify" data-qr="netlify">Netlify Mirror</button>
+        </div>
+        <button id="close-qr-modal-btn" class="modal-dismiss-btn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="qr-lightbox-body">
+        <h3 id="qr-modal-heading" class="qr-modal-title">Scan to Stream • Vercel</h3>
+        <p id="qr-modal-subheading" class="qr-modal-subtitle">Point camera to stream live without installing the app</p>
+        
+        <div class="qr-modal-preview-wrapper">
+          <img id="qr-modal-large-img" src="assets/images/gyansetu_qr_vercel.png" alt="GyanSetu QR Code" class="qr-modal-img">
+        </div>
+
+        <div class="qr-modal-action-row">
+          <a id="qr-modal-link-btn" href="https://gyansetu-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="liquid-btn btn-secondary-glass qr-modal-btn">
+            <span id="qr-modal-link-text">Open gyansetu-five.vercel.app</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -54,6 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalEpisodeDesc = document.getElementById('modal-episode-desc');
   const modalPlayBtn = document.getElementById('modal-play-btn');
 
+  // QR Lightbox Elements
+  const qrModal = document.getElementById('qr-modal');
+  const openQrLightboxBtn = document.getElementById('open-qr-lightbox-btn');
+  const closeQrModalBtn = document.getElementById('close-qr-modal-btn');
+
   // Library & Search Elements
   const episodesGrid = document.getElementById('episodes-grid');
   const searchInput = document.getElementById('search-input');
@@ -330,6 +335,84 @@ document.addEventListener('DOMContentLoaded', () => {
   notesModal.addEventListener('click', (e) => {
     if (e.target === notesModal) {
       notesModal.classList.remove('is-active');
+    }
+  });
+
+  // QR Dual Stream & Modal Logic
+  const qrModalHeading = document.getElementById('qr-modal-heading');
+  const qrModalLargeImg = document.getElementById('qr-modal-large-img');
+  const qrModalLinkBtn = document.getElementById('qr-modal-link-btn');
+  const qrModalLinkText = document.getElementById('qr-modal-link-text');
+  const modalTabVercel = document.getElementById('modal-tab-vercel');
+  const modalTabNetlify = document.getElementById('modal-tab-netlify');
+
+  const qrStreams = {
+    vercel: {
+      name: 'Vercel Stream',
+      url: 'https://gyansetu-five.vercel.app/',
+      img: 'assets/images/gyansetu_qr_vercel.png',
+      heading: 'Scan to Stream • Vercel Network'
+    },
+    netlify: {
+      name: 'Netlify Mirror',
+      url: 'https://imaginative-centaur-0c2b59.netlify.app/',
+      img: 'assets/images/gyansetu_qr_netlify.png',
+      heading: 'Scan to Stream • Netlify Mirror'
+    }
+  };
+
+  function switchQrModalTab(target) {
+    const data = qrStreams[target] || qrStreams.vercel;
+    if (qrModalHeading) qrModalHeading.textContent = data.heading;
+    if (qrModalLargeImg) qrModalLargeImg.src = data.img;
+    if (qrModalLinkBtn) qrModalLinkBtn.href = data.url;
+    if (qrModalLinkText) qrModalLinkText.textContent = `Open ${data.name}`;
+
+    if (modalTabVercel && modalTabNetlify) {
+      if (target === 'vercel') {
+        modalTabVercel.classList.add('active');
+        modalTabNetlify.classList.remove('active');
+      } else {
+        modalTabNetlify.classList.add('active');
+        modalTabVercel.classList.remove('active');
+      }
+    }
+  }
+
+  document.querySelectorAll('.stream-qr-thumb-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = btn.dataset.qr || 'vercel';
+      switchQrModalTab(target);
+      if (qrModal) qrModal.classList.add('is-active');
+    });
+  });
+
+  if (modalTabVercel) {
+    modalTabVercel.addEventListener('click', () => switchQrModalTab('vercel'));
+  }
+  if (modalTabNetlify) {
+    modalTabNetlify.addEventListener('click', () => switchQrModalTab('netlify'));
+  }
+
+  if (closeQrModalBtn && qrModal) {
+    closeQrModalBtn.addEventListener('click', () => {
+      qrModal.classList.remove('is-active');
+    });
+  }
+
+  if (qrModal) {
+    qrModal.addEventListener('click', (e) => {
+      if (e.target === qrModal) {
+        qrModal.classList.remove('is-active');
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (notesModal) notesModal.classList.remove('is-active');
+      if (qrModal) qrModal.classList.remove('is-active');
     }
   });
 
