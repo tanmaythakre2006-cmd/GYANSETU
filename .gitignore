@@ -1,0 +1,11 @@
+# Testing screenshots (root level only)
+/*.png
+/*.jpg
+
+# Python cache & virtualenvs
+__pycache__/
+*.pyc
+
+# OS metadata
+Thumbs.db
+.DS_Store
