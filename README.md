@@ -1,9 +1,8 @@
 # GyanSetu (ज्ञान सेतु) — Global Knowledge Radio Station
 
 > **Mission:** Demystifying Complex Ideas • Igniting Curiosity Across the World  
-> **Student Creators & Founders:**  
-> 1. **Simran Ailani** — Founder and Lead Host  
-> 2. **Tanmay Rambhau Thakre** — Technical Architect, Digital Production, and Co-Founder  
+> **Student Creator & Founder:**  
+> **Simran Ailani** — Founder and Lead Host  
 > **Aesthetic Philosophy:** Apple-Standard Liquid Glass & VisionOS Frosted Glassmorphism  
 
 ---

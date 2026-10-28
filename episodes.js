@@ -11,25 +11,98 @@ const GYAN_SETU_SHOW = {
       role: "Founder and Lead Host",
       initials: "SA",
       bio: "Passionate student communicator dedicated to breaking down intricate, daunting concepts into engaging, intuitive discussions for learners everywhere."
-    },
-    {
-      name: "Tanmay Rambhau Thakre",
-      role: "Technical Architect, Digital Production, and Co-Founder",
-      initials: "TT",
-      bio: "Visionary student builder leading platform architecture, audio systems, and digital transmission to deliver open knowledge to all corners of the earth."
     }
   ],
   mission: "Spreading unrestricted knowledge to the farthest corners of the world by making complex topics accessible, engaging, and delightfully clear.",
   logo: "assets/images/logo.png",
-  totalEpisodes: 7,
-  totalRuntime: "42 mins",
+  totalEpisodes: 13,
+  totalRuntime: "78 mins",
   broadcastMode: "24/7 Global Stream & On-Demand Library"
 };
 
 const GYAN_SETU_EPISODES = [
   {
+    id: "ep-13",
+    number: 13,
+    title: "नागपूरचा इतिहास",
+    category: "History of Ideas",
+    date: "October 28, 2026",
+    duration: "9m 18s",
+    durationSec: 558,
+    description: "या भागात जाणून घेऊया नागपूरचा इतिहास, भोसले राजांचा काळ आणि महालातील जुन्या वास्तूंमागच्या रंजक गोष्टी! Explore the rich history of Nagpur, the era of the Bhonsle dynasty, and the fascinating stories behind the historic monuments of Mahal.",
+    image: "assets/images/ep13-nagpurcha-itihas.jpg",
+    audioSrc: "assets/audio/ep13-nagpurcha-itihas.mp3",
+    onlineAudioSrc: "https://anchor.fm/s/10129a7a0/podcast/play/128311004/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-28%2Faec3f0d6-9b3e-368a-f716-b068daa38dc6.mp3",
+    hosts: ["Simran Ailani"]
+  },
+  {
+    id: "ep-12",
+    number: 12,
+    title: "Oops, I Created Life: In Hindsight, Victor…",
+    category: "Ethics & Ideas",
+    date: "October 26, 2026",
+    duration: "5m 21s",
+    durationSec: 321,
+    description: "What happens when curiosity crosses the line into obsession? Through Mary Shelley's Frankenstein, we explore the dark side of ambition, the ethics of creation, and the consequences of playing God. After all, just because we can create a monster, does that mean we should?",
+    image: "assets/images/ep8-oops-i-created-life.jpg",
+    audioSrc: "assets/audio/ep8-oops-i-created-life.mp3",
+    hosts: ["Simran Ailani"]
+  },
+  {
+    id: "ep-11",
+    number: 11,
+    title: "What colour is the sky?",
+    category: "Everyday Phenomena",
+    date: "October 26, 2026",
+    duration: "4m 31s",
+    durationSec: 271,
+    description: "What colour is the sky? Discover the fascinating science of sunlight, air molecules, and Rayleigh scattering—and see how something we take for granted every day hides a beautiful scientific mystery.",
+    image: "assets/images/ep9-what-colour-is-the-sky.jpg",
+    audioSrc: "assets/audio/ep9-what-colour-is-the-sky.mp3",
+    hosts: ["Simran Ailani"]
+  },
+  {
+    id: "ep-10",
+    number: 10,
+    title: "Napoleon wasn't poisoned.....or was he?",
+    category: "History of Ideas",
+    date: "October 21, 2026",
+    duration: "4m 43s",
+    durationSec: 283,
+    description: "Was Napoleon poisoned, or did he die of natural causes? Uncover the arsenic mystery behind one of history's most debated deaths in an intriguing deep dive into forensic chemistry and historical investigation.",
+    image: "assets/images/ep10-napoleon-wasnt-poisoned.jpg",
+    audioSrc: "assets/audio/ep10-napoleon-wasnt-poisoned.mp3",
+    hosts: ["Simran Ailani"]
+  },
+  {
+    id: "ep-9",
+    number: 9,
+    title: "Are we more than our Molecules?",
+    category: "Mind & Neuroscience",
+    date: "October 09, 2026",
+    duration: "7m 10s",
+    durationSec: 430,
+    description: "What happens when matter begins to feel? Explore the chemistry behind attraction, dopamine, oxytocin, and human connection as we uncover the science of love—and question whether understanding its chemistry can ever explain its meaning.",
+    image: "assets/images/ep11-are-we-more-than-our-molecules.jpg",
+    audioSrc: "assets/audio/ep11-are-we-more-than-our-molecules.mp3",
+    hosts: ["Simran Ailani"]
+  },
+  {
+    id: "ep-8",
+    number: 8,
+    title: "There's always that one character",
+    category: "Literature & Storytelling",
+    date: "October 07, 2026",
+    duration: "4m 57s",
+    durationSec: 297,
+    description: "Let's dive into the minds of authors whose characters make a fantasy truly fantastic! An insightful exploration into character design, archetypes, and the psychology that makes fictional figures feel remarkably alive.",
+    image: "assets/images/ep12-theres-always-that-one-character.jpg",
+    audioSrc: "assets/audio/ep12-theres-always-that-one-character.mp3",
+    hosts: ["Simran Ailani"]
+  },
+  {
     id: "ep-1",
-    number: 1,
+    number: 7,
     title: "Can Chemistry explain Consciousness?",
     category: "Mind & Neuroscience",
     date: "October 06, 2026",
@@ -42,7 +115,7 @@ const GYAN_SETU_EPISODES = [
   },
   {
     id: "ep-2",
-    number: 2,
+    number: 6,
     title: "The secrets of Sadabahar",
     category: "Nature & Medicine",
     date: "August 04, 2026",
@@ -55,7 +128,7 @@ const GYAN_SETU_EPISODES = [
   },
   {
     id: "ep-3",
-    number: 3,
+    number: 5,
     title: "The dream that gave us Benzene",
     category: "History of Ideas",
     date: "July 26, 2026",
@@ -81,7 +154,7 @@ const GYAN_SETU_EPISODES = [
   },
   {
     id: "ep-5",
-    number: 5,
+    number: 3,
     title: "Why bananas are slightly radioactive?",
     category: "Everyday Phenomena",
     date: "July 29, 2025",
@@ -94,7 +167,7 @@ const GYAN_SETU_EPISODES = [
   },
   {
     id: "ep-6",
-    number: 6,
+    number: 2,
     title: "AI in Chemistry: When machines meet molecules",
     category: "Future & Technology",
     date: "July 28, 2025",
@@ -107,7 +180,7 @@ const GYAN_SETU_EPISODES = [
   },
   {
     id: "ep-7",
-    number: 7,
+    number: 1,
     title: "Carbenes",
     category: "Deep Concepts",
     date: "April 07, 2025",

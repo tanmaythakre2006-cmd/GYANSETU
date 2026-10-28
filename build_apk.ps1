@@ -46,5 +46,5 @@ java -jar $ApkSignerJar verify --verbose $FinalApk
 $size = (Get-Item $FinalApk).Length / 1MB
 Write-Host "=========================================================="
 Write-Host ("SUCCESS: GyanSetu.apk generated at: {0}" -f $FinalApk)
-Write-Host ("Size: {0:N2} MB (Includes all 7 episodes offline)" -f $size)
+Write-Host ("Size: {0:N2} MB (Includes all 12 episodes offline)" -f $size)
 Write-Host "=========================================================="

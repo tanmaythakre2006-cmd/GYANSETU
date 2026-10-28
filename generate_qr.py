@@ -156,7 +156,7 @@ def create_showcase_card(qr_img, display_url, out_card_path):
 
     # Founders Credit
     pdraw.line([pad_x + 50, card_bottom - 75, card_w - pad_x - 50, card_bottom - 75], fill=(255, 255, 255, 25), width=1)
-    pdraw.text((card_w//2, card_bottom - 42), "Simran Ailani (Founder & Lead Host)  •  Tanmay Rambhau Thakre (Technical Architect & Co-Founder)", fill=(130, 155, 175, 255), font=font_credit, anchor="mm")
+    pdraw.text((card_w//2, card_bottom - 42), "Simran Ailani • Founder and Lead Host", fill=(130, 155, 175, 255), font=font_credit, anchor="mm")
 
     poster.save(out_card_path, "PNG")
     print(f"Saved Showcase Poster: {out_card_path}")

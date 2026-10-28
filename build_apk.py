@@ -70,8 +70,13 @@ def main():
         for f in os.listdir(os.path.join(classes_dir, "com", "gyansetu", "app"))
         if f.endswith(".class")
     ]
-    classes_arg = " ".join([f'"{cf}"' for cf in class_files])
-    run_cmd(f'java -cp "{d8_jar}" com.android.tools.r8.D8 --lib "{android_jar}" --output "{dex_dir}" {classes_arg}', "4. Converting to Dalvik Executable (classes.dex)")
+    print("==> 4. Converting to Dalvik Executable (classes.dex)...")
+    d8_cmd = ["java", "-cp", d8_jar, "com.android.tools.r8.D8", "--lib", android_jar, "--output", dex_dir] + class_files
+    d8_res = subprocess.run(d8_cmd, capture_output=True, text=True)
+    if d8_res.returncode != 0:
+        print("ERROR: D8 failed:", d8_res.stderr)
+        sys.exit(1)
+    print("==> 4. Converting to Dalvik Executable succeeded!\n")
 
     # 5. Insert classes.dex into base.apk
     print("==> 5. Adding classes.dex to base.apk...")
@@ -111,9 +116,9 @@ def main():
 
     apk_size_mb = os.path.getsize(final_apk) / (1024 * 1024)
     print("=" * 60)
-    print(f"🎉 SUCCESS! GyanSetu APK Generated Successfully!")
-    print(f"📦 Output File: {final_apk}")
-    print(f"📊 File Size: {apk_size_mb:.2f} MB (includes all 7 full studio episodes offline)")
+    print("SUCCESS: GyanSetu APK Generated Successfully!")
+    print(f"Output File: {final_apk}")
+    print(f"File Size: {apk_size_mb:.2f} MB (includes all 12 full studio episodes offline)")
     print("=" * 60)
 
 if __name__ == "__main__":
