@@ -831,7 +831,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAnalyticsUI();
   initFirebaseRealtimeSync();
   detectAndRecordVisit();
-});
 
 
 
@@ -854,16 +853,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isGhostMode) {
       document.body.classList.add('ghost-mode-active');
-      if (ghostModeBtn) ghostModeBtn.classList.add('active');
-      if (ghostNavLabel) ghostNavLabel.textContent = '2G Ghost: ON';
-      if (dockGhostBtn) dockGhostBtn.classList.add('active');
-      if (dockGhostLabel) dockGhostLabel.textContent = '2G Active';
+      if (ghostModeBtn) {
+        ghostModeBtn.classList.add('active');
+        ghostModeBtn.setAttribute('aria-checked', 'true');
+      }
+      if (ghostNavLabel) ghostNavLabel.textContent = 'ON';
+      if (dockGhostBtn) {
+        dockGhostBtn.classList.add('active');
+        dockGhostBtn.setAttribute('aria-checked', 'true');
+      }
+      if (dockGhostLabel) dockGhostLabel.textContent = 'ON';
     } else {
       document.body.classList.remove('ghost-mode-active');
-      if (ghostModeBtn) ghostModeBtn.classList.remove('active');
-      if (ghostNavLabel) ghostNavLabel.textContent = '2G Ghost Mode';
-      if (dockGhostBtn) dockGhostBtn.classList.remove('active');
-      if (dockGhostLabel) dockGhostLabel.textContent = '2G Saver';
+      if (ghostModeBtn) {
+        ghostModeBtn.classList.remove('active');
+        ghostModeBtn.setAttribute('aria-checked', 'false');
+      }
+      if (ghostNavLabel) ghostNavLabel.textContent = 'OFF';
+      if (dockGhostBtn) {
+        dockGhostBtn.classList.remove('active');
+        dockGhostBtn.setAttribute('aria-checked', 'false');
+      }
+      if (dockGhostLabel) dockGhostLabel.textContent = 'OFF';
     }
 
     // Seamless audio hot-swap if playing or loaded
@@ -888,11 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isAuto) {
-      showToast('⚡ 2G Network Detected: Auto-engaged Ghost Stream (82% Data Savings)');
+      showToast('⚡ Low Bandwidth Detected • Data Saver Auto-Engaged (82% Saved)');
     } else {
       showToast(isGhostMode 
-        ? '⚡ 2G Ghost Stream Enabled • 82% Lower Bandwidth' 
-        : '🎧 High-Fidelity Studio Stream Restored');
+        ? '⚡ Data Saver ON • 82% Lower Bandwidth (Voice Stream)' 
+        : '🎧 Data Saver OFF • High-Fidelity Studio Stream Restored');
     }
   }
 
@@ -938,3 +949,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Network Monitoring
   initNetworkDetection();
+});

@@ -39,18 +39,22 @@
         <a href="#episodes" class="nav-pill-link">Episodes</a>
         <a href="pocket.html" class="nav-pill-link nav-pill-retro" title="Switch to Ultra-Lightweight Smart Retro Transistor Radio">📻 Retro Radio</a>
         <a href="#analytics" class="nav-pill-link">Analytics</a>
-        <a href="#mission" class="nav-pill-link">Mission & Team</a>
+        <a href="#mission" class="nav-pill-link">Mission &amp; Team</a>
         <a href="#app" class="nav-pill-link">GyanSetu App</a>
       </div>
 
       <div class="nav-actions">
-        <button id="ghost-mode-btn" class="btn-ghost-pill" title="Toggle 2G Ghost Stream (Low-Bandwidth & Battery Saver)">
-          <span class="ghost-dot"></span>
-          <span id="ghost-nav-label">2G Ghost Mode</span>
+        <button id="ghost-mode-btn" class="btn-data-saver-switch" role="switch" aria-checked="false" title="Data Saver: Toggle 32kbps Voice Stream (Saves 82% Data)">
+          <span class="ds-icon">⚡</span>
+          <span class="ds-label">Data Saver</span>
+          <span class="ds-switch-track">
+            <span class="ds-switch-knob"></span>
+          </span>
+          <span id="ghost-nav-label" class="ds-state-tag">OFF</span>
         </button>
-        <button id="radio-mode-btn" class="liquid-btn btn-sm btn-live-pill">
+        <button id="radio-mode-btn" class="btn-live-pill" title="Tune into Live Stream">
           <span class="pulse-beacon"></span>
-          <span>Live Stream</span>
+          <span>Live<span class="live-stream-word"> Stream</span></span>
         </button>
       </div>
     </nav>
@@ -795,9 +799,10 @@
 
       <!-- Right Utility Actions -->
       <div class="dock-utility-column">
-        <button id="dock-ghost-btn" class="btn-ghost-dock" title="Toggle 2G Ghost Stream (Save 82% Data)">
-          <span class="ghost-dot"></span>
-          <span id="dock-ghost-label">2G Saver</span>
+        <button id="dock-ghost-btn" class="btn-dock-data-saver" role="switch" aria-checked="false" title="Toggle Data Saver (Saves 82% Data)">
+          <span class="dock-ds-icon">⚡</span>
+          <span class="dock-ds-label">Data Saver</span>
+          <span id="dock-ghost-label" class="dock-ds-state">OFF</span>
         </button>
         <button id="speed-toggle-btn" class="dock-pill-btn" title="Playback Speed">1.0×</button>
         

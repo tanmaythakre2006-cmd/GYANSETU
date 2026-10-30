@@ -131,55 +131,66 @@ body.liquid-theme {
 /* Glassmorphism Navigation */
 .liquid-nav-container {
   position: sticky;
-  top: 20px;
+  top: 18px;
   z-index: 1000;
   padding: 0 24px;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .liquid-nav {
-  max-width: 1100px;
+  max-width: 1240px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  gap: 16px;
+  padding: 6px 18px;
+  min-height: 58px;
+  box-sizing: border-box;
   background: var(--navy-dock);
   backdrop-filter: var(--glass-blur);
   border: var(--glass-border-sheen);
   border-radius: 9999px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.22);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .nav-brand .brand-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
 }
 
 .brand-emblem {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
   object-fit: cover;
-  box-shadow: 0 0 16px var(--teal-glow);
+  box-shadow: 0 0 14px var(--teal-glow);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .brand-name {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: 0.8px;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .brand-net {
@@ -204,10 +215,11 @@ body.liquid-theme {
 }
 
 .brand-tagline {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--teal-light);
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  line-height: 1.1;
 }
 
 .net-tag-accent {
@@ -218,22 +230,35 @@ body.liquid-theme {
 .nav-links {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  flex: 1 1 auto;
 }
 
 .nav-pill-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 500;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 9999px;
+  white-space: nowrap;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .nav-pill-link:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 /* Liquid Buttons */
@@ -281,17 +306,38 @@ body.liquid-theme {
 }
 
 .btn-live-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
   background: rgba(249, 124, 34, 0.12);
   color: var(--orange-bright);
   border: 1px solid rgba(249, 124, 34, 0.35);
-  padding: 7px 16px;
-  font-size: 0.82rem;
-  box-shadow: 0 0 16px rgba(249, 124, 34, 0.2);
+  border-radius: 9999px;
+  font-family: var(--font-text);
+  font-size: 0.80rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 0 14px rgba(249, 124, 34, 0.18);
+  box-sizing: border-box;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.25s ease;
 }
 
 .btn-live-pill:hover {
   background: rgba(249, 124, 34, 0.22);
-  box-shadow: 0 0 24px rgba(249, 124, 34, 0.4);
+  border-color: rgba(249, 124, 34, 0.6);
+  box-shadow: 0 0 22px rgba(249, 124, 34, 0.38);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-live-pill:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .pulse-beacon {
@@ -1993,6 +2039,18 @@ body.liquid-theme {
 
 /* Tablet & Smaller Laptops (<= 1024px) */
 @media (max-width: 1024px) {
+  .liquid-nav {
+    max-width: 98%;
+    padding: 6px 14px;
+    gap: 8px;
+  }
+  .nav-pill-link {
+    padding: 5px 8px;
+    font-size: 0.78rem;
+  }
+  .brand-tagline {
+    display: none;
+  }
   .hero-layout {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -2013,6 +2071,12 @@ body.liquid-theme {
     width: auto;
   }
   .liquid-volume-slider {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .liquid-nav .nav-links {
     display: none;
   }
 }
@@ -2038,17 +2102,53 @@ body.liquid-theme {
     margin-bottom: 20px;
   }
   .liquid-nav {
-    padding: 8px 14px;
+    padding: 6px 14px;
+    min-height: 50px;
+    gap: 8px;
   }
   .nav-links {
     display: none;
   }
   .brand-name {
-    font-size: 1.05rem;
+    font-size: 1.0rem;
   }
   .brand-emblem {
-    width: 32px;
+    width: 30px;
+    height: 30px;
+  }
+  .brand-tagline {
+    display: none;
+  }
+  .btn-data-saver-switch {
     height: 32px;
+    padding: 0 8px;
+    gap: 6px;
+  }
+  .ds-label {
+    display: none;
+  }
+  .btn-live-pill {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.74rem;
+  }
+
+  @media (max-width: 440px) {
+    .live-stream-word {
+      display: none;
+    }
+    .liquid-nav {
+      padding: 6px 10px;
+      gap: 6px;
+    }
+    .btn-live-pill {
+      padding: 0 9px;
+      font-size: 0.72rem;
+    }
+    .btn-data-saver-switch {
+      padding: 0 6px;
+      gap: 4px;
+    }
   }
 
   /* Mobile Hero Section */
@@ -2959,75 +3059,166 @@ body.liquid-theme {
    2G GHOST STREAM & SMART RETRO RADIO SYSTEM (Round 2 Innovations)
    ========================================================================= */
 
-/* Nav & Dock Ghost Stream Toggle Buttons */
-.btn-ghost-pill {
-  background: rgba(255, 157, 0, 0.08);
-  border: 1px solid rgba(255, 157, 0, 0.28);
-  color: #ffb833;
+/* Data Saver ON/OFF Switch Pill */
+.btn-data-saver-switch {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 6px 14px;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 9999px;
-  transition: all 0.25s ease;
+  color: rgba(255, 255, 255, 0.88);
   cursor: pointer;
+  font-family: var(--font-text);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  user-select: none;
+  white-space: nowrap;
 }
 
-.btn-ghost-pill:hover {
-  background: rgba(255, 157, 0, 0.16);
-  border-color: rgba(255, 157, 0, 0.5);
-  box-shadow: 0 0 14px rgba(255, 157, 0, 0.25);
+.btn-data-saver-switch:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
-.btn-ghost-pill.active {
-  background: linear-gradient(135deg, rgba(255, 157, 0, 0.25), rgba(249, 124, 34, 0.35));
-  border-color: #ff9d00;
-  color: #ffffff;
-  box-shadow: 0 0 16px rgba(255, 157, 0, 0.4);
+.btn-data-saver-switch:active {
+  transform: translateY(0) scale(0.98);
 }
 
-.ghost-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #7a5200;
+.ds-icon {
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+.ds-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Mechanical/iOS Physical Toggle Track */
+.ds-switch-track {
+  width: 28px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-block;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.ds-switch-knob {
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.ds-state-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
   transition: all 0.25s ease;
+  line-height: 1;
 }
 
-.btn-ghost-pill.active .ghost-dot {
-  background: #ffaa00;
-  box-shadow: 0 0 8px #ffaa00, 0 0 16px #ff9900;
+/* Data Saver: ON State */
+.btn-data-saver-switch.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(5, 150, 105, 0.28));
+  border-color: rgba(52, 211, 153, 0.55);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.3);
 }
 
-.btn-ghost-dock {
-  background: rgba(255, 157, 0, 0.08);
-  border: 1px solid rgba(255, 157, 0, 0.3);
-  color: #ffb833;
-  display: flex;
+.btn-data-saver-switch.active .ds-switch-track {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 8px rgba(16, 185, 129, 0.45);
+}
+
+.btn-data-saver-switch.active .ds-switch-knob {
+  transform: translateX(12px);
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+}
+
+.btn-data-saver-switch.active .ds-state-tag {
+  background: rgba(52, 211, 153, 0.24);
+  color: #34d399;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(52, 211, 153, 0.65);
+}
+
+/* Dock Data Saver Button */
+.btn-dock-data-saver {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  font-size: 0.76rem;
-  font-weight: 700;
+  height: 32px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 9999px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.74rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  user-select: none;
+  white-space: nowrap;
 }
 
-.btn-ghost-dock:hover {
-  background: rgba(255, 157, 0, 0.18);
-  border-color: #ff9d00;
-}
-
-.btn-ghost-dock.active {
-  background: rgba(255, 157, 0, 0.22);
-  border-color: #ffaa11;
+.btn-dock-data-saver:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 170, 17, 0.3);
+}
+
+.dock-ds-icon {
+  font-size: 0.76rem;
+}
+
+.dock-ds-label {
+  white-space: nowrap;
+}
+
+.dock-ds-state {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.btn-dock-data-saver.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(5, 150, 105, 0.28));
+  border-color: rgba(52, 211, 153, 0.55);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
+}
+
+.btn-dock-data-saver.active .dock-ds-state {
+  background: rgba(52, 211, 153, 0.25);
+  color: #34d399;
+  font-weight: 800;
+  text-shadow: 0 0 6px rgba(52, 211, 153, 0.6);
 }
 
 /* 2G Ghost Stream Active Mode: Extreme Power & GPU Saver */
