@@ -39,9 +39,14 @@
         <a href="#episodes" class="nav-pill-link">Episodes</a>
         <a href="#analytics" class="nav-pill-link">Analytics</a>
         <a href="#mission" class="nav-pill-link">Mission & Team</a>
+        <a href="#app" class="nav-pill-link">GyanSetu App</a>
       </div>
 
       <div class="nav-actions">
+        <button id="ghost-mode-btn" class="btn-ghost-pill" title="Toggle 2G Ghost Stream (Low-Bandwidth & Battery Saver)">
+          <span class="ghost-dot"></span>
+          <span id="ghost-nav-label">2G Ghost Mode</span>
+        </button>
         <button id="radio-mode-btn" class="liquid-btn btn-sm btn-live-pill">
           <span class="pulse-beacon"></span>
           <span>Live Stream</span>
@@ -51,6 +56,13 @@
   </header>
 
   <main>
+    <!-- Floating 2G / Network Status Toast -->
+    <div id="network-toast" class="network-toast" aria-live="polite">
+      <span class="toast-icon">⚡</span>
+      <span id="network-toast-msg">2G Ghost Stream: 82% Data Savings Active</span>
+      <button id="close-toast-btn" class="toast-dismiss" aria-label="Close Notification">&times;</button>
+    </div>
+
     <!-- Hero / Live On-Air Broadcast Section -->
     <section id="broadcast" class="hero-section">
       <div class="container hero-layout">
@@ -523,6 +535,205 @@
 
       </div>
     </section>
+
+    <!-- Dedicated GyanSetu App Section (Offline Locker & DRM Vault) -->
+    <section id="app" class="section-block app-download-section">
+      <div class="container">
+
+        <div class="section-title-wrap">
+          <div class="title-meta">
+            <span class="liquid-sub-label">OFFLINE VAULT & HARDWARE DRM PROTECTION</span>
+            <h2 class="section-heading">GyanSetu App</h2>
+            <p class="section-tagline">
+              Democratizing knowledge across low-bandwidth corners of the world with hardware-enforced 
+              intellectual property protection and 100% zero-data offline playback.
+            </p>
+          </div>
+        </div>
+
+        <div class="liquid-glass-card app-master-card">
+          <div class="app-card-grid">
+
+            <!-- Left Column: Security & Offline Architecture -->
+            <div class="app-features-col">
+              <div class="app-security-status-banner">
+                <span class="shield-beacon">🛡️</span>
+                <div>
+                  <h4 class="security-banner-title">Hardware DRM Vault Active</h4>
+                  <p class="security-banner-sub">Operating-system enforced FLAG_SECURE protection</p>
+                </div>
+              </div>
+
+              <div class="app-feature-list">
+                <div class="app-feature-item">
+                  <div class="app-feature-icon">🚫</div>
+                  <div class="app-feature-content">
+                    <h4 class="app-feature-title">Anti-Screen-Capture & Anti-Recording</h4>
+                    <p class="app-feature-desc">
+                      Hardware-level display protection strictly blocks all screenshot combinations. Screen recorders 
+                      capture only solid black pixels, and multitasking previews are obscured to safeguard the creators' intellectual property.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="app-feature-item">
+                  <div class="app-feature-icon">📴</div>
+                  <div class="app-feature-content">
+                    <h4 class="app-feature-title">100% Zero-Data Offline Locker</h4>
+                    <p class="app-feature-desc">
+                      Built specifically for students in remote regions (Zambia, Uganda, rural communities). All 13 full studio-quality 
+                      episodes are available in the app vault—requiring zero internet connection and zero mobile data.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="app-feature-item">
+                  <div class="app-feature-icon">🔐</div>
+                  <div class="app-feature-content">
+                    <h4 class="app-feature-title">Encrypted Storage Sandbox</h4>
+                    <p class="app-feature-desc">
+                      Audio files reside in isolated private application storage. File managers, unauthorized scrapers, and 
+                      USB transfers cannot rip or extract raw files from the device.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="app-feature-item">
+                  <div class="app-feature-icon">📻</div>
+                  <div class="app-feature-content">
+                    <h4 class="app-feature-title">Dedicated Radio Controls & Show Notes</h4>
+                    <p class="app-feature-desc">
+                      Intuitive tactile playback with 15-second skip, speed multipliers (1.0× to 2.0×), and offline narrative transcripts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: App Mockup & Download Terminal -->
+            <div class="app-download-col">
+              <div class="app-device-frame">
+                <div class="app-emblem-badge-wrap">
+                  <img src="assets/images/logo.png" alt="GyanSetu App Logo" class="app-badge-logo">
+                  <div class="app-badge-glow"></div>
+                </div>
+
+                <h3 class="app-download-name">GyanSetu Android Suite</h3>
+                <p class="app-download-tag">Dual-Edition Offline Locker • Global Access v2.0</p>
+
+                <!-- Dual APK Edition Grid -->
+                <div class="dual-apk-grid">
+                  <!-- Edition 1: Flagship Vault -->
+                  <div class="apk-card">
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Flagship Vault</h4>
+                      <p class="apk-card-sub">Liquid Glass VisionOS UI & Full-Fidelity Studio Audio</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val">93 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">DRM</span>
+                        <span class="mini-spec-val highlight-amber">FLAG_SECURE</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu.apk" download="GyanSetu.apk" class="liquid-btn btn-primary-gradient btn-download-action">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Flagship APK (93MB)</span>
+                    </a>
+                  </div>
+
+                  <!-- Edition 2: Pocket Retro Radio -->
+                  <div class="apk-card pocket-edition">
+                    <span class="apk-card-badge">Global South</span>
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Pocket Retro Radio</h4>
+                      <p class="apk-card-sub">Smart Transistor Radio • 82% Lighter • 2G Ghost Audio</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val highlight-amber">18 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Format</span>
+                        <span class="mini-spec-val">Retro Radio</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu-PocketRadio.apk" download="GyanSetu-PocketRadio.apk" class="liquid-btn btn-secondary-glass btn-download-action" style="border-color: rgba(255, 157, 0, 0.45); color: #ffaa11;">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Pocket Radio (18MB)</span>
+                    </a>
+                    <a href="pocket.html" target="_blank" class="btn-simulator">
+                      <span>📻 Launch Web Simulator</span>
+                      <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Sleek Dual Web Stream Options -->
+                <div class="sleek-dual-streams">
+                  <!-- Option 1: Vercel -->
+                  <div class="stream-option-bar">
+                    <button type="button" class="stream-qr-thumb-btn" data-qr="vercel" title="Scan or view Vercel QR Code">
+                      <img src="assets/images/gyansetu_qr_vercel.png" alt="Vercel QR Code" class="stream-qr-thumb-img">
+                      <span class="stream-qr-zoom-glyph">⛶</span>
+                    </button>
+                    <div class="stream-meta">
+                      <div class="stream-meta-top">
+                        <span class="stream-badge-vercel">Vercel Stream</span>
+                        <span class="stream-hint-tag">Primary</span>
+                      </div>
+                      <a href="https://gyansetu-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="stream-url-link">
+                        <span>gyansetu-five.vercel.app</span>
+                        <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- Option 2: Netlify -->
+                  <div class="stream-option-bar">
+                    <button type="button" class="stream-qr-thumb-btn" data-qr="netlify" title="Scan or view Netlify QR Code">
+                      <img src="assets/images/gyansetu_qr_netlify.png" alt="Netlify QR Code" class="stream-qr-thumb-img">
+                      <span class="stream-qr-zoom-glyph">⛶</span>
+                    </button>
+                    <div class="stream-meta">
+                      <div class="stream-meta-top">
+                        <span class="stream-badge-netlify">Netlify Mirror</span>
+                        <span class="stream-hint-tag">Mirror</span>
+                      </div>
+                      <a href="https://imaginative-centaur-0c2b59.netlify.app/" target="_blank" rel="noopener noreferrer" class="stream-url-link">
+                        <span>imaginative-centaur-0c2b59.netlify.app</span>
+                        <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <details class="install-steps-accordion">
+                  <summary class="steps-accordion-summary">
+                    <span class="accordion-summary-text">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                      Installation Guide (3 steps)
+                    </span>
+                    <span class="accordion-arrow">▾</span>
+                  </summary>
+                  <ol class="steps-compact-list">
+                    <li>Tap <strong>Download GyanSetu APK</strong> above.</li>
+                    <li>Allow <em>"Install unknown apps"</em> when prompted by Android.</li>
+                    <li>Open <strong>GyanSetu</strong> and enjoy full offline knowledge anytime!</li>
+                  </ol>
+                </details>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- Apple macOS/visionOS Liquid Glass Floating Audio Dock -->
@@ -580,6 +791,10 @@
 
       <!-- Right Utility Actions -->
       <div class="dock-utility-column">
+        <button id="dock-ghost-btn" class="btn-ghost-dock" title="Toggle 2G Ghost Stream (Save 82% Data)">
+          <span class="ghost-dot"></span>
+          <span id="dock-ghost-label">2G Saver</span>
+        </button>
         <button id="speed-toggle-btn" class="dock-pill-btn" title="Playback Speed">1.0×</button>
         
         <div class="dock-volume-group">
@@ -615,6 +830,35 @@
           <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           <span>Play Full Episode</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liquid Glass Dual QR Lightbox Modal -->
+  <div id="qr-modal" class="modal-scrim">
+    <div class="liquid-glass-modal qr-lightbox-modal">
+      <div class="modal-top-bar">
+        <div class="qr-modal-tabs">
+          <button type="button" class="qr-tab-btn active" id="modal-tab-vercel" data-qr="vercel">Vercel Stream</button>
+          <button type="button" class="qr-tab-btn" id="modal-tab-netlify" data-qr="netlify">Netlify Mirror</button>
+        </div>
+        <button id="close-qr-modal-btn" class="modal-dismiss-btn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="qr-lightbox-body">
+        <h3 id="qr-modal-heading" class="qr-modal-title">Scan to Stream • Vercel</h3>
+        <p id="qr-modal-subheading" class="qr-modal-subtitle">Point camera to stream live without installing the app</p>
+        
+        <div class="qr-modal-preview-wrapper">
+          <img id="qr-modal-large-img" src="assets/images/gyansetu_qr_vercel.png" alt="GyanSetu QR Code" class="qr-modal-img">
+        </div>
+
+        <div class="qr-modal-action-row">
+          <a id="qr-modal-link-btn" href="https://gyansetu-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="liquid-btn btn-secondary-glass qr-modal-btn">
+            <span id="qr-modal-link-text">Open gyansetu-five.vercel.app</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>

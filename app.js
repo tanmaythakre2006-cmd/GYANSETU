@@ -59,6 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const openQrLightboxBtn = document.getElementById('open-qr-lightbox-btn');
   const closeQrModalBtn = document.getElementById('close-qr-modal-btn');
 
+  // 2G Ghost Stream & Network Elements
+  const ghostModeBtn = document.getElementById('ghost-mode-btn');
+  const ghostNavLabel = document.getElementById('ghost-nav-label');
+  const dockGhostBtn = document.getElementById('dock-ghost-btn');
+  const dockGhostLabel = document.getElementById('dock-ghost-label');
+  const networkToast = document.getElementById('network-toast');
+  const networkToastMsg = document.getElementById('network-toast-msg');
+  const closeToastBtn = document.getElementById('close-toast-btn');
+
+  let isGhostMode = localStorage.getItem('gyansetu_ghost_mode') === 'true';
+  let toastTimeout = null;
+
   // Library & Search Elements
   const episodesGrid = document.getElementById('episodes-grid');
   const searchInput = document.getElementById('search-input');
@@ -146,7 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
     currentEpisodeIndex = index;
     const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
 
-    audio.src = ep.audioSrc;
+    const targetAudioSrc = isGhostMode 
+      ? ep.audioSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+      : ep.audioSrc;
+    audio.src = targetAudioSrc;
     audio.playbackRate = speeds[currentSpeedIndex];
 
     // Hero Showcase Sync
@@ -819,3 +834,107 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+  // ==========================================================================
+  // 2G GHOST STREAM & AUTO NETWORK DETECTION (Round 2 Innovations)
+  // ==========================================================================
+  function showToast(msg, duration = 4000) {
+    if (!networkToast) return;
+    if (networkToastMsg) networkToastMsg.textContent = msg;
+    networkToast.classList.add('show');
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      networkToast.classList.remove('show');
+    }, duration);
+  }
+
+  function setGhostMode(active, isAuto = false) {
+    isGhostMode = active;
+    localStorage.setItem('gyansetu_ghost_mode', isGhostMode ? 'true' : 'false');
+
+    if (isGhostMode) {
+      document.body.classList.add('ghost-mode-active');
+      if (ghostModeBtn) ghostModeBtn.classList.add('active');
+      if (ghostNavLabel) ghostNavLabel.textContent = '2G Ghost: ON';
+      if (dockGhostBtn) dockGhostBtn.classList.add('active');
+      if (dockGhostLabel) dockGhostLabel.textContent = '2G Active';
+    } else {
+      document.body.classList.remove('ghost-mode-active');
+      if (ghostModeBtn) ghostModeBtn.classList.remove('active');
+      if (ghostNavLabel) ghostNavLabel.textContent = '2G Ghost Mode';
+      if (dockGhostBtn) dockGhostBtn.classList.remove('active');
+      if (dockGhostLabel) dockGhostLabel.textContent = '2G Saver';
+    }
+
+    // Seamless audio hot-swap if playing or loaded
+    const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+    if (ep && audio.src) {
+      const targetSrc = isGhostMode 
+        ? ep.audioSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+        : ep.audioSrc;
+      
+      const currentUrl = new URL(audio.src, window.location.href).pathname;
+      const targetUrl = new URL(targetSrc, window.location.href).pathname;
+
+      if (currentUrl !== targetUrl) {
+        const curTime = audio.currentTime;
+        const wasPlaying = isPlaying;
+        audio.src = targetSrc;
+        audio.currentTime = curTime;
+        if (wasPlaying) {
+          playAudio();
+        }
+      }
+    }
+
+    if (isAuto) {
+      showToast('⚡ 2G Network Detected: Auto-engaged Ghost Stream (82% Data Savings)');
+    } else {
+      showToast(isGhostMode 
+        ? '⚡ 2G Ghost Stream Enabled • 82% Lower Bandwidth' 
+        : '🎧 High-Fidelity Studio Stream Restored');
+    }
+  }
+
+  function initNetworkDetection() {
+    // 1. Initial UI sync
+    if (isGhostMode) {
+      setGhostMode(true, false);
+    }
+
+    // 2. Network Information API
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (conn) {
+      const checkNetwork = () => {
+        const isSlow = conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g';
+        const isSaveData = conn.saveData === true;
+        if ((isSlow || isSaveData) && !isGhostMode) {
+          setGhostMode(true, true);
+        }
+      };
+      checkNetwork();
+      conn.addEventListener('change', checkNetwork);
+    }
+
+    // 3. Button Click Handlers
+    if (ghostModeBtn) {
+      ghostModeBtn.addEventListener('click', () => {
+        setGhostMode(!isGhostMode, false);
+      });
+    }
+
+    if (dockGhostBtn) {
+      dockGhostBtn.addEventListener('click', () => {
+        setGhostMode(!isGhostMode, false);
+      });
+    }
+
+    if (closeToastBtn && networkToast) {
+      closeToastBtn.addEventListener('click', () => {
+        networkToast.classList.remove('show');
+      });
+    }
+  }
+
+  // Initialize Network Monitoring
+  initNetworkDetection();

@@ -5,6 +5,7 @@
 # Python cache & virtualenvs
 __pycache__/
 *.pyc
+.venv/
 
 # OS metadata
 Thumbs.db
@@ -12,4 +13,5 @@ Thumbs.db
 
 # Android build intermediates
 android/build/
+android_pocket/build/
 android/*.keystore

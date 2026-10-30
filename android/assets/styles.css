@@ -2954,3 +2954,274 @@ body.liquid-theme {
 }
 
 
+
+/* =========================================================================
+   2G GHOST STREAM & SMART RETRO RADIO SYSTEM (Round 2 Innovations)
+   ========================================================================= */
+
+/* Nav & Dock Ghost Stream Toggle Buttons */
+.btn-ghost-pill {
+  background: rgba(255, 157, 0, 0.08);
+  border: 1px solid rgba(255, 157, 0, 0.28);
+  color: #ffb833;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-ghost-pill:hover {
+  background: rgba(255, 157, 0, 0.16);
+  border-color: rgba(255, 157, 0, 0.5);
+  box-shadow: 0 0 14px rgba(255, 157, 0, 0.25);
+  color: #ffffff;
+}
+
+.btn-ghost-pill.active {
+  background: linear-gradient(135deg, rgba(255, 157, 0, 0.25), rgba(249, 124, 34, 0.35));
+  border-color: #ff9d00;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 157, 0, 0.4);
+}
+
+.ghost-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7a5200;
+  display: inline-block;
+  transition: all 0.25s ease;
+}
+
+.btn-ghost-pill.active .ghost-dot {
+  background: #ffaa00;
+  box-shadow: 0 0 8px #ffaa00, 0 0 16px #ff9900;
+}
+
+.btn-ghost-dock {
+  background: rgba(255, 157, 0, 0.08);
+  border: 1px solid rgba(255, 157, 0, 0.3);
+  color: #ffb833;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost-dock:hover {
+  background: rgba(255, 157, 0, 0.18);
+  border-color: #ff9d00;
+}
+
+.btn-ghost-dock.active {
+  background: rgba(255, 157, 0, 0.22);
+  border-color: #ffaa11;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 170, 17, 0.3);
+}
+
+/* 2G Ghost Stream Active Mode: Extreme Power & GPU Saver */
+body.ghost-mode-active .mesh-orb {
+  animation: none !important;
+  opacity: 0.15 !important;
+  filter: blur(80px) !important;
+}
+
+body.ghost-mode-active .liquid-scrubber-track,
+body.ghost-mode-active .card-artwork-frame {
+  box-shadow: none !important;
+}
+
+body.ghost-mode-active {
+  --teal-glow: rgba(80, 155, 147, 0.15);
+}
+
+/* Floating Network Status Toast */
+.network-toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(18, 22, 28, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 157, 0, 0.45);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 157, 0, 0.2);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+.network-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+  font-size: 1.1rem;
+}
+
+.toast-dismiss {
+  background: none;
+  border: none;
+  color: #8fa0b5;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.15s ease;
+}
+.toast-dismiss:hover {
+  color: #ffffff;
+}
+
+/* Dual APK Grid Architecture */
+.dual-apk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.apk-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.apk-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.apk-card.pocket-edition {
+  border-color: rgba(255, 157, 0, 0.35);
+  background: linear-gradient(165deg, rgba(255, 157, 0, 0.04), rgba(20, 24, 30, 0.6));
+}
+
+.apk-card.pocket-edition:hover {
+  border-color: rgba(255, 157, 0, 0.6);
+  box-shadow: 0 10px 30px rgba(255, 157, 0, 0.12);
+}
+
+.apk-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 157, 0, 0.15);
+  color: #ffaa11;
+  border: 1px solid rgba(255, 157, 0, 0.4);
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.apk-card-header {
+  margin-bottom: 12px;
+}
+
+.apk-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.apk-card-sub {
+  font-size: 0.76rem;
+  color: #8fa0b5;
+  line-height: 1.4;
+}
+
+.apk-mini-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.mini-spec-item {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mini-spec-lbl {
+  display: block;
+  font-size: 0.6rem;
+  color: #7b8898;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.mini-spec-val {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.mini-spec-val.highlight-amber {
+  color: #ffaa11;
+}
+
+.btn-simulator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 157, 0, 0.08);
+  border: 1px solid rgba(255, 157, 0, 0.25);
+  color: #ffaa11;
+  border-radius: 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-simulator:hover {
+  background: rgba(255, 157, 0, 0.18);
+  border-color: #ffaa11;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .dual-apk-grid {
+    grid-template-columns: 1fr;
+  }
+}

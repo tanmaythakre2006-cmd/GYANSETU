@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GyanSetu Pocket Radio • Ultra-Lightweight Retro Transistor</title>
+  <style>
+    :root {
+      --radio-body: #1c1f24;
+      --radio-body-inner: #14171b;
+      --radio-metal: #3a3f47;
+      --radio-chrome: #c5cbd3;
+      --amber-glow: #ff9d00;
+      --amber-soft: rgba(255, 157, 0, 0.15);
+      --amber-dim: #7a4b00;
+      --lcd-bg: #1a1608;
+      --lcd-text: #ffaa11;
+      --lcd-dim: #443208;
+      --screw-color: #555c66;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0b0d11;
+      color: #e0e5eb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", monospace, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      overflow-x: hidden;
+    }
+
+    /* Outer Vintage Wooden / Bakelite Frame */
+    .radio-container {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(145deg, #282d36, #14161a);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.9),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.8),
+        0 0 0 4px #0d0e12;
+      position: relative;
+      border: 1px solid #333a44;
+    }
+
+    /* Corner Screws */
+    .screw {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #77808c 0%, #3a3f47 70%, #1a1d21 100%);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0,0,0,0.8);
+    }
+    .screw::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 1px;
+      width: 8px;
+      height: 2px;
+      background: #111;
+      transform: rotate(45deg);
+    }
+    .screw.tl { top: 12px; left: 12px; }
+    .screw.tr { top: 12px; right: 12px; }
+    .screw.bl { bottom: 12px; left: 12px; }
+    .screw.br { bottom: 12px; right: 12px; }
+
+    /* Telescopic Antenna Element */
+    .antenna-mount {
+      position: absolute;
+      top: -24px;
+      left: 36px;
+      width: 14px;
+      height: 24px;
+      background: linear-gradient(90deg, #666, #aaa 40%, #eee 60%, #444);
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.5);
+    }
+    .antenna-tip {
+      position: absolute;
+      top: -8px;
+      left: 2px;
+      width: 10px;
+      height: 8px;
+      background: #ff3333;
+      border-radius: 50% 50% 0 0;
+    }
+
+    /* Radio Header Banner */
+    .radio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #e5ebf2;
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px #000;
+    }
+
+    .brand-subtitle {
+      font-size: 0.68rem;
+      color: #8892a0;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* Power Indicator Lamp */
+    .pilot-lamp-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pilot-lamp {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #2a1100;
+      border: 1px solid #111;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+
+    .pilot-lamp.on {
+      background: #ffaa00;
+      box-shadow: 0 0 10px #ff9900, 0 0 20px rgba(255, 153, 0, 0.6), inset 0 1px 2px #fff;
+    }
+
+    .pilot-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #778291;
+      letter-spacing: 0.5px;
+    }
+
+    /* Vintage Analog Tuning Window */
+    .tuning-dial-panel {
+      background: #0d0f13;
+      border-radius: 12px;
+      border: 2px solid #282d36;
+      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.9), 0 1px 1px rgba(255, 255, 255, 0.1);
+      padding: 12px 14px 10px;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Backlit glass sheen */
+    .tuning-dial-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+      pointer-events: none;
+    }
+
+    .dial-top-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.62rem;
+      color: #ff9d00;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .frequency-track {
+      position: relative;
+      height: 38px;
+      background: #08090c;
+      border: 1px solid #1f242c;
+      border-radius: 6px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+    }
+
+    /* Frequency markings scale */
+    .freq-ticks {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 4px;
+      bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .tick {
+      width: 1px;
+      height: 6px;
+      background: #47505d;
+    }
+    .tick.major {
+      height: 14px;
+      background: #ffaa11;
+      position: relative;
+    }
+    .tick.major::before {
+      content: attr(data-freq);
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #9aa5b5;
+      font-family: monospace;
+    }
+
+    /* Physical Orange Needle */
+    .tuning-needle {
+      position: absolute;
+      top: -2px;
+      bottom: -2px;
+      width: 3px;
+      background: linear-gradient(180deg, #ff3b30, #ff9500);
+      box-shadow: 0 0 8px #ff3b30, 0 0 14px rgba(255, 59, 48, 0.6);
+      border-radius: 2px;
+      transition: left 0.35s cubic-bezier(0.2, 0.8, 0.25, 1);
+      z-index: 5;
+    }
+    .tuning-needle::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: -2px;
+      width: 7px;
+      height: 5px;
+      background: #ff3b30;
+      border-radius: 2px;
+    }
+
+    /* Amber Illuminated VFD / LCD Screen */
+    .lcd-display {
+      background-color: var(--lcd-bg);
+      border: 2px solid #2e2610;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(255, 157, 0, 0.08);
+      position: relative;
+    }
+
+    .lcd-channel-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .lcd-channel-badge {
+      background: #2b2108;
+      border: 1px solid #ff9d00;
+      color: #ffaa11;
+      font-family: monospace;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .lcd-station-freq {
+      font-family: monospace;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ffaa11;
+      text-shadow: 0 0 8px rgba(255, 170, 17, 0.4);
+    }
+
+    .lcd-title {
+      font-family: monospace;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffbe44;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 0 8px rgba(255, 190, 68, 0.3);
+    }
+
+    .lcd-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: monospace;
+      font-size: 0.65rem;
+      color: #b38022;
+    }
+
+    /* Signal & Audio Meter */
+    .vu-meter-bar {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+    }
+    .vu-seg {
+      width: 4px;
+      height: 8px;
+      background: #332608;
+      border-radius: 1px;
+    }
+    .vu-seg.active {
+      background: #ffaa11;
+      box-shadow: 0 0 4px #ffaa11;
+    }
+    .vu-seg.red.active {
+      background: #ff3b30;
+      box-shadow: 0 0 4px #ff3b30;
+    }
+
+    /* Speaker Grill Section */
+    .speaker-grille {
+      background: #111418;
+      border-radius: 12px;
+      border: 1px solid #232830;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+    .slat {
+      height: 3px;
+      background: linear-gradient(90deg, #181c22, #2c333e 50%, #181c22);
+      border-radius: 2px;
+    }
+
+    /* Mechanical Tactile Buttons Row */
+    .control-chassis {
+      background: #121519;
+      border: 1px solid #262c35;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Vintage Push Button Styling */
+    .retro-btn {
+      background: linear-gradient(180deg, #383f4a 0%, #20242b 100%);
+      color: #e5ebf2;
+      border: 1px solid #4a5361;
+      border-radius: 8px;
+      padding: 12px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      box-shadow: 
+        0 4px 0 #111417,
+        0 6px 6px rgba(0,0,0,0.5),
+        inset 0 1px 1px rgba(255,255,255,0.25);
+      transition: all 0.08s ease;
+      touch-action: manipulation;
+    }
+
+    .retro-btn:active, .retro-btn.pressed {
+      transform: translateY(3px);
+      box-shadow: 
+        0 1px 0 #111417,
+        0 2px 3px rgba(0,0,0,0.6),
+        inset 0 2px 4px rgba(0,0,0,0.5);
+      background: linear-gradient(180deg, #22262e 0%, #171a1f 100%);
+    }
+
+    .retro-btn.btn-power {
+      background: linear-gradient(180deg, #6b2623 0%, #3d1412 100%);
+      border-color: #8c322e;
+    }
+    .retro-btn.btn-power:active {
+      background: linear-gradient(180deg, #3d1412 0%, #240a09 100%);
+    }
+
+    .retro-btn.btn-play {
+      background: linear-gradient(180deg, #2f544f 0%, #182e2b 100%);
+      border-color: #487d76;
+    }
+    .retro-btn.btn-play:active {
+      background: linear-gradient(180deg, #182e2b 0%, #0e1c1a 100%);
+    }
+
+    .btn-icon-svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .btn-label {
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: monospace;
+    }
+
+    /* Progress & Time Readout */
+    .progress-bar-wrap {
+      margin-top: 12px;
+      background: #08090c;
+      border: 1px solid #1f242c;
+      border-radius: 4px;
+      height: 8px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff9500, #ffaa11);
+      box-shadow: 0 0 6px rgba(255, 170, 17, 0.5);
+      border-radius: 3px;
+      transition: width 0.1s linear;
+    }
+
+    /* Rotary Knobs & Specs Footer */
+    .radio-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.62rem;
+      color: #7b8696;
+      font-family: monospace;
+    }
+
+    .offline-vault-tag {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #50b3a3;
+      font-weight: 700;
+    }
+
+    .offline-dot {
+      width: 7px;
+      height: 7px;
+      background: #50b3a3;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #50b3a3;
+    }
+
+    /* Channel List drawer */
+    .station-list-drawer {
+      margin-top: 14px;
+      background: #111418;
+      border: 1px solid #232830;
+      border-radius: 10px;
+      max-height: 140px;
+      overflow-y: auto;
+      padding: 6px;
+    }
+
+    .station-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-family: monospace;
+      color: #8fa0b5;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .station-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+
+    .station-row.active {
+      background: #2b2108;
+      color: #ffaa11;
+      font-weight: 700;
+    }
+
+    /* Audio Element */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Physical Telescopic Antenna -->
+  <div class="antenna-mount">
+    <div class="antenna-tip"></div>
+  </div>
+
+  <!-- Pocket Transistor Radio Chassis -->
+  <div class="radio-container">
+    <!-- Corner Screws -->
+    <div class="screw tl"></div>
+    <div class="screw tr"></div>
+    <div class="screw bl"></div>
+    <div class="screw br"></div>
+
+    <!-- Header Brand Plate -->
+    <header class="radio-header">
+      <div class="brand-group">
+        <h1 class="brand-title">ज्ञानसेतु</h1>
+        <span class="brand-subtitle">TRANSISTOR 13-CH</span>
+      </div>
+      <div class="pilot-lamp-group">
+        <div id="pilot-lamp" class="pilot-lamp on"></div>
+        <span class="pilot-label">POWER</span>
+      </div>
+    </header>
+
+    <!-- Analog Frequency Dial with Sliding Needle -->
+    <section class="tuning-dial-panel">
+      <div class="dial-top-row">
+        <span>FM MEGACYCLES (MHz)</span>
+        <span>GLOBAL KNOWLEDGE SCALE</span>
+      </div>
+
+      <div class="frequency-track" id="freq-track">
+        <div class="freq-ticks">
+          <div class="tick major" data-freq="88"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick major" data-freq="92"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick major" data-freq="96"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick major" data-freq="100"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick major" data-freq="104"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick major" data-freq="108"></div>
+        </div>
+        <!-- Sliding Physical Needle -->
+        <div id="tuning-needle" class="tuning-needle" style="left: 92%;"></div>
+      </div>
+    </section>
+
+    <!-- Illuminated LCD / Vacuum Fluorescent Display -->
+    <section class="lcd-display">
+      <div class="lcd-channel-row">
+        <span class="lcd-channel-badge" id="lcd-channel">CH-13</span>
+        <span class="lcd-station-freq" id="lcd-freq">108.0 MHz FM</span>
+      </div>
+      <div class="lcd-title" id="lcd-title">नागपूरचा इतिहास</div>
+      <div class="lcd-meta-row">
+        <span id="lcd-meta">HISTORY • 9m 18s</span>
+        <div class="vu-meter-bar" id="vu-meter">
+          <div class="vu-seg active"></div>
+          <div class="vu-seg active"></div>
+          <div class="vu-seg active"></div>
+          <div class="vu-seg active"></div>
+          <div class="vu-seg active"></div>
+          <div class="vu-seg red"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speaker Slats -->
+    <div class="speaker-grille">
+      <div class="slat"></div>
+      <div class="slat"></div>
+      <div class="slat"></div>
+      <div class="slat"></div>
+    </div>
+
+    <!-- Tactile Push-Buttons Deck -->
+    <section class="control-chassis">
+      <div class="buttons-row">
+        <!-- Power Button -->
+        <button id="btn-power" class="retro-btn btn-power" title="Power On / Off">
+          <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42A7.92 7.92 0 0 1 20 12c0 4.42-3.58 8-8 8s-8-3.58-8-8c0-2.48 1.13-4.7 2.92-6.17L5.5 4.41A9.95 9.95 0 0 0 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-2.92-1.26-5.54-3.17-7.41z"/></svg>
+          <span class="btn-label">PWR</span>
+        </button>
+
+        <!-- Previous Episode -->
+        <button id="btn-prev" class="retro-btn" title="Previous Episode">
+          <svg class="btn-icon-svg" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="4" x2="5" y2="20" stroke="currentColor" stroke-width="2.5"/></svg>
+          <span class="btn-label">PREV</span>
+        </button>
+
+        <!-- Play / Pause -->
+        <button id="btn-play" class="retro-btn btn-play" title="Play / Pause">
+          <svg id="play-icon" class="btn-icon-svg" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          <span id="play-label" class="btn-label">PLAY</span>
+        </button>
+
+        <!-- Next Episode -->
+        <button id="btn-next" class="retro-btn" title="Next Episode">
+          <svg class="btn-icon-svg" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="4" x2="19" y2="20" stroke="currentColor" stroke-width="2.5"/></svg>
+          <span class="btn-label">NEXT</span>
+        </button>
+
+        <!-- Scan / Auto-Tune -->
+        <button id="btn-scan" class="retro-btn" title="Scan Next Frequency">
+          <svg class="btn-icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <span class="btn-label">SCAN</span>
+        </button>
+      </div>
+
+      <!-- Scrubber -->
+      <div class="progress-bar-wrap" id="progress-wrap">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </section>
+
+    <!-- Quick Station Switcher Drawer -->
+    <div class="station-list-drawer" id="station-list">
+      <!-- Generated via JS -->
+    </div>
+
+    <!-- Chassis Specifications Footer -->
+    <footer class="radio-footer">
+      <div class="offline-vault-tag">
+        <span class="offline-dot"></span>
+        <span>100% ZERO-DATA OFFLINE</span>
+      </div>
+      <div>13 BROADCASTS • 18 MB</div>
+    </footer>
+  </div>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <script>
+    // Master Episode Catalog with frequency mappings
+        const isAndroidAsset = window.location.protocol === 'file:';
+    const audioBase = isAndroidAsset ? 'assets/audio/' : 'assets/audio_ghost/';
+
+    const EPISODES = [
+      { id: "ep-13", num: 13, freq: "108.0", title: "नागपूरचा इतिहास", cat: "HISTORY", dur: "9m 18s", src: audioBase + "ep13-nagpurcha-itihas.mp3" },
+      { id: "ep-12", num: 12, freq: "106.5", title: "Oops, I Created Life", cat: "ETHICS", dur: "5m 21s", src: audioBase + "ep8-oops-i-created-life.mp3" },
+      { id: "ep-11", num: 11, freq: "105.0", title: "What colour is the sky?", cat: "EVERYDAY", dur: "4m 31s", src: audioBase + "ep9-what-colour-is-the-sky.mp3" },
+      { id: "ep-10", num: 10, freq: "103.5", title: "Napoleon wasn't poisoned?", cat: "HISTORY", dur: "4m 43s", src: audioBase + "ep10-napoleon-wasnt-poisoned.mp3" },
+      { id: "ep-9",  num: 9,  freq: "101.8", title: "Are we more than Molecules?", cat: "MIND", dur: "7m 10s", src: audioBase + "ep11-are-we-more-than-our-molecules.mp3" },
+      { id: "ep-8",  num: 8,  freq: "100.0", title: "Always that one character", cat: "STORIES", dur: "4m 57s", src: audioBase + "ep12-theres-always-that-one-character.mp3" },
+      { id: "ep-7",  num: 7,  freq: "98.2",  title: "Can Chemistry explain Mind?", cat: "MIND", dur: "4m 29s", src: audioBase + "ep1-can-chemistry-explain-consciousness.mp3" },
+      { id: "ep-6",  num: 6,  freq: "96.5",  title: "The secrets of Sadabahar", cat: "MEDICINE", dur: "3m 58s", src: audioBase + "ep2-the-secrets-of-sadabahar.mp3" },
+      { id: "ep-5",  num: 5,  freq: "94.8",  title: "The dream that gave Benzene", cat: "HISTORY", dur: "5m 04s", src: audioBase + "ep3-the-dream-that-gave-us-benzene.mp3" },
+      { id: "ep-4",  num: 4,  freq: "93.0",  title: "How drugs know where to go", cat: "MEDICINE", dur: "6m 23s", src: audioBase + "ep4-how-do-drugs-know-where-to-go-in-th.mp3" },
+      { id: "ep-3",  num: 3,  freq: "91.2",  title: "Why bananas are radioactive", cat: "EVERYDAY", dur: "5m 37s", src: audioBase + "ep5-why-bananas-are-slightly-radioactiv.mp3" },
+      { id: "ep-2",  num: 2,  freq: "89.5",  title: "AI in Chemistry", cat: "TECH", dur: "6m 08s", src: audioBase + "ep6-ai-in-chemistry-when-machines-meet-.mp3" },
+      { id: "ep-1",  num: 1,  freq: "88.0",  title: "Carbenes", cat: "CONCEPTS", dur: "10m 21s", src: audioBase + "ep7-carbenes.mp3" }
+    ];
+
+    let currentIndex = 0;
+    let isPoweredOn = true;
+    let isPlaying = false;
+
+    // DOM Elements
+    const audio = document.getElementById('audio');
+    const pilotLamp = document.getElementById('pilot-lamp');
+    const tuningNeedle = document.getElementById('tuning-needle');
+    const lcdChannel = document.getElementById('lcd-channel');
+    const lcdFreq = document.getElementById('lcd-freq');
+    const lcdTitle = document.getElementById('lcd-title');
+    const lcdMeta = document.getElementById('lcd-meta');
+    const playIcon = document.getElementById('play-icon');
+    const playLabel = document.getElementById('play-label');
+    const progressFill = document.getElementById('progress-fill');
+    const progressWrap = document.getElementById('progress-wrap');
+    const stationList = document.getElementById('station-list');
+    const vuMeter = document.getElementById('vu-meter');
+
+    // Synthesize Mechanical Click Audio via Web Audio API (Zero bytes overhead!)
+    let audioCtx = null;
+    function playClickSound(freq = 800, duration = 0.02) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // Populate Station Drawer
+    function renderStationList() {
+      stationList.innerHTML = '';
+      EPISODES.forEach((ep, idx) => {
+        const row = document.createElement('div');
+        row.className = `station-row ${idx === currentIndex ? 'active' : ''}`;
+        row.innerHTML = `
+          <span>[CH-${ep.num}] ${ep.title}</span>
+          <span>${ep.freq} MHz</span>
+        `;
+        row.addEventListener('click', () => {
+          playClickSound(1000);
+          tuneToEpisode(idx, true);
+        });
+        stationList.appendChild(row);
+      });
+    }
+
+    // Tune needle percentage calculation (88 MHz to 108 MHz scale)
+    function calculateNeedlePos(freqStr) {
+      const f = parseFloat(freqStr);
+      // Map 88.0 -> 4%, 108.0 -> 96%
+      const pct = 4 + ((f - 88.0) / (108.0 - 88.0)) * 92;
+      return Math.max(4, Math.min(96, pct));
+    }
+
+    function updateDisplay(ep) {
+      lcdChannel.textContent = `CH-${ep.num}`;
+      lcdFreq.textContent = `${ep.freq} MHz FM`;
+      lcdTitle.textContent = ep.title;
+      lcdMeta.textContent = `${ep.cat} • ${ep.dur}`;
+      tuningNeedle.style.left = `${calculateNeedlePos(ep.freq)}%`;
+      renderStationList();
+    }
+
+    function tuneToEpisode(index, autoPlay = true) {
+      if (index < 0) index = EPISODES.length - 1;
+      if (index >= EPISODES.length) index = 0;
+      currentIndex = index;
+      const ep = EPISODES[currentIndex];
+
+      audio.src = ep.src;
+      updateDisplay(ep);
+
+      if (autoPlay && isPoweredOn) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updatePlayState();
+        }).catch(() => {
+          isPlaying = false;
+          updatePlayState();
+        });
+      } else {
+        isPlaying = false;
+        updatePlayState();
+      }
+    }
+
+    function updatePlayState() {
+      if (isPlaying) {
+        playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        playLabel.textContent = 'PAUSE';
+      } else {
+        playIcon.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"/>';
+        playLabel.textContent = 'PLAY';
+      }
+    }
+
+    // VU Meter Animation
+    let vuInterval = null;
+    function startVuMeter() {
+      if (vuInterval) clearInterval(vuInterval);
+      vuInterval = setInterval(() => {
+        if (!isPlaying || !isPoweredOn) {
+          vuMeter.querySelectorAll('.vu-seg').forEach(s => s.classList.remove('active'));
+          return;
+        }
+        const activeCount = Math.floor(Math.random() * 5) + 2; // 2 to 6
+        vuMeter.querySelectorAll('.vu-seg').forEach((seg, i) => {
+          if (i < activeCount) seg.classList.add('active');
+          else seg.classList.remove('active');
+        });
+      }, 120);
+    }
+    startVuMeter();
+
+    // Event Listeners
+    document.getElementById('btn-play').addEventListener('click', () => {
+      playClickSound(600);
+      if (!isPoweredOn) return;
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+      } else {
+        audio.play().then(() => { isPlaying = true; updatePlayState(); });
+      }
+      updatePlayState();
+    });
+
+    document.getElementById('btn-prev').addEventListener('click', () => {
+      playClickSound(900);
+      tuneToEpisode(currentIndex - 1, true);
+    });
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      playClickSound(900);
+      tuneToEpisode(currentIndex + 1, true);
+    });
+
+    document.getElementById('btn-scan').addEventListener('click', () => {
+      playClickSound(1200);
+      tuneToEpisode(currentIndex + 1, true);
+    });
+
+    document.getElementById('btn-power').addEventListener('click', () => {
+      playClickSound(400);
+      isPoweredOn = !isPoweredOn;
+      if (isPoweredOn) {
+        pilotLamp.classList.add('on');
+        tuneToEpisode(currentIndex, false);
+      } else {
+        pilotLamp.classList.remove('on');
+        audio.pause();
+        isPlaying = false;
+        updatePlayState();
+        lcdChannel.textContent = 'OFF';
+        lcdFreq.textContent = 'STANDBY';
+        lcdTitle.textContent = 'GyanSetu Pocket Radio';
+        lcdMeta.textContent = 'BATTERY SAVER ACTIVE';
+      }
+    });
+
+    // Time & Scrubber
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${pct}%`;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      tuneToEpisode(currentIndex + 1, true);
+    });
+
+    progressWrap.addEventListener('click', (e) => {
+      const rect = progressWrap.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = clickX / rect.width;
+      if (audio.duration) {
+        audio.currentTime = pct * audio.duration;
+      }
+    });
+
+    // Initial setup
+    tuneToEpisode(0, false);
+  </script>
+</body>
+</html>

@@ -43,6 +43,10 @@
       </div>
 
       <div class="nav-actions">
+        <button id="ghost-mode-btn" class="btn-ghost-pill" title="Toggle 2G Ghost Stream (Low-Bandwidth & Battery Saver)">
+          <span class="ghost-dot"></span>
+          <span id="ghost-nav-label">2G Ghost Mode</span>
+        </button>
         <button id="radio-mode-btn" class="liquid-btn btn-sm btn-live-pill">
           <span class="pulse-beacon"></span>
           <span>Live Stream</span>
@@ -52,6 +56,13 @@
   </header>
 
   <main>
+    <!-- Floating 2G / Network Status Toast -->
+    <div id="network-toast" class="network-toast" aria-live="polite">
+      <span class="toast-icon">⚡</span>
+      <span id="network-toast-msg">2G Ghost Stream: 82% Data Savings Active</span>
+      <button id="close-toast-btn" class="toast-dismiss" aria-label="Close Notification">&times;</button>
+    </div>
+
     <!-- Hero / Live On-Air Broadcast Section -->
     <section id="broadcast" class="hero-section">
       <div class="container hero-layout">
@@ -607,36 +618,60 @@
                   <div class="app-badge-glow"></div>
                 </div>
 
-                <h3 class="app-download-name">GyanSetu</h3>
-                <p class="app-download-tag">Official Android Release • v1.0.0</p>
+                <h3 class="app-download-name">GyanSetu Android Suite</h3>
+                <p class="app-download-tag">Dual-Edition Offline Locker • Global Access v2.0</p>
 
-                <div class="app-specs-grid">
-                  <div class="spec-pill">
-                    <span class="spec-label">Package</span>
-                    <strong class="spec-val">GyanSetu.apk</strong>
+                <!-- Dual APK Edition Grid -->
+                <div class="dual-apk-grid">
+                  <!-- Edition 1: Flagship Vault -->
+                  <div class="apk-card">
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Flagship Vault</h4>
+                      <p class="apk-card-sub">Liquid Glass VisionOS UI & Full-Fidelity Studio Audio</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val">93 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">DRM</span>
+                        <span class="mini-spec-val highlight-amber">FLAG_SECURE</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu.apk" download="GyanSetu.apk" class="liquid-btn btn-primary-gradient btn-download-action">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Flagship APK (93MB)</span>
+                    </a>
                   </div>
-                  <div class="spec-pill">
-                    <span class="spec-label">Vault Size</span>
-                    <strong class="spec-val">93 MB (12 Episodes)</strong>
-                  </div>
-                  <div class="spec-pill">
-                    <span class="spec-label">Compatibility</span>
-                    <strong class="spec-val">Android 7.0+</strong>
-                  </div>
-                  <div class="spec-pill">
-                    <span class="spec-label">DRM Status</span>
-                    <strong class="spec-val text-teal">FLAG_SECURE</strong>
+
+                  <!-- Edition 2: Pocket Retro Radio -->
+                  <div class="apk-card pocket-edition">
+                    <span class="apk-card-badge">Global South</span>
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Pocket Retro Radio</h4>
+                      <p class="apk-card-sub">Smart Transistor Radio • 82% Lighter • 2G Ghost Audio</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val highlight-amber">18 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Format</span>
+                        <span class="mini-spec-val">Retro Radio</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu-PocketRadio.apk" download="GyanSetu-PocketRadio.apk" class="liquid-btn btn-secondary-glass btn-download-action" style="border-color: rgba(255, 157, 0, 0.45); color: #ffaa11;">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Pocket Radio (18MB)</span>
+                    </a>
+                    <a href="pocket.html" target="_blank" class="btn-simulator">
+                      <span>📻 Launch Web Simulator</span>
+                      <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                    </a>
                   </div>
                 </div>
-
-                <a href="assets/downloads/GyanSetu.apk" download="GyanSetu.apk" class="liquid-btn btn-primary-gradient btn-download-action">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                  <span>Download GyanSetu APK</span>
-                </a>
 
                 <!-- Sleek Dual Web Stream Options -->
                 <div class="sleek-dual-streams">
@@ -756,6 +791,10 @@
 
       <!-- Right Utility Actions -->
       <div class="dock-utility-column">
+        <button id="dock-ghost-btn" class="btn-ghost-dock" title="Toggle 2G Ghost Stream (Save 82% Data)">
+          <span class="ghost-dot"></span>
+          <span id="dock-ghost-label">2G Saver</span>
+        </button>
         <button id="speed-toggle-btn" class="dock-pill-btn" title="Playback Speed">1.0×</button>
         
         <div class="dock-volume-group">
