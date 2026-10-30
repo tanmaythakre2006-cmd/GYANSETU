@@ -3225,3 +3225,40 @@ body.ghost-mode-active {
     grid-template-columns: 1fr;
   }
 }
+
+/* Hero Retro Radio CTA & Nav Link */
+.btn-retro-launch {
+  background: rgba(255, 157, 0, 0.12);
+  border: 1px solid rgba(255, 157, 0, 0.4);
+  color: #ffaa11;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 9999px;
+  padding: 12px 22px;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.btn-retro-launch:hover {
+  background: rgba(255, 157, 0, 0.24);
+  border-color: #ffaa11;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 157, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.nav-pill-retro {
+  color: #ffaa11 !important;
+  border: 1px solid rgba(255, 157, 0, 0.3) !important;
+  background: rgba(255, 157, 0, 0.08) !important;
+}
+
+.nav-pill-retro:hover {
+  background: rgba(255, 157, 0, 0.2) !important;
+  border-color: #ffaa11 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(255, 157, 0, 0.3);
+}

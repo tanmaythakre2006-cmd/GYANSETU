@@ -523,6 +523,44 @@
       font-weight: 700;
     }
 
+    .pocket-top-nav {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      z-index: 10;
+    }
+    .nav-back-link, .nav-download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #9aa5b5;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+    }
+    .nav-back-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .nav-download-link {
+      color: #ffaa11;
+      border-color: rgba(255, 157, 0, 0.3);
+      background: rgba(255, 157, 0, 0.08);
+    }
+    .nav-download-link:hover {
+      background: rgba(255, 157, 0, 0.2);
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 157, 0, 0.3);
+    }
+
     /* Audio Element */
     audio {
       display: none;
@@ -530,6 +568,18 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Navigation Bar to jump back to full website -->
+  <nav class="pocket-top-nav">
+    <a href="index.html" class="nav-back-link">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Modern Liquid Studio</span>
+    </a>
+    <a href="assets/downloads/GyanSetu-PocketRadio.apk" download="GyanSetu-PocketRadio.apk" class="nav-download-link">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Get 18MB APK</span>
+    </a>
+  </nav>
 
   <!-- Physical Telescopic Antenna -->
   <div class="antenna-mount">
