@@ -3286,10 +3286,11 @@ body.ghost-mode-active {
   color: #ffffff;
 }
 
-/* Dual APK Grid Architecture */
+/* Tri/Dual APK Grid Architecture */
+.tri-apk-grid,
 .dual-apk-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 18px;
 }
@@ -3321,6 +3322,22 @@ body.ghost-mode-active {
 .apk-card.pocket-edition:hover {
   border-color: rgba(255, 157, 0, 0.6);
   box-shadow: 0 10px 30px rgba(255, 157, 0, 0.12);
+}
+
+.apk-card.lite-edition {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: linear-gradient(165deg, rgba(16, 185, 129, 0.04), rgba(20, 24, 30, 0.6));
+}
+
+.apk-card.lite-edition:hover {
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.14);
+}
+
+.apk-card-badge.lite-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
 .apk-card-badge {
