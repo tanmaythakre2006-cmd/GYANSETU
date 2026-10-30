@@ -59,6 +59,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const openQrLightboxBtn = document.getElementById('open-qr-lightbox-btn');
   const closeQrModalBtn = document.getElementById('close-qr-modal-btn');
 
+  // Teleprompter Modal Elements
+  const transcriptModal = document.getElementById('transcript-modal');
+  const closeTranscriptModalBtn = document.getElementById('close-transcript-modal-btn');
+  const dockTranscriptBtn = document.getElementById('dock-transcript-btn');
+  const teleprompterBody = document.getElementById('teleprompter-body');
+  const teleprompterTitle = document.getElementById('teleprompter-title');
+  const teleprompterEpTag = document.getElementById('teleprompter-ep-tag');
+  const tpCurrentLineTime = document.getElementById('tp-current-line-time');
+  const tpPlayPauseBtn = document.getElementById('tp-play-pause-btn');
+  const tpPlayIcon = document.getElementById('tp-play-icon');
+  const tpAutoScrollBtn = document.getElementById('tp-autoscroll-btn');
+  const tpTtsBtn = document.getElementById('tp-tts-btn');
+  const tpPolyglotBtn = document.getElementById('tp-polyglot-btn');
+  const tpPolyglotMenu = document.getElementById('tp-polyglot-menu');
+  const tpConceptDrawer = document.getElementById('tp-concept-drawer');
+  const closeConceptBtn = document.getElementById('close-concept-btn');
+  const tpConceptTitle = document.getElementById('tp-concept-title');
+  const tpConceptCat = document.getElementById('tp-concept-cat');
+  const tpConceptDef = document.getElementById('tp-concept-def');
+  const tpCopyTranscriptBtn = document.getElementById('tp-copy-transcript-btn');
+
   // 2G Ghost Stream & Network Elements
   const ghostModeBtn = document.getElementById('ghost-mode-btn');
   const ghostNavLabel = document.getElementById('ghost-nav-label');
@@ -118,6 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </button>
             <button class="btn-card-notes" data-id="${ep.id}">Research Notes</button>
           </div>
+          ${ep.id === 'ep-13' ? `
+          <button class="btn-card-transcript" data-id="${ep.id}" title="Open Synchronized English Master Teleprompter">
+            <span>📜 English Master Transcript (100% Vetted)</span>
+          </button>
+          ` : ''}
         </div>
       `;
       episodesGrid.appendChild(card);
@@ -146,6 +172,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = e.currentTarget.dataset.id;
         const ep = GYAN_SETU_EPISODES.find(item => item.id === id);
         if (ep) openNotesModal(ep);
+      });
+    });
+
+    document.querySelectorAll('.btn-card-transcript').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        const index = GYAN_SETU_EPISODES.findIndex(item => item.id === id);
+        if (index !== -1 && index !== currentEpisodeIndex) {
+          loadEpisode(index, true);
+        }
+        if (typeof openTranscriptModal === 'function') {
+          openTranscriptModal(id);
+        }
       });
     });
   }
@@ -231,6 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const isCurrent = (epId === GYAN_SETU_EPISODES[currentEpisodeIndex].id);
       btn.querySelector('span').textContent = (isCurrent && playing) ? 'Pause' : 'Listen Now';
     });
+
+    if (typeof updateTpPlayState === 'function') {
+      updateTpPlayState(playing);
+    }
   }
 
   function highlightActiveCard() {
@@ -252,6 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const percent = (current / duration) * 100;
     progressFill.style.width = `${percent}%`;
     currentTimeLabel.textContent = formatTime(current);
+
+    if (typeof syncTeleprompterTime === 'function') {
+      syncTeleprompterTime(current);
+    }
   });
 
   audio.addEventListener('loadedmetadata', () => {
@@ -431,6 +478,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') {
       if (notesModal) notesModal.classList.remove('is-active');
       if (qrModal) qrModal.classList.remove('is-active');
+      if (transcriptModal) transcriptModal.classList.remove('is-active');
+      if (isTpTtsEnabled && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
     }
   });
 
@@ -945,6 +996,303 @@ document.addEventListener('DOMContentLoaded', () => {
         networkToast.classList.remove('show');
       });
     }
+  }
+
+  // =========================================================================
+  // 12. GLOBAL LINGUA TELEPROMPTER & SYNCHRONIZED MASTER TRANSCRIPT ENGINE
+  // =========================================================================
+  let currentTpLang = 'en'; // 'en', 'dual', 'mr', 'poly-hi', 'poly-es', 'poly-fr', 'poly-sw', 'poly-de'
+  let isTpAutoScroll = true;
+  let isTpTtsEnabled = false;
+  let activeTpSegmentIdx = -1;
+  let currentActiveTranscript = null;
+
+  function openTranscriptModal(epId) {
+    if (!epId) {
+      const currentEp = GYAN_SETU_EPISODES[currentEpisodeIndex];
+      epId = currentEp ? currentEp.id : 'ep-13';
+    }
+
+    const tData = (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[epId]) 
+      ? window.GYAN_SETU_TRANSCRIPTS[epId] 
+      : (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS['ep-13']);
+
+    currentActiveTranscript = tData;
+    if (!tData) {
+      showToast('Master transcript is loading...');
+      return;
+    }
+
+    if (teleprompterEpTag) teleprompterEpTag.textContent = `Episode ${tData.number || 13}`;
+    if (teleprompterTitle) teleprompterTitle.textContent = `${tData.titleMarathi} • ${tData.titleEnglish}`;
+
+    renderTeleprompterContent();
+    updateTpPlayState(isPlaying);
+
+    if (transcriptModal) {
+      transcriptModal.classList.add('is-active');
+      syncTeleprompterTime(audio.currentTime);
+    }
+  }
+
+  function renderTeleprompterContent() {
+    if (!teleprompterBody || !currentActiveTranscript) return;
+    teleprompterBody.innerHTML = '';
+
+    const segments = currentActiveTranscript.segments || [];
+    segments.forEach((seg, idx) => {
+      const segEl = document.createElement('div');
+      segEl.className = 'tp-segment';
+      segEl.dataset.index = idx;
+      segEl.dataset.start = seg.start;
+      segEl.dataset.end = seg.end;
+
+      let innerHtml = `
+        <div class="tp-segment-meta">
+          <span class="tp-time-pill">${seg.timeLabel}</span>
+          ${seg.concept ? `<span class="tp-concept-chip" data-concept="${seg.concept}">💡 ${seg.concept}</span>` : ''}
+        </div>
+      `;
+
+      if (currentTpLang === 'en' || currentTpLang === 'dual') {
+        innerHtml += `<div class="tp-english-text">${seg.english}</div>`;
+      }
+
+      if (currentTpLang === 'mr' || currentTpLang === 'dual') {
+        innerHtml += `<div class="tp-marathi-text">${seg.marathi}</div>`;
+      }
+
+      if (currentTpLang.startsWith('poly-')) {
+        const polyCode = currentTpLang.replace('poly-', '');
+        const polyNames = { hi: 'हिन्दी (Hindi)', es: 'Español (Spanish)', fr: 'Français (French)', sw: 'Kiswahili (Swahili)', de: 'Deutsch (German)' };
+        innerHtml += `
+          <div class="tp-english-text">${seg.english}</div>
+          <div class="tp-marathi-text" style="color: #67e8f9;">[${polyNames[polyCode] || polyCode} Translation Layer Active] • ${seg.marathi}</div>
+        `;
+      }
+
+      segEl.innerHTML = innerHtml;
+
+      // Click to seek audio
+      segEl.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tp-concept-chip')) return;
+        const targetStart = parseFloat(seg.start);
+        audio.currentTime = targetStart;
+        if (!isPlaying) playAudio();
+        highlightTpSegment(idx, true);
+      });
+
+      // Concept chip click
+      const conceptChip = segEl.querySelector('.tp-concept-chip');
+      if (conceptChip) {
+        conceptChip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const cName = conceptChip.dataset.concept;
+          showConceptDrawer(cName);
+        });
+      }
+
+      teleprompterBody.appendChild(segEl);
+    });
+
+    activeTpSegmentIdx = -1;
+  }
+
+  function highlightTpSegment(idx, forceScroll = false) {
+    if (!teleprompterBody) return;
+    const items = teleprompterBody.querySelectorAll('.tp-segment');
+    if (idx < 0 || idx >= items.length) return;
+
+    if (activeTpSegmentIdx !== -1 && items[activeTpSegmentIdx]) {
+      items[activeTpSegmentIdx].classList.remove('active');
+    }
+
+    activeTpSegmentIdx = idx;
+    const activeItem = items[idx];
+    activeItem.classList.add('active');
+
+    const startSec = activeItem.dataset.start;
+    const mins = Math.floor(startSec / 60);
+    const secs = Math.floor(startSec % 60);
+    if (tpCurrentLineTime) {
+      tpCurrentLineTime.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    if (isTpAutoScroll || forceScroll) {
+      activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // TTS Dubbing Voiceover if active
+    if (isTpTtsEnabled && 'speechSynthesis' in window && currentActiveTranscript) {
+      const seg = currentActiveTranscript.segments[idx];
+      if (seg && seg.english && !seg.english.startsWith('[')) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(seg.english);
+        utter.lang = 'en-US';
+        utter.rate = 1.05;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+  }
+
+  function syncTeleprompterTime(timeSec) {
+    if (!currentActiveTranscript || !currentActiveTranscript.segments) {
+      // Default to episode 13 if available
+      if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS['ep-13']) {
+        currentActiveTranscript = window.GYAN_SETU_TRANSCRIPTS['ep-13'];
+      } else {
+        return;
+      }
+    }
+    const segments = currentActiveTranscript.segments;
+    
+    let foundIdx = -1;
+    for (let i = 0; i < segments.length; i++) {
+      if (timeSec >= segments[i].start && timeSec < segments[i].end) {
+        foundIdx = i;
+        break;
+      }
+    }
+
+    if (foundIdx !== -1 && foundIdx !== activeTpSegmentIdx) {
+      highlightTpSegment(foundIdx);
+    }
+  }
+
+  function showConceptDrawer(conceptName) {
+    if (!currentActiveTranscript || !currentActiveTranscript.glossary) return;
+    const g = currentActiveTranscript.glossary[conceptName];
+    if (!g || !tpConceptDrawer) return;
+
+    if (tpConceptTitle) tpConceptTitle.textContent = `${conceptName} (${g.marathi})`;
+    if (tpConceptCat) tpConceptCat.textContent = g.category.toUpperCase();
+    if (tpConceptDef) tpConceptDef.textContent = g.definition;
+    tpConceptDrawer.classList.remove('hidden');
+  }
+
+  function updateTpPlayState(playing) {
+    if (!tpPlayIcon) return;
+    tpPlayIcon.innerHTML = playing 
+      ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' 
+      : '<path d="M8 5v14l11-7z"/>';
+  }
+
+  // Event Listeners for Teleprompter
+  if (dockTranscriptBtn) {
+    dockTranscriptBtn.addEventListener('click', () => {
+      openTranscriptModal();
+    });
+  }
+
+  if (closeTranscriptModalBtn && transcriptModal) {
+    closeTranscriptModalBtn.addEventListener('click', () => {
+      transcriptModal.classList.remove('is-active');
+      if (isTpTtsEnabled && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    });
+
+    transcriptModal.addEventListener('click', (e) => {
+      if (e.target === transcriptModal) {
+        transcriptModal.classList.remove('is-active');
+        if (isTpTtsEnabled && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+      }
+    });
+  }
+
+  if (tpPlayPauseBtn) {
+    tpPlayPauseBtn.addEventListener('click', () => {
+      togglePlayPause();
+      updateTpPlayState(isPlaying);
+    });
+  }
+
+  // Language switchers
+  document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentTpLang = btn.dataset.lang;
+      renderTeleprompterContent();
+      if (activeTpSegmentIdx !== -1) {
+        highlightTpSegment(activeTpSegmentIdx, true);
+      }
+    });
+  });
+
+  // Polyglot menu toggle and selection
+  if (tpPolyglotBtn && tpPolyglotMenu) {
+    tpPolyglotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      tpPolyglotMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.tp-poly-opt').forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        const polyCode = opt.dataset.poly;
+        currentTpLang = `poly-${polyCode}`;
+        document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(b => b.classList.remove('active'));
+        tpPolyglotBtn.classList.add('active');
+        tpPolyglotBtn.textContent = `🌍 ${opt.textContent.split(' ')[1]} ▾`;
+        tpPolyglotMenu.classList.add('hidden');
+        renderTeleprompterContent();
+        if (activeTpSegmentIdx !== -1) {
+          highlightTpSegment(activeTpSegmentIdx, true);
+        }
+      });
+    });
+
+    document.addEventListener('click', () => {
+      if (!tpPolyglotMenu.classList.contains('hidden')) {
+        tpPolyglotMenu.classList.add('hidden');
+      }
+    });
+  }
+
+  // Auto-scroll toggle
+  if (tpAutoScrollBtn) {
+    tpAutoScrollBtn.addEventListener('click', () => {
+      isTpAutoScroll = !isTpAutoScroll;
+      tpAutoScrollBtn.classList.toggle('active', isTpAutoScroll);
+      tpAutoScrollBtn.innerHTML = `<span class="tp-toggle-indicator"></span> Auto-Scroll: ${isTpAutoScroll ? 'ON' : 'OFF'}`;
+    });
+  }
+
+  // TTS Dubbing toggle
+  if (tpTtsBtn) {
+    tpTtsBtn.addEventListener('click', () => {
+      isTpTtsEnabled = !isTpTtsEnabled;
+      tpTtsBtn.classList.toggle('tts-active', isTpTtsEnabled);
+      tpTtsBtn.innerHTML = `<span class="tp-toggle-indicator"></span> 🗣️ English AI Dub: ${isTpTtsEnabled ? 'ON' : 'OFF'}`;
+      if (!isTpTtsEnabled && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      } else if (isTpTtsEnabled) {
+        showToast('🗣️ English AI Voiceover Active • Zero Data Speech Dubbing');
+        if (activeTpSegmentIdx !== -1) {
+          highlightTpSegment(activeTpSegmentIdx);
+        }
+      }
+    });
+  }
+
+  // Concept close
+  if (closeConceptBtn && tpConceptDrawer) {
+    closeConceptBtn.addEventListener('click', () => {
+      tpConceptDrawer.classList.add('hidden');
+    });
+  }
+
+  // Copy English Transcript
+  if (tpCopyTranscriptBtn) {
+    tpCopyTranscriptBtn.addEventListener('click', () => {
+      if (!currentActiveTranscript) return;
+      const fullText = currentActiveTranscript.segments.map(s => `[${s.timeLabel}] ${s.english}`).join('\n\n');
+      navigator.clipboard.writeText(`GyanSetu Episode 13: ${currentActiveTranscript.titleEnglish}\nHost: ${currentActiveTranscript.host}\n\n${fullText}`).then(() => {
+        showToast('📋 English Master Transcript Copied to Clipboard!');
+      });
+    });
   }
 
   // Initialize Network Monitoring

@@ -404,6 +404,39 @@
       box-shadow: 0 0 4px #ff3b30;
     }
 
+    /* Retro English Teleprompter Ticker (Zero-Data Lingua Bridge) */
+    .lcd-transcript-ticker {
+      margin-top: 8px;
+      padding: 4px 8px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 157, 0, 0.3);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .lcd-transcript-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #00f5ff;
+      background: rgba(0, 245, 255, 0.15);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      padding: 1px 5px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .lcd-transcript-content {
+      font-family: monospace, sans-serif;
+      font-size: clamp(0.68rem, 2vw, 0.76rem);
+      color: #ffcc55;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.01em;
+    }
+
     /* Speaker Grill Section */
     .speaker-grille {
       background: #111418;
@@ -1052,6 +1085,11 @@
           <div class="vu-seg red"></div>
         </div>
       </div>
+      <!-- Retro English Teleprompter Sub-band (Zero-Data Lingua Bridge) -->
+      <div class="lcd-transcript-ticker" id="lcd-transcript-ticker" title="Live Synced English Teleprompter">
+        <span class="lcd-transcript-tag">ENG ▶</span>
+        <span id="lcd-transcript-text" class="lcd-transcript-content">Namaskar! If one truly wishes to understand the history of a city...</span>
+      </div>
     </section>
 
     <!-- Speaker Slats -->
@@ -1250,8 +1288,9 @@
 
   <audio id="audio" preload="metadata"></audio>
 
-  <!-- Bundled Offline QR Code Generator -->
+  <!-- Bundled Offline QR Code Generator & Master Transcripts -->
   <script src="assets/js/qrcode.min.js"></script>
+  <script src="assets/data/episodes_transcripts.js"></script>
 
   <script>
     // =========================================================================
@@ -1476,11 +1515,23 @@
       }
     });
 
-    // Scrubber
+    // Scrubber & Live Teleprompter Ticker Sync
+    const lcdTranscriptText = document.getElementById('lcd-transcript-text');
     audio.addEventListener('timeupdate', () => {
       if (audio.duration) {
         const pct = (audio.currentTime / audio.duration) * 100;
         progressFill.style.width = `${pct}%`;
+      }
+
+      // Sync Retro LCD English Ticker
+      const ep = episodes[currentIndex];
+      if (ep && (ep.num === 13 || ep.id === 'ep-13') && window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS['ep-13']) {
+        const segs = window.GYAN_SETU_TRANSCRIPTS['ep-13'].segments;
+        const cur = audio.currentTime;
+        const match = segs.find(s => cur >= s.start && cur < s.end);
+        if (match && lcdTranscriptText && lcdTranscriptText.textContent !== match.english) {
+          lcdTranscriptText.textContent = match.english;
+        }
       }
     });
 
