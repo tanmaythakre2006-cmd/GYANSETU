@@ -784,6 +784,11 @@
         <div class="dock-info-wrap">
           <div id="dock-title" class="dock-track-title">Select an episode</div>
           <div id="dock-artist" class="dock-track-sub">GyanSetu Radio • Global Stream</div>
+          <div id="dock-audio-track-selector" class="dock-audio-track-selector hidden">
+            <span class="track-selector-label">Voice:</span>
+            <button type="button" class="btn-track-choice active" data-track="mr" title="Listen in Original Marathi">🇮🇳 Original</button>
+            <button type="button" class="btn-track-choice" data-track="en" title="Listen in English Master Studio Dub">🇬🇧 English Master</button>
+          </div>
         </div>
       </div>
 
@@ -938,11 +943,14 @@
         </div>
 
         <div class="teleprompter-toggles">
+          <button type="button" id="tp-track-switch-btn" class="tp-pill-toggle active" title="Switch between Marathi and English Studio Master Audio">
+            <span class="tp-toggle-indicator"></span> 🎙️ Audio: <span id="tp-track-label">Original Marathi</span>
+          </button>
           <button type="button" id="tp-autoscroll-btn" class="tp-pill-toggle active" title="Toggle Auto-Scroll">
             <span class="tp-toggle-indicator"></span> Auto-Scroll: ON
           </button>
           <button type="button" id="tp-tts-btn" class="tp-pill-toggle" title="Read English Translation via On-Device Speech">
-            <span class="tp-toggle-indicator"></span> 🗣️ English Voice Dub: OFF
+            <span class="tp-toggle-indicator"></span> 🗣️ Live Voice Dub: OFF
           </button>
         </div>
       </div>

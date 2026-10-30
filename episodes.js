@@ -32,6 +32,7 @@ const GYAN_SETU_EPISODES = [
     description: "या भागात जाणून घेऊया नागपूरचा इतिहास, भोसले राजांचा काळ आणि महालातील जुन्या वास्तूंमागच्या रंजक गोष्टी! Explore the rich history of Nagpur, the era of the Bhonsle dynasty, and the fascinating stories behind the historic monuments of Mahal.",
     image: "assets/images/ep13-nagpurcha-itihas.jpg",
     audioSrc: "assets/audio/ep13-nagpurcha-itihas.mp3",
+    audioSrcEnglish: "assets/audio/ep13-nagpur-english-master.mp3",
     onlineAudioSrc: "https://anchor.fm/s/10129a7a0/podcast/play/128311004/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-28%2Faec3f0d6-9b3e-368a-f716-b068daa38dc6.mp3",
     hosts: ["Simran Ailani"]
   },

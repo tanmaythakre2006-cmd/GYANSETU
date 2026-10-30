@@ -79,6 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const tpConceptCat = document.getElementById('tp-concept-cat');
   const tpConceptDef = document.getElementById('tp-concept-def');
   const tpCopyTranscriptBtn = document.getElementById('tp-copy-transcript-btn');
+  const dockAudioTrackSelector = document.getElementById('dock-audio-track-selector');
+  const tpTrackSwitchBtn = document.getElementById('tp-track-switch-btn');
+  const tpTrackLabel = document.getElementById('tp-track-label');
+  let currentAudioLanguage = 'mr'; // 'mr' (original Marathi) or 'en' (English master studio)
 
   // 2G Ghost Stream & Network Elements
   const ghostModeBtn = document.getElementById('ghost-mode-btn');
@@ -190,6 +194,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 3. Audio Loading and Playback Controls
+  function updateAudioTrackButtons() {
+    const isEn = (currentAudioLanguage === 'en');
+    document.querySelectorAll('.btn-track-choice').forEach(b => {
+      b.classList.toggle('active', b.dataset.track === currentAudioLanguage);
+    });
+    if (tpTrackLabel) {
+      tpTrackLabel.textContent = isEn ? 'English Master Studio Dub' : 'Original Marathi';
+    }
+    if (tpTrackSwitchBtn) {
+      tpTrackSwitchBtn.classList.toggle('active', isEn);
+    }
+  }
+
+  function setAudioLanguageTrack(lang) {
+    if (currentAudioLanguage === lang) return;
+    const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+    if (lang === 'en' && !ep.audioSrcEnglish) {
+      showToast('English Studio Dub available on Episode 13');
+      return;
+    }
+
+    currentAudioLanguage = lang;
+    const curTime = audio.currentTime;
+    const wasPlaying = isPlaying;
+
+    const baseSrc = (currentAudioLanguage === 'en' && ep.audioSrcEnglish) ? ep.audioSrcEnglish : ep.audioSrc;
+    const targetAudioSrc = isGhostMode 
+      ? baseSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+      : baseSrc;
+
+    audio.src = targetAudioSrc;
+    audio.currentTime = curTime;
+    if (wasPlaying) playAudio();
+
+    updateAudioTrackButtons();
+    showToast(currentAudioLanguage === 'en' 
+      ? '🇬🇧 Switched to Studio English Master Voice Broadcast' 
+      : '🇮🇳 Switched to Original Marathi Broadcast (Simran Ailani)');
+  }
+
   function loadEpisode(index, autoPlay = true) {
     if (index < 0) index = GYAN_SETU_EPISODES.length - 1;
     if (index >= GYAN_SETU_EPISODES.length) index = 0;
@@ -197,9 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
     currentEpisodeIndex = index;
     const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
 
+    // Show/hide audio track language switcher if episode has an English track
+    if (dockAudioTrackSelector) {
+      if (ep.audioSrcEnglish) {
+        dockAudioTrackSelector.classList.remove('hidden');
+      } else {
+        dockAudioTrackSelector.classList.add('hidden');
+        currentAudioLanguage = 'mr';
+      }
+      updateAudioTrackButtons();
+    }
+
+    const baseSrc = (currentAudioLanguage === 'en' && ep.audioSrcEnglish) ? ep.audioSrcEnglish : ep.audioSrc;
     const targetAudioSrc = isGhostMode 
-      ? ep.audioSrc.replace('assets/audio/', 'assets/audio_ghost/') 
-      : ep.audioSrc;
+      ? baseSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+      : baseSrc;
     audio.src = targetAudioSrc;
     audio.playbackRate = speeds[currentSpeedIndex];
 
@@ -1049,7 +1105,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let innerHtml = `
         <div class="tp-segment-meta">
-          <span class="tp-time-pill">${seg.timeLabel}</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="tp-time-pill">${seg.timeLabel}</span>
+            <button type="button" class="tp-speak-line-btn" title="Speak this English translation aloud">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Speak</span>
+            </button>
+          </div>
           ${seg.concept ? `<span class="tp-concept-chip" data-concept="${seg.concept}">💡 ${seg.concept}</span>` : ''}
         </div>
       `;
@@ -1072,6 +1134,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       segEl.innerHTML = innerHtml;
+
+      // Speak line button
+      const speakBtn = segEl.querySelector('.tp-speak-line-btn');
+      if (speakBtn) {
+        speakBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            speakBtn.classList.add('is-speaking');
+            const utter = new SpeechSynthesisUtterance(seg.english);
+            utter.lang = 'en-US';
+            utter.rate = 1.0;
+            utter.onend = () => speakBtn.classList.remove('is-speaking');
+            utter.onerror = () => speakBtn.classList.remove('is-speaking');
+            window.speechSynthesis.speak(utter);
+          }
+        });
+      }
 
       // Click to seek audio
       segEl.addEventListener('click', (e) => {
@@ -1127,9 +1207,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const seg = currentActiveTranscript.segments[idx];
       if (seg && seg.english && !seg.english.startsWith('[')) {
         window.speechSynthesis.cancel();
+        if (audio) audio.volume = 0.12; // Duck background original voice
         const utter = new SpeechSynthesisUtterance(seg.english);
         utter.lang = 'en-US';
         utter.rate = 1.05;
+        utter.onend = () => {
+          if (audio && !isTpTtsEnabled) audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.9;
+        };
         window.speechSynthesis.speak(utter);
       }
     }
@@ -1292,6 +1376,21 @@ document.addEventListener('DOMContentLoaded', () => {
       navigator.clipboard.writeText(`GyanSetu Episode 13: ${currentActiveTranscript.titleEnglish}\nHost: ${currentActiveTranscript.host}\n\n${fullText}`).then(() => {
         showToast('📋 English Master Transcript Copied to Clipboard!');
       });
+    });
+  }
+
+  // Track Switching Event Handlers
+  document.querySelectorAll('.btn-track-choice').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setAudioLanguageTrack(btn.dataset.track);
+    });
+  });
+
+  if (tpTrackSwitchBtn) {
+    tpTrackSwitchBtn.addEventListener('click', () => {
+      const nextLang = (currentAudioLanguage === 'en') ? 'mr' : 'en';
+      setAudioLanguageTrack(nextLang);
     });
   }
 
