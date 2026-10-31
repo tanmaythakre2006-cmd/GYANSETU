@@ -32,6 +32,8 @@ const GYAN_SETU_EPISODES = [
     description: "या भागात जाणून घेऊया नागपूरचा इतिहास, भोसले राजांचा काळ आणि महालातील जुन्या वास्तूंमागच्या रंजक गोष्टी! Explore the rich history of Nagpur, the era of the Bhonsle dynasty, and the fascinating stories behind the historic monuments of Mahal.",
     image: "assets/images/ep13-nagpurcha-itihas.jpg",
     audioSrc: "assets/audio/ep13-nagpurcha-itihas.mp3",
+    audioSrcEnglish: "assets/audio/ep13-nagpur-english-master.mp3",
+    audioSrcHindi: "assets/audio/ep13-nagpur-hindi-master.mp3",
     onlineAudioSrc: "https://anchor.fm/s/10129a7a0/podcast/play/128311004/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-28%2Faec3f0d6-9b3e-368a-f716-b068daa38dc6.mp3",
     hosts: ["Simran Ailani"]
   },
@@ -46,6 +48,7 @@ const GYAN_SETU_EPISODES = [
     description: "What happens when curiosity crosses the line into obsession? Through Mary Shelley's Frankenstein, we explore the dark side of ambition, the ethics of creation, and the consequences of playing God. After all, just because we can create a monster, does that mean we should?",
     image: "assets/images/ep8-oops-i-created-life.jpg",
     audioSrc: "assets/audio/ep8-oops-i-created-life.mp3",
+    audioSrcHindi: "assets/audio/ep-12-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -59,6 +62,7 @@ const GYAN_SETU_EPISODES = [
     description: "What colour is the sky? Discover the fascinating science of sunlight, air molecules, and Rayleigh scattering—and see how something we take for granted every day hides a beautiful scientific mystery.",
     image: "assets/images/ep9-what-colour-is-the-sky.jpg",
     audioSrc: "assets/audio/ep9-what-colour-is-the-sky.mp3",
+    audioSrcHindi: "assets/audio/ep-11-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -72,6 +76,7 @@ const GYAN_SETU_EPISODES = [
     description: "Was Napoleon poisoned, or did he die of natural causes? Uncover the arsenic mystery behind one of history's most debated deaths in an intriguing deep dive into forensic chemistry and historical investigation.",
     image: "assets/images/ep10-napoleon-wasnt-poisoned.jpg",
     audioSrc: "assets/audio/ep10-napoleon-wasnt-poisoned.mp3",
+    audioSrcHindi: "assets/audio/ep-10-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -85,6 +90,7 @@ const GYAN_SETU_EPISODES = [
     description: "What happens when matter begins to feel? Explore the chemistry behind attraction, dopamine, oxytocin, and human connection as we uncover the science of love—and question whether understanding its chemistry can ever explain its meaning.",
     image: "assets/images/ep11-are-we-more-than-our-molecules.jpg",
     audioSrc: "assets/audio/ep11-are-we-more-than-our-molecules.mp3",
+    audioSrcHindi: "assets/audio/ep-9-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -98,6 +104,7 @@ const GYAN_SETU_EPISODES = [
     description: "Let's dive into the minds of authors whose characters make a fantasy truly fantastic! An insightful exploration into character design, archetypes, and the psychology that makes fictional figures feel remarkably alive.",
     image: "assets/images/ep12-theres-always-that-one-character.jpg",
     audioSrc: "assets/audio/ep12-theres-always-that-one-character.mp3",
+    audioSrcHindi: "assets/audio/ep-8-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -111,6 +118,7 @@ const GYAN_SETU_EPISODES = [
     description: "Can atomic bonds and neurotransmitters explain what makes us think, feel, and experience the world? Dive into the profound frontier where biochemistry intersects with the mystery of human consciousness, exploring how matter gives rise to mind.",
     image: "assets/images/ep1-can-chemistry-explain-consciousness.jpg",
     audioSrc: "assets/audio/ep1-can-chemistry-explain-consciousness.mp3",
+    audioSrcHindi: "assets/audio/ep-7-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -124,6 +132,7 @@ const GYAN_SETU_EPISODES = [
     description: "What if an unassuming common flower held a secret that revolutionized modern medicine? Uncover the astonishing true story of how a failed diabetes study unmasked vincristine—a groundbreaking life-saving chemotherapy drug—and why nature's deepest marvels often hide in plain sight.",
     image: "assets/images/ep2-the-secrets-of-sadabahar.jpg",
     audioSrc: "assets/audio/ep2-the-secrets-of-sadabahar.mp3",
+    audioSrcHindi: "assets/audio/ep-6-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -137,6 +146,7 @@ const GYAN_SETU_EPISODES = [
     description: "What connects a legendary dream of an ancient snake seizing its own tail with one of humanity's most pivotal scientific breakthroughs? Discover the story behind August Kekulé's visionary epiphany and why the symmetrical benzene ring reshaped our entire understanding of molecular architecture.",
     image: "assets/images/ep3-the-dream-that-gave-us-benzene.jpg",
     audioSrc: "assets/audio/ep3-the-dream-that-gave-us-benzene.mp3",
+    audioSrcHindi: "assets/audio/ep-5-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -150,6 +160,7 @@ const GYAN_SETU_EPISODES = [
     description: "Ever wondered how a tiny swallowed pill knows exactly where you are aching? Does it have a biological GPS? Unravel the elegant choreography of circulatory diffusion, receptors, and lock-and-key targeting mechanisms that allow modern treatments to pinpoint pain without taking a single wrong turn.",
     image: "assets/images/ep4-how-do-drugs-know-where-to-go-in-th.jpg",
     audioSrc: "assets/audio/ep4-how-do-drugs-know-where-to-go-in-th.mp3",
+    audioSrcHindi: "assets/audio/ep-4-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -163,6 +174,7 @@ const GYAN_SETU_EPISODES = [
     description: "Is your morning fruit bowl technically emitting radiation? Break down the fascinating physics of Potassium-40, background environmental radiation, and human biology in a fun, intuitive journey to see whether your banana smoothie is a radioactive marvel or simply nature at work.",
     image: "assets/images/ep5-why-bananas-are-slightly-radioactiv.jpg",
     audioSrc: "assets/audio/ep5-why-bananas-are-slightly-radioactiv.mp3",
+    audioSrcHindi: "assets/audio/ep-3-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -173,10 +185,11 @@ const GYAN_SETU_EPISODES = [
     date: "July 28, 2025",
     duration: "6m 08s",
     durationSec: 368,
-    description: "What happens when neural networks and machine intelligence step inside the laboratory? Simran is joined by her AI co-host Neo to explore how generative algorithms and computational models are predicting molecular structures in seconds and accelerating breakthroughs that once took decades.",
+    description: "What happens when neural networks and machine intelligence step inside the laboratory? Simran explores how generative algorithms and computational models are predicting molecular structures in seconds and accelerating breakthroughs that once took decades.",
     image: "assets/images/ep6-ai-in-chemistry-when-machines-meet-.jpg",
     audioSrc: "assets/audio/ep6-ai-in-chemistry-when-machines-meet-.mp3",
-    hosts: ["Simran Ailani", "Neo (AI Co-Host)"]
+    audioSrcHindi: "assets/audio/ep-2-hindi-master.mp3",
+    hosts: ["Simran Ailani"]
   },
   {
     id: "ep-7",
@@ -189,6 +202,7 @@ const GYAN_SETU_EPISODES = [
     description: "Simran Ailani ventures into the fleeting world of carbenes—ultra-reactive chemical species with lifetimes measured in microseconds. Explore how these temporary molecular dynamos drive breakthrough green syntheses, pharmaceutical innovations, and next-generation materials.",
     image: "assets/images/ep7-carbenes.jpg",
     audioSrc: "assets/audio/ep7-carbenes.mp3",
+    audioSrcHindi: "assets/audio/ep-1-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   }
 ];

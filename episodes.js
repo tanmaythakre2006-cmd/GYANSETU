@@ -118,7 +118,7 @@ const GYAN_SETU_EPISODES = [
     description: "Can atomic bonds and neurotransmitters explain what makes us think, feel, and experience the world? Dive into the profound frontier where biochemistry intersects with the mystery of human consciousness, exploring how matter gives rise to mind.",
     image: "assets/images/ep1-can-chemistry-explain-consciousness.jpg",
     audioSrc: "assets/audio/ep1-can-chemistry-explain-consciousness.mp3",
-    audioSrcHindi: "assets/audio/ep-1-hindi-master.mp3",
+    audioSrcHindi: "assets/audio/ep-7-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -132,7 +132,7 @@ const GYAN_SETU_EPISODES = [
     description: "What if an unassuming common flower held a secret that revolutionized modern medicine? Uncover the astonishing true story of how a failed diabetes study unmasked vincristine—a groundbreaking life-saving chemotherapy drug—and why nature's deepest marvels often hide in plain sight.",
     image: "assets/images/ep2-the-secrets-of-sadabahar.jpg",
     audioSrc: "assets/audio/ep2-the-secrets-of-sadabahar.mp3",
-    audioSrcHindi: "assets/audio/ep-2-hindi-master.mp3",
+    audioSrcHindi: "assets/audio/ep-6-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -146,7 +146,7 @@ const GYAN_SETU_EPISODES = [
     description: "What connects a legendary dream of an ancient snake seizing its own tail with one of humanity's most pivotal scientific breakthroughs? Discover the story behind August Kekulé's visionary epiphany and why the symmetrical benzene ring reshaped our entire understanding of molecular architecture.",
     image: "assets/images/ep3-the-dream-that-gave-us-benzene.jpg",
     audioSrc: "assets/audio/ep3-the-dream-that-gave-us-benzene.mp3",
-    audioSrcHindi: "assets/audio/ep-3-hindi-master.mp3",
+    audioSrcHindi: "assets/audio/ep-5-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -174,7 +174,7 @@ const GYAN_SETU_EPISODES = [
     description: "Is your morning fruit bowl technically emitting radiation? Break down the fascinating physics of Potassium-40, background environmental radiation, and human biology in a fun, intuitive journey to see whether your banana smoothie is a radioactive marvel or simply nature at work.",
     image: "assets/images/ep5-why-bananas-are-slightly-radioactiv.jpg",
     audioSrc: "assets/audio/ep5-why-bananas-are-slightly-radioactiv.mp3",
-    audioSrcHindi: "assets/audio/ep-5-hindi-master.mp3",
+    audioSrcHindi: "assets/audio/ep-3-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -188,7 +188,7 @@ const GYAN_SETU_EPISODES = [
     description: "What happens when neural networks and machine intelligence step inside the laboratory? Simran explores how generative algorithms and computational models are predicting molecular structures in seconds and accelerating breakthroughs that once took decades.",
     image: "assets/images/ep6-ai-in-chemistry-when-machines-meet-.jpg",
     audioSrc: "assets/audio/ep6-ai-in-chemistry-when-machines-meet-.mp3",
-    audioSrcHindi: "assets/audio/ep-6-hindi-master.mp3",
+    audioSrcHindi: "assets/audio/ep-2-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   },
   {
@@ -202,7 +202,7 @@ const GYAN_SETU_EPISODES = [
     description: "Simran Ailani ventures into the fleeting world of carbenes—ultra-reactive chemical species with lifetimes measured in microseconds. Explore how these temporary molecular dynamos drive breakthrough green syntheses, pharmaceutical innovations, and next-generation materials.",
     image: "assets/images/ep7-carbenes.jpg",
     audioSrc: "assets/audio/ep7-carbenes.mp3",
-    audioSrcHindi: "assets/audio/ep-7-hindi-master.mp3",
+    audioSrcHindi: "assets/audio/ep-1-hindi-master.mp3",
     hosts: ["Simran Ailani"]
   }
 ];

@@ -1320,7 +1320,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tpCurrentLineTime.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
-    if (isTpAutoScroll || forceScroll) {
+    if ((isTpAutoScroll || forceScroll) && transcriptModal && transcriptModal.classList.contains('is-active')) {
       activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
@@ -1398,12 +1398,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners for Teleprompter & Lingua Micro-Switcher
   if (dockLinguaBtn && dockLinguaPopover) {
     dockLinguaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
+      renderLinguaPopoverOptions();
       dockLinguaPopover.classList.toggle('hidden');
     });
 
     document.addEventListener('click', (e) => {
-      if (!dockLinguaPopover.contains(e.target) && e.target !== dockLinguaBtn) {
+      if (!dockLinguaPopover.contains(e.target) && !dockLinguaBtn.contains(e.target)) {
         dockLinguaPopover.classList.add('hidden');
       }
     });

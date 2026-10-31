@@ -621,88 +621,10 @@ window.GYAN_SETU_TRANSCRIPTS = {
   },
   "ep-7": {
     "episodeId": "ep-7",
-    "number": 7,
-    "titleOriginal": "Can Chemistry explain Consciousness?",
-    "titleEnglish": "Can Chemistry explain Consciousness?",
-    "titleHindi": "Can Chemistry explain Consciousness?",
-    "origLang": "en",
-    "availableTranslations": [
-      "orig",
-      "hi"
-    ],
-    "host": "Simran Ailani",
-    "segments": [
-      {
-        "start": 0,
-        "end": 60,
-        "timeLabel": "00:00",
-        "english": "Can the dance of chemical bonds, ion gradients, and molecular neurotransmitters explain the spark of self-awareness? Today we bridge molecular neuroscience and philosophy to tackle the greatest frontier in biology.",
-        "hindi": "क्या रासायनिक बंधों, आयन प्रवाह और न्यूरोट्रांसमीटर की हलचल हमारी आत्म-जागरूकता की चिंगारी को समझा सकती है? आज हम जीवविज्ञान के सबसे बड़े रहस्य को समझने के लिए मॉलिक्यूलर न्यूरोसाइंस और दर्शन का सेतु बनाते हैं।",
-        "concept": "Molecular Neuroscience"
-      },
-      {
-        "start": 60,
-        "end": 180,
-        "timeLabel": "01:00",
-        "english": "Sodium-potassium ATPase pumps generate membrane potentials across billions of cortical neurons. When these networks synchronize at gamma frequencies, isolated sensory inputs crystallize into unified perception.",
-        "hindi": "सोडियम-पोटेशियम पंप हमारे मस्तिष्क के अरबों न्यूरॉन्स में विद्युत विभव उत्पन्न करते हैं। जब ये नेटवर्क विशेष आवृत्तियों पर तालमेल बिठाते हैं, तो अलग-अलग संवेदी अनुभूतियां एक एकीकृत चेतना का रूप ले लेती हैं।",
-        "concept": "Neural Synchrony"
-      },
-      {
-        "start": 180,
-        "end": 312,
-        "timeLabel": "03:00",
-        "english": "Yet a complete physical ledger of neurochemicals leaves an explanatory gap. Consciousness may be an emergent property of immense systemic complexity—a testament to how nature transforms simple chemistry into mind.",
-        "hindi": "फिर भी रसायनों की पूरी सूची चेतना के वास्तविक अनुभव को पूरी तरह नहीं समझा पाती। चेतना अत्यंत जटिल व्यवस्था का एक उभरता हुआ गुण हो सकती है—प्रकृति का वह चमत्कार जो सरल रसायन विज्ञान को मन में बदल देता है।",
-        "concept": "Emergence of Mind"
-      }
-    ]
-  },
-  "ep-6": {
-    "episodeId": "ep-6",
-    "number": 6,
-    "titleOriginal": "The secrets of Sadabahar",
-    "titleEnglish": "The secrets of Sadabahar",
-    "titleHindi": "The secrets of Sadabahar",
-    "origLang": "en",
-    "availableTranslations": [
-      "orig",
-      "hi"
-    ],
-    "host": "Simran Ailani",
-    "segments": [
-      {
-        "start": 0,
-        "end": 60,
-        "timeLabel": "00:00",
-        "english": "What if an unassuming tropical flower blooming on roadside pavements held the secret to curing childhood leukemia? Welcome to the incredible botanical and pharmaceutical journey of Catharanthus roseus, known across India as Sadabahar.",
-        "hindi": "क्या होगा अगर सड़कों के किनारे खिलने वाला एक साधारण सा फूल बच्चों के ब्लड कैंसर (ल्यूकेमिया) के इलाज का रहस्य छिपाए बैठा हो? आइए जानते हैं सदाबहार (Catharanthus roseus) की अद्भुत वानस्पतिक और औषधीय यात्रा।",
-        "concept": "Ethnobotany"
-      },
-      {
-        "start": 60,
-        "end": 170,
-        "timeLabel": "01:00",
-        "english": "Researchers initially investigated Sadabahar as a folk remedy for diabetes. Instead, they discovered two potent vinca alkaloids: Vinblastine and Vincristine, which dismantle the microtubule spindles cancer cells need to divide.",
-        "hindi": "वैज्ञानिकों ने शुरू में सदाबहार का अध्ययन मधुमेह की पारंपरिक दवा के रूप में किया था। लेकिन इसके बजाय उन्हें दो शक्तिशाली अल्कलॉइड मिले: विनब्लास्टिन और विन्क्रिस्टिन, जो कैंसर कोशिकाओं के विभाजन को रोक देते हैं।",
-        "concept": "Vinca Alkaloids"
-      },
-      {
-        "start": 170,
-        "end": 286,
-        "timeLabel": "02:50",
-        "english": "Because of these tiny molecules extracted from periwinkle petals, survival rates for pediatric acute lymphoblastic leukemia leaped from under ten percent to over ninety percent, reminding us that nature remains the ultimate master chemist.",
-        "hindi": "सदाबहार की पंखुड़ियों से मिले इन चमत्कारी अणुओं की वजह से बचपन के ल्यूकेमिया से बचने की दर दस प्रतिशत से बढ़कर नब्बे प्रतिशत से अधिक हो गई। यह साबित करता है कि प्रकृति ही सबसे बड़ी रसायनज्ञ है।",
-        "concept": "Phytotherapy"
-      }
-    ]
-  },
-  "ep-5": {
-    "episodeId": "ep-5",
-    "number": 5,
-    "titleOriginal": "The dream that gave us Benzene",
-    "titleEnglish": "The dream that gave us Benzene",
-    "titleHindi": "The dream that gave us Benzene",
+    "number": 1,
+    "titleOriginal": "Carbenes",
+    "titleEnglish": "Carbenes",
+    "titleHindi": "Carbenes",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -714,25 +636,103 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "start": 0,
         "end": 50,
         "timeLabel": "00:00",
-        "english": "How did an ancient mythological dream of a serpent swallowing its own tail solve the deepest structural enigma in organic chemistry? Let's explore August Kekulé's legendary breakthrough that revealed the cyclic ring of Benzene.",
-        "hindi": "अपनी ही पूंछ को निगलते हुए एक पौराणिक सांप के सपने ने ऑर्गेनिक केमिस्ट्री की सबसे बड़ी गुत्थी को कैसे सुलझाया? आइए जानते हैं वैज्ञानिक ऑगस्ट केकुले की उस ऐतिहासिक खोज के बारे में जिसने बेंजीन के चक्रीय वलय (Ring) का रहस्य खोला।",
-        "concept": "Kekulé Dream"
+        "english": "Simran Ailani ventures into the fleeting world of carbenes—ultra-reactive neutral molecules featuring divalent carbon with only six valence electrons, defying textbook stability rules.",
+        "hindi": "सिमरन ऐलानी कार्बीन्स की रहस्यमयी दुनिया में प्रवेश करती हैं—अत्यधिक प्रतिक्रियाशील अणु जिनमें कार्बन केवल दो बंधों और छह इलेक्ट्रॉनों के साथ पाठ्यपुस्तकों के नियमों को चुनौती देता है।",
+        "concept": "Carbene Chemistry"
       },
       {
         "start": 50,
-        "end": 150,
+        "end": 130,
         "timeLabel": "00:50",
-        "english": "For decades, chemists struggled with benzene's formula C6H6: how could six carbons satisfy their tetravalency with so few hydrogens? Kekulé's vision of an alternating hexagonal ring unlocked modern aromatic chemistry.",
-        "hindi": "दशकों तक वैज्ञानिक बेंजीन के सूत्र C6H6 को लेकर परेशान रहे: इतने कम हाइड्रोजन के साथ छह कार्बन अपनी संयोजकता कैसे पूरी कर सकते हैं? केकुले की छह-कोणीय चक्रीय संरचना ने आधुनिक एरोमैटिक रसायन शास्त्र की नींव रखी।",
-        "concept": "Aromatic Ring"
+        "english": "Whether existing in singlet states with paired electrons or triplet states with radical character, carbenes perform lightning-fast cyclopropanations and insertion reactions critical to synthesis.",
+        "hindi": "चाहे वे सिंगलेट अवस्था में हों या ट्रिपलेट अवस्था में, कार्बीन्स पलक झपकते ही रासायनिक संश्लेषण में महत्वपूर्ण साइक्लोप्रोपेनेशन और इन्सर्शन अभिक्रियाएं करने में सक्षम होते हैं।",
+        "concept": "Singlet vs Triplet"
       },
       {
-        "start": 150,
-        "end": 268,
-        "timeLabel": "02:30",
-        "english": "Today, quantum mechanics explains this through delocalized pi electrons—a cloud of resonance stability. The benzene ring sits at the core of life-saving antibiotics, polymers, and synthetic materials worldwide.",
-        "hindi": "आज क्वांटम भौतिकी इसे डीलोकलाइज्ड पाई-इलेक्ट्रॉनों के माध्यम से समझाती है—जो इसे विशेष स्थिरता प्रदान करते हैं। आज बेंजीन रिंग जीवन रक्षक दवाओं, प्लास्टिक और सिंथेटिक सामग्रियों का आधार है।",
-        "concept": "Resonance Stability"
+        "start": 130,
+        "end": 224,
+        "timeLabel": "02:10",
+        "english": "From Nobel-winning olefin metathesis catalysts to revolutionary organic synthesis, understanding these transient chemical ghosts empowers modern materials and pharmaceutical breakthroughs.",
+        "hindi": "नोबेल पुरस्कार विजेता ओलेफिन मेटाथेसिस उत्प्रेरकों से लेकर आधुनिक दवा निर्माण तक, इन क्षणभंगुर रासायनिक कणों को समझना भविष्य की सामग्रियों के निर्माण में क्रांतिकारी भूमिका निभाता है।",
+        "concept": "Olefin Metathesis"
+      }
+    ]
+  },
+  "ep-6": {
+    "episodeId": "ep-6",
+    "number": 2,
+    "titleOriginal": "AI in Chemistry: When machines meet molecules",
+    "titleEnglish": "AI in Chemistry: When machines meet molecules",
+    "titleHindi": "AI in Chemistry: When machines meet molecules",
+    "origLang": "en",
+    "availableTranslations": [
+      "orig",
+      "hi"
+    ],
+    "host": "Simran Ailani",
+    "segments": [
+      {
+        "start": 0,
+        "end": 50,
+        "timeLabel": "00:00",
+        "english": "What happens when artificial neural networks enter the chemical laboratory? Explore how generative diffusion models, graph neural networks, and AlphaFold are compressing decades of drug discovery into mere hours.",
+        "hindi": "क्या होता है जब कृत्रिम तंत्रिका नेटवर्क (Neural Networks) रसायन विज्ञान की प्रयोगशाला में कदम रखते हैं? जानिए कैसे AI और AlphaFold दशकों की दवा खोज को कुछ ही घंटों में समेट रहे हैं।",
+        "concept": "AI in Chemistry"
+      },
+      {
+        "start": 50,
+        "end": 140,
+        "timeLabel": "00:50",
+        "english": "Synthesizing a novel therapeutic compound used to demand thousands of laborious test-tube iterations. Today, machine learning algorithms screen trillions of virtual molecular candidates, predicting binding affinities before a single pipette is lifted.",
+        "hindi": "पहले किसी नई दवा को बनाने के लिए हजारों प्रयोगशाला परीक्षणों की जरूरत होती थी। आज मशीन लर्निंग मॉडल कंप्यूटर पर ही खरबों अणुओं की जांच कर लेते हैं, और यह बता देते हैं कि कौन सा अणु सबसे प्रभावी होगा।",
+        "concept": "In Silico Screening"
+      },
+      {
+        "start": 140,
+        "end": 240,
+        "timeLabel": "02:20",
+        "english": "By predicting how complex proteins fold into three-dimensional architectures with atomic precision, human curiosity augmented by silicon intelligence is unlocking the next great era of personalized medicine.",
+        "hindi": "परमाणु स्तर पर प्रोटीन की 3D संरचना की सटीक भविष्यवाणी करके, मानव जिज्ञासा और कंप्यूटर तकनीक मिलकर व्यक्तिगत चिकित्सा (Personalized Medicine) के एक नए युग की शुरुआत कर रहे हैं।",
+        "concept": "Protein Folding"
+      }
+    ]
+  },
+  "ep-5": {
+    "episodeId": "ep-5",
+    "number": 3,
+    "titleOriginal": "Why bananas are slightly radioactive?",
+    "titleEnglish": "Why bananas are slightly radioactive?",
+    "titleHindi": "Why bananas are slightly radioactive?",
+    "origLang": "en",
+    "availableTranslations": [
+      "orig",
+      "hi"
+    ],
+    "host": "Simran Ailani",
+    "segments": [
+      {
+        "start": 0,
+        "end": 45,
+        "timeLabel": "00:00",
+        "english": "Is your breakfast fruit bowl technically emitting nuclear radiation? Today we demystify the charming physics behind the 'Banana Equivalent Dose' and the natural abundance of Potassium-40.",
+        "hindi": "क्या सुबह के नाश्ते में रखा फल वास्तव में परमाणु विकिरण उत्सर्जित कर रहा होता है? आज हम 'केला समतुल्य खुराक' (Banana Equivalent Dose) और पोटैशियम-40 के प्राकृतिक विज्ञान के पीछे की भौतिकी को समझते हैं।",
+        "concept": "Banana Equivalent Dose"
+      },
+      {
+        "start": 45,
+        "end": 130,
+        "timeLabel": "00:45",
+        "english": "Bananas are famously rich in potassium, an essential electrolyte. A tiny fraction—about 0.012%—exists naturally as the unstable radioactive isotope Potassium-40, emitting positrons and beta particles as it decays.",
+        "hindi": "केले में पोटैशियम प्रचुर मात्रा में होता है, जो हमारे शरीर के लिए एक आवश्यक इलेक्ट्रोलाइट है। इसका एक छोटा सा हिस्सा (लगभग 0.012%) स्वाभाविक रूप से रेडियोधर्मी आइसोटोप पोटैशियम-40 के रूप में मौजूद होता है, जो धीरे-धीरे क्षय होता है।",
+        "concept": "Potassium-40 Decay"
+      },
+      {
+        "start": 130,
+        "end": 218,
+        "timeLabel": "02:10",
+        "english": "Yet human homeostasis strictly regulates internal potassium levels; eating a banana simply expels surplus minerals, resulting in zero accumulated radiation risk. Radiation is not an unnatural menace, but a constant, gentle companion of our living Earth.",
+        "hindi": "लेकिन हमारा शरीर पोटैशियम के स्तर को प्राकृतिक रूप से संतुलित रखता है; केला खाने से अतिरिक्त खनिज शरीर से बाहर निकल जाता है। विकिरण कोई अस्वाभाविक खतरा नहीं, बल्कि इस धरती पर जीवन का एक स्वाभाविक हिस्सा है।",
+        "concept": "Biological Homeostasis"
       }
     ]
   },
@@ -777,10 +777,10 @@ window.GYAN_SETU_TRANSCRIPTS = {
   },
   "ep-3": {
     "episodeId": "ep-3",
-    "number": 3,
-    "titleOriginal": "Why bananas are slightly radioactive?",
-    "titleEnglish": "Why bananas are slightly radioactive?",
-    "titleHindi": "Why bananas are slightly radioactive?",
+    "number": 5,
+    "titleOriginal": "The dream that gave us Benzene",
+    "titleEnglish": "The dream that gave us Benzene",
+    "titleHindi": "The dream that gave us Benzene",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -790,36 +790,36 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "segments": [
       {
         "start": 0,
-        "end": 45,
+        "end": 50,
         "timeLabel": "00:00",
-        "english": "Is your breakfast fruit bowl technically emitting nuclear radiation? Today we demystify the charming physics behind the 'Banana Equivalent Dose' and the natural abundance of Potassium-40.",
-        "hindi": "क्या सुबह के नाश्ते में रखा फल वास्तव में परमाणु विकिरण उत्सर्जित कर रहा होता है? आज हम 'केला समतुल्य खुराक' (Banana Equivalent Dose) और पोटैशियम-40 के प्राकृतिक विज्ञान के पीछे की भौतिकी को समझते हैं।",
-        "concept": "Banana Equivalent Dose"
+        "english": "How did an ancient mythological dream of a serpent swallowing its own tail solve the deepest structural enigma in organic chemistry? Let's explore August Kekulé's legendary breakthrough that revealed the cyclic ring of Benzene.",
+        "hindi": "अपनी ही पूंछ को निगलते हुए एक पौराणिक सांप के सपने ने ऑर्गेनिक केमिस्ट्री की सबसे बड़ी गुत्थी को कैसे सुलझाया? आइए जानते हैं वैज्ञानिक ऑगस्ट केकुले की उस ऐतिहासिक खोज के बारे में जिसने बेंजीन के चक्रीय वलय (Ring) का रहस्य खोला।",
+        "concept": "Kekulé Dream"
       },
       {
-        "start": 45,
-        "end": 130,
-        "timeLabel": "00:45",
-        "english": "Bananas are famously rich in potassium, an essential electrolyte. A tiny fraction—about 0.012%—exists naturally as the unstable radioactive isotope Potassium-40, emitting positrons and beta particles as it decays.",
-        "hindi": "केले में पोटैशियम प्रचुर मात्रा में होता है, जो हमारे शरीर के लिए एक आवश्यक इलेक्ट्रोलाइट है। इसका एक छोटा सा हिस्सा (लगभग 0.012%) स्वाभाविक रूप से रेडियोधर्मी आइसोटोप पोटैशियम-40 के रूप में मौजूद होता है, जो धीरे-धीरे क्षय होता है।",
-        "concept": "Potassium-40 Decay"
+        "start": 50,
+        "end": 150,
+        "timeLabel": "00:50",
+        "english": "For decades, chemists struggled with benzene's formula C6H6: how could six carbons satisfy their tetravalency with so few hydrogens? Kekulé's vision of an alternating hexagonal ring unlocked modern aromatic chemistry.",
+        "hindi": "दशकों तक वैज्ञानिक बेंजीन के सूत्र C6H6 को लेकर परेशान रहे: इतने कम हाइड्रोजन के साथ छह कार्बन अपनी संयोजकता कैसे पूरी कर सकते हैं? केकुले की छह-कोणीय चक्रीय संरचना ने आधुनिक एरोमैटिक रसायन शास्त्र की नींव रखी।",
+        "concept": "Aromatic Ring"
       },
       {
-        "start": 130,
-        "end": 218,
-        "timeLabel": "02:10",
-        "english": "Yet human homeostasis strictly regulates internal potassium levels; eating a banana simply expels surplus minerals, resulting in zero accumulated radiation risk. Radiation is not an unnatural menace, but a constant, gentle companion of our living Earth.",
-        "hindi": "लेकिन हमारा शरीर पोटैशियम के स्तर को प्राकृतिक रूप से संतुलित रखता है; केला खाने से अतिरिक्त खनिज शरीर से बाहर निकल जाता है। विकिरण कोई अस्वाभाविक खतरा नहीं, बल्कि इस धरती पर जीवन का एक स्वाभाविक हिस्सा है।",
-        "concept": "Biological Homeostasis"
+        "start": 150,
+        "end": 268,
+        "timeLabel": "02:30",
+        "english": "Today, quantum mechanics explains this through delocalized pi electrons—a cloud of resonance stability. The benzene ring sits at the core of life-saving antibiotics, polymers, and synthetic materials worldwide.",
+        "hindi": "आज क्वांटम भौतिकी इसे डीलोकलाइज्ड पाई-इलेक्ट्रॉनों के माध्यम से समझाती है—जो इसे विशेष स्थिरता प्रदान करते हैं। आज बेंजीन रिंग जीवन रक्षक दवाओं, प्लास्टिक और सिंथेटिक सामग्रियों का आधार है।",
+        "concept": "Resonance Stability"
       }
     ]
   },
   "ep-2": {
     "episodeId": "ep-2",
-    "number": 2,
-    "titleOriginal": "AI in Chemistry: When machines meet molecules",
-    "titleEnglish": "AI in Chemistry: When machines meet molecules",
-    "titleHindi": "AI in Chemistry: When machines meet molecules",
+    "number": 6,
+    "titleOriginal": "The secrets of Sadabahar",
+    "titleEnglish": "The secrets of Sadabahar",
+    "titleHindi": "The secrets of Sadabahar",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -829,36 +829,36 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "segments": [
       {
         "start": 0,
-        "end": 50,
+        "end": 60,
         "timeLabel": "00:00",
-        "english": "What happens when artificial neural networks enter the chemical laboratory? Explore how generative diffusion models, graph neural networks, and AlphaFold are compressing decades of drug discovery into mere hours.",
-        "hindi": "क्या होता है जब कृत्रिम तंत्रिका नेटवर्क (Neural Networks) रसायन विज्ञान की प्रयोगशाला में कदम रखते हैं? जानिए कैसे AI और AlphaFold दशकों की दवा खोज को कुछ ही घंटों में समेट रहे हैं।",
-        "concept": "AI in Chemistry"
+        "english": "What if an unassuming tropical flower blooming on roadside pavements held the secret to curing childhood leukemia? Welcome to the incredible botanical and pharmaceutical journey of Catharanthus roseus, known across India as Sadabahar.",
+        "hindi": "क्या होगा अगर सड़कों के किनारे खिलने वाला एक साधारण सा फूल बच्चों के ब्लड कैंसर (ल्यूकेमिया) के इलाज का रहस्य छिपाए बैठा हो? आइए जानते हैं सदाबहार (Catharanthus roseus) की अद्भुत वानस्पतिक और औषधीय यात्रा।",
+        "concept": "Ethnobotany"
       },
       {
-        "start": 50,
-        "end": 140,
-        "timeLabel": "00:50",
-        "english": "Synthesizing a novel therapeutic compound used to demand thousands of laborious test-tube iterations. Today, machine learning algorithms screen trillions of virtual molecular candidates, predicting binding affinities before a single pipette is lifted.",
-        "hindi": "पहले किसी नई दवा को बनाने के लिए हजारों प्रयोगशाला परीक्षणों की जरूरत होती थी। आज मशीन लर्निंग मॉडल कंप्यूटर पर ही खरबों अणुओं की जांच कर लेते हैं, और यह बता देते हैं कि कौन सा अणु सबसे प्रभावी होगा।",
-        "concept": "In Silico Screening"
+        "start": 60,
+        "end": 170,
+        "timeLabel": "01:00",
+        "english": "Researchers initially investigated Sadabahar as a folk remedy for diabetes. Instead, they discovered two potent vinca alkaloids: Vinblastine and Vincristine, which dismantle the microtubule spindles cancer cells need to divide.",
+        "hindi": "वैज्ञानिकों ने शुरू में सदाबहार का अध्ययन मधुमेह की पारंपरिक दवा के रूप में किया था। लेकिन इसके बजाय उन्हें दो शक्तिशाली अल्कलॉइड मिले: विनब्लास्टिन और विन्क्रिस्टिन, जो कैंसर कोशिकाओं के विभाजन को रोक देते हैं।",
+        "concept": "Vinca Alkaloids"
       },
       {
-        "start": 140,
-        "end": 240,
-        "timeLabel": "02:20",
-        "english": "By predicting how complex proteins fold into three-dimensional architectures with atomic precision, human curiosity augmented by silicon intelligence is unlocking the next great era of personalized medicine.",
-        "hindi": "परमाणु स्तर पर प्रोटीन की 3D संरचना की सटीक भविष्यवाणी करके, मानव जिज्ञासा और कंप्यूटर तकनीक मिलकर व्यक्तिगत चिकित्सा (Personalized Medicine) के एक नए युग की शुरुआत कर रहे हैं।",
-        "concept": "Protein Folding"
+        "start": 170,
+        "end": 286,
+        "timeLabel": "02:50",
+        "english": "Because of these tiny molecules extracted from periwinkle petals, survival rates for pediatric acute lymphoblastic leukemia leaped from under ten percent to over ninety percent, reminding us that nature remains the ultimate master chemist.",
+        "hindi": "सदाबहार की पंखुड़ियों से मिले इन चमत्कारी अणुओं की वजह से बचपन के ल्यूकेमिया से बचने की दर दस प्रतिशत से बढ़कर नब्बे प्रतिशत से अधिक हो गई। यह साबित करता है कि प्रकृति ही सबसे बड़ी रसायनज्ञ है।",
+        "concept": "Phytotherapy"
       }
     ]
   },
   "ep-1": {
     "episodeId": "ep-1",
-    "number": 1,
-    "titleOriginal": "Carbenes",
-    "titleEnglish": "Carbenes",
-    "titleHindi": "Carbenes",
+    "number": 7,
+    "titleOriginal": "Can Chemistry explain Consciousness?",
+    "titleEnglish": "Can Chemistry explain Consciousness?",
+    "titleHindi": "Can Chemistry explain Consciousness?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -868,27 +868,27 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "segments": [
       {
         "start": 0,
-        "end": 50,
+        "end": 60,
         "timeLabel": "00:00",
-        "english": "Simran Ailani ventures into the fleeting world of carbenes—ultra-reactive neutral molecules featuring divalent carbon with only six valence electrons, defying textbook stability rules.",
-        "hindi": "सिमरन ऐलानी कार्बीन्स की रहस्यमयी दुनिया में प्रवेश करती हैं—अत्यधिक प्रतिक्रियाशील अणु जिनमें कार्बन केवल दो बंधों और छह इलेक्ट्रॉनों के साथ पाठ्यपुस्तकों के नियमों को चुनौती देता है।",
-        "concept": "Carbene Chemistry"
+        "english": "Can the dance of chemical bonds, ion gradients, and molecular neurotransmitters explain the spark of self-awareness? Today we bridge molecular neuroscience and philosophy to tackle the greatest frontier in biology.",
+        "hindi": "क्या रासायनिक बंधों, आयन प्रवाह और न्यूरोट्रांसमीटर की हलचल हमारी आत्म-जागरूकता की चिंगारी को समझा सकती है? आज हम जीवविज्ञान के सबसे बड़े रहस्य को समझने के लिए मॉलिक्यूलर न्यूरोसाइंस और दर्शन का सेतु बनाते हैं।",
+        "concept": "Molecular Neuroscience"
       },
       {
-        "start": 50,
-        "end": 130,
-        "timeLabel": "00:50",
-        "english": "Whether existing in singlet states with paired electrons or triplet states with radical character, carbenes perform lightning-fast cyclopropanations and insertion reactions critical to synthesis.",
-        "hindi": "चाहे वे सिंगलेट अवस्था में हों या ट्रिपलेट अवस्था में, कार्बीन्स पलक झपकते ही रासायनिक संश्लेषण में महत्वपूर्ण साइक्लोप्रोपेनेशन और इन्सर्शन अभिक्रियाएं करने में सक्षम होते हैं।",
-        "concept": "Singlet vs Triplet"
+        "start": 60,
+        "end": 180,
+        "timeLabel": "01:00",
+        "english": "Sodium-potassium ATPase pumps generate membrane potentials across billions of cortical neurons. When these networks synchronize at gamma frequencies, isolated sensory inputs crystallize into unified perception.",
+        "hindi": "सोडियम-पोटेशियम पंप हमारे मस्तिष्क के अरबों न्यूरॉन्स में विद्युत विभव उत्पन्न करते हैं। जब ये नेटवर्क विशेष आवृत्तियों पर तालमेल बिठाते हैं, तो अलग-अलग संवेदी अनुभूतियां एक एकीकृत चेतना का रूप ले लेती हैं।",
+        "concept": "Neural Synchrony"
       },
       {
-        "start": 130,
-        "end": 224,
-        "timeLabel": "02:10",
-        "english": "From Nobel-winning olefin metathesis catalysts to revolutionary organic synthesis, understanding these transient chemical ghosts empowers modern materials and pharmaceutical breakthroughs.",
-        "hindi": "नोबेल पुरस्कार विजेता ओलेफिन मेटाथेसिस उत्प्रेरकों से लेकर आधुनिक दवा निर्माण तक, इन क्षणभंगुर रासायनिक कणों को समझना भविष्य की सामग्रियों के निर्माण में क्रांतिकारी भूमिका निभाता है।",
-        "concept": "Olefin Metathesis"
+        "start": 180,
+        "end": 312,
+        "timeLabel": "03:00",
+        "english": "Yet a complete physical ledger of neurochemicals leaves an explanatory gap. Consciousness may be an emergent property of immense systemic complexity—a testament to how nature transforms simple chemistry into mind.",
+        "hindi": "फिर भी रसायनों की पूरी सूची चेतना के वास्तविक अनुभव को पूरी तरह नहीं समझा पाती। चेतना अत्यंत जटिल व्यवस्था का एक उभरता हुआ गुण हो सकती है—प्रकृति का वह चमत्कार जो सरल रसायन विज्ञान को मन में बदल देता है।",
+        "concept": "Emergence of Mind"
       }
     ]
   }
