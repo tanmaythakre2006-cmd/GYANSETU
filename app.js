@@ -79,10 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const tpConceptCat = document.getElementById('tp-concept-cat');
   const tpConceptDef = document.getElementById('tp-concept-def');
   const tpCopyTranscriptBtn = document.getElementById('tp-copy-transcript-btn');
-  const dockAudioTrackSelector = document.getElementById('dock-audio-track-selector');
+  const dockLinguaBtn = document.getElementById('dock-lingua-btn');
+  const dockLinguaLabel = document.getElementById('dock-lingua-label');
+  const dockLinguaPopover = document.getElementById('dock-lingua-popover');
+  const dockLinguaOptionsList = document.getElementById('dock-lingua-options-list');
   const tpTrackSwitchBtn = document.getElementById('tp-track-switch-btn');
   const tpTrackLabel = document.getElementById('tp-track-label');
-  let currentAudioLanguage = 'mr'; // 'mr' (original Marathi) or 'en' (English master studio)
+  const tpMrBtn = document.getElementById('tp-mr-btn');
+  let currentTrackLanguage = 'orig'; // STRICT DEFAULT: 'orig' (Original composition by Simran Ailani)
 
   // 2G Ghost Stream & Network Elements
   const ghostModeBtn = document.getElementById('ghost-mode-btn');
@@ -193,45 +197,100 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Audio Loading and Playback Controls
-  function updateAudioTrackButtons() {
-    const isEn = (currentAudioLanguage === 'en');
-    document.querySelectorAll('.btn-track-choice').forEach(b => {
-      b.classList.toggle('active', b.dataset.track === currentAudioLanguage);
-    });
-    if (tpTrackLabel) {
-      tpTrackLabel.textContent = isEn ? 'English Master Studio Dub' : 'Original Marathi';
+  // 3. Audio Loading, Playback & Multilingual Language Tracks
+  function renderLinguaPopoverOptions() {
+    if (!dockLinguaOptionsList) return;
+    const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+    if (!ep) return;
+    dockLinguaOptionsList.innerHTML = '';
+
+    const isEp13 = (ep.id === 'ep-13');
+    // STRICT USER RULE:
+    // Ep 13 (Marathi original): Available in Original (MR), English (EN), Hindi (HI)
+    // Ep 1-12 (English original): Available in Original (EN), Hindi (HI)
+    let options = [];
+    if (isEp13) {
+      options = [
+        { code: 'orig', label: '🇮🇳 Original Marathi', sub: 'Simran Ailani (Default)', badge: 'ORIGINAL' },
+        { code: 'en', label: '🇬🇧 English Master', sub: 'Neerja Voice (Studio Dub)', badge: 'STUDIO DUB' },
+        { code: 'hi', label: '🇮🇳 Hindi Master', sub: 'Swara Voice (Studio Dub)', badge: 'STUDIO DUB' }
+      ];
+    } else {
+      options = [
+        { code: 'orig', label: '🇬🇧 Original English', sub: 'Simran Ailani (Default)', badge: 'ORIGINAL' },
+        { code: 'hi', label: '🇮🇳 Hindi Master', sub: 'Swara Voice (Neural Translation)', badge: 'TRANSLATION' }
+      ];
     }
-    if (tpTrackSwitchBtn) {
-      tpTrackSwitchBtn.classList.toggle('active', isEn);
+
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `btn-lingua-option ${currentTrackLanguage === opt.code ? 'active' : ''}`;
+      btn.innerHTML = `
+        <div>
+          <div>${opt.label}</div>
+          <div style="font-size:0.62rem; color:rgba(255,255,255,0.5);">${opt.sub}</div>
+        </div>
+        <span class="lingua-opt-badge">${opt.badge}</span>
+      `;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setTrackLanguage(opt.code);
+        if (dockLinguaPopover) dockLinguaPopover.classList.add('hidden');
+      });
+      dockLinguaOptionsList.appendChild(btn);
+    });
+
+    if (dockLinguaLabel) {
+      dockLinguaLabel.textContent = currentTrackLanguage.toUpperCase();
     }
   }
 
-  function setAudioLanguageTrack(lang) {
-    if (currentAudioLanguage === lang) return;
+  function setTrackLanguage(lang) {
+    if (currentTrackLanguage === lang) return;
     const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
-    if (lang === 'en' && !ep.audioSrcEnglish) {
-      showToast('English Studio Dub available on Episode 13');
-      return;
-    }
+    currentTrackLanguage = lang;
 
-    currentAudioLanguage = lang;
     const curTime = audio.currentTime;
     const wasPlaying = isPlaying;
 
-    const baseSrc = (currentAudioLanguage === 'en' && ep.audioSrcEnglish) ? ep.audioSrcEnglish : ep.audioSrc;
-    const targetAudioSrc = isGhostMode 
-      ? baseSrc.replace('assets/audio/', 'assets/audio_ghost/') 
-      : baseSrc;
+    let targetSrc = ep.audioSrc;
+    if (ep.id === 'ep-13') {
+      if (lang === 'en' && ep.audioSrcEnglish) targetSrc = ep.audioSrcEnglish;
+      if (lang === 'hi' && ep.audioSrcHindi) targetSrc = ep.audioSrcHindi;
+    } else {
+      if (lang === 'hi' && ep.audioSrcHindi) targetSrc = ep.audioSrcHindi;
+    }
 
-    audio.src = targetAudioSrc;
-    audio.currentTime = curTime;
+    const finalSrc = isGhostMode 
+      ? targetSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+      : targetSrc;
+
+    audio.src = finalSrc;
+    audio.onloadedmetadata = () => {
+      if (curTime > 0 && curTime < audio.duration) {
+        audio.currentTime = curTime;
+      }
+    };
+
     if (wasPlaying) playAudio();
 
-    updateAudioTrackButtons();
-    showToast(currentAudioLanguage === 'en' 
-      ? '🇬🇧 Switched to Studio English Master Voice Broadcast' 
-      : '🇮🇳 Switched to Original Marathi Broadcast (Simran Ailani)');
+    if (dockLinguaLabel) {
+      dockLinguaLabel.textContent = currentTrackLanguage.toUpperCase();
+    }
+    renderLinguaPopoverOptions();
+
+    // If teleprompter is open, sync its language too
+    if (typeof syncTeleprompterLanguage === 'function') {
+      syncTeleprompterLanguage(lang);
+    }
+
+    const toastMsgs = {
+      orig: `🎙️ Playing Original Composition (${ep.hosts[0]} • Default)`,
+      en: `🇬🇧 Switched to English Master Translation (Neerja Voice)`,
+      hi: `🇮🇳 Switched to Hindi Master Translation (Swara Voice)`
+    };
+    showToast(toastMsgs[lang] || 'Language updated');
   }
 
   function loadEpisode(index, autoPlay = true) {
@@ -241,21 +300,13 @@ document.addEventListener('DOMContentLoaded', () => {
     currentEpisodeIndex = index;
     const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
 
-    // Show/hide audio track language switcher if episode has an English track
-    if (dockAudioTrackSelector) {
-      if (ep.audioSrcEnglish) {
-        dockAudioTrackSelector.classList.remove('hidden');
-      } else {
-        dockAudioTrackSelector.classList.add('hidden');
-        currentAudioLanguage = 'mr';
-      }
-      updateAudioTrackButtons();
-    }
+    // STRICT USER RULE: Always reset to Original composition by default!
+    currentTrackLanguage = 'orig';
+    renderLinguaPopoverOptions();
 
-    const baseSrc = (currentAudioLanguage === 'en' && ep.audioSrcEnglish) ? ep.audioSrcEnglish : ep.audioSrc;
     const targetAudioSrc = isGhostMode 
-      ? baseSrc.replace('assets/audio/', 'assets/audio_ghost/') 
-      : baseSrc;
+      ? ep.audioSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+      : ep.audioSrc;
     audio.src = targetAudioSrc;
     audio.playbackRate = speeds[currentSpeedIndex];
 
@@ -1057,7 +1108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 12. GLOBAL LINGUA TELEPROMPTER & SYNCHRONIZED MASTER TRANSCRIPT ENGINE
   // =========================================================================
-  let currentTpLang = 'en'; // 'en', 'dual', 'mr', 'poly-hi', 'poly-es', 'poly-fr', 'poly-sw', 'poly-de'
+  let currentTpLang = 'en'; // 'en', 'hi', 'dual', 'mr', 'poly-hi', 'poly-es', 'poly-fr', 'poly-sw', 'poly-de'
   let isTpAutoScroll = true;
   let isTpTtsEnabled = false;
   let activeTpSegmentIdx = -1;
@@ -1079,8 +1130,41 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    if (teleprompterEpTag) teleprompterEpTag.textContent = `Episode ${tData.number || 13}`;
-    if (teleprompterTitle) teleprompterTitle.textContent = `${tData.titleMarathi} • ${tData.titleEnglish}`;
+    if (teleprompterEpTag) teleprompterEpTag.textContent = `Episode ${tData.number || currentEpisodeIndex + 1}`;
+    if (teleprompterTitle) {
+      const titleMain = tData.titleMarathi || tData.titleOriginal || tData.titleEnglish || 'Episode Transcript';
+      const titleSub = (tData.titleMarathi && tData.titleEnglish) ? ` • ${tData.titleEnglish}` : '';
+      teleprompterTitle.textContent = `${titleMain}${titleSub}`;
+    }
+
+    // Toggle Marathi button depending on episode language
+    if (tpMrBtn) {
+      const isMarathi = (tData.origLang === 'mr' || tData.language === 'mr');
+      tpMrBtn.style.display = isMarathi ? 'inline-flex' : 'none';
+    }
+
+    // Synchronize initial teleprompter language with current audio track
+    if (currentTrackLanguage === 'hi') {
+      currentTpLang = 'hi';
+    } else if (currentTrackLanguage === 'en') {
+      currentTpLang = 'en';
+    } else {
+      currentTpLang = (tData.origLang === 'mr' || tData.language === 'mr') ? 'mr' : 'en';
+    }
+
+    document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === currentTpLang);
+    });
+
+    if (tpTrackLabel) {
+      const isEp13 = (tData.episodeId === 'ep-13' || tData.origLang === 'mr');
+      const labels = {
+        orig: isEp13 ? 'Original Marathi' : 'Original English',
+        en: 'English Master',
+        hi: 'Hindi Master'
+      };
+      tpTrackLabel.textContent = labels[currentTrackLanguage] || currentTrackLanguage.toUpperCase();
+    }
 
     renderTeleprompterContent();
     updateTpPlayState(isPlaying);
@@ -1088,6 +1172,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (transcriptModal) {
       transcriptModal.classList.add('is-active');
       syncTeleprompterTime(audio.currentTime);
+    }
+  }
+
+  function syncTeleprompterLanguage(lang) {
+    if (lang === 'orig') {
+      const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+      currentTpLang = (ep && ep.id === 'ep-13') ? 'mr' : 'en';
+    } else {
+      currentTpLang = lang;
+    }
+
+    document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === currentTpLang);
+    });
+
+    if (tpTrackLabel) {
+      const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+      const isEp13 = (ep && ep.id === 'ep-13');
+      const labels = {
+        orig: isEp13 ? 'Original Marathi' : 'Original English',
+        en: 'English Master',
+        hi: 'Hindi Master'
+      };
+      tpTrackLabel.textContent = labels[currentTrackLanguage] || currentTrackLanguage.toUpperCase();
+    }
+
+    if (transcriptModal && transcriptModal.classList.contains('is-active')) {
+      renderTeleprompterContent();
+      if (activeTpSegmentIdx !== -1) {
+        highlightTpSegment(activeTpSegmentIdx, true);
+      }
     }
   }
 
@@ -1107,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="tp-segment-meta">
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="tp-time-pill">${seg.timeLabel}</span>
-            <button type="button" class="tp-speak-line-btn" title="Speak this English translation aloud">
+            <button type="button" class="tp-speak-line-btn" title="Speak translation aloud">
               <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
               <span>Speak</span>
             </button>
@@ -1116,20 +1231,26 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      if (currentTpLang === 'en' || currentTpLang === 'dual') {
-        innerHtml += `<div class="tp-english-text">${seg.english}</div>`;
-      }
-
-      if (currentTpLang === 'mr' || currentTpLang === 'dual') {
-        innerHtml += `<div class="tp-marathi-text">${seg.marathi}</div>`;
-      }
-
-      if (currentTpLang.startsWith('poly-')) {
+      if (currentTpLang === 'en') {
+        innerHtml += `<div class="tp-english-text">${seg.english || seg.marathi || ''}</div>`;
+      } else if (currentTpLang === 'mr') {
+        innerHtml += `<div class="tp-marathi-text">${seg.marathi || seg.english || ''}</div>`;
+      } else if (currentTpLang === 'hi') {
+        innerHtml += `<div class="tp-hindi-text" style="font-size:1.02rem; line-height:1.75; color:#f8fafc; font-family:'Noto Sans Devanagari', 'Mukta', sans-serif;">${seg.hindi || seg.english || ''}</div>`;
+      } else if (currentTpLang === 'dual') {
+        if (seg.marathi) {
+          innerHtml += `<div class="tp-marathi-text" style="margin-bottom:6px;">${seg.marathi}</div>`;
+          innerHtml += `<div class="tp-english-text" style="color:#7dd3fc;">${seg.english}</div>`;
+        } else {
+          innerHtml += `<div class="tp-english-text" style="margin-bottom:6px;">${seg.english}</div>`;
+          innerHtml += `<div class="tp-hindi-text" style="color:#7dd3fc; font-family:'Noto Sans Devanagari', 'Mukta', sans-serif;">${seg.hindi || ''}</div>`;
+        }
+      } else if (currentTpLang.startsWith('poly-')) {
         const polyCode = currentTpLang.replace('poly-', '');
         const polyNames = { hi: 'हिन्दी (Hindi)', es: 'Español (Spanish)', fr: 'Français (French)', sw: 'Kiswahili (Swahili)', de: 'Deutsch (German)' };
         innerHtml += `
-          <div class="tp-english-text">${seg.english}</div>
-          <div class="tp-marathi-text" style="color: #67e8f9;">[${polyNames[polyCode] || polyCode} Translation Layer Active] • ${seg.marathi}</div>
+          <div class="tp-english-text">${seg.english || ''}</div>
+          <div class="tp-marathi-text" style="color: #67e8f9;">[${polyNames[polyCode] || polyCode} Translation Layer Active] • ${seg.hindi || seg.marathi || seg.english}</div>
         `;
       }
 
@@ -1143,8 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
             speakBtn.classList.add('is-speaking');
-            const utter = new SpeechSynthesisUtterance(seg.english);
-            utter.lang = 'en-US';
+            const toSpeak = (currentTpLang === 'hi' && seg.hindi) ? seg.hindi : (seg.english || seg.marathi);
+            const utter = new SpeechSynthesisUtterance(toSpeak);
+            utter.lang = (currentTpLang === 'hi') ? 'hi-IN' : ((currentTpLang === 'mr') ? 'mr-IN' : 'en-US');
             utter.rate = 1.0;
             utter.onend = () => speakBtn.classList.remove('is-speaking');
             utter.onerror = () => speakBtn.classList.remove('is-speaking');
@@ -1205,25 +1327,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // TTS Dubbing Voiceover if active
     if (isTpTtsEnabled && 'speechSynthesis' in window && currentActiveTranscript) {
       const seg = currentActiveTranscript.segments[idx];
-      if (seg && seg.english && !seg.english.startsWith('[')) {
-        window.speechSynthesis.cancel();
-        if (audio) audio.volume = 0.12; // Duck background original voice
-        const utter = new SpeechSynthesisUtterance(seg.english);
-        utter.lang = 'en-US';
-        utter.rate = 1.05;
-        utter.onend = () => {
-          if (audio && !isTpTtsEnabled) audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.9;
-        };
-        window.speechSynthesis.speak(utter);
+      if (seg) {
+        let toSpeak = seg.english;
+        let speakLang = 'en-US';
+        if (currentTpLang === 'hi' && seg.hindi) {
+          toSpeak = seg.hindi;
+          speakLang = 'hi-IN';
+        } else if (currentTpLang === 'mr' && seg.marathi) {
+          toSpeak = seg.marathi;
+          speakLang = 'mr-IN';
+        }
+        if (toSpeak && !toSpeak.startsWith('[')) {
+          window.speechSynthesis.cancel();
+          if (audio) audio.volume = 0.12; // Duck background original voice
+          const utter = new SpeechSynthesisUtterance(toSpeak);
+          utter.lang = speakLang;
+          utter.rate = 1.05;
+          utter.onend = () => {
+            if (audio && !isTpTtsEnabled) audio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.9;
+          };
+          window.speechSynthesis.speak(utter);
+        }
       }
     }
   }
 
   function syncTeleprompterTime(timeSec) {
     if (!currentActiveTranscript || !currentActiveTranscript.segments) {
-      // Default to episode 13 if available
-      if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS['ep-13']) {
-        currentActiveTranscript = window.GYAN_SETU_TRANSCRIPTS['ep-13'];
+      const currentEp = GYAN_SETU_EPISODES[currentEpisodeIndex];
+      const epId = currentEp ? currentEp.id : 'ep-13';
+      if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[epId]) {
+        currentActiveTranscript = window.GYAN_SETU_TRANSCRIPTS[epId];
       } else {
         return;
       }
@@ -1248,8 +1382,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const g = currentActiveTranscript.glossary[conceptName];
     if (!g || !tpConceptDrawer) return;
 
-    if (tpConceptTitle) tpConceptTitle.textContent = `${conceptName} (${g.marathi})`;
-    if (tpConceptCat) tpConceptCat.textContent = g.category.toUpperCase();
+    if (tpConceptTitle) tpConceptTitle.textContent = `${conceptName} ${g.marathi ? `(${g.marathi})` : ''}`;
+    if (tpConceptCat) tpConceptCat.textContent = g.category ? g.category.toUpperCase() : 'SCIENCE';
     if (tpConceptDef) tpConceptDef.textContent = g.definition;
     tpConceptDrawer.classList.remove('hidden');
   }
@@ -1261,7 +1395,20 @@ document.addEventListener('DOMContentLoaded', () => {
       : '<path d="M8 5v14l11-7z"/>';
   }
 
-  // Event Listeners for Teleprompter
+  // Event Listeners for Teleprompter & Lingua Micro-Switcher
+  if (dockLinguaBtn && dockLinguaPopover) {
+    dockLinguaBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dockLinguaPopover.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dockLinguaPopover.contains(e.target) && e.target !== dockLinguaBtn) {
+        dockLinguaPopover.classList.add('hidden');
+      }
+    });
+  }
+
   if (dockTranscriptBtn) {
     dockTranscriptBtn.addEventListener('click', () => {
       openTranscriptModal();
@@ -1293,7 +1440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Language switchers
+  // Language switchers inside Teleprompter
   document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tp-lang-btn[data-lang]').forEach(b => b.classList.remove('active'));
@@ -1349,11 +1496,11 @@ document.addEventListener('DOMContentLoaded', () => {
     tpTtsBtn.addEventListener('click', () => {
       isTpTtsEnabled = !isTpTtsEnabled;
       tpTtsBtn.classList.toggle('tts-active', isTpTtsEnabled);
-      tpTtsBtn.innerHTML = `<span class="tp-toggle-indicator"></span> 🗣️ English AI Dub: ${isTpTtsEnabled ? 'ON' : 'OFF'}`;
+      tpTtsBtn.innerHTML = `<span class="tp-toggle-indicator"></span> 🗣️ Live Voice Dub: ${isTpTtsEnabled ? 'ON' : 'OFF'}`;
       if (!isTpTtsEnabled && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       } else if (isTpTtsEnabled) {
-        showToast('🗣️ English AI Voiceover Active • Zero Data Speech Dubbing');
+        showToast('🗣️ Live Voice Dubbing Active • Synchronized Narration');
         if (activeTpSegmentIdx !== -1) {
           highlightTpSegment(activeTpSegmentIdx);
         }
@@ -1368,29 +1515,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Copy English Transcript
+  // Copy Transcript
   if (tpCopyTranscriptBtn) {
     tpCopyTranscriptBtn.addEventListener('click', () => {
       if (!currentActiveTranscript) return;
-      const fullText = currentActiveTranscript.segments.map(s => `[${s.timeLabel}] ${s.english}`).join('\n\n');
-      navigator.clipboard.writeText(`GyanSetu Episode 13: ${currentActiveTranscript.titleEnglish}\nHost: ${currentActiveTranscript.host}\n\n${fullText}`).then(() => {
-        showToast('📋 English Master Transcript Copied to Clipboard!');
+      const fullText = currentActiveTranscript.segments.map(s => {
+        const text = (currentTpLang === 'hi' && s.hindi) ? s.hindi : (s.english || s.marathi);
+        return `[${s.timeLabel}] ${text}`;
+      }).join('\n\n');
+      navigator.clipboard.writeText(`GyanSetu Episode ${currentActiveTranscript.number}: ${currentActiveTranscript.titleEnglish || currentActiveTranscript.titleOriginal}\nHost: ${currentActiveTranscript.host}\n\n${fullText}`).then(() => {
+        showToast('📋 Active Transcript Copied to Clipboard!');
       });
     });
   }
 
-  // Track Switching Event Handlers
-  document.querySelectorAll('.btn-track-choice').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      setAudioLanguageTrack(btn.dataset.track);
-    });
-  });
-
+  // Teleprompter Audio Track Switcher
   if (tpTrackSwitchBtn) {
     tpTrackSwitchBtn.addEventListener('click', () => {
-      const nextLang = (currentAudioLanguage === 'en') ? 'mr' : 'en';
-      setAudioLanguageTrack(nextLang);
+      const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+      const isEp13 = (ep && ep.id === 'ep-13');
+      let nextLang = 'orig';
+      if (isEp13) {
+        if (currentTrackLanguage === 'orig') nextLang = 'en';
+        else if (currentTrackLanguage === 'en') nextLang = 'hi';
+        else nextLang = 'orig';
+      } else {
+        nextLang = (currentTrackLanguage === 'orig') ? 'hi' : 'orig';
+      }
+      setTrackLanguage(nextLang);
     });
   }
 

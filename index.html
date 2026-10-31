@@ -783,11 +783,22 @@
         </div>
         <div class="dock-info-wrap">
           <div id="dock-title" class="dock-track-title">Select an episode</div>
-          <div id="dock-artist" class="dock-track-sub">GyanSetu Radio • Global Stream</div>
-          <div id="dock-audio-track-selector" class="dock-audio-track-selector hidden">
-            <span class="track-selector-label">Voice:</span>
-            <button type="button" class="btn-track-choice active" data-track="mr" title="Listen in Original Marathi">🇮🇳 Original</button>
-            <button type="button" class="btn-track-choice" data-track="en" title="Listen in English Master Studio Dub">🇬🇧 English Master</button>
+          <div class="dock-track-sub-row">
+            <span id="dock-artist" class="dock-track-sub">GyanSetu Radio • Global Stream</span>
+            <!-- Discreet Micro Lingua Switcher Pill -->
+            <div class="dock-lingua-dropdown-wrap">
+              <button type="button" id="dock-lingua-btn" class="dock-micro-lingua-btn" title="Switch Language Track (Default: Original)">
+                <span class="lingua-icon">🌐</span>
+                <span id="dock-lingua-label">ORG</span>
+                <span class="lingua-caret">▾</span>
+              </button>
+              <div id="dock-lingua-popover" class="dock-lingua-popover hidden">
+                <div class="lingua-popover-header">Language Audio Track</div>
+                <div id="dock-lingua-options-list">
+                  <!-- Rendered dynamically based on episode -->
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -928,8 +939,9 @@
       <div class="teleprompter-control-bar">
         <div class="teleprompter-lang-buttons">
           <button type="button" class="tp-lang-btn active" data-lang="en">🇬🇧 English Master</button>
-          <button type="button" class="tp-lang-btn" data-lang="dual">🌐 Dual (English + मराठी)</button>
-          <button type="button" class="tp-lang-btn" data-lang="mr">🇮🇳 मराठी Original</button>
+          <button type="button" class="tp-lang-btn" data-lang="hi">🇮🇳 हिन्दी Master</button>
+          <button type="button" class="tp-lang-btn" data-lang="dual">🌐 Dual Subtitles</button>
+          <button type="button" class="tp-lang-btn" data-lang="mr" id="tp-mr-btn">🇮🇳 मराठी Original</button>
           <div class="tp-polyglot-dropdown-wrap">
             <button type="button" id="tp-polyglot-btn" class="tp-lang-btn tp-polyglot-toggle">🌍 Polyglot ▾</button>
             <div id="tp-polyglot-menu" class="tp-polyglot-menu hidden">

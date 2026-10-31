@@ -3990,48 +3990,130 @@ body.ghost-mode-active {
   font-size: 0.8rem;
 }
 
-/* Audio Track Selector in Dock */
-.dock-audio-track-selector {
+/* Discreet Micro Lingua Switcher Pill */
+.dock-track-sub-row {
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin-top: 4px;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
-.dock-audio-track-selector.hidden {
+.dock-lingua-dropdown-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.dock-micro-lingua-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #7dd3fc;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.dock-micro-lingua-btn:hover {
+  background: rgba(0, 245, 255, 0.15);
+  border-color: #00f5ff;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.dock-micro-lingua-btn .lingua-caret {
+  font-size: 0.6rem;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.dock-lingua-popover {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: rgba(13, 20, 36, 0.96);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 6px;
+  min-width: 220px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 16px rgba(0, 245, 255, 0.15);
+  z-index: 4000;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  animation: popoverFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-lingua-popover.hidden {
   display: none !important;
 }
 
-.track-selector-label {
-  font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 600;
-  margin-right: 2px;
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.btn-track-choice {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  font-weight: 600;
+.lingua-popover-header {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 2px;
+}
+
+.btn-lingua-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.76rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
 }
 
-.btn-track-choice:hover {
-  background: rgba(0, 245, 255, 0.15);
-  border-color: rgba(0, 245, 255, 0.35);
-  color: #ffffff;
-}
-
-.btn-track-choice.active {
-  background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(16, 185, 129, 0.2));
-  border-color: #00f5ff;
+.btn-lingua-option:hover {
+  background: rgba(0, 245, 255, 0.12);
   color: #00f5ff;
-  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.btn-lingua-option.active {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(16, 185, 129, 0.15));
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.lingua-opt-badge {
+  font-size: 0.62rem;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-lingua-option.active .lingua-opt-badge {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
 }
 
 /* Individual Sentence Speak Button */
