@@ -38,6 +38,10 @@
         <a href="#broadcast" class="nav-pill-link">Broadcast</a>
         <a href="#episodes" class="nav-pill-link">Episodes</a>
         <a href="pocket.html" class="nav-pill-link nav-pill-retro" title="Switch to Ultra-Lightweight Smart Retro Transistor Radio">📻 Retro Radio</a>
+        <button type="button" id="nav-live-studio-btn" class="nav-pill-link nav-pill-live-studio" title="Open Global Live Transmission Studio & Collaboration Hub">
+          <span class="live-dot-pulse"></span>
+          <span>Live Studio &amp; Collaborate</span>
+        </button>
         <a href="#analytics" class="nav-pill-link">Analytics</a>
         <a href="#mission" class="nav-pill-link">Mission &amp; Team</a>
         <a href="#app" class="nav-pill-link">GyanSetu App</a>
@@ -999,6 +1003,294 @@
           <button id="tp-copy-transcript-btn" class="liquid-btn btn-secondary-glass tp-btn-sm" title="Copy Full English Transcript">
             <span>📋 Copy English Script</span>
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liquid Glass Global Live Studio & Voice Curation Hub -->
+  <div id="live-studio-modal" class="modal-scrim">
+    <div class="liquid-glass-modal live-studio-modal">
+      <div class="modal-top-bar studio-top-bar">
+        <div class="studio-header-info">
+          <div class="studio-badge-row">
+            <span class="studio-badge live-beacon-pulse">🔴 GYANSETU GLOBAL TRANSMISSION NETWORK</span>
+            <span class="studio-badge-sub">Democratic Acoustic Commons • Curated by Simran Ailani</span>
+          </div>
+          <h3 class="studio-modal-title">Global Live Studio &amp; Collaborator Vault</h3>
+        </div>
+        <button id="close-live-studio-btn" class="modal-dismiss-btn" aria-label="Close Live Studio">&times;</button>
+      </div>
+
+      <!-- Studio Navigation Tabs -->
+      <div class="studio-tabs-bar">
+        <button type="button" class="studio-tab-btn active" data-tab="listen">
+          <span>🔴 On-Air Stream</span>
+        </button>
+        <button type="button" class="studio-tab-btn" data-tab="golive">
+          <span>🎙️ Go Live (10-Min Studio)</span>
+        </button>
+        <button type="button" class="studio-tab-btn" data-tab="collaborate">
+          <span>🌍 Submit Episode / Voice</span>
+        </button>
+        <button type="button" class="studio-tab-btn" data-tab="curator">
+          <span>🛡️ Curator Review Desk</span>
+        </button>
+      </div>
+
+      <div class="studio-modal-body">
+        <!-- Tab 1: On-Air Live Stream (Listener Lounge) -->
+        <div id="tab-content-listen" class="studio-tab-pane active">
+          <div class="live-stream-hero-card">
+            <div class="live-stream-header">
+              <div class="live-status-pill">
+                <span class="pulse-beacon-red"></span>
+                <span id="live-on-air-status-text">TRANSMITTING LIVE • GLOBAL FREQUENCY</span>
+              </div>
+              <div class="live-listener-pill">
+                <span class="listener-icon">👥</span>
+                <span id="live-listeners-count">384 Listeners Across 18 Countries</span>
+              </div>
+            </div>
+
+            <div class="live-broadcast-meta">
+              <div class="live-country-chip" id="live-country-tag">🌍 Nairobi, Kenya &bull; Global South Initiative</div>
+              <h4 class="live-broadcast-title" id="live-stream-title">Solar Micro-Grids &amp; Solid-State Chemistry in Rural Sub-Saharan Africa</h4>
+              <p class="live-broadcast-speaker" id="live-stream-speaker">Broadcaster: <strong id="live-speaker-name">Kwame Mensah</strong> (University of Nairobi) &bull; Lead Host: <strong>Simran Ailani</strong></p>
+            </div>
+
+            <div class="live-waveform-wrapper">
+              <canvas id="live-stream-canvas" class="live-waveform-canvas" width="600" height="90"></canvas>
+              <div class="live-frequency-callsign">GS-LIVE // 108.0 MHz SATELLITE RELAY</div>
+            </div>
+
+            <div class="live-stream-controls-row">
+              <button id="btn-toggle-live-listen" class="liquid-btn btn-primary-gradient live-listen-btn">
+                <svg id="live-listen-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <span id="live-listen-label">Tune In to Live Transmission</span>
+              </button>
+
+              <div class="live-reactions-bar">
+                <span class="reactions-title">Live Solidary Reactions:</span>
+                <button type="button" class="btn-live-reaction" data-reaction="insight" title="Send Insight">
+                  <span>💡</span>
+                  <span class="reaction-count" id="count-insight">142</span>
+                </button>
+                <button type="button" class="btn-live-reaction" data-reaction="clap" title="Send Applause">
+                  <span>👏</span>
+                  <span class="reaction-count" id="count-clap">219</span>
+                </button>
+                <button type="button" class="btn-live-reaction" data-reaction="globe" title="Global South Solidarity">
+                  <span>🌍</span>
+                  <span class="reaction-count" id="count-globe">308</span>
+                </button>
+                <button type="button" class="btn-live-reaction" data-reaction="heart" title="Send Love">
+                  <span>❤️</span>
+                  <span class="reaction-count" id="count-heart">451</span>
+                </button>
+              </div>
+            </div>
+            <div id="live-reactions-floating-zone" class="live-reactions-floating-zone"></div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Go Live (10-Minute Guest Broadcaster) -->
+        <div id="tab-content-golive" class="studio-tab-pane">
+          <!-- Gate: Code Required -->
+          <div id="golive-auth-gate" class="studio-gate-box">
+            <div class="gate-icon-frame">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#ffaa11" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h4 class="gate-title">Curator Passcode Verification</h4>
+            <p class="gate-prose">
+              GyanSetu connects knowledge seekers worldwide completely free of charge. To maintain rigorous educational accuracy and protect listeners from harassment, guest broadcasters must enter an authorization code issued by Lead Curator <strong>Simran Ailani</strong>.
+            </p>
+
+            <div class="gate-input-wrapper">
+              <input type="text" id="studio-passcode-input" class="studio-text-input" placeholder="Enter Authorization Code (e.g. GS-AFRICA-2026)" autocomplete="off">
+              <button id="btn-verify-passcode" class="liquid-btn btn-primary-gradient">
+                <span>Unlock 10-Minute Studio</span>
+              </button>
+            </div>
+
+            <div class="gate-helper-row">
+              <span class="gate-demo-tip">💡 Active Evaluation Keys: <code>GS-AFRICA-2026</code> &bull; <code>GS-LIVE</code> &bull; <code>GS-STUDENT</code></span>
+              <button type="button" id="btn-request-passcode-tab" class="btn-text-link">Need a custom broadcast code? Request from Curator &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Studio Cockpit (Visible Once Unlocked) -->
+          <div id="golive-cockpit" class="studio-cockpit-box hidden">
+            <div class="cockpit-header">
+              <div class="cockpit-status-lamp">
+                <span class="studio-lamp" id="cockpit-lamp"></span>
+                <span id="cockpit-status-text">STUDIO AUTHORIZED &bull; STANDBY MODE</span>
+              </div>
+              <div class="cockpit-timekeeper">
+                <span class="timer-desc">MAX SESSION DURATION:</span>
+                <div class="digital-clock" id="studio-countdown-clock">10:00</div>
+              </div>
+            </div>
+
+            <div class="cockpit-form-grid">
+              <div class="studio-field">
+                <label for="broadcaster-name">Your Full Name &amp; Title</label>
+                <input type="text" id="broadcaster-name" class="studio-text-input" placeholder="e.g. Amara Okafor, Undergraduate Researcher">
+              </div>
+              <div class="studio-field">
+                <label for="broadcaster-country">Country / Institution</label>
+                <input type="text" id="broadcaster-country" class="studio-text-input" placeholder="e.g. Lagos, Nigeria &bull; University of Lagos">
+              </div>
+              <div class="studio-field full-width">
+                <label for="broadcaster-topic">Broadcast Inquiry Topic</label>
+                <input type="text" id="broadcaster-topic" class="studio-text-input" placeholder="e.g. Cassava Cyanide Detoxification: Indigenous Chemistry meets Modern Biochemistry">
+              </div>
+            </div>
+
+            <div class="cockpit-mic-deck">
+              <div class="mic-meta-line">
+                <div class="mic-status-badge">
+                  <span class="mic-dot" id="mic-status-dot"></span>
+                  <span id="mic-status-label">Microphone Ready (Web Audio Studio Stream)</span>
+                </div>
+                <div class="mic-time-limit-note">Automatic 10-minute cap prevents session hogging</div>
+              </div>
+
+              <div class="mic-meter-container">
+                <div class="vu-meter-bar horizontal" id="studio-vu-meter">
+                  <div class="vu-seg"></div><div class="vu-seg"></div><div class="vu-seg"></div>
+                  <div class="vu-seg"></div><div class="vu-seg"></div><div class="vu-seg"></div>
+                  <div class="vu-seg"></div><div class="vu-seg"></div><div class="vu-seg red"></div>
+                </div>
+                <canvas id="studio-mic-canvas" class="studio-mic-canvas" width="400" height="40"></canvas>
+              </div>
+            </div>
+
+            <div class="cockpit-actions-bar">
+              <button id="btn-start-live-transmit" class="liquid-btn btn-danger-gradient btn-live-transmit">
+                <span class="pulse-beacon-red"></span>
+                <span id="btn-transmit-label">🔴 Transmit Live Across GyanSetu Network</span>
+              </button>
+              <button id="btn-relock-studio" class="liquid-btn btn-secondary-glass btn-sm">
+                <span>Lock Studio</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Submit / Record Episode (Global Voice Vault) -->
+        <div id="tab-content-collaborate" class="studio-tab-pane">
+          <div class="collaborate-container">
+            <div class="collab-intro-card">
+              <h4 class="collab-heading">Lend Your Voice to GyanSetu</h4>
+              <p class="collab-prose">
+                Knowledge is a universal human heritage. If you have an inquiry into chemistry, African or Asian oral histories, medicinal botany, or scientific philosophy, GyanSetu provides the stage completely free. Record right here or upload your recording.
+              </p>
+            </div>
+
+            <form id="collab-submission-form" class="collab-form">
+              <div class="collab-form-grid">
+                <div class="studio-field">
+                  <label for="collab-name">Your Name</label>
+                  <input type="text" id="collab-name" class="studio-text-input" placeholder="e.g. Kwame Mensah" required>
+                </div>
+                <div class="studio-field">
+                  <label for="collab-contact">Email / WhatsApp / Signal</label>
+                  <input type="text" id="collab-contact" class="studio-text-input" placeholder="e.g. kwame@uonbi.ac.ke" required>
+                </div>
+                <div class="studio-field">
+                  <label for="collab-country">Country / City</label>
+                  <input type="text" id="collab-country" class="studio-text-input" placeholder="e.g. Nairobi, Kenya" required>
+                </div>
+                <div class="studio-field">
+                  <label for="collab-language">Episode Language</label>
+                  <input type="text" id="collab-language" class="studio-text-input" placeholder="e.g. English, Swahili, Yoruba, Hindi" required>
+                </div>
+                <div class="studio-field full-width">
+                  <label for="collab-title">Proposed Episode Title</label>
+                  <input type="text" id="collab-title" class="studio-text-input" placeholder="e.g. Geothermal Energy in the East African Rift" required>
+                </div>
+                <div class="studio-field full-width">
+                  <label for="collab-abstract">Concept Outline &amp; Pedagogical Core (2-3 Sentences)</label>
+                  <textarea id="collab-abstract" class="studio-textarea" rows="3" placeholder="Explain the key idea, what listeners will understand, and why it matters to everyday learners..." required></textarea>
+                </div>
+              </div>
+
+              <!-- Audio Input Mechanism: Upload or In-Browser Studio Record -->
+              <div class="audio-input-choice-card">
+                <div class="choice-tab-header">
+                  <label class="choice-radio-label">
+                    <input type="radio" name="audio-mode-choice" value="upload" checked>
+                    <span>Upload Audio File (.mp3, .m4a, .wav)</span>
+                  </label>
+                  <label class="choice-radio-label">
+                    <input type="radio" name="audio-mode-choice" value="record">
+                    <span>🎙️ Record Voice in Browser (Studio Mode)</span>
+                  </label>
+                </div>
+
+                <!-- Mode A: File Upload Zone -->
+                <div id="collab-upload-zone" class="audio-mode-pane active">
+                  <div class="file-drop-target">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#7dd3fc" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p class="file-prompt">Select an audio recording from your device (Max 60 MB)</p>
+                    <input type="file" id="collab-file-input" accept="audio/*">
+                    <span id="collab-file-name-label" class="selected-file-label">No file selected</span>
+                  </div>
+                </div>
+
+                <!-- Mode B: In-Browser Studio Recorder -->
+                <div id="collab-record-zone" class="audio-mode-pane">
+                  <div class="recorder-deck">
+                    <div class="recorder-timer-display" id="collab-recorder-timer">00:00</div>
+                    <div class="recorder-actions">
+                      <button type="button" id="btn-collab-record-start" class="liquid-btn btn-danger-gradient">
+                        <span>🔴 Start Recording</span>
+                      </button>
+                      <button type="button" id="btn-collab-record-stop" class="liquid-btn btn-secondary-glass" disabled>
+                        <span>⏹️ Stop</span>
+                      </button>
+                    </div>
+                    <audio id="collab-recorded-audio-preview" controls class="recorder-preview-player hidden"></audio>
+                  </div>
+                </div>
+              </div>
+
+              <div class="collab-submit-row">
+                <button type="submit" id="btn-submit-collab-form" class="liquid-btn btn-primary-gradient collab-submit-btn">
+                  <span>🚀 Submit Proposal to Curator Simran Ailani</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Success Receipt Box (Shown upon submission) -->
+            <div id="collab-receipt-box" class="collab-receipt-box hidden">
+              <div class="receipt-emblem">✓</div>
+              <h4 class="receipt-title">Transmission Logged Successfully!</h4>
+              <p class="receipt-code">OFFICIAL PROPOSAL RECEIPT: <strong id="receipt-id-tag">GS-SUB-9842</strong></p>
+              <p class="receipt-prose">
+                Your episode proposal has been securely logged into the Lead Curator review queue. <strong>Simran Ailani</strong> reviews all submissions for scientific truth and conversational pedagogical clarity. Once approved, it will be scheduled for global broadcast and added to the official library.
+              </p>
+              <button type="button" id="btn-reset-collab-form" class="liquid-btn btn-secondary-glass btn-sm">
+                <span>Submit Another Proposal</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Curator Review Desk (Simran Ailani Review Console) -->
+        <div id="tab-content-curator" class="studio-tab-pane">
+          <div class="curator-desk-header">
+            <div>
+              <h4 class="curator-heading">Lead Curator Evaluation Desk</h4>
+              <p class="curator-sub">Review incoming global student proposals &bull; Approve for station broadcast</p>
+            </div>
+            <div class="curator-badge-pill">Lead Curator: Simran Ailani</div>
+          </div>
+
+          <div id="curator-queue-list" class="curator-queue-list">
+            <!-- Dynamically populated via JS from proposal queue -->
+          </div>
         </div>
       </div>
     </div>

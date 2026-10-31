@@ -54,7 +54,7 @@ All 7 episodes are stored in 100% full-length studio quality (approx 57 MB total
 | **4** | How do drugs know where to go in the body? | 6m 23s | 11.15 MB | Everyday Phenomena | `assets/audio/ep4-how-do-drugs-know-where-to-go-in-th.mp3` |
 | **5** | Why bananas are slightly radioactive? | 5m 37s | 5.14 MB | Everyday Phenomena | `assets/audio/ep5-why-bananas-are-slightly-radioactiv.mp3` |
 | **6** | AI in Chemistry: When machines meet molecules | 6m 08s | 8.34 MB | Future & Tech | `assets/audio/ep6-ai-in-chemistry-when-machines-meet-.mp3` |
-| **7** | Carbenes *(feat. Lawanya Deshmukh & Simran Ailani)* | 10m 21s | 9.49 MB | Deep Concepts | `assets/audio/ep7-carbenes.mp3` |
+| **7** | Carbenes *(Curated & Hosted by Simran Ailani)* | 10m 21s | 9.49 MB | Deep Concepts | `assets/audio/ep7-carbenes.mp3` |
 
 ---
 

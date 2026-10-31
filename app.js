@@ -1546,6 +1546,671 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // =========================================================================
+  // 13. GLOBAL LIVE TRANSMISSION STUDIO & COLLABORATIVE CURATION ENGINE
+  // =========================================================================
+  const liveStudioModal = document.getElementById('live-studio-modal');
+  const closeLiveStudioBtn = document.getElementById('close-live-studio-btn');
+  const navLiveStudioBtn = document.getElementById('nav-live-studio-btn');
+  const studioTabBtns = document.querySelectorAll('.studio-tab-btn[data-tab]');
+  const studioTabPanes = document.querySelectorAll('.studio-tab-pane');
+
+  // Tab 1 Elements
+  const liveStreamCanvas = document.getElementById('live-stream-canvas');
+  const btnToggleLiveListen = document.getElementById('btn-toggle-live-listen');
+  const liveListenLabel = document.getElementById('live-listen-label');
+  const liveListenIcon = document.getElementById('live-listen-icon');
+  const liveReactionsFloatingZone = document.getElementById('live-reactions-floating-zone');
+  let isListeningLiveStream = false;
+  let liveWaveformAnimId = null;
+
+  // Tab 2 Elements (Go Live & 10-Min Timer)
+  const goliveAuthGate = document.getElementById('golive-auth-gate');
+  const goliveCockpit = document.getElementById('golive-cockpit');
+  const studioPasscodeInput = document.getElementById('studio-passcode-input');
+  const btnVerifyPasscode = document.getElementById('btn-verify-passcode');
+  const btnRequestPasscodeTab = document.getElementById('btn-request-passcode-tab');
+  const studioCountdownClock = document.getElementById('studio-countdown-clock');
+  const btnStartLiveTransmit = document.getElementById('btn-start-live-transmit');
+  const btnTransmitLabel = document.getElementById('btn-transmit-label');
+  const btnRelockStudio = document.getElementById('btn-relock-studio');
+  const cockpitLamp = document.getElementById('cockpit-lamp');
+  const cockpitStatusText = document.getElementById('cockpit-status-text');
+  const studioMicCanvas = document.getElementById('studio-mic-canvas');
+  const studioVuMeter = document.getElementById('studio-vu-meter');
+  const micStatusDot = document.getElementById('mic-status-dot');
+  const micStatusLabel = document.getElementById('mic-status-label');
+
+  let isLiveTransmitting = false;
+  let liveSessionTimeRemaining = 600; // 10 minutes (600 seconds)
+  let liveSessionInterval = null;
+  let broadcasterMediaStream = null;
+  let broadcasterAudioCtx = null;
+  let broadcasterAnalyser = null;
+  let broadcasterAnimId = null;
+
+  // Broadcast Channel for Real-time Inter-window Communication
+  let liveBroadcastChannel = null;
+  try {
+    liveBroadcastChannel = new BroadcastChannel('gyansetu_live_transmission_channel');
+    liveBroadcastChannel.onmessage = (event) => {
+      const data = event.data;
+      if (data && data.type === 'LIVE_START') {
+        const liveOnAirText = document.getElementById('live-on-air-status-text');
+        const liveTitle = document.getElementById('live-stream-title');
+        const liveSpeaker = document.getElementById('live-speaker-name');
+        if (liveOnAirText) liveOnAirText.textContent = `🔴 TRANSMITTING LIVE FROM ${data.country.toUpperCase()}`;
+        if (liveTitle) liveTitle.textContent = data.topic || 'Global Collaborative Inquiry';
+        if (liveSpeaker) liveSpeaker.textContent = data.name || 'Guest Broadcaster';
+        showToast(`🔴 Live Broadcast Started: ${data.name} (${data.country})`);
+      }
+    };
+  } catch (e) {}
+
+  // Open & Close Studio Modal
+  function openLiveStudioModal(initialTab = 'listen') {
+    if (liveStudioModal) {
+      liveStudioModal.classList.add('is-active');
+      switchStudioTab(initialTab);
+      startLiveStreamWaveform();
+      renderCuratorQueue();
+    }
+  }
+
+  function closeLiveStudioModal() {
+    if (liveStudioModal) {
+      liveStudioModal.classList.remove('is-active');
+      if (liveWaveformAnimId) cancelAnimationFrame(liveWaveformAnimId);
+    }
+  }
+
+  if (navLiveStudioBtn) {
+    navLiveStudioBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  }
+
+  if (radioModeBtn) {
+    radioModeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  }
+
+  if (closeLiveStudioBtn) {
+    closeLiveStudioBtn.addEventListener('click', closeLiveStudioModal);
+  }
+
+  if (liveStudioModal) {
+    liveStudioModal.addEventListener('click', (e) => {
+      if (e.target === liveStudioModal) closeLiveStudioModal();
+    });
+  }
+
+  // Tab Switching
+  function switchStudioTab(targetTab) {
+    studioTabBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === targetTab);
+    });
+
+    studioTabPanes.forEach(pane => {
+      pane.classList.remove('active');
+    });
+
+    const activePane = document.getElementById(`tab-content-${targetTab}`);
+    if (activePane) activePane.classList.add('active');
+
+    if (targetTab === 'curator') {
+      renderCuratorQueue();
+    }
+  }
+
+  studioTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchStudioTab(btn.dataset.tab);
+    });
+  });
+
+  if (btnRequestPasscodeTab) {
+    btnRequestPasscodeTab.addEventListener('click', () => {
+      switchStudioTab('collaborate');
+    });
+  }
+
+  // --- TAB 1: Live Stream Waveform & Reactions ---
+  function startLiveStreamWaveform() {
+    if (!liveStreamCanvas) return;
+    const ctx = liveStreamCanvas.getContext('2d');
+    let phase = 0;
+
+    function renderWave() {
+      ctx.clearRect(0, 0, liveStreamCanvas.width, liveStreamCanvas.height);
+      const width = liveStreamCanvas.width;
+      const height = liveStreamCanvas.height;
+      const mid = height / 2;
+
+      // Draw background glow grid
+      ctx.strokeStyle = 'rgba(239, 68, 68, 0.1)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, mid);
+      ctx.lineTo(width, mid);
+      ctx.stroke();
+
+      // Draw active sine harmonic lines
+      const colors = ['rgba(239, 68, 68, 0.8)', 'rgba(56, 189, 248, 0.7)', 'rgba(255, 190, 68, 0.6)'];
+      colors.forEach((col, cIdx) => {
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let x = 0; x < width; x += 4) {
+          const freq = 0.02 + cIdx * 0.01;
+          const amp = (isListeningLiveStream || isLiveTransmitting) ? 24 : 10;
+          const y = mid + Math.sin(x * freq + phase + cIdx) * amp * Math.sin(x / width * Math.PI);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      });
+
+      phase += 0.05;
+      liveWaveformAnimId = requestAnimationFrame(renderWave);
+    }
+
+    if (liveWaveformAnimId) cancelAnimationFrame(liveWaveformAnimId);
+    renderWave();
+  }
+
+  if (btnToggleLiveListen) {
+    btnToggleLiveListen.addEventListener('click', () => {
+      isListeningLiveStream = !isListeningLiveStream;
+      if (isListeningLiveStream) {
+        liveListenLabel.textContent = 'Disconnect from Live Stream';
+        liveListenIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        btnToggleLiveListen.classList.remove('btn-primary-gradient');
+        btnToggleLiveListen.classList.add('btn-secondary-glass');
+        showToast('🔴 Connected to Global Live Transmission • Nairobi Relay Active');
+      } else {
+        liveListenLabel.textContent = 'Tune In to Live Transmission';
+        liveListenIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        btnToggleLiveListen.classList.add('btn-primary-gradient');
+        btnToggleLiveListen.classList.remove('btn-secondary-glass');
+        showToast('Disconnected from Live Stream');
+      }
+    });
+  }
+
+  // Floating Reactions
+  document.querySelectorAll('.btn-live-reaction').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const reaction = btn.dataset.reaction;
+      const countEl = btn.querySelector('.reaction-count');
+      if (countEl) {
+        const cur = parseInt(countEl.textContent, 10) || 0;
+        countEl.textContent = cur + 1;
+      }
+
+      // Spawn floating emoji
+      if (liveReactionsFloatingZone) {
+        const emojiMap = { insight: '💡', clap: '👏', globe: '🌍', heart: '❤️' };
+        const bubble = document.createElement('div');
+        bubble.className = 'floating-reaction-emoji';
+        bubble.textContent = emojiMap[reaction] || '✨';
+        bubble.style.left = `${Math.floor(Math.random() * 80)}px`;
+        liveReactionsFloatingZone.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 2200);
+      }
+    });
+  });
+
+  // --- TAB 2: Go Live Authorization & 10-Minute Timer Cockpit ---
+  const validPasscodes = ['GS-AFRICA-2026', 'GS-AFRICA', 'GS-LIVE', 'GS-STUDENT', 'GS-GLOBAL', 'SIMRAN2026', 'AVISHKAR2026'];
+
+  if (btnVerifyPasscode && studioPasscodeInput) {
+    btnVerifyPasscode.addEventListener('click', () => {
+      const code = studioPasscodeInput.value.trim().toUpperCase();
+      if (validPasscodes.includes(code)) {
+        goliveAuthGate.classList.add('hidden');
+        goliveCockpit.classList.remove('hidden');
+        initBroadcasterMic();
+        showToast('🔓 Studio Cockpit Authorized: 10-Minute Session Ready');
+      } else {
+        studioPasscodeInput.style.borderColor = '#ef4444';
+        showToast('❌ Invalid Passcode. Use GS-AFRICA-2026 or request authorization.');
+        setTimeout(() => studioPasscodeInput.style.borderColor = '', 2500);
+      }
+    });
+  }
+
+  if (btnRelockStudio) {
+    btnRelockStudio.addEventListener('click', () => {
+      stopLiveTransmission();
+      goliveCockpit.classList.add('hidden');
+      goliveAuthGate.classList.remove('hidden');
+      if (studioPasscodeInput) studioPasscodeInput.value = '';
+    });
+  }
+
+  async function initBroadcasterMic() {
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        if (micStatusLabel) micStatusLabel.textContent = 'Web Audio Studio Stream (Simulated)';
+        return;
+      }
+      broadcasterMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      if (micStatusDot) micStatusDot.style.background = '#10b981';
+      if (micStatusLabel) micStatusLabel.textContent = 'Studio Microphone Connected (Low Latency)';
+
+      broadcasterAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const source = broadcasterAudioCtx.createMediaStreamSource(broadcasterMediaStream);
+      broadcasterAnalyser = broadcasterAudioCtx.createAnalyser();
+      broadcasterAnalyser.fftSize = 64;
+      source.connect(broadcasterAnalyser);
+
+      renderBroadcasterMicVU();
+    } catch (err) {
+      console.warn('Microphone permission or hardware access note:', err);
+      if (micStatusDot) micStatusDot.style.background = '#ffaa11';
+      if (micStatusLabel) micStatusLabel.textContent = 'Audio Stream Ready (Browser Sandbox)';
+      startSimulatedMicVU();
+    }
+  }
+
+  function renderBroadcasterMicVU() {
+    if (!studioMicCanvas || !broadcasterAnalyser) return;
+    const ctx = studioMicCanvas.getContext('2d');
+    const dataArray = new Uint8Array(broadcasterAnalyser.frequencyBinCount);
+
+    function draw() {
+      broadcasterAnalyser.getByteFrequencyData(dataArray);
+      ctx.clearRect(0, 0, studioMicCanvas.width, studioMicCanvas.height);
+      const barWidth = (studioMicCanvas.width / dataArray.length) * 1.5;
+      let x = 0;
+
+      for (let i = 0; i < dataArray.length; i++) {
+        const barHeight = (dataArray[i] / 255) * studioMicCanvas.height;
+        ctx.fillStyle = isLiveTransmitting ? '#ef4444' : '#10b981';
+        ctx.fillRect(x, studioMicCanvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth + 1;
+      }
+
+      // Update VU meter blocks
+      let sum = 0;
+      for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+      const avg = sum / dataArray.length;
+      if (studioVuMeter) {
+        const segs = studioVuMeter.querySelectorAll('.vu-seg');
+        const activeCount = Math.floor((avg / 255) * segs.length);
+        segs.forEach((s, idx) => s.classList.toggle('active', idx < activeCount));
+      }
+
+      broadcasterAnimId = requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  function startSimulatedMicVU() {
+    if (broadcasterAnimId) cancelAnimationFrame(broadcasterAnimId);
+    let tick = 0;
+    function sim() {
+      tick++;
+      if (studioVuMeter) {
+        const segs = studioVuMeter.querySelectorAll('.vu-seg');
+        const level = isLiveTransmitting ? Math.floor(Math.sin(tick * 0.2) * 4 + 4) : 1;
+        segs.forEach((s, idx) => s.classList.toggle('active', idx < level));
+      }
+      broadcasterAnimId = requestAnimationFrame(sim);
+    }
+    sim();
+  }
+
+  if (btnStartLiveTransmit) {
+    btnStartLiveTransmit.addEventListener('click', () => {
+      if (!isLiveTransmitting) {
+        startLiveTransmission();
+      } else {
+        stopLiveTransmission();
+      }
+    });
+  }
+
+  function startLiveTransmission() {
+    isLiveTransmitting = true;
+    liveSessionTimeRemaining = 600; // 10 minutes
+    if (cockpitLamp) cockpitLamp.classList.add('live');
+    if (cockpitStatusText) cockpitStatusText.textContent = '🔴 ON AIR • LIVE TRANSMITTING ACROSS GYANSETU';
+    btnTransmitLabel.textContent = '⏹️ Conclude & End Broadcast';
+    btnStartLiveTransmit.style.background = 'linear-gradient(135deg, #1e293b 0%, #334155 100%)';
+
+    const bName = (document.getElementById('broadcaster-name') && document.getElementById('broadcaster-name').value.trim()) || 'Guest Researcher';
+    const bCountry = (document.getElementById('broadcaster-country') && document.getElementById('broadcaster-country').value.trim()) || 'Nairobi, Kenya';
+    const bTopic = (document.getElementById('broadcaster-topic') && document.getElementById('broadcaster-topic').value.trim()) || 'Global South Inquiry';
+
+    // Broadcast message via BroadcastChannel
+    if (liveBroadcastChannel) {
+      liveBroadcastChannel.postMessage({
+        type: 'LIVE_START',
+        name: bName,
+        country: bCountry,
+        topic: bTopic
+      });
+    }
+
+    showToast(`🔴 Transmission Active! You are Live to the World (10:00 Countdown Started)`);
+
+    // 10-Minute Timer
+    if (liveSessionInterval) clearInterval(liveSessionInterval);
+    liveSessionInterval = setInterval(() => {
+      liveSessionTimeRemaining--;
+      const mins = Math.floor(liveSessionTimeRemaining / 60);
+      const secs = liveSessionTimeRemaining % 60;
+      if (studioCountdownClock) {
+        studioCountdownClock.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        if (liveSessionTimeRemaining <= 120) {
+          studioCountdownClock.classList.add('warning');
+        }
+      }
+
+      if (liveSessionTimeRemaining <= 0) {
+        stopLiveTransmission();
+        showToast('⏰ 10-Minute Session Gracefully Concluded. Thank you for broadcasting!');
+      }
+    }, 1000);
+  }
+
+  function stopLiveTransmission() {
+    isLiveTransmitting = false;
+    if (liveSessionInterval) clearInterval(liveSessionInterval);
+    if (cockpitLamp) cockpitLamp.classList.remove('live');
+    if (cockpitStatusText) cockpitStatusText.textContent = 'STUDIO AUTHORIZED • STANDBY MODE';
+    if (btnTransmitLabel) btnTransmitLabel.textContent = '🔴 Transmit Live Across GyanSetu Network';
+    if (btnStartLiveTransmit) btnStartLiveTransmit.style.background = '';
+    if (studioCountdownClock) {
+      studioCountdownClock.textContent = '10:00';
+      studioCountdownClock.classList.remove('warning');
+    }
+  }
+
+  // --- TAB 3: Collaborate & In-Browser Audio Recorder ---
+  const collabForm = document.getElementById('collab-submission-form');
+  const collabReceiptBox = document.getElementById('collab-receipt-box');
+  const receiptIdTag = document.getElementById('receipt-id-tag');
+  const btnResetCollabForm = document.getElementById('btn-reset-collab-form');
+  const audioModeRadios = document.querySelectorAll('input[name="audio-mode-choice"]');
+  const collabUploadZone = document.getElementById('collab-upload-zone');
+  const collabRecordZone = document.getElementById('collab-record-zone');
+  const collabFileInput = document.getElementById('collab-file-input');
+  const collabFileNameLabel = document.getElementById('collab-file-name-label');
+
+  // In-Browser Recorder Elements
+  const btnCollabRecordStart = document.getElementById('btn-collab-record-start');
+  const btnCollabRecordStop = document.getElementById('btn-collab-record-stop');
+  const collabRecorderTimer = document.getElementById('collab-recorder-timer');
+  const collabRecordedAudioPreview = document.getElementById('collab-recorded-audio-preview');
+
+  let mediaRecorder = null;
+  let recordedAudioChunks = [];
+  let recordTimerInterval = null;
+  let recordSeconds = 0;
+  let recordedBlobUrl = null;
+
+  audioModeRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      const mode = radio.value;
+      if (mode === 'upload') {
+        collabUploadZone.classList.add('active');
+        collabRecordZone.classList.remove('active');
+      } else {
+        collabUploadZone.classList.remove('active');
+        collabRecordZone.classList.add('active');
+      }
+    });
+  });
+
+  if (collabFileInput && collabFileNameLabel) {
+    collabFileInput.addEventListener('change', () => {
+      const file = collabFileInput.files[0];
+      if (file) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        collabFileNameLabel.textContent = `Selected: ${file.name} (${sizeMb} MB)`;
+      } else {
+        collabFileNameLabel.textContent = 'No file selected';
+      }
+    });
+  }
+
+  // In-Browser Studio Recording Engine
+  if (btnCollabRecordStart && btnCollabRecordStop) {
+    btnCollabRecordStart.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        recordedAudioChunks = [];
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) recordedAudioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(recordedAudioChunks, { type: 'audio/mp3' });
+          if (recordedBlobUrl) URL.revokeObjectURL(recordedBlobUrl);
+          recordedBlobUrl = URL.createObjectURL(audioBlob);
+          if (collabRecordedAudioPreview) {
+            collabRecordedAudioPreview.src = recordedBlobUrl;
+            collabRecordedAudioPreview.classList.remove('hidden');
+          }
+          showToast('🎙️ Voice Recording Captured! You can review audio below.');
+        };
+
+        mediaRecorder.start();
+        btnCollabRecordStart.disabled = true;
+        btnCollabRecordStop.disabled = false;
+        recordSeconds = 0;
+
+        if (recordTimerInterval) clearInterval(recordTimerInterval);
+        recordTimerInterval = setInterval(() => {
+          recordSeconds++;
+          const mins = Math.floor(recordSeconds / 60);
+          const secs = recordSeconds % 60;
+          if (collabRecorderTimer) {
+            collabRecorderTimer.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+          }
+        }, 1000);
+      } catch (err) {
+        showToast('Microphone access needed to record in-browser.');
+      }
+    });
+
+    btnCollabRecordStop.addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        mediaRecorder.stream.getTracks().forEach(t => t.stop());
+      }
+      if (recordTimerInterval) clearInterval(recordTimerInterval);
+      btnCollabRecordStart.disabled = false;
+      btnCollabRecordStop.disabled = true;
+    });
+  }
+
+  // Form Submission
+  if (collabForm) {
+    collabForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('collab-name').value.trim();
+      const contact = document.getElementById('collab-contact').value.trim();
+      const country = document.getElementById('collab-country').value.trim();
+      const language = document.getElementById('collab-language').value.trim();
+      const title = document.getElementById('collab-title').value.trim();
+      const abstract = document.getElementById('collab-abstract').value.trim();
+
+      const receiptId = `GS-SUB-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      const newProposal = {
+        id: receiptId,
+        author: name,
+        contact: contact,
+        country: country,
+        language: language,
+        title: title,
+        abstract: abstract,
+        date: 'October 31, 2026',
+        audioSrc: recordedBlobUrl || 'assets/audio/ep-1-hindi-master.mp3',
+        status: 'Pending Review'
+      };
+
+      // Save to localStorage
+      try {
+        const stored = JSON.parse(localStorage.getItem('gyansetu_guest_proposals') || '[]');
+        stored.unshift(newProposal);
+        localStorage.setItem('gyansetu_guest_proposals', JSON.stringify(stored));
+      } catch (e) {}
+
+      if (receiptIdTag) receiptIdTag.textContent = receiptId;
+      collabForm.classList.add('hidden');
+      if (collabReceiptBox) collabReceiptBox.classList.remove('hidden');
+
+      showToast(`🚀 Transmission Logged: ${receiptId}. Sent to Simran Ailani's Curation Vault.`);
+      renderCuratorQueue();
+    });
+  }
+
+  if (btnResetCollabForm) {
+    btnResetCollabForm.addEventListener('click', () => {
+      if (collabForm) {
+        collabForm.reset();
+        collabForm.classList.remove('hidden');
+      }
+      if (collabReceiptBox) collabReceiptBox.classList.add('hidden');
+      if (collabRecordedAudioPreview) {
+        collabRecordedAudioPreview.classList.add('hidden');
+        collabRecordedAudioPreview.src = '';
+      }
+      if (collabFileNameLabel) collabFileNameLabel.textContent = 'No file selected';
+    });
+  }
+
+  // --- TAB 4: Curator Review Console (Simran Ailani Review Queue) ---
+  const defaultGlobalProposals = [
+    {
+      id: "GS-SUB-8491",
+      author: "Amara Okafor",
+      country: "Lagos, Nigeria • University of Lagos",
+      language: "English & Yoruba",
+      title: "Cassava Cyanide Detoxification: Indigenous Chemistry meets Modern Biochemistry",
+      abstract: "How traditional fermentation methods developed over centuries in West Africa chemically neutralize toxic linamarin glucosides in cassava roots, creating a safe dietary staple.",
+      audioSrc: "assets/audio/ep-2-hindi-master.mp3",
+      date: "October 30, 2026",
+      status: "Ready for Approval"
+    },
+    {
+      id: "GS-SUB-7922",
+      author: "Kofi Mensah",
+      country: "Nairobi, Kenya • University of Nairobi",
+      language: "English & Swahili",
+      title: "Geothermal Reservoirs of the Great Rift Valley: Volcanology & Frugal Clean Power",
+      abstract: "An exploration into the steam vents and subsurface thermodynamics of Olkaria, revealing how geological fissures provide decentralized green baseload electricity for rural communities.",
+      audioSrc: "assets/audio/ep-4-hindi-master.mp3",
+      date: "October 29, 2026",
+      status: "Ready for Approval"
+    }
+  ];
+
+  function getCuratorProposals() {
+    try {
+      const stored = localStorage.getItem('gyansetu_guest_proposals');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return defaultGlobalProposals;
+  }
+
+  function renderCuratorQueue() {
+    const listEl = document.getElementById('curator-queue-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    const proposals = getCuratorProposals();
+
+    proposals.forEach((p, idx) => {
+      const card = document.createElement('div');
+      card.className = 'curator-proposal-card';
+      card.innerHTML = `
+        <div class="proposal-card-header">
+          <div>
+            <span class="proposal-author">🌍 ${p.author} (${p.country})</span>
+            <span style="font-size:0.68rem; color:rgba(255,255,255,0.4); margin-left:8px;">Receipt: ${p.id} • ${p.date}</span>
+          </div>
+          <span class="proposal-lang-badge">${p.language}</span>
+        </div>
+        <h5 class="proposal-title">${p.title}</h5>
+        <p class="proposal-abstract">${p.abstract}</p>
+        <div class="proposal-actions">
+          <button type="button" class="liquid-btn btn-secondary-glass btn-sm btn-preview-proposal-audio">
+            <span>▶ Listen Audio</span>
+          </button>
+          <button type="button" class="btn-approve-catalog" data-id="${p.id}" data-idx="${idx}">
+            <span>✅ Approve &amp; Add to Global Catalog</span>
+          </button>
+        </div>
+      `;
+
+      // Audio preview click
+      const previewBtn = card.querySelector('.btn-preview-proposal-audio');
+      if (previewBtn) {
+        previewBtn.addEventListener('click', () => {
+          audio.src = p.audioSrc;
+          playAudio();
+          showToast(`🎧 Previewing Submission: "${p.title}"`);
+        });
+      }
+
+      // Approve & Add to Catalog
+      const approveBtn = card.querySelector('.btn-approve-catalog');
+      if (approveBtn) {
+        approveBtn.addEventListener('click', () => {
+          approveProposalToCatalog(p);
+        });
+      }
+
+      listEl.appendChild(card);
+    });
+  }
+
+  function approveProposalToCatalog(proposal) {
+    // Check if already in episodes
+    const exists = GYAN_SETU_EPISODES.some(e => e.title === proposal.title);
+    if (exists) {
+      showToast('⚠️ Episode is already in the official broadcast catalog!');
+      return;
+    }
+
+    const newEp = {
+      id: `ep-collab-${Date.now()}`,
+      number: GYAN_SETU_EPISODES.length + 1,
+      title: proposal.title,
+      category: "Global Inquiry",
+      date: proposal.date || "October 31, 2026",
+      duration: "6m 15s",
+      durationSec: 375,
+      description: `${proposal.abstract} • Guest Broadcaster: ${proposal.author} (${proposal.country}). Curated & approved by Simran Ailani.`,
+      image: "assets/images/ep1-can-chemistry-explain-consciousness.jpg",
+      audioSrc: proposal.audioSrc,
+      hosts: ["Simran Ailani", proposal.author]
+    };
+
+    // Add to active episodes list
+    GYAN_SETU_EPISODES.unshift(newEp);
+    filteredEpisodes = [...GYAN_SETU_EPISODES];
+    renderEpisodeCards(filteredEpisodes);
+    loadEpisode(0, true);
+
+    showToast(`🎉 Approved! "${proposal.title}" by ${proposal.author} is now live in the official GyanSetu catalog!`);
+    closeLiveStudioModal();
+  }
+
   // Initialize Network Monitoring
   initNetworkDetection();
 });

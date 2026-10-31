@@ -186,9 +186,9 @@ const GYAN_SETU_EPISODES = [
     date: "April 07, 2025",
     duration: "10m 21s",
     durationSec: 621,
-    description: "Simran Ailani and Lawanya Deshmukh venture into the fleeting world of carbenes—ultra-reactive chemical species with lifetimes measured in microseconds. Explore how these temporary molecular dynamos drive breakthrough green syntheses, pharmaceutical innovations, and next-generation materials.",
+    description: "Simran Ailani ventures into the fleeting world of carbenes—ultra-reactive chemical species with lifetimes measured in microseconds. Explore how these temporary molecular dynamos drive breakthrough green syntheses, pharmaceutical innovations, and next-generation materials.",
     image: "assets/images/ep7-carbenes.jpg",
     audioSrc: "assets/audio/ep7-carbenes.mp3",
-    hosts: ["Simran Ailani", "Lawanya Deshmukh"]
+    hosts: ["Simran Ailani"]
   }
 ];
