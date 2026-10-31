@@ -55,6 +55,9 @@ VOICE_FEMALE_HI = "hi-IN-SwaraNeural"
 VOICE_MALE_EN = "en-IN-PrabhatNeural"
 VOICE_FEMALE_EN = "en-IN-NeerjaExpressiveNeural"
 
+# Fast Pacing for Dubbed Broadcasts (Crisp, snappy delivery)
+RATE_FAST = "+8%"
+
 def split_into_dialogue_turns(text, lang="hi"):
     """
     Splits a multi-sentence segment into natural conversational turns
@@ -121,12 +124,12 @@ def build_dialogue_track(ep_id, lang, target_mp3_name):
     
     track_clips = []
     
-    # 250ms silence clip for turn-taking
-    silence_mp3 = os.path.join(TEMP_DIR, "silence_250ms.mp3")
+    # Snappy 100ms silence clip for fast turn-taking
+    silence_mp3 = os.path.join(TEMP_DIR, "silence_100ms.mp3")
     if not os.path.exists(silence_mp3):
         subprocess.run([
             FFMPEG, "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
-            "-t", "0.25", "-codec:a", "libmp3lame", "-b:a", "128k", silence_mp3
+            "-t", "0.10", "-codec:a", "libmp3lame", "-b:a", "128k", silence_mp3
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         
     clip_counter = 0
@@ -136,15 +139,15 @@ def build_dialogue_track(ep_id, lang, target_mp3_name):
             continue
             
         if is_monologue:
-            # Single continuous narrator (ep-13)
+            # Single continuous narrator (ep-13) with brisk documentary pacing
             voice = VOICE_MALE_HI if lang == 'hi' else VOICE_MALE_EN
             pitch = "-12Hz"
-            rate = "-15%"
+            rate = RATE_FAST
             clip_path = os.path.join(TEMP_DIR, f"{ep_id}_{lang}_seg{s_idx}.mp3")
             if synthesize_clip(txt, voice, pitch, rate, clip_path):
                 track_clips.append(clip_path)
         else:
-            # Dialogue: Split into conversational sentences
+            # Dialogue: Split into fast-paced conversational sentences
             turns = split_into_dialogue_turns(txt, lang)
             for speaker, turn_txt in turns:
                 clip_counter += 1
@@ -153,15 +156,15 @@ def build_dialogue_track(ep_id, lang, target_mp3_name):
                 if speaker == "male":
                     voice = VOICE_MALE_HI if lang == 'hi' else VOICE_MALE_EN
                     pitch = "-14Hz"
-                    rate = "-15%"
+                    rate = RATE_FAST
                 else:
                     voice = VOICE_FEMALE_HI if lang == 'hi' else VOICE_FEMALE_EN
-                    pitch = "-18Hz"
-                    rate = "-16%"
+                    pitch = "-15Hz"
+                    rate = RATE_FAST
                     
                 if synthesize_clip(turn_txt, voice, pitch, rate, clip_path):
                     track_clips.append(clip_path)
-                    track_clips.append(silence_mp3) # conversational latency
+                    track_clips.append(silence_mp3) # snappy conversational latency
                     
     if not track_clips:
         print(f"   ⚠️ No clips generated for {ep_id}")
