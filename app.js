@@ -1287,19 +1287,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- TAB 2: Go Live Authorization & 10-Minute Timer Cockpit ---
-  const validPasscodes = ['GS-AFRICA-2026', 'GS-AFRICA', 'GS-LIVE', 'GS-STUDENT', 'GS-GLOBAL', 'SIMRAN2026', 'AVISHKAR2026'];
-
   if (btnVerifyPasscode && studioPasscodeInput) {
     btnVerifyPasscode.addEventListener('click', () => {
       const code = studioPasscodeInput.value.trim().toUpperCase();
-      if (validPasscodes.includes(code)) {
+      const codeObj = verifyAndConsumePasscode(code);
+      if (codeObj) {
         goliveAuthGate.classList.add('hidden');
         goliveCockpit.classList.remove('hidden');
+        
+        // Auto-fill guest metadata if registered by Lead Host
+        if (codeObj.guest) {
+          const nameInput = document.getElementById('broadcaster-name');
+          const countryInput = document.getElementById('broadcaster-country');
+          const topicInput = document.getElementById('broadcaster-topic');
+          if (nameInput && !nameInput.value) nameInput.value = codeObj.guest;
+          if (countryInput && !countryInput.value) countryInput.value = codeObj.country || '';
+          if (topicInput && !topicInput.value) topicInput.value = codeObj.topic || '';
+        }
+        
         initBroadcasterMic();
-        showToast('🔓 Studio Cockpit Authorized: 10-Minute Session Ready');
+        showToast(`🔓 Broadcast Authorized: Welcome ${codeObj.guest || 'Guest'} (10-Minute Studio)`);
       } else {
         studioPasscodeInput.style.borderColor = '#ef4444';
-        showToast('❌ Invalid Passcode. Use GS-AFRICA-2026 or request authorization.');
+        showToast('❌ Invalid or Expired Passcode. Request authorization from Lead Host.');
         setTimeout(() => studioPasscodeInput.style.borderColor = '', 2500);
       }
     });
@@ -1732,6 +1742,316 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast(`🎉 Approved! "${proposal.title}" by ${proposal.author} is now live in the official GyanSetu catalog!`);
     closeLiveStudioModal();
   }
+
+  // =========================================================================
+  // 13. ROLE-BASED ACCESS CONTROL (RBAC) & LEAD HOST AUTHENTICATION ENGINE
+  // =========================================================================
+
+  const AUTHORIZED_HOSTS = [
+    { email: 'tanmaythakre2006@gmail.com', name: 'Tanmay Thakre' },
+    { email: 'simranailani2@gmail.com', name: 'Simran Ailani' }
+  ];
+  const AUTHORIZED_HOST_PASSWORD = '22102024';
+
+  // Elements: Gateway & Auth
+  const gatewayModal = document.getElementById('gyansetu-gateway-modal');
+  const btnChooseListener = document.getElementById('btn-gateway-choose-listener');
+  const btnChooseHost = document.getElementById('btn-gateway-choose-host');
+  const gatewayViewChoose = document.getElementById('gateway-view-choose');
+  const gatewayViewLogin = document.getElementById('gateway-view-login');
+  const btnGatewayBack = document.getElementById('btn-gateway-back-to-choose');
+  const hostLoginForm = document.getElementById('gateway-host-login-form');
+  const hostEmailInput = document.getElementById('gateway-host-email');
+  const hostPasswordInput = document.getElementById('gateway-host-password');
+  const hostLoginError = document.getElementById('gateway-login-error');
+  
+  // Navbar & Deck Host Badges
+  const navHostLoginBtn = document.getElementById('nav-host-login-btn');
+  const navHostLogoutBtn = document.getElementById('nav-host-logout-btn');
+  const btnHostDeckLogout = document.getElementById('btn-host-deck-logout');
+  const navHostNameTag = document.getElementById('nav-host-name-tag');
+  const curatorLoggedInLabel = document.getElementById('curator-logged-in-label');
+
+  // Passcode Mint Elements
+  const btnMintPasscode = document.getElementById('btn-mint-passcode');
+  const mintGuestName = document.getElementById('mint-guest-name');
+  const mintGuestCountry = document.getElementById('mint-guest-country');
+  const mintGuestTopic = document.getElementById('mint-guest-topic');
+  const mintedCodeResultBox = document.getElementById('minted-code-result-box');
+  const mintedCodeText = document.getElementById('minted-code-text');
+  const btnCopyMintedCode = document.getElementById('btn-copy-minted-code');
+  const activeCodesListEl = document.getElementById('active-codes-list');
+
+  // Role Session Accessors
+  function getActiveUserRole() {
+    return sessionStorage.getItem('gyansetu_user_role');
+  }
+
+  function getActiveHostEmail() {
+    return (sessionStorage.getItem('gyansetu_host_email') || '').trim().toLowerCase();
+  }
+
+  function isHostAuthenticated() {
+    const role = getActiveUserRole();
+    const email = getActiveHostEmail();
+    return role === 'host' && AUTHORIZED_HOSTS.some(h => h.email.toLowerCase() === email);
+  }
+
+  function getHostProfile() {
+    const email = getActiveHostEmail();
+    return AUTHORIZED_HOSTS.find(h => h.email.toLowerCase() === email) || { name: 'Lead Curator' };
+  }
+
+  // Update UI based on active role
+  function updateRoleUI() {
+    const hostActive = isHostAuthenticated();
+    if (hostActive) {
+      document.body.classList.add('is-host');
+      const profile = getHostProfile();
+      if (navHostNameTag) navHostNameTag.textContent = `Host: ${profile.name}`;
+      if (curatorLoggedInLabel) curatorLoggedInLabel.textContent = `Lead Host Session Active: ${profile.name}`;
+      
+      // Render host exclusive components
+      renderActiveCodesList();
+      renderCuratorQueue();
+    } else {
+      document.body.classList.remove('is-host');
+      
+      // If user had curator tab open, switch back to listen tab
+      const curatorTabPane = document.getElementById('tab-content-curator');
+      if (curatorTabPane && curatorTabPane.classList.contains('active')) {
+        curatorTabPane.classList.remove('active');
+        const listenPane = document.getElementById('tab-content-listen');
+        if (listenPane) listenPane.classList.add('active');
+        studioTabBtns.forEach(btn => {
+          if (btn.getAttribute('data-tab') === 'listen') btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+      }
+    }
+  }
+
+  // Gateway Modal Controller
+  function initGatewayModal() {
+    const role = getActiveUserRole();
+    
+    // If user has not chosen role in this session, display gateway
+    if (!role) {
+      if (gatewayModal) gatewayModal.classList.add('is-active');
+    } else {
+      updateRoleUI();
+    }
+
+    // Choice 1: Listener
+    if (btnChooseListener) {
+      btnChooseListener.addEventListener('click', () => {
+        sessionStorage.setItem('gyansetu_user_role', 'listener');
+        if (gatewayModal) gatewayModal.classList.remove('is-active');
+        updateRoleUI();
+        showToast('🎧 Welcome to GyanSetu! Enjoy unrestricted global broadcasts.');
+      });
+    }
+
+    // Choice 2: Lead Host Login
+    if (btnChooseHost) {
+      btnChooseHost.addEventListener('click', () => {
+        if (gatewayViewChoose) gatewayViewChoose.classList.remove('active');
+        if (gatewayViewLogin) gatewayViewLogin.classList.add('active');
+        if (hostEmailInput) hostEmailInput.focus();
+      });
+    }
+
+    // Back to role selection
+    if (btnGatewayBack) {
+      btnGatewayBack.addEventListener('click', () => {
+        if (gatewayViewLogin) gatewayViewLogin.classList.remove('active');
+        if (gatewayViewChoose) gatewayViewChoose.classList.add('active');
+        if (hostLoginError) hostLoginError.classList.add('hidden');
+      });
+    }
+
+    // Host Login Form Submission
+    if (hostLoginForm) {
+      hostLoginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = (hostEmailInput ? hostEmailInput.value : '').trim().toLowerCase();
+        const pwd = (hostPasswordInput ? hostPasswordInput.value : '').trim();
+
+        const match = AUTHORIZED_HOSTS.find(h => h.email.toLowerCase() === email);
+        if (match && pwd === AUTHORIZED_HOST_PASSWORD) {
+          sessionStorage.setItem('gyansetu_user_role', 'host');
+          sessionStorage.setItem('gyansetu_host_email', email);
+          if (gatewayModal) gatewayModal.classList.remove('is-active');
+          if (hostLoginError) hostLoginError.classList.add('hidden');
+          
+          updateRoleUI();
+          showToast(`🎉 Lead Host Authenticated: Welcome, ${match.name}!`);
+        } else {
+          if (hostLoginError) {
+            hostLoginError.classList.remove('hidden');
+            hostLoginError.style.animation = 'none';
+            void hostLoginError.offsetWidth; // trigger reflow
+            hostLoginError.style.animation = 'shake 0.3s ease';
+          }
+        }
+      });
+    }
+
+    // Navbar Host Portal click (open login directly)
+    if (navHostLoginBtn) {
+      navHostLoginBtn.addEventListener('click', () => {
+        if (gatewayModal) {
+          if (gatewayViewChoose) gatewayViewChoose.classList.remove('active');
+          if (gatewayViewLogin) gatewayViewLogin.classList.add('active');
+          gatewayModal.classList.add('is-active');
+          if (hostEmailInput) hostEmailInput.focus();
+        }
+      });
+    }
+
+    // Host Logout Handlers
+    function handleLogout() {
+      sessionStorage.setItem('gyansetu_user_role', 'listener');
+      sessionStorage.removeItem('gyansetu_host_email');
+      updateRoleUI();
+      showToast('👋 Host session logged out. Reverted to Listener mode.');
+    }
+
+    if (navHostLogoutBtn) navHostLogoutBtn.addEventListener('click', handleLogout);
+    if (btnHostDeckLogout) btnHostDeckLogout.addEventListener('click', handleLogout);
+  }
+
+  // --- Dynamic 10-Minute Passcode Minting Engine ---
+  const DEFAULT_PASSCODES = [
+    { code: 'GS-AFRICA-2026', guest: 'Global South Initiative', country: 'Africa', topic: 'Solar Chemistry', issuedAt: 'Oct 31, 2026', status: 'ACTIVE' },
+    { code: 'GS-LIVE', guest: 'Live Host Override', country: 'Global Station', topic: 'Live Editorial', issuedAt: 'Oct 31, 2026', status: 'ACTIVE' },
+    { code: 'GS-STUDENT', guest: 'Student Researcher', country: 'India', topic: 'Biomolecules', issuedAt: 'Oct 31, 2026', status: 'ACTIVE' }
+  ];
+
+  function getIssuedPasscodes() {
+    try {
+      const stored = localStorage.getItem('gyansetu_issued_passcodes');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return DEFAULT_PASSCODES;
+  }
+
+  function saveIssuedPasscodes(list) {
+    localStorage.setItem('gyansetu_issued_passcodes', JSON.stringify(list));
+  }
+
+  function verifyAndConsumePasscode(enteredCode) {
+    const list = getIssuedPasscodes();
+    const found = list.find(p => p.code.toUpperCase() === enteredCode && p.status === 'ACTIVE');
+    if (found) {
+      // Mark as used unless it is the permanent host override
+      if (found.code !== 'GS-LIVE') {
+        found.status = 'USED';
+        saveIssuedPasscodes(list);
+        renderActiveCodesList();
+      }
+      return found;
+    }
+    return null;
+  }
+
+  function renderActiveCodesList() {
+    if (!activeCodesListEl) return;
+    activeCodesListEl.innerHTML = '';
+    const list = getIssuedPasscodes();
+
+    list.slice().reverse().forEach((item, revIdx) => {
+      const origIdx = list.length - 1 - revIdx;
+      const row = document.createElement('div');
+      row.className = 'active-code-row';
+      const statusClass = item.status === 'ACTIVE' ? 'active' : 'used';
+      
+      row.innerHTML = `
+        <div>
+          <span class="active-code-key">${item.code}</span>
+          <span class="active-code-meta"> &bull; ${item.guest} (${item.country || 'Global'})</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="active-code-status-pill ${statusClass}">${item.status}</span>
+          ${item.status === 'ACTIVE' ? `<button type="button" class="btn-revoke-code" data-idx="${origIdx}" style="background:none; border:none; color:#ef4444; font-size:0.7rem; cursor:pointer;" title="Revoke Passcode">✕ Revoke</button>` : ''}
+        </div>
+      `;
+
+      const revokeBtn = row.querySelector('.btn-revoke-code');
+      if (revokeBtn) {
+        revokeBtn.addEventListener('click', () => {
+          list[origIdx].status = 'REVOKED';
+          saveIssuedPasscodes(list);
+          renderActiveCodesList();
+          showToast(`Passcode ${item.code} revoked.`);
+        });
+      }
+
+      activeCodesListEl.appendChild(row);
+    });
+  }
+
+  // Passcode Minting Button
+  if (btnMintPasscode) {
+    btnMintPasscode.addEventListener('click', () => {
+      const gName = (mintGuestName ? mintGuestName.value : '').trim() || 'Global Guest Broadcaster';
+      const gCountry = (mintGuestCountry ? mintGuestCountry.value : '').trim() || 'Global';
+      const gTopic = (mintGuestTopic ? mintGuestTopic.value : '').trim() || 'Knowledge Inquiry';
+
+      // Clean country slug (e.g. "Kenya" -> "KENYA", "Lagos, Nigeria" -> "NIGERIA")
+      let slug = gCountry.replace(/[^a-zA-Z]/g, '').toUpperCase();
+      if (!slug || slug.length < 3) slug = 'STUDENT';
+      if (slug.length > 7) slug = slug.substring(0, 7);
+
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const newCode = `GS-${slug}-${randNum}`;
+
+      const list = getIssuedPasscodes();
+      list.push({
+        code: newCode,
+        guest: gName,
+        country: gCountry,
+        topic: gTopic,
+        issuedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        status: 'ACTIVE'
+      });
+      saveIssuedPasscodes(list);
+
+      // Display newly minted code box
+      if (mintedCodeResultBox && mintedCodeText) {
+        mintedCodeText.textContent = newCode;
+        mintedCodeResultBox.classList.remove('hidden');
+      }
+
+      renderActiveCodesList();
+      showToast(`🔑 Passcode ${newCode} minted for ${gName}!`);
+
+      // Clear input fields
+      if (mintGuestName) mintGuestName.value = '';
+      if (mintGuestCountry) mintGuestCountry.value = '';
+      if (mintGuestTopic) mintGuestTopic.value = '';
+    });
+  }
+
+  // Copy minted code button
+  if (btnCopyMintedCode && mintedCodeText) {
+    btnCopyMintedCode.addEventListener('click', () => {
+      const code = mintedCodeText.textContent.trim();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(() => {
+          showToast(`📋 Code "${code}" copied to clipboard! Send to your guest.`);
+        });
+      } else {
+        showToast(`Passcode: ${code}`);
+      }
+    });
+  }
+
+  // Initialize Gateway Modal & Role State
+  initGatewayModal();
 
   // Initialize Network Monitoring
   initNetworkDetection();

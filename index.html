@@ -60,6 +60,18 @@
           <span class="pulse-beacon"></span>
           <span>Live<span class="live-stream-word"> Stream</span></span>
         </button>
+        <!-- Lead Host Entry Portal & Session Status -->
+        <button type="button" id="nav-host-login-btn" class="btn-host-portal-nav" title="Lead Host & Curator Access">
+          <span class="host-shield-icon">🛡️</span>
+          <span>Host Portal</span>
+        </button>
+        <div id="nav-host-active-cluster" class="nav-host-active-cluster host-only-element">
+          <span class="host-active-badge">
+            <span class="green-live-dot"></span>
+            <span id="nav-host-name-tag">Host: Simran Ailani</span>
+          </span>
+          <button type="button" id="nav-host-logout-btn" class="btn-host-logout" title="Sign out of Host Session">Logout</button>
+        </div>
       </div>
     </nav>
   </header>
@@ -944,8 +956,8 @@
         <button type="button" class="studio-tab-btn" data-tab="collaborate">
           <span>🌍 Submit Episode / Voice</span>
         </button>
-        <button type="button" class="studio-tab-btn" data-tab="curator">
-          <span>🛡️ Curator Review Desk</span>
+        <button type="button" class="studio-tab-btn host-only-tab" data-tab="curator">
+          <span>🛡️ Curator &amp; Host Deck</span>
         </button>
       </div>
 
@@ -1025,8 +1037,8 @@
             </div>
 
             <div class="gate-helper-row">
-              <span class="gate-demo-tip">💡 Active Evaluation Keys: <code>GS-AFRICA-2026</code> &bull; <code>GS-LIVE</code> &bull; <code>GS-STUDENT</code></span>
-              <button type="button" id="btn-request-passcode-tab" class="btn-text-link">Need a custom broadcast code? Request from Curator &rarr;</button>
+              <span class="gate-demo-tip host-only-element">💡 Host Override: <code>GS-AFRICA-2026</code> &bull; <code>GS-LIVE</code> &bull; <code>GS-STUDENT</code></span>
+              <button type="button" id="btn-request-passcode-tab" class="btn-text-link">Need a 10-minute broadcast code? Request one from Lead Host &rarr;</button>
             </div>
           </div>
 
@@ -1189,19 +1201,180 @@
           </div>
         </div>
 
-        <!-- Tab 4: Curator Review Desk (Simran Ailani Review Console) -->
-        <div id="tab-content-curator" class="studio-tab-pane">
+        <!-- Tab 4: Curator & Lead Host Command Deck (HOST ONLY) -->
+        <div id="tab-content-curator" class="studio-tab-pane host-only-pane">
           <div class="curator-desk-header">
             <div>
-              <h4 class="curator-heading">Lead Curator Evaluation Desk</h4>
-              <p class="curator-sub">Review incoming global student proposals &bull; Approve for station broadcast</p>
+              <div class="curator-host-active-tag">
+                <span class="green-live-dot"></span>
+                <span id="curator-logged-in-label">Lead Host Session Active: Simran Ailani</span>
+              </div>
+              <h4 class="curator-heading">Station Curator &amp; Broadcast Management Deck</h4>
+              <p class="curator-sub">Review global student submissions &bull; Mint 10-minute guest passcodes &bull; Control live feed</p>
             </div>
-            <div class="curator-badge-pill">Lead Curator: Simran Ailani</div>
+            <button type="button" id="btn-host-deck-logout" class="liquid-btn btn-secondary-glass btn-sm">
+              <span>🚪 Sign Out</span>
+            </button>
           </div>
 
-          <div id="curator-queue-list" class="curator-queue-list">
-            <!-- Dynamically populated via JS from proposal queue -->
+          <!-- Section A: 10-Minute Guest Broadcast Passcode Mint -->
+          <div class="host-panel-card passcode-mint-card">
+            <div class="panel-card-header">
+              <div class="panel-icon">⚡</div>
+              <div>
+                <h5 class="panel-title">Mint 10-Minute Guest Broadcast Passcode</h5>
+                <p class="panel-desc">Authorize a collaborator from Africa, Asia, or anywhere in the world to go live on the station for exactly 10 minutes.</p>
+              </div>
+            </div>
+
+            <div class="passcode-mint-form">
+              <div class="mint-field-grid">
+                <div class="mint-field">
+                  <label for="mint-guest-name">Guest Name / Speaker</label>
+                  <input type="text" id="mint-guest-name" class="studio-text-input" placeholder="e.g. Kwame Mensah">
+                </div>
+                <div class="mint-field">
+                  <label for="mint-guest-country">Country / Institution</label>
+                  <input type="text" id="mint-guest-country" class="studio-text-input" placeholder="e.g. Nairobi, Kenya • UoN">
+                </div>
+                <div class="mint-field full-width">
+                  <label for="mint-guest-topic">Broadcast Topic</label>
+                  <input type="text" id="mint-guest-topic" class="studio-text-input" placeholder="e.g. Solar Micro-Grids in Rural East Africa">
+                </div>
+              </div>
+
+              <div class="mint-actions-row">
+                <button type="button" id="btn-mint-passcode" class="liquid-btn btn-primary-gradient">
+                  <span>🔑 Mint Single-Use Passcode</span>
+                </button>
+              </div>
+
+              <!-- Newly Minted Code Result Display -->
+              <div id="minted-code-result-box" class="minted-code-box hidden">
+                <div class="minted-code-banner">
+                  <span class="minted-label">NEW BROADCAST PASSCODE GENERATED:</span>
+                  <div class="minted-code-display" id="minted-code-text">GS-AFRICA-9412</div>
+                  <button type="button" id="btn-copy-minted-code" class="liquid-btn btn-secondary-glass btn-sm">
+                    <span id="copy-btn-label">📋 Copy Code</span>
+                  </button>
+                </div>
+                <p class="minted-instructions">
+                  Send this code to your guest collaborator. When they enter it into the "Go Live" tab, their microphone will unlock for exactly 10 minutes.
+                </p>
+              </div>
+
+              <!-- Active Codes Table -->
+              <div class="active-codes-table-wrap">
+                <h6 class="active-codes-title">Station Authorization Registry</h6>
+                <div id="active-codes-list" class="active-codes-list">
+                  <!-- Dynamically populated via JS -->
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- Section B: Incoming Student Proposals Vault -->
+          <div class="host-panel-card submissions-vault-card">
+            <div class="panel-card-header">
+              <div class="panel-icon">📬</div>
+              <div>
+                <h5 class="panel-title">Incoming Student Proposals &amp; Voice Recordings</h5>
+                <p class="panel-desc">Review proposals submitted by listeners worldwide. Approve high-quality episodes to instantly add them to the official station broadcast catalog.</p>
+              </div>
+            </div>
+
+            <div id="curator-queue-list" class="curator-queue-list">
+              <!-- Dynamically populated via JS from proposal queue -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gateway Entry Selection Modal: Listener vs Lead Host -->
+  <div id="gyansetu-gateway-modal" class="modal-scrim gateway-modal-scrim">
+    <div class="liquid-glass-modal gateway-dialog-card">
+      <div class="gateway-header">
+        <div class="gateway-emblem-wrap">
+          <img src="assets/images/logo.png" alt="GyanSetu Emblem" class="gateway-emblem">
+          <span class="gateway-beacon-pulse"></span>
+        </div>
+        <span class="gateway-pretitle">STUDENT-LED GLOBAL KNOWLEDGE PLATFORM &bull; 24/7 INTERNET RADIO</span>
+        <h2 class="gateway-title">Welcome to GyanSetu</h2>
+        <p class="gateway-sub">Curated by <strong>Simran Ailani</strong> &bull; Demystifying Complex Ideas Across the World</p>
+      </div>
+
+      <!-- State 1: Choose Role (Listener vs Host) -->
+      <div id="gateway-view-choose" class="gateway-view-pane active">
+        <p class="gateway-prompt">How will you be joining GyanSetu today?</p>
+        
+        <div class="gateway-cards-grid">
+          <!-- Option A: Listener -->
+          <div class="gateway-choice-card" id="btn-gateway-choose-listener" role="button" tabindex="0">
+            <div class="choice-icon-bubble">🎧</div>
+            <div class="choice-content">
+              <h4 class="choice-title">I am a Listener / Learner</h4>
+              <p class="choice-desc">Access 13 multilingual science podcasts, 24/7 global internet radio, and student research completely free.</p>
+            </div>
+            <div class="choice-action-arrow">
+              <span>Enter Radio Station &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Option B: Host -->
+          <div class="gateway-choice-card host-choice" id="btn-gateway-choose-host" role="button" tabindex="0">
+            <div class="choice-icon-bubble host-bubble">🛡️</div>
+            <div class="choice-content">
+              <h4 class="choice-title">Lead Host &amp; Curator</h4>
+              <p class="choice-desc">Authorized station management: review global student submissions, mint 10-minute guest broadcast codes, and control the live feed.</p>
+            </div>
+            <div class="choice-action-arrow host-arrow">
+              <span>Host Login &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gateway-footer-note">
+          <span>🌍 Open Access Knowledge &bull; Zero subscription fees &bull; Global South Initiative</span>
+        </div>
+      </div>
+
+      <!-- State 2: Host Login Form (Shown when Host selected) -->
+      <div id="gateway-view-login" class="gateway-view-pane">
+        <div class="host-login-box">
+          <div class="host-login-title-row">
+            <span class="host-login-icon">🔐</span>
+            <div>
+              <h3 class="host-login-title">Lead Host &amp; Curator Authentication</h3>
+              <p class="host-login-subtitle">Restricted Access &bull; Authorized Station Hosts Only</p>
+            </div>
+          </div>
+
+          <form id="gateway-host-login-form" class="gateway-login-form" autocomplete="on">
+            <div class="login-field-group">
+              <label for="gateway-host-email">Host Email Address</label>
+              <input type="email" id="gateway-host-email" class="gateway-input" placeholder="e.g. simranailani2@gmail.com" required autocomplete="email">
+            </div>
+
+            <div class="login-field-group">
+              <label for="gateway-host-password">Security Password</label>
+              <input type="password" id="gateway-host-password" class="gateway-input" placeholder="Enter station password" required autocomplete="current-password">
+            </div>
+
+            <div id="gateway-login-error" class="gateway-error-msg hidden">
+              <span>❌ Invalid Host Credentials. Only authorized station curators may access this console.</span>
+            </div>
+
+            <div class="gateway-login-actions">
+              <button type="submit" class="liquid-btn btn-primary-gradient btn-host-signin">
+                <span>🔓 Sign In as Station Host</span>
+              </button>
+              <button type="button" id="btn-gateway-back-to-choose" class="btn-text-link">
+                &larr; Back to Selection
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
