@@ -846,11 +846,6 @@
 
       <!-- Right Utility Actions -->
       <div class="dock-utility-column">
-        <button id="dock-transcript-btn" class="dock-pill-btn btn-dock-transcript" title="Open Global Lingua Teleprompter & English Master Script">
-          <span class="transcript-btn-icon">📜</span>
-          <span class="transcript-btn-label">Transcript</span>
-          <span class="tp-live-dot"></span>
-        </button>
         <button id="dock-ghost-btn" class="btn-dock-data-saver" role="switch" aria-checked="false" title="Toggle Data Saver (Saves 82% Data)">
           <span class="dock-ds-icon">⚡</span>
           <span class="dock-ds-label">Data Saver</span>
@@ -919,90 +914,6 @@
             <span id="qr-modal-link-text">Open gyansetu-five.vercel.app</span>
             <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
           </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Liquid Glass Global Lingua Teleprompter Modal -->
-  <div id="transcript-modal" class="modal-scrim">
-    <div class="liquid-glass-modal teleprompter-modal">
-      <div class="modal-top-bar teleprompter-top-bar">
-        <div class="teleprompter-header-info">
-          <div class="teleprompter-badge-row">
-            <span class="teleprompter-badge live-pulse">● SYNCED MASTER TELEPROMPTER</span>
-            <span id="teleprompter-ep-tag" class="teleprompter-ep-badge">Episode 13</span>
-            <span class="teleprompter-lang-tag">English Anchor (100% Vetted)</span>
-          </div>
-          <h3 id="teleprompter-title" class="teleprompter-title">नागपूरचा इतिहास • The History of Nagpur</h3>
-        </div>
-        <button id="close-transcript-modal-btn" class="modal-dismiss-btn" aria-label="Close Teleprompter">&times;</button>
-      </div>
-
-      <!-- Lingua Control Bar -->
-      <div class="teleprompter-control-bar">
-        <div class="teleprompter-lang-buttons">
-          <button type="button" class="tp-lang-btn active" data-lang="en">🇬🇧 English Master</button>
-          <button type="button" class="tp-lang-btn" data-lang="hi">🇮🇳 हिन्दी Master</button>
-          <button type="button" class="tp-lang-btn" data-lang="dual">🌐 Dual Subtitles</button>
-          <button type="button" class="tp-lang-btn" data-lang="mr" id="tp-mr-btn">🇮🇳 मराठी Original</button>
-          <div class="tp-polyglot-dropdown-wrap">
-            <button type="button" id="tp-polyglot-btn" class="tp-lang-btn tp-polyglot-toggle">🌍 Polyglot ▾</button>
-            <div id="tp-polyglot-menu" class="tp-polyglot-menu hidden">
-              <button type="button" class="tp-poly-opt" data-poly="hi">🇮🇳 Hindi (हिन्दी)</button>
-              <button type="button" class="tp-poly-opt" data-poly="es">🇪🇸 Spanish (Español)</button>
-              <button type="button" class="tp-poly-opt" data-poly="fr">🇫🇷 French (Français)</button>
-              <button type="button" class="tp-poly-opt" data-poly="sw">🇰🇪 Swahili (Kiswahili)</button>
-              <button type="button" class="tp-poly-opt" data-poly="de">🇩🇪 German (Deutsch)</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="teleprompter-toggles">
-          <button type="button" id="tp-track-switch-btn" class="tp-pill-toggle active" title="Switch between Marathi and English Studio Master Audio">
-            <span class="tp-toggle-indicator"></span> 🎙️ Audio: <span id="tp-track-label">Original Marathi</span>
-          </button>
-          <button type="button" id="tp-autoscroll-btn" class="tp-pill-toggle active" title="Toggle Auto-Scroll">
-            <span class="tp-toggle-indicator"></span> Auto-Scroll: ON
-          </button>
-          <button type="button" id="tp-tts-btn" class="tp-pill-toggle" title="Read English Translation via On-Device Speech">
-            <span class="tp-toggle-indicator"></span> 🗣️ Live Voice Dub: OFF
-          </button>
-        </div>
-      </div>
-
-      <!-- Live Teleprompter Body with Timed Sentences -->
-      <div id="teleprompter-body" class="teleprompter-body" tabindex="0">
-        <!-- Rendered dynamically -->
-      </div>
-
-      <!-- Concept Explainer Drawer (Cognitive Lens) -->
-      <div id="tp-concept-drawer" class="tp-concept-drawer hidden">
-        <div class="tp-concept-inner">
-          <div class="tp-concept-header">
-            <span class="tp-concept-cat" id="tp-concept-cat">HISTORICAL FIGURE</span>
-            <button type="button" id="close-concept-btn" class="tp-concept-close">&times;</button>
-          </div>
-          <h4 id="tp-concept-title" class="tp-concept-title">Bakht Buland Shah</h4>
-          <p id="tp-concept-def" class="tp-concept-def">The visionary Gond ruler of Deogarh...</p>
-        </div>
-      </div>
-
-      <!-- Bottom Audio Sync Bar -->
-      <div class="teleprompter-footer-bar">
-        <div class="tp-footer-playback">
-          <button id="tp-play-pause-btn" class="tp-round-play-btn" title="Play / Pause Audio">
-            <svg id="tp-play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <div class="tp-footer-info">
-            <span id="tp-current-line-time" class="tp-time-badge">00:00</span>
-            <span class="tp-help-tip">Click any sentence to seek audio playback instantly • Vetted by Simran Ailani</span>
-          </div>
-        </div>
-        <div class="tp-footer-actions">
-          <button id="tp-copy-transcript-btn" class="liquid-btn btn-secondary-glass tp-btn-sm" title="Copy Full English Transcript">
-            <span>📋 Copy English Script</span>
-          </button>
         </div>
       </div>
     </div>
@@ -1305,7 +1216,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
 
   <!-- Scripts -->
-  <script src="assets/data/episodes_transcripts.js"></script>
   <script src="episodes.js"></script>
   <script src="app.js"></script>
 </body>
