@@ -339,6 +339,108 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 4px;
+      gap: 6px;
+    }
+
+    /* Universal Lingua Micro-Button (Original / English Dub) */
+    .lcd-track-switch-btn {
+      background: #241c09;
+      border: 1px solid #ff9d00;
+      color: #ffaa11;
+      font-family: monospace;
+      font-size: clamp(0.60rem, 1.8vw, 0.68rem);
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.8), 0 0 6px rgba(255, 157, 0, 0.25);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      line-height: 1.2;
+    }
+
+    .lcd-track-switch-btn:hover {
+      background: #38290a;
+      border-color: #ffbe44;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 190, 68, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .lcd-track-switch-btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    .lcd-track-switch-btn.dub-active {
+      background: #082329;
+      border-color: #00f5ff;
+      color: #a5f3fc;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.8), 0 0 8px rgba(0, 245, 255, 0.35);
+    }
+
+    .lcd-track-switch-btn.eng-only {
+      background: #0e2015;
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #6ee7b7;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.8), 0 0 5px rgba(16, 185, 129, 0.2);
+      cursor: pointer;
+    }
+
+    .track-led {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff9d00;
+      box-shadow: 0 0 6px #ff9d00;
+      transition: all 0.2s ease;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .lcd-track-switch-btn.dub-active .track-led {
+      background: #00f5ff;
+      box-shadow: 0 0 8px #00f5ff;
+    }
+
+    .lcd-track-switch-btn.eng-only .track-led {
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
+    }
+
+    .pocket-retro-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #ff9d00;
+      color: #ffbe44;
+      font-family: monospace;
+      font-size: clamp(0.72rem, 2vw, 0.82rem);
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6), 0 0 14px rgba(255, 157, 0, 0.3);
+      backdrop-filter: blur(12px);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pocket-retro-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
     }
 
     .lcd-channel-badge {
@@ -1071,6 +1173,11 @@
     <section class="lcd-display">
       <div class="lcd-channel-row">
         <span class="lcd-channel-badge" id="lcd-channel">CH-13</span>
+        <!-- Universal Lingua Track Switcher (Original / English Dub) -->
+        <button id="btn-pocket-track" class="lcd-track-switch-btn" type="button" title="Audio Track Mode (Original / English Dub)">
+          <span class="track-led" id="pocket-track-led"></span>
+          <span id="pocket-track-label">ORG (MR)</span>
+        </button>
         <span class="lcd-station-freq" id="lcd-freq">108.0 MHz FM</span>
       </div>
       <div class="lcd-title" id="lcd-title">नागपूरचा इतिहास</div>
@@ -1317,19 +1424,19 @@
     const audioBase = isAndroidAsset ? 'assets/audio/' : 'assets/audio_ghost/';
 
     let EPISODES = [
-      { id: "ep-13", num: 13, freq: "108.0", title: "नागपूरचा इतिहास", cat: "HISTORY", dur: "9m 18s", src: audioBase + "ep13-nagpurcha-itihas.mp3" },
-      { id: "ep-12", num: 12, freq: "106.5", title: "Oops, I Created Life", cat: "ETHICS", dur: "5m 21s", src: audioBase + "ep8-oops-i-created-life.mp3" },
-      { id: "ep-11", num: 11, freq: "105.0", title: "What colour is the sky?", cat: "EVERYDAY", dur: "4m 31s", src: audioBase + "ep9-what-colour-is-the-sky.mp3" },
-      { id: "ep-10", num: 10, freq: "103.5", title: "Napoleon wasn't poisoned?", cat: "HISTORY", dur: "4m 43s", src: audioBase + "ep10-napoleon-wasnt-poisoned.mp3" },
-      { id: "ep-9",  num: 9,  freq: "101.8", title: "Are we more than Molecules?", cat: "MIND", dur: "7m 10s", src: audioBase + "ep11-are-we-more-than-our-molecules.mp3" },
-      { id: "ep-8",  num: 8,  freq: "100.0", title: "Always that one character", cat: "STORIES", dur: "4m 57s", src: audioBase + "ep12-theres-always-that-one-character.mp3" },
-      { id: "ep-7",  num: 7,  freq: "98.2",  title: "Can Chemistry explain Mind?", cat: "MIND", dur: "4m 29s", src: audioBase + "ep1-can-chemistry-explain-consciousness.mp3" },
-      { id: "ep-6",  num: 6,  freq: "96.5",  title: "The secrets of Sadabahar", cat: "MEDICINE", dur: "3m 58s", src: audioBase + "ep2-the-secrets-of-sadabahar.mp3" },
-      { id: "ep-5",  num: 5,  freq: "94.8",  title: "The dream that gave Benzene", cat: "HISTORY", dur: "5m 04s", src: audioBase + "ep3-the-dream-that-gave-us-benzene.mp3" },
-      { id: "ep-4",  num: 4,  freq: "93.0",  title: "How drugs know where to go", cat: "MEDICINE", dur: "6m 23s", src: audioBase + "ep4-how-do-drugs-know-where-to-go-in-th.mp3" },
-      { id: "ep-3",  num: 3,  freq: "91.2",  title: "Why bananas are radioactive", cat: "EVERYDAY", dur: "5m 37s", src: audioBase + "ep5-why-bananas-are-slightly-radioactiv.mp3" },
-      { id: "ep-2",  num: 2,  freq: "89.5",  title: "AI in Chemistry", cat: "TECH", dur: "6m 08s", src: audioBase + "ep6-ai-in-chemistry-when-machines-meet-.mp3" },
-      { id: "ep-1",  num: 1,  freq: "88.0",  title: "Carbenes", cat: "CONCEPTS", dur: "10m 21s", src: audioBase + "ep7-carbenes.mp3" }
+      { id: "ep-13", num: 13, freq: "108.0", title: "नागपूरचा इतिहास", titleDub: "The History of Nagpur", cat: "HISTORY", dur: "9m 18s", origLang: "mr", src: audioBase + "ep13-nagpurcha-itihas.mp3", dubSrc: audioBase + "ep13-nagpur-english-master.mp3" },
+      { id: "ep-12", num: 12, freq: "106.5", title: "Oops, I Created Life", cat: "ETHICS", dur: "5m 21s", origLang: "en", src: audioBase + "ep8-oops-i-created-life.mp3" },
+      { id: "ep-11", num: 11, freq: "105.0", title: "What colour is the sky?", cat: "EVERYDAY", dur: "4m 31s", origLang: "en", src: audioBase + "ep9-what-colour-is-the-sky.mp3" },
+      { id: "ep-10", num: 10, freq: "103.5", title: "Napoleon wasn't poisoned?", cat: "HISTORY", dur: "4m 43s", origLang: "en", src: audioBase + "ep10-napoleon-wasnt-poisoned.mp3" },
+      { id: "ep-9",  num: 9,  freq: "101.8", title: "Are we more than Molecules?", cat: "MIND", dur: "7m 10s", origLang: "en", src: audioBase + "ep11-are-we-more-than-our-molecules.mp3" },
+      { id: "ep-8",  num: 8,  freq: "100.0", title: "Always that one character", cat: "STORIES", dur: "4m 57s", origLang: "en", src: audioBase + "ep12-theres-always-that-one-character.mp3" },
+      { id: "ep-7",  num: 7,  freq: "98.2",  title: "Can Chemistry explain Mind?", cat: "MIND", dur: "4m 29s", origLang: "en", src: audioBase + "ep1-can-chemistry-explain-consciousness.mp3" },
+      { id: "ep-6",  num: 6,  freq: "96.5",  title: "The secrets of Sadabahar", cat: "MEDICINE", dur: "3m 58s", origLang: "en", src: audioBase + "ep2-the-secrets-of-sadabahar.mp3" },
+      { id: "ep-5",  num: 5,  freq: "94.8",  title: "The dream that gave Benzene", cat: "HISTORY", dur: "5m 04s", origLang: "en", src: audioBase + "ep3-the-dream-that-gave-us-benzene.mp3" },
+      { id: "ep-4",  num: 4,  freq: "93.0",  title: "How drugs know where to go", cat: "MEDICINE", dur: "6m 23s", origLang: "en", src: audioBase + "ep4-how-do-drugs-know-where-to-go-in-th.mp3" },
+      { id: "ep-3",  num: 3,  freq: "91.2",  title: "Why bananas are radioactive", cat: "EVERYDAY", dur: "5m 37s", origLang: "en", src: audioBase + "ep5-why-bananas-are-slightly-radioactiv.mp3" },
+      { id: "ep-2",  num: 2,  freq: "89.5",  title: "AI in Chemistry", cat: "TECH", dur: "6m 08s", origLang: "en", src: audioBase + "ep6-ai-in-chemistry-when-machines-meet-.mp3" },
+      { id: "ep-1",  num: 1,  freq: "88.0",  title: "Carbenes", cat: "CONCEPTS", dur: "10m 21s", origLang: "en", src: audioBase + "ep7-carbenes.mp3" }
     ];
 
     // Load any custom P2P beamed episodes from local sandbox storage
@@ -1350,6 +1457,7 @@
     let currentIndex = 0;
     let isPoweredOn = true;
     let isPlaying = false;
+    let currentPocketTrack = 'orig'; // 'orig' (strict default) or 'dub' (English master)
 
     // Core Elements
     const audio = document.getElementById('audio');
@@ -1359,6 +1467,9 @@
     const lcdFreq = document.getElementById('lcd-freq');
     const lcdTitle = document.getElementById('lcd-title');
     const lcdMeta = document.getElementById('lcd-meta');
+    const btnPocketTrack = document.getElementById('btn-pocket-track');
+    const pocketTrackLed = document.getElementById('pocket-track-led');
+    const pocketTrackLabel = document.getElementById('pocket-track-label');
     const playIcon = document.getElementById('play-icon');
     const playLabel = document.getElementById('play-label');
     const progressFill = document.getElementById('progress-fill');
@@ -1412,10 +1523,111 @@
     function updateDisplay(ep) {
       lcdChannel.textContent = `CH-${ep.num}`;
       lcdFreq.textContent = `${ep.freq} MHz FM`;
-      lcdTitle.textContent = ep.title;
+      
+      if (currentPocketTrack === 'dub' && ep.titleDub) {
+        lcdTitle.textContent = ep.titleDub;
+      } else {
+        lcdTitle.textContent = ep.title;
+      }
+
       lcdMeta.textContent = `${ep.cat} • ${ep.dur}`;
       tuningNeedle.style.left = `${calculateNeedlePos(ep.freq)}%`;
       renderStationList();
+      updateTrackButtonDisplay(ep);
+    }
+
+    function updateTrackButtonDisplay(ep) {
+      if (!btnPocketTrack) return;
+      if (ep.origLang !== 'en' && ep.dubSrc) {
+        // Regional language composition with English Dub available (Ep 13)
+        btnPocketTrack.classList.remove('eng-only');
+        if (currentPocketTrack === 'dub') {
+          btnPocketTrack.classList.add('dub-active');
+          if (pocketTrackLabel) pocketTrackLabel.textContent = 'DUB (EN)';
+          btnPocketTrack.title = 'Active: English Studio Dub • Click to switch to Original Marathi';
+        } else {
+          btnPocketTrack.classList.remove('dub-active');
+          if (pocketTrackLabel) pocketTrackLabel.textContent = 'ORG (MR)';
+          btnPocketTrack.title = 'Active: Original Marathi Composition • Click to switch to English Dub';
+        }
+      } else {
+        // Episode is originally composed in English (Ep 1 to 12)
+        btnPocketTrack.classList.remove('dub-active');
+        btnPocketTrack.classList.add('eng-only');
+        if (pocketTrackLabel) pocketTrackLabel.textContent = 'ORIG (EN)';
+        btnPocketTrack.title = 'Broadcast is in English • Original composition is already the Global Lingua Franca';
+      }
+    }
+
+    function setPocketTrack(track) {
+      const ep = EPISODES[currentIndex];
+      if (!ep.dubSrc) return;
+      currentPocketTrack = track;
+      const curTime = audio.currentTime;
+      const wasPlaying = isPlaying;
+
+      const targetSrc = (track === 'dub') ? ep.dubSrc : ep.src;
+      audio.src = targetSrc;
+      
+      audio.onloadedmetadata = () => {
+        if (curTime > 0 && curTime < audio.duration) {
+          audio.currentTime = curTime;
+        }
+      };
+
+      if (wasPlaying && isPoweredOn) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updatePlayState();
+        }).catch(() => {});
+      }
+
+      updateTrackButtonDisplay(ep);
+
+      if (track === 'dub' && ep.titleDub) {
+        lcdTitle.textContent = ep.titleDub;
+      } else {
+        lcdTitle.textContent = ep.title;
+      }
+
+      flashLcdMeta(track === 'dub' ? '🎧 ENGLISH DUB ACTIVE' : '🎙️ ORIGINAL COMPOSITION');
+
+      if (track === 'dub') {
+        showPocketToast('🌐 English Master Studio Dub Engaged • Global Lingua Bridge');
+      } else {
+        showPocketToast('🎙️ Original Marathi Composition • Curated by Simran Ailani');
+      }
+    }
+
+    let lcdMetaTimer = null;
+    function flashLcdMeta(text) {
+      if (!lcdMeta) return;
+      if (lcdMetaTimer) clearTimeout(lcdMetaTimer);
+      const ep = EPISODES[currentIndex];
+      const originalMeta = `${ep.cat} • ${ep.dur}`;
+      lcdMeta.textContent = text;
+      lcdMeta.style.color = '#00f5ff';
+      lcdMetaTimer = setTimeout(() => {
+        lcdMeta.textContent = originalMeta;
+        lcdMeta.style.color = '';
+      }, 2400);
+    }
+
+    let toastTimer = null;
+    function showPocketToast(msg) {
+      let toastEl = document.getElementById('pocket-retro-toast');
+      if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.id = 'pocket-retro-toast';
+        toastEl.className = 'pocket-retro-toast';
+        document.body.appendChild(toastEl);
+      }
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 3000);
     }
 
     function tuneToEpisode(index, autoPlay = true) {
@@ -1424,6 +1636,8 @@
       currentIndex = index;
       const ep = EPISODES[currentIndex];
 
+      // STRICT USER RULE: Always reset to Original composition by default!
+      currentPocketTrack = 'orig';
       audio.src = ep.src;
       updateDisplay(ep);
 
@@ -1497,6 +1711,21 @@
       tuneToEpisode(currentIndex + 1, true);
     });
 
+    // Lingua Track Mode Button (Original / English Dub)
+    if (btnPocketTrack) {
+      btnPocketTrack.addEventListener('click', () => {
+        playClickSound(1200);
+        const ep = EPISODES[currentIndex];
+        if (ep.origLang !== 'en' && ep.dubSrc) {
+          const nextTrack = (currentPocketTrack === 'orig') ? 'dub' : 'orig';
+          setPocketTrack(nextTrack);
+        } else {
+          flashLcdMeta('📻 BROADCAST IN ENGLISH');
+          showPocketToast('📻 Broadcast is in English • Original composition is already the Global Lingua Franca');
+        }
+      });
+    }
+
     document.getElementById('btn-power').addEventListener('click', () => {
       playClickSound(400);
       isPoweredOn = !isPoweredOn;
@@ -1524,7 +1753,7 @@
       }
 
       // Sync Retro LCD English Ticker
-      const ep = episodes[currentIndex];
+      const ep = EPISODES[currentIndex];
       if (ep && (ep.num === 13 || ep.id === 'ep-13') && window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS['ep-13']) {
         const segs = window.GYAN_SETU_TRANSCRIPTS['ep-13'].segments;
         const cur = audio.currentTime;
