@@ -24,31 +24,37 @@
   <!-- Apple-Style Frosted Floating Navigation Bar -->
   <header class="liquid-nav-container">
     <nav class="liquid-nav">
-      <div class="nav-brand">
-        <a href="#" class="brand-link">
-          <img src="assets/images/logo.png" alt="GyanSetu Emblem" class="brand-emblem">
-          <div class="brand-text">
-            <span class="brand-name">GYA<span class="brand-net">N</span>S<span class="brand-net">ET</span>U</span>
-            <span class="brand-tagline">Global Inter<span class="net-tag-accent">net</span> Radio</span>
+      <!-- Row 1: Brand & Host Portal -->
+      <div class="nav-brand-bar">
+        <div class="nav-brand">
+          <a href="#" class="brand-link">
+            <img src="assets/images/logo.png" alt="GyanSetu Emblem" class="brand-emblem">
+            <div class="brand-text">
+              <span class="brand-name">GYA<span class="brand-net">N</span>S<span class="brand-net">ET</span>U</span>
+              <span class="brand-tagline">Global Inter<span class="net-tag-accent">net</span> Radio</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="nav-host-zone">
+          <!-- Lead Host Entry Portal & Session Status -->
+          <button type="button" id="nav-host-login-btn" class="btn-host-portal-nav" title="Lead Host & Curator Access">
+            <span class="host-shield-icon">🛡️</span>
+            <span class="host-portal-word">Host Portal</span>
+          </button>
+          <div id="nav-host-active-cluster" class="nav-host-active-cluster host-only-element">
+            <span class="host-active-badge">
+              <span class="green-live-dot"></span>
+              <span id="nav-host-name-tag">Host: Simran Ailani</span>
+            </span>
+            <button type="button" id="nav-host-logout-btn" class="btn-host-logout" title="Sign out of Host Session">Logout</button>
           </div>
-        </a>
+        </div>
       </div>
 
-      <div class="nav-links">
-        <a href="#broadcast" class="nav-pill-link">Broadcast</a>
-        <a href="#episodes" class="nav-pill-link">Episodes</a>
-        <a href="pocket.html" class="nav-pill-link nav-pill-retro" title="Switch to Ultra-Lightweight Smart Retro Transistor Radio">📻 Retro Radio</a>
-        <button type="button" id="nav-live-studio-btn" class="nav-pill-link nav-pill-live-studio" title="Open Global Live Transmission Studio & Collaboration Hub">
-          <span class="live-dot-pulse"></span>
-          <span>Live Studio &amp; Collaborate</span>
-        </button>
-        <a href="#analytics" class="nav-pill-link">Analytics</a>
-        <a href="#mission" class="nav-pill-link">Mission &amp; Team</a>
-        <a href="#app" class="nav-pill-link">GyanSetu App</a>
-      </div>
-
-      <div class="nav-actions">
-        <button id="ghost-mode-btn" class="btn-data-saver-switch" role="switch" aria-checked="false" title="Data Saver: Toggle 32kbps Voice Stream (Saves 82% Data)">
+      <!-- Row 2 (Mobile) / Integrated Ribbon (Desktop): Scrollable Feature & Category Ribbon -->
+      <div class="nav-scroll-ribbon" aria-label="Navigation Actions and Categories">
+        <button id="ghost-mode-btn" class="btn-data-saver-switch ribbon-pill" role="switch" aria-checked="false" title="Data Saver: Toggle 32kbps Voice Stream (Saves 82% Data)">
           <span class="ds-icon">⚡</span>
           <span class="ds-label">Data Saver</span>
           <span class="ds-switch-track">
@@ -56,28 +62,23 @@
           </span>
           <span id="ghost-nav-label" class="ds-state-tag">OFF</span>
         </button>
-        <button id="radio-mode-btn" class="btn-live-pill" title="Tune into Live Stream">
+
+        <button id="radio-mode-btn" class="btn-live-pill ribbon-pill" title="Tune into Live Stream">
           <span class="pulse-beacon"></span>
-          <span>Live<span class="live-stream-word"> Stream</span></span>
+          <span>Live Stream</span>
         </button>
-        <!-- Lead Host Entry Portal & Session Status -->
-        <!-- Mobile-Only Live Studio & Hub Trigger -->
-        <button type="button" id="mobile-live-studio-btn" class="btn-mobile-live-studio" title="Open Live Transmission Studio & Hub">
+
+        <button type="button" id="mobile-live-studio-btn" class="mob-ribbon-pill mob-studio-pill studio-open-btn" title="Open Global Live Transmission Studio & Collaboration Hub">
           <span class="live-dot-pulse"></span>
-          <span class="mob-studio-word">Studio</span>
+          <span>🎙️ Studio &amp; Network</span>
         </button>
-        <!-- Lead Host Entry Portal & Session Status -->
-        <button type="button" id="nav-host-login-btn" class="btn-host-portal-nav" title="Lead Host & Curator Access">
-          <span class="host-shield-icon">🛡️</span>
-          <span class="host-portal-word">Host Portal</span>
-        </button>
-        <div id="nav-host-active-cluster" class="nav-host-active-cluster host-only-element">
-          <span class="host-active-badge">
-            <span class="green-live-dot"></span>
-            <span id="nav-host-name-tag">Host: Simran Ailani</span>
-          </span>
-          <button type="button" id="nav-host-logout-btn" class="btn-host-logout" title="Sign out of Host Session">Logout</button>
-        </div>
+
+        <a href="pocket.html" class="mob-ribbon-pill mob-retro-pill" title="Switch to Retro Radio">📻 Retro Radio</a>
+        <a href="#broadcast" class="mob-ribbon-pill desktop-nav-link">Broadcast</a>
+        <a href="#episodes" class="mob-ribbon-pill desktop-nav-link">Episodes</a>
+        <a href="#analytics" class="mob-ribbon-pill desktop-nav-link">Analytics</a>
+        <a href="#mission" class="mob-ribbon-pill desktop-nav-link">Mission &amp; Team</a>
+        <a href="#app" class="mob-ribbon-pill desktop-nav-link">GyanSetu App</a>
       </div>
     </nav>
   </header>

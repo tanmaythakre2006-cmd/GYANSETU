@@ -1549,9 +1549,16 @@
           </div>
         </div>
 
-        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-          <button id="start-cam-btn" class="mesh-btn-action" style="flex: 1; padding: 10px;">
+        <input type="file" id="optical-file-input" accept="image/*" capture="environment" style="display:none">
+        <div style="display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;">
+          <button id="start-cam-btn" class="mesh-btn-action" style="flex: 2; min-width: 150px; padding: 10px;">
             📷 ACTIVATE OPTICAL SCANNER
+          </button>
+          <button id="flip-cam-btn" class="retro-btn" style="flex: 1; min-width: 80px; padding: 0 8px; border-radius: 8px; display: none;" title="Toggle Rear / Front Camera">
+            🔄 FLIP
+          </button>
+          <button id="snap-file-btn" class="retro-btn" style="flex: 1; min-width: 110px; padding: 0 8px; border-radius: 8px;" title="Snap or upload frame if camera stream is restricted">
+            📁 SNAP / UPLOAD
           </button>
         </div>
 
@@ -2123,13 +2130,13 @@
       const pin = generateMeshPin();
       meshPinCode.textContent = pin;
 
-      // Extract full transcripts for air-gap delivery
-      let hiTxt = "";
-      let enTxt = "";
+      // Fast-syncing lean air-gap packet (3-4 chunks total -> near-instant 1.5s transfer & immediate cease)
+      let summaryTxt = ep.title;
       if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[ep.id]) {
         const segs = window.GYAN_SETU_TRANSCRIPTS[ep.id].segments || [];
-        hiTxt = segs.map(s => s.hindi).filter(Boolean).join(' ');
-        enTxt = segs.map(s => s.english).filter(Boolean).join(' ');
+        if (segs.length > 0) {
+          summaryTxt = (segs[0].hindi || segs[0].english || ep.title).substr(0, 140);
+        }
       }
 
       const payloadObj = {
@@ -2141,15 +2148,16 @@
         cat: ep.cat,
         dur: ep.dur,
         src: ep.src,
-        hi: hiTxt,
-        en: enTxt
+        origLang: ep.origLang,
+        pin: pin,
+        summary: summaryTxt
       };
 
       const rawStr = JSON.stringify(payloadObj);
       const b64 = btoa(unescape(encodeURIComponent(rawStr)));
       
-      // Slice into easily scannable optical chunks (170 chars each)
-      const CHUNK_SIZE = 170;
+      // Slice into compact optical chunks (140 chars each -> only 3 to 4 frames total!)
+      const CHUNK_SIZE = 140;
       const totalChunks = Math.ceil(b64.length / CHUNK_SIZE);
       senderFountainFrames = [];
 
@@ -2228,6 +2236,68 @@
       receiverStatusBanner.innerHTML = "";
     }
 
+    let currentCameraFacing = 'environment';
+    const flipCamBtn = document.getElementById('flip-cam-btn');
+    const snapFileBtn = document.getElementById('snap-file-btn');
+    const opticalFileInput = document.getElementById('optical-file-input');
+
+    if (flipCamBtn) {
+      flipCamBtn.addEventListener('click', async () => {
+        currentCameraFacing = (currentCameraFacing === 'environment') ? 'user' : 'environment';
+        playClickSound(1000);
+        if (isScanning) {
+          stopCameraScanner();
+          await startCameraScanner();
+        }
+      });
+    }
+
+    if (snapFileBtn && opticalFileInput) {
+      snapFileBtn.addEventListener('click', () => {
+        playClickSound(800);
+        opticalFileInput.click();
+      });
+
+      opticalFileInput.addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        receiverStatusBanner.className = "mesh-status-banner info";
+        receiverStatusBanner.innerHTML = "🔍 Decoding captured optical frame...";
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const tempC = document.createElement('canvas');
+            const maxD = 640;
+            let w = img.width;
+            let h = img.height;
+            if (w > maxD || h > maxD) {
+              if (w > h) { h = Math.round((h * maxD) / w); w = maxD; }
+              else { w = Math.round((w * maxD) / h); h = maxD; }
+            }
+            tempC.width = w;
+            tempC.height = h;
+            const tCtx = tempC.getContext('2d', { willReadFrequently: true });
+            tCtx.drawImage(img, 0, 0, w, h);
+            const imgData = tCtx.getImageData(0, 0, w, h);
+            if (typeof jsQR !== 'undefined') {
+              const code = jsQR(imgData.data, w, h, { inversionAttempts: "attemptBoth" });
+              if (code && code.data && code.data.startsWith("GS2|")) {
+                handleIncomingFountainChunk(code.data);
+              } else {
+                receiverStatusBanner.className = "mesh-status-banner info";
+                receiverStatusBanner.innerHTML = "⚠️ No optical QR frame found in photo. Ensure moving QR is centered.";
+              }
+            }
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
     startCamBtn.addEventListener('click', async () => {
       playClickSound(800);
       if (isScanning) {
@@ -2240,28 +2310,43 @@
     async function startCameraScanner() {
       try {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          throw new Error("Camera API not accessible in this browser.");
+          throw new Error("Live camera stream requires HTTPS. Use 'Snap / Upload' or PIN below.");
         }
 
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 480 } }
-        });
+        // Progressive acquisition: rear -> user -> any video
+        let stream = null;
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { ideal: currentCameraFacing }, width: { ideal: 1280 } }
+          });
+        } catch (e1) {
+          try {
+            stream = await navigator.mediaDevices.getUserMedia({
+              video: { facingMode: currentCameraFacing }
+            });
+          } catch (e2) {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          }
+        }
 
+        cameraStream = stream;
         scannerVideo.srcObject = cameraStream;
         scannerVideo.style.display = 'block';
         scannerPromptText.style.display = 'none';
         startCamBtn.textContent = '⏹ STOP SCANNER';
         startCamBtn.style.background = '#dc2626';
+        if (flipCamBtn) flipCamBtn.style.display = 'inline-block';
         isScanning = true;
 
         receiverStatusBanner.className = "mesh-status-banner info";
-        receiverStatusBanner.innerHTML = "🔍 Optical Lens Active: Hold camera facing sender's moving QR loop...";
+        receiverStatusBanner.innerHTML = "📷 Optical Lens Active: Hold camera facing sender's moving QR loop...";
 
         scannerVideo.play();
+        lastScanTimestamp = 0;
         requestAnimationFrame(tickScannerLoop);
       } catch (err) {
         receiverStatusBanner.className = "mesh-status-banner info";
-        receiverStatusBanner.innerHTML = "ℹ️ Camera unavailable (" + err.message + "). You can use the 6-digit Mesh PIN below.";
+        receiverStatusBanner.innerHTML = "⚠️ Camera unavailable (" + err.message + "). Use 'Snap / Upload' or 6-digit PIN below.";
       }
     }
 
@@ -2275,46 +2360,65 @@
         cameraStream.getTracks().forEach(t => t.stop());
         cameraStream = null;
       }
-      scannerVideo.style.display = 'none';
+      if (scannerVideo) {
+        scannerVideo.pause();
+        scannerVideo.srcObject = null;
+        scannerVideo.style.display = 'none';
+      }
       scannerPromptText.style.display = 'block';
       startCamBtn.textContent = '📷 ACTIVATE OPTICAL SCANNER';
       startCamBtn.style.background = '';
+      if (flipCamBtn) flipCamBtn.style.display = 'none';
     }
 
-    async function tickScannerLoop() {
+    let lastScanTimestamp = 0;
+    async function tickScannerLoop(timestamp) {
       if (!isScanning) return;
 
-      if (scannerVideo.readyState === scannerVideo.HAVE_ENOUGH_DATA) {
-        const vW = scannerVideo.videoWidth;
-        const vH = scannerVideo.videoHeight;
-        
-        let detectedText = null;
+      // Throttle scanning to 8-10 FPS (every 110ms) to keep mobile CPU cool and responsive
+      if (timestamp - lastScanTimestamp > 110) {
+        lastScanTimestamp = timestamp;
 
-        // 1. Try Hardware-Accelerated BarcodeDetector
-        if (nativeBarcodeDetector) {
-          try {
-            const barcodes = await nativeBarcodeDetector.detect(scannerVideo);
-            if (barcodes.length > 0 && barcodes[0].rawValue) {
-              detectedText = barcodes[0].rawValue;
+        if (scannerVideo.readyState >= scannerVideo.HAVE_CURRENT_DATA) {
+          const vW = scannerVideo.videoWidth;
+          const vH = scannerVideo.videoHeight;
+          
+          if (vW > 0 && vH > 0) {
+            let detectedText = null;
+
+            // 1. Try Hardware-Accelerated BarcodeDetector
+            if (nativeBarcodeDetector) {
+              try {
+                const barcodes = await nativeBarcodeDetector.detect(scannerVideo);
+                if (barcodes.length > 0 && barcodes[0].rawValue) {
+                  detectedText = barcodes[0].rawValue;
+                }
+              } catch(e) {}
             }
-          } catch(e) {}
-        }
 
-        // 2. Fallback to bundled jsQR
-        if (!detectedText && typeof jsQR !== 'undefined') {
-          scannerCanvas.width = 320;
-          scannerCanvas.height = 240;
-          const ctx = scannerCanvas.getContext('2d');
-          ctx.drawImage(scannerVideo, 0, 0, 320, 240);
-          const imgData = ctx.getImageData(0, 0, 320, 240);
-          const qrCode = jsQR(imgData.data, 320, 240, { inversionAttempts: "dontInvert" });
-          if (qrCode && qrCode.data) {
-            detectedText = qrCode.data;
+            // 2. Bundled jsQR with square center crop (never squash portrait aspect ratio!)
+            if (!detectedText && typeof jsQR !== 'undefined') {
+              const minDim = Math.min(vW, vH);
+              const sx = Math.floor((vW - minDim) / 2);
+              const sy = Math.floor((vH - minDim) / 2);
+              const targetSize = Math.min(480, minDim);
+
+              scannerCanvas.width = targetSize;
+              scannerCanvas.height = targetSize;
+              const ctx = scannerCanvas.getContext('2d', { willReadFrequently: true });
+              ctx.drawImage(scannerVideo, sx, sy, minDim, minDim, 0, 0, targetSize, targetSize);
+
+              const imgData = ctx.getImageData(0, 0, targetSize, targetSize);
+              const qrCode = jsQR(imgData.data, targetSize, targetSize, { inversionAttempts: "dontInvert" });
+              if (qrCode && qrCode.data) {
+                detectedText = qrCode.data;
+              }
+            }
+
+            if (detectedText && detectedText.startsWith("GS2|")) {
+              handleIncomingFountainChunk(detectedText);
+            }
           }
-        }
-
-        if (detectedText && detectedText.startsWith("GS2|")) {
-          handleIncomingFountainChunk(detectedText);
         }
       }
 

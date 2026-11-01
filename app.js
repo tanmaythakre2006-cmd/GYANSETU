@@ -1161,6 +1161,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  document.querySelectorAll('.studio-open-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  });
+
   if (radioModeBtn) {
     radioModeBtn.addEventListener('click', (e) => {
       e.preventDefault();
