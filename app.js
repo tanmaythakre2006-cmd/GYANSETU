@@ -1146,6 +1146,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+    const mobileLiveStudioBtn = document.getElementById('mobile-live-studio-btn');
+  if (mobileLiveStudioBtn) {
+    mobileLiveStudioBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  }
+
   if (navLiveStudioBtn) {
     navLiveStudioBtn.addEventListener('click', (e) => {
       e.preventDefault();
