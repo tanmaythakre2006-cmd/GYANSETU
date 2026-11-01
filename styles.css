@@ -6110,30 +6110,284 @@ body.is-host #nav-host-login-btn {
 
 
 /* ==========================================================================
-   MODERN DUAL-TIER NAVIGATION: INSTAGRAM/SPOTIFY STYLE APP BAR
+   PERFECT PIXEL FINISH: DUAL-TIER NAVIGATION SYSTEM
+   Apple / Linear Grade Frosted Desktop Navigation & Mobile Ribbon Architecture
    ========================================================================== */
-.nav-brand-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+
+/* 1. Global Container */
+.liquid-nav-container {
+  position: sticky;
+  top: 16px;
+  z-index: 1000;
+  padding: 0 20px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.nav-host-zone {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.liquid-nav {
+  max-width: 1360px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: var(--navy-dock);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border-sheen);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-scroll-ribbon {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ==========================================================================
+   DESKTOP VIEWPORT (>= 1024px)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .liquid-nav {
+    border-radius: 9999px;
+    padding: 6px 14px 6px 18px;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .nav-desktop-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .nav-mobile-layout {
+    display: none !important;
+  }
+
+  /* --- Zone 1: Brand --- */
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .nav-brand .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .brand-emblem {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    object-fit: cover;
+    box-shadow: 0 0 14px var(--teal-glow);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.10rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.8px;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .brand-tagline {
+    font-size: 0.65rem;
+    color: var(--teal-light);
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  /* --- Zone 2: Center Navigation Links --- */
+  .nav-center-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex: 1 1 auto;
+    margin: 0 4px;
+    flex-wrap: nowrap;
+  }
+
+  .nav-center-links .nav-pill-link {
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    font-size: 0.80rem;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid transparent;
+    background: transparent;
+  }
+
+  .nav-center-links .nav-pill-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .nav-center-links .nav-pill-retro {
+    background: rgba(245, 158, 11, 0.12) !important;
+    border: 1px solid rgba(245, 158, 11, 0.32) !important;
+    color: #fde68a !important;
+    font-weight: 600;
+  }
+
+  .nav-center-links .nav-pill-retro:hover {
+    background: rgba(245, 158, 11, 0.24) !important;
+    border-color: rgba(245, 158, 11, 0.55) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+  }
+
+  /* --- Zone 3: Right Action Controls --- */
+  .nav-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+  }
+
+  /* Studio Button (Ruby Glass) */
+  .btn-studio-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 35px;
+    padding: 0 12px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(185, 28, 28, 0.25));
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 9999px;
+    font-family: var(--font-text);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.18);
+    box-sizing: border-box;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-studio-pill:hover {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(185, 28, 28, 0.4));
+    border-color: rgba(239, 68, 68, 0.65);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.35);
+  }
+
+  /* Lead Host Portal Pill (Sapphire Glass) */
+  .btn-host-portal-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 35px;
+    padding: 0 12px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(37, 99, 235, 0.25));
+    border: 1px solid rgba(96, 165, 250, 0.45);
+    border-radius: 9999px;
+    color: #93c5fd;
+    font-family: var(--font-text);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 0 14px rgba(59, 130, 246, 0.2);
+    box-sizing: border-box;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-host-portal-nav:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.32), rgba(37, 99, 235, 0.4));
+    border-color: rgba(147, 197, 253, 0.75);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
 }
 
-@media (max-width: 900px) {
+/* ==========================================================================
+   LAPTOPS (1024px to 1320px) - COMPACT RESPONSIVENESS
+   ========================================================================== */
+@media (min-width: 1024px) and (max-width: 1320px) {
+  .liquid-nav-container {
+    padding: 0 12px;
+  }
+  .liquid-nav {
+    padding: 5px 10px 5px 12px;
+    gap: 6px;
+  }
+  .nav-desktop-layout {
+    gap: 6px;
+  }
+  .brand-name {
+    font-size: 0.98rem;
+  }
+  .brand-tagline {
+    display: none;
+  }
+  .nav-center-links {
+    gap: 2px;
+    margin: 0 2px;
+  }
+  .nav-center-links .nav-pill-link {
+    font-size: 0.75rem;
+    padding: 4px 7px;
+  }
+  .nav-right-actions {
+    gap: 5px;
+  }
+  .btn-data-saver-switch {
+    padding: 0 7px;
+    height: 32px;
+  }
+  .btn-data-saver-switch .ds-label {
+    display: none;
+  }
+  .btn-studio-pill,
+  .btn-live-pill,
+  .btn-host-portal-nav {
+    height: 32px;
+    padding: 0 9px;
+    font-size: 0.72rem;
+  }
+  .host-portal-word {
+    display: inline;
+  }
+}
+
+/* ==========================================================================
+   MOBILE & TABLET VIEWPORT (< 1024px)
+   Instagram / Spotify Style 2-Tier Island Header
+   ========================================================================== */
+@media (max-width: 1023px) {
   .liquid-nav-container {
     top: 8px !important;
-    padding: 0 10px !important;
+    padding: 0 12px !important;
     margin-bottom: 16px !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -6149,9 +6403,22 @@ body.is-host #nav-host-login-btn {
     min-height: auto !important;
     background: var(--navy-dock) !important;
     backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
   }
 
+  .nav-desktop-layout {
+    display: none !important;
+  }
+
+  .nav-mobile-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  /* Row 1: Brand & Host Portal */
   .nav-brand-bar {
     display: flex !important;
     justify-content: space-between !important;
@@ -6183,14 +6450,14 @@ body.is-host #nav-host-login-btn {
     opacity: 0.8 !important;
   }
 
-  .nav-host-zone {
+  .mob-host-zone {
     display: flex !important;
     align-items: center !important;
     gap: 6px !important;
     flex-shrink: 0 !important;
   }
 
-  .btn-host-portal-nav {
+  .mob-host-zone .btn-host-portal-nav {
     height: 34px !important;
     padding: 0 12px !important;
     font-size: 0.78rem !important;
@@ -6198,13 +6465,13 @@ body.is-host #nav-host-login-btn {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(37, 99, 235, 0.32)) !important;
+    border: 1px solid rgba(96, 165, 250, 0.5) !important;
+    color: #93c5fd !important;
+    font-weight: 700 !important;
   }
 
-  .host-portal-word {
-    display: inline !important;
-  }
-
-  /* Smooth Horizontally Scrollable Category & Action Ribbon */
+  /* Row 2: Horizontally Scrollable Ribbon */
   .nav-scroll-ribbon {
     display: flex !important;
     overflow-x: auto !important;
@@ -6283,5 +6550,101 @@ body.is-host #nav-host-login-btn {
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(180, 83, 9, 0.2)) !important;
     border-color: rgba(245, 158, 11, 0.45) !important;
     color: #fef3c7 !important;
+  }
+}
+
+/* ==========================================================================
+   AUTHENTICATED HOST SESSION CLUSTER
+   ========================================================================== */
+.host-only-element {
+  display: none !important;
+}
+
+body.is-host .host-only-element {
+  display: inline-flex !important;
+}
+
+body.is-host .btn-host-portal-nav {
+  display: none !important;
+}
+
+.nav-host-active-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.host-active-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.btn-host-logout {
+  background: rgba(239, 68, 68, 0.16);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-host-logout:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ffffff;
+}
+
+/* Floating Toast Styling */
+.network-toast {
+  position: fixed;
+  top: 84px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 160, 72, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 160, 72, 0.15);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  max-width: 90vw;
+  width: max-content;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.network-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 768px) {
+  .network-toast {
+    top: 76px;
+    padding: 8px 14px;
+    border-radius: 14px;
+    font-size: 0.76rem;
   }
 }

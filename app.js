@@ -974,11 +974,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isGhostMode) {
       document.body.classList.add('ghost-mode-active');
-      if (ghostModeBtn) {
-        ghostModeBtn.classList.add('active');
-        ghostModeBtn.setAttribute('aria-checked', 'true');
-      }
-      if (ghostNavLabel) ghostNavLabel.textContent = 'ON';
+      document.querySelectorAll('.btn-data-saver-switch').forEach(btn => {
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+      });
+      document.querySelectorAll('.ds-state-tag').forEach(lbl => {
+        lbl.textContent = 'ON';
+      });
       if (dockGhostBtn) {
         dockGhostBtn.classList.add('active');
         dockGhostBtn.setAttribute('aria-checked', 'true');
@@ -986,11 +988,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dockGhostLabel) dockGhostLabel.textContent = 'ON';
     } else {
       document.body.classList.remove('ghost-mode-active');
-      if (ghostModeBtn) {
-        ghostModeBtn.classList.remove('active');
-        ghostModeBtn.setAttribute('aria-checked', 'false');
-      }
-      if (ghostNavLabel) ghostNavLabel.textContent = 'OFF';
+      document.querySelectorAll('.btn-data-saver-switch').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-checked', 'false');
+      });
+      document.querySelectorAll('.ds-state-tag').forEach(lbl => {
+        lbl.textContent = 'OFF';
+      });
       if (dockGhostBtn) {
         dockGhostBtn.classList.remove('active');
         dockGhostBtn.setAttribute('aria-checked', 'false');
@@ -1049,11 +1053,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Button Click Handlers
-    if (ghostModeBtn) {
-      ghostModeBtn.addEventListener('click', () => {
+    document.querySelectorAll('.btn-data-saver-switch').forEach(btn => {
+      btn.addEventListener('click', () => {
         setGhostMode(!isGhostMode, false);
       });
-    }
+    });
 
     if (dockGhostBtn) {
       dockGhostBtn.addEventListener('click', () => {
@@ -1823,7 +1827,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hostActive) {
       document.body.classList.add('is-host');
       const profile = getHostProfile();
-      if (navHostNameTag) navHostNameTag.textContent = `Host: ${profile.name}`;
+      document.querySelectorAll('#nav-host-name-tag, #mob-nav-host-name-tag').forEach(el => {
+        el.textContent = `Host: ${profile.name}`;
+      });
       if (curatorLoggedInLabel) curatorLoggedInLabel.textContent = `Lead Host Session Active: ${profile.name}`;
       
       // Render host exclusive components
@@ -1912,9 +1918,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Navbar Host Portal click (open login directly)
-    if (navHostLoginBtn) {
-      navHostLoginBtn.addEventListener('click', () => {
+    // Host Portal buttons click (open login directly)
+    document.querySelectorAll('.btn-host-portal-nav').forEach(btn => {
+      btn.addEventListener('click', () => {
         if (gatewayModal) {
           if (gatewayViewChoose) gatewayViewChoose.classList.remove('active');
           if (gatewayViewLogin) gatewayViewLogin.classList.add('active');
@@ -1922,7 +1928,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (hostEmailInput) hostEmailInput.focus();
         }
       });
-    }
+    });
 
     // Host Logout Handlers
     function handleLogout() {
@@ -1932,7 +1938,9 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('👋 Host session logged out. Reverted to Listener mode.');
     }
 
-    if (navHostLogoutBtn) navHostLogoutBtn.addEventListener('click', handleLogout);
+    document.querySelectorAll('.btn-host-logout').forEach(btn => {
+      btn.addEventListener('click', handleLogout);
+    });
     if (btnHostDeckLogout) btnHostDeckLogout.addEventListener('click', handleLogout);
   }
 
