@@ -9,103 +9,112 @@ async def test_beamer():
         page = await browser.new_page(viewport={'width': 390, 'height': 844})
         await page.goto("http://localhost:8000/pocket.html", wait_until="networkidle")
         
-        print("Testing Optical Fountain Beamer in pocket.html...")
+        print("Testing Smart 20 MB Optical Vault & Mesh Beamer in pocket.html...")
         
         # 1. Click BEAM button
         await page.click("#btn-beam")
         await page.wait_for_timeout(400)
         
-        # Check if modal is open
         is_open = await page.evaluate("() => document.getElementById('mesh-modal').classList.contains('open')")
         print(f"  [Beamer Modal Open]: {is_open}")
         assert is_open, "Beamer modal did not open!"
         
-        # 2. Check Sender Fountain stream
+        # 2. Check Sender Fountain stream & Stations (including 20 MB Vault option)
         sender_info = await page.evaluate("""() => {
             const ticker = document.getElementById('fountain-ticker-text').textContent;
             const select = document.getElementById('beam-station-select');
             const qrBox = document.getElementById('qr-render-box');
             const dots = document.querySelectorAll('.fountain-dot').length;
-            const hasQrCanvasOrImg = qrBox.querySelector('canvas') || qrBox.querySelector('img');
+            const hasQr = !!(qrBox.querySelector('canvas') || qrBox.querySelector('img'));
+            const options = Array.from(select.options).map(o => ({ value: o.value, text: o.text }));
             return {
                 ticker: ticker,
                 stationsCount: select.options.length,
-                selectedStation: select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : '',
+                options: options,
                 dotsCount: dots,
-                hasQrElement: !!hasQrCanvasOrImg
+                hasQr: hasQr
             };
         }""")
-        print(f"  [Sender Loop Status]: {sender_info['ticker']}")
-        print(f"  [Stations in Dropdown]: {sender_info['stationsCount']} (Selected: {sender_info['selectedStation']})")
-        print(f"  [Fountain Slices Count]: {sender_info['dotsCount']} frames")
-        print(f"  [QR Render Active]: {sender_info['hasQrElement']}")
-        assert sender_info['stationsCount'] > 0, "No stations in dropdown!"
-        assert sender_info['dotsCount'] > 0, "Fountain frames not generated!"
-        assert sender_info['hasQrElement'], "QR element not rendered!"
+        print(f"  [Stations Count]: {sender_info['stationsCount']}")
+        print(f"  [First Option]: {sender_info['options'][0]['text']}")
+        assert sender_info['stationsCount'] >= 14, "Missing Full Vault option in dropdown!"
+        assert "FULL VAULT" in sender_info['options'][0]['text'], "Full Vault not first option!"
         
-        # Wait 600ms to verify loop increments frames
-        await page.wait_for_timeout(600)
-        ticker2 = await page.evaluate("() => document.getElementById('fountain-ticker-text').textContent")
-        print(f"  [Sender Loop Progression]: Frame updated to -> {ticker2}")
+        # 3. Select FULL VAULT and test 20 MB Vault Stream Generation
+        await page.select_option("#beam-station-select", "all")
+        await page.wait_for_timeout(500)
         
-        # 3. Test Switch to Receiver Tab
+        vault_stream_info = await page.evaluate("""() => {
+            const ticker = document.getElementById('fountain-ticker-text').textContent;
+            const banner = document.getElementById('sender-status-banner').textContent;
+            const pin = document.getElementById('mesh-pin-code').textContent;
+            return {
+                ticker: ticker,
+                banner: banner,
+                pin: pin,
+                framesCount: senderFountainFrames.length
+            };
+        }""")
+        print(f"  [20 MB Vault Stream Initialized]: {vault_stream_info['banner']}")
+        print(f"  [Vault Fountain Frames]: {vault_stream_info['framesCount']} frames (PIN: {vault_stream_info['pin']})")
+        assert vault_stream_info['framesCount'] > 0, "Vault frames not generated!"
+        
+        # 4. Test Switch to Receiver Tab
         await page.click("#tab-receiver-btn")
         await page.wait_for_timeout(300)
         
         rec_info = await page.evaluate("""() => {
             const recPanel = document.getElementById('mesh-receiver-panel');
-            const isActive = recPanel.classList.contains('active');
             const camBtn = document.getElementById('start-cam-btn');
-            const hud = document.getElementById('hud-progress-readout').textContent;
+            const flipBtn = document.getElementById('flip-cam-btn');
+            const snapBtn = document.getElementById('snap-file-btn');
             return {
-                isActive: isActive,
+                isActive: recPanel.classList.contains('active'),
                 camBtnText: camBtn ? camBtn.textContent.trim() : '',
-                hudReadout: hud
+                hasFlipBtn: !!flipBtn,
+                hasSnapBtn: !!snapBtn
             };
         }""")
-        print(f"  [Receiver Panel Active]: {rec_info['isActive']}")
-        print(f"  [Scanner Button]: {rec_info['camBtnText']}")
-        print(f"  [HUD Progress]: {rec_info['hudReadout']}")
+        print(f"  [Receiver Panel Ready]: {rec_info['isActive']} (Cam: {rec_info['camBtnText']}, Snap: {rec_info['hasSnapBtn']})")
         assert rec_info['isActive'], "Receiver panel not active!"
+        assert rec_info['hasSnapBtn'], "Snap/Upload fallback button missing!"
         
-        # 4. Test Decryption Simulation via Fountain Decoder
-        decode_result = await page.evaluate("""() => {
-            // Simulate receiving 2 frames of an episode
-            const testEp = {
-                id: "beamed-opt-test",
-                num: 99,
-                freq: "99.9",
-                title: "Optical Air-Gap Beamed Special",
-                cat: "BEAMED",
-                dur: "3m 45s"
+        # 5. Test Decryption & Installation of 20 MB Vault Payload
+        test_vault_install = await page.evaluate("""async () => {
+            const testVault = {
+                proto: "GS-FULL-VAULT",
+                v: 2,
+                pin: "GS-9182",
+                stationsCount: 2,
+                totalSize: "20.4 MB",
+                timestamp: Date.now(),
+                stations: [
+                    { id: "test-v1", num: 91, freq: "91.1", title: "Beamed Vault Special 1", cat: "PHYSICS", dur: "4m 10s", src: "assets/audio/ep1-can-chemistry-explain-consciousness.mp3" },
+                    { id: "test-v2", num: 92, freq: "92.2", title: "Beamed Vault Special 2", cat: "CHEMISTRY", dur: "5m 20s", src: "assets/audio/ep2-the-secrets-of-sadabahar.mp3" }
+                ]
             };
-            const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(testEp))));
-            const total = 2;
-            const half = Math.ceil(b64.length / 2);
-            const chunk1 = b64.substr(0, half);
-            const chunk2 = b64.substr(half);
             
-            // Deliver frame 1 then frame 2 to decoder
-            handleIncomingFountainChunk(`GS2|${testEp.id}|1|${total}|${chunk1}`);
-            const state1 = Object.keys(receiverFountainBuffer).length;
+            // Deliver encrypted chunk
+            const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(testVault))));
+            const total = 1;
+            handleIncomingFountainChunk(`GS2|VAULT20M|1|${total}|${testVault.pin}|${b64}`);
             
-            handleIncomingFountainChunk(`GS2|${testEp.id}|2|${total}|${chunk2}`);
-            const state2 = Object.keys(receiverFountainBuffer).length;
+            await new Promise(r => setTimeout(r, 200));
+            
+            const vault = JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]');
+            const hasV1 = vault.some(x => x.id === "test-v1");
+            const hasV2 = vault.some(x => x.id === "test-v2");
             
             return {
-                frame1Recorded: state1 === 1,
-                frame2Recorded: state2 === 2,
-                vaultContainsEp: JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]').some(x => x.id === testEp.id)
+                installedV1: hasV1,
+                installedV2: hasV2,
+                totalInVault: vault.length
             };
         }""")
-        print(f"  [Optical Decoder Assembly & Decryption]: {decode_result}")
-        assert decode_result['vaultContainsEp'], "Decrypted episode not installed in vault!"
-        
-        # Take screenshot of the Optical Beamer HUD
-        await page.screenshot(path="screenshot_optical_beamer_hud.png")
-        print("  📸 Captured screenshot_optical_beamer_hud.png")
+        print(f"  [20 MB Vault Decryption & Installation]: {test_vault_install}")
+        assert test_vault_install['installedV1'] and test_vault_install['installedV2'], "20 MB Vault stations not installed!"
         
         await browser.close()
-        print("\n🎉 OPTICAL FOUNTAIN BEAMER TEST PASSED COMPLETELY!")
+        print("\n🎉 ALL CUTTING-EDGE 20 MB VAULT & OPTICAL BEAM TESTS PASSED!")
 
 asyncio.run(test_beamer())

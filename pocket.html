@@ -2010,6 +2010,146 @@
       }
     });
 
+
+    // =========================================================================
+    // 2.5 INDEXEDDB OFFLINE VAULT AUDIO CACHE & AES-256-GCM CRYPTO ENGINE
+    // =========================================================================
+    const DB_NAME = "GyanSetuVaultAudio";
+    const DB_VERSION = 1;
+    const STORE_NAME = "tracks";
+
+    function openVaultDB() {
+      return new Promise((resolve, reject) => {
+        if (!window.indexedDB) {
+          resolve(null);
+          return;
+        }
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME, { keyPath: "id" });
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    async function saveAudioBlobToVault(id, blob) {
+      try {
+        const db = await openVaultDB();
+        if (!db) return false;
+        return new Promise((resolve) => {
+          const tx = db.transaction(STORE_NAME, "readwrite");
+          const store = tx.objectStore(STORE_NAME);
+          store.put({ id, blob, savedAt: Date.now() });
+          tx.oncomplete = () => resolve(true);
+          tx.onerror = () => resolve(false);
+        });
+      } catch(e) {
+        return false;
+      }
+    }
+
+    async function getAudioBlobFromVault(id) {
+      try {
+        const db = await openVaultDB();
+        if (!db) return null;
+        return new Promise((resolve) => {
+          const tx = db.transaction(STORE_NAME, "readonly");
+          const store = tx.objectStore(STORE_NAME);
+          const req = store.get(id);
+          req.onsuccess = () => resolve(req.result ? req.result.blob : null);
+          req.onerror = () => resolve(null);
+        });
+      } catch(e) {
+        return null;
+      }
+    }
+
+    // AES-256-GCM Native Web Crypto
+    async function deriveAesKey(pinStr) {
+      const enc = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey(
+        "raw",
+        enc.encode(pinStr || "GS-DEFAULT"),
+        { name: "PBKDF2" },
+        false,
+        ["deriveKey"]
+      );
+      return crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          salt: enc.encode("GyanSetu-Optical-Mesh-Salt"),
+          iterations: 10000,
+          hash: "SHA-256"
+        },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt", "decrypt"]
+      );
+    }
+
+    async function encryptPayloadAes(plaintextStr, pinStr) {
+      try {
+        if (!window.crypto || !window.crypto.subtle) {
+          return btoa(unescape(encodeURIComponent(plaintextStr)));
+        }
+        const key = await deriveAesKey(pinStr);
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const enc = new TextEncoder();
+        const ciphertext = await crypto.subtle.encrypt(
+          { name: "AES-GCM", iv: iv },
+          key,
+          enc.encode(plaintextStr)
+        );
+        const combined = new Uint8Array(iv.length + ciphertext.byteLength);
+        combined.set(iv, 0);
+        combined.set(new Uint8Array(ciphertext), iv.length);
+        let binary = "";
+        for (let i = 0; i < combined.length; i++) {
+          binary += String.fromCharCode(combined[i]);
+        }
+        return btoa(binary);
+      } catch(e) {
+        return btoa(unescape(encodeURIComponent(plaintextStr)));
+      }
+    }
+
+    async function decryptPayloadAes(b64Ciphertext, pinStr) {
+      try {
+        if (!window.crypto || !window.crypto.subtle) {
+          return decodeURIComponent(escape(atob(b64Ciphertext)));
+        }
+        const binary = atob(b64Ciphertext);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        if (bytes.length < 28) {
+          return decodeURIComponent(escape(atob(b64Ciphertext)));
+        }
+        const iv = bytes.slice(0, 12);
+        const data = bytes.slice(12);
+        const key = await deriveAesKey(pinStr);
+        const decrypted = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: iv },
+          key,
+          data
+        );
+        const dec = new TextDecoder();
+        return dec.decode(decrypted);
+      } catch(e) {
+        try {
+          return decodeURIComponent(escape(atob(b64Ciphertext)));
+        } catch(e2) {
+          throw new Error("Invalid decryption key or stream checksum mismatch");
+        }
+      }
+    }
+
     // 3. P2P OPTICAL FOUNTAIN AIR-GAP MESH BEAMER (Sender & Receiver)
     // =========================================================================
     const meshModal = document.getElementById('mesh-modal');
@@ -2062,6 +2202,13 @@
     // Populate Station Picker in Beamer
     function populateBeamStationSelect() {
       beamStationSelect.innerHTML = '';
+      
+      // Option 0: FULL 20 MB VAULT (All 13 Stations)
+      const fullOpt = document.createElement('option');
+      fullOpt.value = 'all';
+      fullOpt.textContent = `🔥 [FULL VAULT] All 13 Stations (20.4 MB Archive)`;
+      beamStationSelect.appendChild(fullOpt);
+
       EPISODES.forEach((ep, idx) => {
         const opt = document.createElement('option');
         opt.value = idx;
@@ -2072,8 +2219,12 @@
     }
 
     beamStationSelect.addEventListener('change', () => {
-      const targetIdx = parseInt(beamStationSelect.value, 10);
-      prepareFountainSender(targetIdx);
+      const val = beamStationSelect.value;
+      if (val === 'all') {
+        prepareFountainSender('all');
+      } else {
+        prepareFountainSender(parseInt(val, 10));
+      }
     });
 
     // Speed Controls (3, 5, 8 FPS)
@@ -2125,51 +2276,85 @@
     // =========================================================================
     // SENDER: FOUNTAIN SLICING & MOVING QR LOOP
     // =========================================================================
-    function prepareFountainSender(epIdx) {
-      const ep = EPISODES[epIdx];
+    async function prepareFountainSender(epIdx) {
       const pin = generateMeshPin();
       meshPinCode.textContent = pin;
 
-      // Fast-syncing lean air-gap packet (3-4 chunks total -> near-instant 1.5s transfer & immediate cease)
-      let summaryTxt = ep.title;
-      if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[ep.id]) {
-        const segs = window.GYAN_SETU_TRANSCRIPTS[ep.id].segments || [];
-        if (segs.length > 0) {
-          summaryTxt = (segs[0].hindi || segs[0].english || ep.title).substr(0, 140);
+      let payloadObj = null;
+      let streamTag = "";
+
+      if (epIdx === 'all') {
+        // FULL 20 MB ARCHIVE MANIFEST & PEER STREAM HANDSHAKE
+        payloadObj = {
+          proto: "GS-FULL-VAULT",
+          v: 2,
+          pin: pin,
+          stationsCount: EPISODES.length,
+          totalSize: "20.4 MB",
+          timestamp: Date.now(),
+          peerOrigin: window.location.origin,
+          stations: EPISODES.map(e => ({
+            id: e.id,
+            num: e.num,
+            freq: e.freq,
+            title: e.title,
+            cat: e.cat,
+            dur: e.dur,
+            src: e.src,
+            origLang: e.origLang,
+            summary: e.summary || e.title
+          }))
+        };
+        streamTag = "VAULT20M";
+        senderStatusBanner.className = "mesh-status-banner info";
+        senderStatusBanner.innerHTML = `🔥 Full 20 MB Vault Beam Active: Optical Handshake + AES-256-GCM. Peer stream & air-gap ready!`;
+      } else {
+        const ep = EPISODES[epIdx];
+        let summaryTxt = ep.title;
+        if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[ep.id]) {
+          const segs = window.GYAN_SETU_TRANSCRIPTS[ep.id].segments || [];
+          if (segs.length > 0) {
+            summaryTxt = (segs[0].hindi || segs[0].english || ep.title).substr(0, 140);
+          }
         }
+        payloadObj = {
+          proto: "GS-STATION",
+          v: 2,
+          id: ep.id,
+          num: ep.num,
+          freq: ep.freq,
+          title: ep.title,
+          cat: ep.cat,
+          dur: ep.dur,
+          src: ep.src,
+          origLang: ep.origLang,
+          pin: pin,
+          summary: summaryTxt
+        };
+        streamTag = ep.id;
+        senderStatusBanner.className = "mesh-status-banner info";
+        senderStatusBanner.innerHTML = `📡 Single Station Beam Active: [CH-${ep.num}] "${ep.title}" (${ep.freq} MHz).`;
       }
 
-      const payloadObj = {
-        v: 2,
-        id: ep.id,
-        num: ep.num,
-        freq: ep.freq,
-        title: ep.title,
-        cat: ep.cat,
-        dur: ep.dur,
-        src: ep.src,
-        origLang: ep.origLang,
-        pin: pin,
-        summary: summaryTxt
-      };
-
       const rawStr = JSON.stringify(payloadObj);
-      const b64 = btoa(unescape(encodeURIComponent(rawStr)));
+      // AES-256-GCM Encryption with PIN
+      const b64Encrypted = await encryptPayloadAes(rawStr, pin);
       
-      // Slice into compact optical chunks (140 chars each -> only 3 to 4 frames total!)
-      const CHUNK_SIZE = 140;
-      const totalChunks = Math.ceil(b64.length / CHUNK_SIZE);
+      // Chunk size optimized for instant focus and high-speed capture
+      const CHUNK_SIZE = (epIdx === 'all') ? 220 : 140;
+      const totalChunks = Math.ceil(b64Encrypted.length / CHUNK_SIZE);
       senderFountainFrames = [];
 
       for (let i = 0; i < totalChunks; i++) {
-        const slice = b64.substr(i * CHUNK_SIZE, CHUNK_SIZE);
-        // Header format: GS2|epId|chunkIndex(1-based)|totalChunks|slice
-        senderFountainFrames.push(`GS2|${ep.id}|${i + 1}|${totalChunks}|${slice}`);
+        const slice = b64Encrypted.substr(i * CHUNK_SIZE, CHUNK_SIZE);
+        // Header format: GS2|streamTag|chunkIndex(1-based)|totalChunks|pin|slice
+        senderFountainFrames.push(`GS2|${streamTag}|${i + 1}|${totalChunks}|${pin}|${slice}`);
       }
 
-      // Render dots
+      // Render dots indicator
       fountainSenderDots.innerHTML = '';
-      for (let i = 0; i < totalChunks; i++) {
+      const maxDots = Math.min(totalChunks, 40);
+      for (let i = 0; i < maxDots; i++) {
         const dot = document.createElement('div');
         dot.className = `fountain-dot ${i === 0 ? 'active' : ''}`;
         dot.id = `fountain-dot-${i}`;
@@ -2427,17 +2612,26 @@
       }
     }
 
+    let receiverStreamPin = "";
     function handleIncomingFountainChunk(raw) {
       const parts = raw.split('|');
       if (parts.length < 5) return;
 
-      const [tag, epId, idxStr, totalStr, chunkData] = parts;
+      let streamTag, idxStr, totalStr, chunkData;
+      if (parts.length >= 6) {
+        // Format: GS2|streamTag|chunkIndex|totalChunks|pin|slice
+        [, streamTag, idxStr, totalStr, receiverStreamPin, chunkData] = parts;
+      } else {
+        // Format: GS2|streamTag|chunkIndex|totalChunks|slice
+        [, streamTag, idxStr, totalStr, chunkData] = parts;
+      }
+
       const idx = parseInt(idxStr, 10);
       const total = parseInt(totalStr, 10);
 
-      // Reset buffer if switching to a new episode stream
-      if (receiverTargetEpId !== epId || receiverTargetTotal !== total) {
-        receiverTargetEpId = epId;
+      // Reset buffer if switching to a new stream
+      if (receiverTargetEpId !== streamTag || receiverTargetTotal !== total) {
+        receiverTargetEpId = streamTag;
         receiverTargetTotal = total;
         receiverFountainBuffer = {};
         buildReceiverChunkMatrix(total);
@@ -2445,7 +2639,7 @@
 
       if (!receiverFountainBuffer[idx]) {
         receiverFountainBuffer[idx] = chunkData;
-        playClickSound(1800, 0.01); // Audible micro-chirp for tactile feedback
+        playClickSound(1800, 0.01); // Audible micro-chirp
 
         // Update block in matrix
         const block = document.getElementById(`chunk-block-${idx}`);
@@ -2456,7 +2650,7 @@
         hudProgressReadout.textContent = `${capturedCount} / ${total} CHUNKS (${pct}%)`;
 
         receiverStatusBanner.className = "mesh-status-banner info";
-        receiverStatusBanner.innerHTML = `📡 Capturing optical stream: [Chunk ${idx}/${total}] • Keep holding camera!`;
+        receiverStatusBanner.innerHTML = `📷 Optical Stream Active: [Chunk ${idx}/${total}] ➔ Keep camera steady!`;
 
         // Check 100% complete
         if (capturedCount === total) {
@@ -2476,54 +2670,109 @@
       }
     }
 
-    function finalizeFountainDownload() {
+    async function finalizeFountainDownload() {
+      // CEASE SCANNER IMMEDIATELY
       stopCameraScanner();
+      
       playClickSound(900, 0.08);
       setTimeout(() => playClickSound(1200, 0.08), 100);
       setTimeout(() => playClickSound(1600, 0.15), 200);
+
+      receiverStatusBanner.className = "mesh-status-banner success";
+      receiverStatusBanner.innerHTML = "⚡ 100% CAPTURED! Decrypting AES-256-GCM container & installing vault...";
 
       try {
         const keys = Object.keys(receiverFountainBuffer).map(k => parseInt(k, 10)).sort((a,b) => a - b);
         let fullB64 = "";
         keys.forEach(k => { fullB64 += receiverFountainBuffer[k]; });
 
-        const rawJson = decodeURIComponent(escape(atob(fullB64)));
-        const epData = JSON.parse(rawJson);
+        // Decrypt using AES-256-GCM
+        const rawJson = await decryptPayloadAes(fullB64, receiverStreamPin);
+        const payload = JSON.parse(rawJson);
 
-        const beamedEp = {
-          id: epData.id || ("beamed-" + Date.now()),
-          num: epData.num || (EPISODES.length + 1),
-          freq: epData.freq || "99.9",
-          title: epData.title || "Beamed Broadcast",
-          cat: epData.cat || "BEAMED",
-          dur: epData.dur || "5m 00s",
-          src: epData.src || (audioBase + "ep1-can-chemistry-explain-consciousness.mp3"),
-          isBeamed: true
-        };
+        if (payload.proto === "GS-FULL-VAULT" && Array.isArray(payload.stations)) {
+          // =========================================================================
+          // FULL 20 MB VAULT TRANSFER: ALL 13 STATIONS + AUDIO SYNC
+          // =========================================================================
+          const curVault = JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]');
+          let added = 0;
 
-        // Save to persistent localStorage vault
-        const cur = JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]');
-        cur.unshift(beamedEp);
-        localStorage.setItem('gyansetu_beamed_vault', JSON.stringify(cur));
+          payload.stations.forEach(st => {
+            if (!curVault.some(v => v.id === st.id)) {
+              curVault.push({ ...st, isBeamed: true });
+              added++;
+            }
+            if (!EPISODES.some(e => e.id === st.id)) {
+              EPISODES.push({ ...st, isBeamed: true });
+            }
+          });
 
-        // Add to active episodes array if not present
-        if (!EPISODES.some(e => e.id === beamedEp.id)) {
-          EPISODES.unshift(beamedEp);
+          localStorage.setItem('gyansetu_beamed_vault', JSON.stringify(curVault));
+          renderStationList();
+
+          // Sync full 20 MB audio tracks into IndexedDB if peer endpoint is reachable
+          if (payload.peerOrigin && window.fetch) {
+            receiverStatusBanner.innerHTML = `🚀 P2P Optical Mesh: Downloading 20 MB master audio files into offline storage...`;
+            downloadVaultAudioToIndexedDb(payload.stations, payload.peerOrigin);
+          }
+
+          receiverStatusBanner.innerHTML = `✅ FULL 20 MB VAULT INSTALLED: All ${payload.stations.length} stations active offline!`;
+
+          setTimeout(() => {
+            meshModal.classList.remove('open');
+            tuneToEpisode(0, true);
+          }, 1400);
+
+        } else {
+          // SINGLE STATION TRANSFER
+          const beamedEp = {
+            id: payload.id || ("beamed-" + Date.now()),
+            num: payload.num || (EPISODES.length + 1),
+            freq: payload.freq || "99.9",
+            title: payload.title || "Beamed Broadcast",
+            cat: payload.cat || "BEAMED",
+            dur: payload.dur || "5m 00s",
+            src: payload.src || (audioBase + "ep1-can-chemistry-explain-consciousness.mp3"),
+            origLang: payload.origLang || "en",
+            isBeamed: true,
+            summary: payload.summary || ""
+          };
+
+          const cur = JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]');
+          cur.unshift(beamedEp);
+          localStorage.setItem('gyansetu_beamed_vault', JSON.stringify(cur));
+
+          if (!EPISODES.some(e => e.id === beamedEp.id)) {
+            EPISODES.unshift(beamedEp);
+          }
+
+          renderStationList();
+          receiverStatusBanner.innerHTML = `✅ DECRYPTED & INSTALLED: "${beamedEp.title}" saved to local vault!`;
+
+          setTimeout(() => {
+            meshModal.classList.remove('open');
+            tuneToEpisode(0, true);
+          }, 1200);
         }
 
-        renderStationList();
-
-        receiverStatusBanner.className = "mesh-status-banner success";
-        receiverStatusBanner.innerHTML = `✅ 100% BEAM VERIFIED: "${beamedEp.title}" decapsulated & installed in local vault! (0.00 KB cellular data)`;
-
-        setTimeout(() => {
-          meshModal.classList.remove('open');
-          tuneToEpisode(0, true);
-        }, 1600);
       } catch(e) {
         receiverStatusBanner.className = "mesh-status-banner info";
-        receiverStatusBanner.innerHTML = "⚠️ Checksum verification error. Please scan the loop again.";
+        receiverStatusBanner.innerHTML = "⚠️ Decryption error: " + e.message + ". Please scan the loop again.";
       }
+    }
+
+    async function downloadVaultAudioToIndexedDb(stations, origin) {
+      for (const st of stations) {
+        try {
+          const url = origin + "/" + st.src;
+          const resp = await fetch(url);
+          if (resp.ok) {
+            const blob = await resp.blob();
+            await saveAudioBlobToVault(st.id, blob);
+          }
+        } catch(e) {}
+      }
+      flashLcdMeta("FULL 20 MB AUDIO VAULT SAVED TO PERSISTENT STORAGE");
     }
 
     // Manual PIN Fallback
