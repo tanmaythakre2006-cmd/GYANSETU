@@ -15,3 +15,6 @@ Thumbs.db
 android/build/
 android_pocket/build/
 android/*.keystore
+
+temp_conversational_build/
+

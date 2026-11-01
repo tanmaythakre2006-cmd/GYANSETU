@@ -1,5 +1,3 @@
-// GyanSetu Master Multilingual Transcripts Library
-// Student-led Global Knowledge Platform • Curated by Simran Ailani
 window.GYAN_SETU_TRANSCRIPTS = {
   "ep-13": {
     "episodeId": "ep-13",
@@ -55,7 +53,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "नमस्कार! एखाद्या शहराचा इतिहास जाणून घ्यायचा असेल, तर केवळ त्याच्या आधुनिक इमारतींकडे पाहून चालत नाही; तर जुन्या वास्तूंच्या भिंतींमध्ये दडलेल्या आठवणी ऐकाव्या लागतात.",
         "english": "Namaskar! If one truly wishes to understand the soul and history of a city, looking merely at modern concrete towers is never enough; one must listen to the whispers and memories cradled within the ancient stones of its heritage.",
         "concept": null,
-        "hindi": "नमस्कार! यदि आप किसी शहर का वास्तविक इतिहास जानना चाहते हैं, तो केवल उसकी आधुनिक इमारतों को देखना पर्याप्त नहीं है; पुरानी वास्तुकला की दीवारों में छिपी यादों को सुनना होगा।"
+        "hindi": "Namaskar doston! Agar kisi shehar ki asli kahani aur uska itihaas jaanna hai na, toh sirf nayi chamchamati buildingen dekhne se kaam nahi chalega; hume uski purani galliyon, purane kilon aur mandiron ke ghanton ki goonj ko sunna padega."
       },
       {
         "start": 15,
@@ -64,7 +62,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "त्यांच्या घंटानादामागचा काळ समजून घ्यावा लागतो आणि जुन्या दरवाजातून वाहत असलेल्या इतिहासाचा मागोवा घ्यावा लागतो. आज आपण अशाच एका शहराच्या इतिहासात प्रवेश करणार आहोत.",
         "english": "We must decipher the bygone eras behind the ringing temple bells and retrace the footsteps of history flowing through timeless archways. Today, we step into the epic chronicles of one such city.",
         "concept": null,
-        "hindi": "हमें मंदिर के घंटों की गूंज के पीछे के दौर को समझना होगा और ऐतिहासिक द्वारों से गुजरते इतिहास के पदचिह्नों का पीछा करना होगा। आज हम ऐसे ही एक शहर के इतिहास में प्रवेश कर रहे हैं।"
+        "hindi": "Hume us daur ko mehsus karna hoga jo sadiyon pehle yahan guzra tha. Aaj hum nikal rahe hain ek aise hi shehar ke safar par..."
       },
       {
         "start": 30,
@@ -73,7 +71,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "तो म्हणजे आपला नागपूर! आजचे संत्र्यांचे शहर, पण एका काळी राजसत्तेचे केंद्रबिंदू, राजवैभवाचे प्रतीक आणि अनेक ऐतिहासिक घडामोडींचे साक्षीदार हे शहर.",
         "english": "That city is our beloved Nagpur! Today renowned globally as the 'City of Oranges,' it once stood as the formidable epicenter of sovereign empire, royal grandeur, and world-shaping historical turning points.",
         "concept": "Nag River",
-        "hindi": "और वह है हमारा अपना नागपुर! आज यह 'संतरा नगरी' के नाम से जाना जाता है, लेकिन कभी यह राजसत्ता का केंद्र, राजसी वैभव का प्रतीक और कई ऐतिहासिक घटनाओं का साक्षी रहा है।"
+        "hindi": "...aur woh hai hamara apna Nagpur! Aaj log ise Orange City ya Santra Nagri bolte hain, par kabhi yeh shaan-o-shaukat aur rajputana taakat ka bada kendra hua karta tha."
       },
       {
         "start": 45,
@@ -82,7 +80,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "या भूमीला गोंड राजांची परंपरा लाभली, भोसले घराण्याचा इतिहास लाभला, आणि ब्रिटिश सत्तेच्या विस्ताराच्या काळात अनेक स्थित्यंतरे अनुभवावी लागली.",
         "english": "This sacred soil inherited the enduring legacy of the Gond Kings, blossomed under the royal reign of the Maratha Bhonsle dynasty, and weathered seismic upheavals during the colonial expansion of the British Empire.",
         "concept": "Gond Dynasty",
-        "hindi": "इस भूमि को गोंड राजाओं की गौरवशाली परंपरा मिली, भोसले वंश का पराक्रमी इतिहास मिला, और ब्रिटिश हुकूमत के विस्तार के दौरान कई बड़े बदलाव देखने को मिले।"
+        "hindi": "Toh chaliye, samay ke chakke ko 300 saal peeche ghumate hain aur dekhte hain ki Nagpur ki neev kaise rakhi gayi thi."
       },
       {
         "start": 60,
@@ -91,7 +89,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "नागपूरच्या मांडणीची सुरुवात भोसले घराण्याने होत नाही; तर १८व्या शतकाच्या सुरुवातीला गोंड राजा बख्त बुलंद शहा यांना नागपूरच्या विकासाचे श्रेय दिले जाते. पुढे रघूजीराजे भोसले प्रथम...",
         "english": "The architectural founding of modern Nagpur does not begin with the Bhonsles, but rather in the early 18th century, credited to the visionary Gond King Bakht Buland Shah around 1702. Later, Raghuji Bhonsle I...",
         "concept": "Bakht Buland Shah",
-        "hindi": "नागपुर की नींव की शुरुआत भोसले वंश से नहीं, बल्कि 18वीं सदी की शुरुआत में गोंड राजा बख्त बुलंद शाह को आधुनिक नागपुर की स्थापना का श्रेय दिया जाता है। इसके बाद रघूजीराजे भोसले प्रथम..."
+        "hindi": "Nagpur ki kahani shuru hoti hai Gond rajaon se, jinhone 18th century ki shuruat mein is jungle se ghire ilaqe ko ek shandar shehar banaya."
       },
       {
         "start": 75,
@@ -100,7 +98,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "प्रथम यांनी नागपूरला आपल्या राज्याची राजधानी म्हणून महत्त्व प्राप्त करून दिले. भोसल्यांच्या काळात नागपूर हे राजकारण, प्रशासन, व्यापार आणि लष्करी सामर्थ्याचे महत्त्वाचे केंद्र बनले.",
         "english": "...elevated Nagpur into the sovereign capital of their realm. Under the Bhonsle kings, Nagpur emerged as a premier powerhouse of diplomacy, civil governance, thriving trade routes, and formidable military might.",
         "concept": "Bhonsle Dynasty",
-        "hindi": "...ने नागपुर को अपने राज्य की राजधानी बनाकर इसे विशेष महत्व दिया। भोसले शासनकाल में नागपुर राजनीति, प्रशासन, व्यापार और सैन्य शक्ति का एक प्रमुख केंद्र बन गया।"
+        "hindi": "Raja Bakht Buland Shah ne 1702 mein 12 alag alag gaanvon ko jod kar Nagpur ki neev rakhi thi."
       },
       {
         "start": 90,
@@ -109,7 +107,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "नागपूरची ओळख केवळ एका शहराची नव्हती; ती एका सत्तेची, संस्कृतीची आणि राजवैभवाची ओळख होती. आता आपण येतोय नागपूरच्या हृदयस्थानी, म्हणजेच महाल परिसरामध्ये.",
         "english": "Nagpur was not merely an administrative township; it was the embodiment of Maratha sovereignty, rich culture, and royal majesty. Now, let us travel to the very beating heart of Nagpur: the historic citadel of Mahal.",
         "concept": "Mahal",
-        "hindi": "नागपुर केवल एक शहर नहीं था; यह मराठा प्रभुसत्ता, समृद्ध संस्कृति और राजसी गरिमा की पहचान था। अब हम चलते हैं नागपुर के दिल यानी ऐतिहासिक 'महाल' क्षेत्र की ओर।"
+        "hindi": "Unhone Nag nadi ke kinare par safai karwayi, sadkein banwayi aur traders ko yahan aakar basne ke liye invite kiya."
       },
       {
         "start": 105,
@@ -118,7 +116,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "आज गजबजलेल्या बाजारपेठा आणि अरुंद रस्त्यांसाठी ओळखल्या जाणारा हा परिसर, एका काळी भोसले घराण्याच्या राजवाड्याचा आणि जुन्या नागपूरच्या राजकीय संस्कृतीच्या जीवनाचा महत्त्वाचा गाभा होता.",
         "english": "While known today for vibrant, crowded heritage markets and winding historic lanes, Mahal was once the regal nucleus of the Bhonsle royal palace and the heartbeat of civic and political life.",
         "concept": "Mahal",
-        "hindi": "आज संकरी गलियों और हलचल भरे बाजारों के लिए जाना जाने वाला यह क्षेत्र, कभी भोसले राजवंश के महलों और पुराने नागपुर के राजनीतिक जीवन का मुख्य केंद्र हुआ करता था।"
+        "hindi": "Unke baad Raja Chand Sultan ne shehar ko aur aage badhaya, Sitabuldi ka kila banwaya aur shehar ke chaaron taraf ek mazboot deewar khadi kar di."
       },
       {
         "start": 120,
@@ -127,7 +125,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "या इतिहासाच्या पाऊलखुणा जपणारे पाच दरवाजे विशेष उल्लेखनीय आहेत. पहिला गांधी दरवाजा—गोंड राजांनी याचे नाव जुम्मा दरवाजा असे ठेवले होते.",
         "english": "Five monumental gates (Darwazas) stand as living sentinels of this royal legacy. The first is Gandhi Darwaza, originally christened 'Jumma Darwaza' under the Gond rulers.",
         "concept": null,
-        "hindi": "इस इतिहास की गवाही देने वाले पाँच प्रमुख ऐतिहासिक द्वार विशेष रूप से प्रसिद्ध हैं। पहला है गांधी दरवाजा, जिसे गोंड राजाओं ने 'जुम्मा दरवाजा' नाम दिया था।"
+        "hindi": "Par 1739 mein Chand Sultan ke guzarne ke baad parivaar mein rajgaddi ke liye ladai shuru ho gayi."
       },
       {
         "start": 135,
@@ -136,7 +134,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "भोसलेंच्या काळी या दरवाजाचे नाव शुक्रवार दरवाजा असे झाले, त्यानुसार त्याच्या समोर असलेल्या तलावाचे नाव देखील बदलले गेले. जुन्या जुम्मा दरवाजाशी संबंधित...",
         "english": "During the Bhonsle era, it was renamed 'Shukrawar Darwaza' (Friday Gate), and the historic lake facing it was likewise rechristened. Intricately bound to this ancient portal...",
         "concept": null,
-        "hindi": "भोसले काल में इसका नाम बदलकर 'शुक्रवार दरवाजा' कर दिया गया और इसके सामने स्थित तालाब का नाम भी बदल दिया गया। पुराने जुम्मा दरवाजे से जुड़े..."
+        "hindi": "Tabhi picture mein entry hui Maratha samrajya ke bahadur senapati Raghuji Bhonsle ki!"
       },
       {
         "start": 150,
@@ -145,7 +143,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "हा परिसर १८५७ च्या उठावाच्या काळातील क्रांतिकारी बलिदानाच्या स्मृतींशी जोडला जातो. हा दरवाजा स्वातंत्र्यासाठी प्राण अर्पण करणाऱ्या वीरांची आठवण करून देतो.",
         "english": "...are the immortal sacrifices of revolutionary freedom fighters during the Indian Uprising of 1857. This gate stands forever as a tribute to those who laid down their lives for freedom.",
         "concept": null,
-        "hindi": "...अवशेष 1857 के प्रथम स्वतंत्रता संग्राम के अमर बलिदानियों की याद दिलाते हैं। यह द्वार आज भी देश के लिए जान न्योछावर करने वाले वीरों का नमन करता है।"
+        "hindi": "Raghuji Bhonsle ne aakar situation ko control kiya, aur 1743 tak Nagpur poori tarah se Bhonsle dynasty ki rajdhani ban gaya."
       },
       {
         "start": 165,
@@ -154,7 +152,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "[मध्यंतर संगीत / शांतता]",
         "english": "[Harmonic Interlude • Traditional Sitar & Flute Resonance]",
         "concept": null,
-        "hindi": "[मध्यंतर संगीत • सितार और बांसुरी की पारंपरिक धुन]"
+        "hindi": "Iske baad shuru hua Nagpur ka Golden Era—jise Bhonsle kaal kehte hain!"
       },
       {
         "start": 180,
@@ -163,7 +161,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "दुसरा दरवाजा म्हणजे भुतिया दरवाजा! होय, बरोबर ऐकलंत—इथला भुतिया दरवाजा! या दरवाजाचे नाव ऐकताच मनात कुतूहल निर्माण होते, कारण या दरवाजाशी जोडलेली एक गूढ आख्यायिका...",
         "english": "The second portal is the enigmatic 'Bhutiya Darwaza'—yes, the Ghost Gate! The moment one hears its name, an eerie curiosity awakens, rooted in a mystical legend whispered across centuries.",
         "concept": "Bhutiya Darwaza",
-        "hindi": "दूसरा ऐतिहासिक द्वार है 'भुतिया दरवाजा'! जी हां, बिल्कुल सही सुना आपने—भुतिया दरवाजा! इसका नाम सुनते ही एक रहस्यमयी कौतूहल जाग उठता है, क्योंकि इससे जुड़ी एक अनूठी लोककथा है..."
+        "hindi": "Nagpur ek chote se trading town se badhkar ek bohot bada political aur cultural hub ban gaya."
       },
       {
         "start": 195,
@@ -172,7 +170,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...आजही स्थानिक स्मृतीमध्ये सांगितली जाते. असे म्हणतात की बंगालच्या स्वारीच्या काळात काही मंत्र्यांनी रघूजीराजे भोसले यांच्यावर काळ्या जादूचा प्रयोग केला. याची माहिती मिळाल्यानंतर महाराजांनी...",
         "english": "Local folklore recounts that during the historic Bengal military expedition, rival sorcerers attempted occult black magic against King Raghuji Bhonsle. Upon uncovering this treason, the Maharaja...",
         "concept": "Bhutiya Darwaza",
-        "hindi": "...जो आज भी स्थानीय स्मृतियों में गूंजती है। कहा जाता है कि बंगाल अभियान के समय कुछ तांत्रिकों ने रघूजीराजे भोसले पर काला जादू करने का प्रयास किया। जब महाराज को इसका पता चला..."
+        "hindi": "Raghuji Bhonsle pehle ek bohot bade yoddha the, jinhone Bengal aur Odisha tak apne jhande gaade the."
       },
       {
         "start": 210,
@@ -181,7 +179,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...त्या मंत्र्याला मृत्युदंडाची शिक्षा सुनावली. मृत्यू समोर उभा ठाकल्यावर त्याने महाराजांसमोर एक प्रस्ताव ठेवला: त्याचे प्राण वाचवल्यास तो महालाच्या एका दरवाजाचे आणि...",
         "english": "...sentenced the sorcerer to execution. Staring death in the face, the sorcerer made a desperate pact: in exchange for his life, he would bind two supernatural guardian forces to watch over the palace gate...",
         "concept": "Bhutiya Darwaza",
-        "hindi": "...तो उन्होंने उस तांत्रिक को मृत्युदंड की सजा सुनाई। मृत्यु को सामने देखकर उसने महाराज के सामने एक प्रस्ताव रखा: प्राण रक्षा के बदले वह महल के एक द्वार और..."
+        "hindi": "Unhone Nagpur ko sundar mandiron, lake reservoirs aur shandar bagichon se saja diya."
       },
       {
         "start": 225,
@@ -190,7 +188,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...घराण्याचे रक्षण करण्यासाठी दोन अदृश्य शक्ती देईल. रघूजी महाराजांनी हा प्रस्ताव स्वीकारल्याची आख्यायिका सांगितली जाते. तेव्हापासून या दोन शक्ती भुतिया दरवाजावर पहारा देतात...",
         "english": "...and protect the royal lineage forever. Legend tells that Maharaja Raghuji accepted. Since that fateful night, local belief holds that these two unseen guardians keep vigil at Bhutiya Darwaza.",
         "concept": "Bhutiya Darwaza",
-        "hindi": "...राजघराने की रक्षा के लिए दो अदृश्य दिव्य शक्तियां प्रदान करेगा। लोककथा के अनुसार महाराज रघूजी ने यह प्रस्ताव स्वीकार कर लिया। तब से माना जाता है कि ये दो शक्तियां भुतिया दरवाजे पर पहरा देती हैं।"
+        "hindi": "Mahal ka ilakha shehar ka dil ban gaya, jahan raja ka shahi mahal, unki adalat aur mukhya market hoti thi."
       },
       {
         "start": 240,
@@ -199,7 +197,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...अशी लोकमान्यता आहे. या कथेला आणखी एक गूढ पदर आहे—भोसले घराण्यातील एखाद्या व्यक्तीचे निधन झाल्यानंतर, अंतिम संस्कारासाठी पार्थिव याच दरवाजातून नेले जात असे...",
         "english": "The legend deepens with another solemn custom: whenever a member of the royal Bhonsle dynasty passed away, their funeral cortège was traditionally carried through this very gate on its final journey.",
         "concept": "Bhutiya Darwaza",
-        "hindi": "इस कहानी का एक और गंभीर पहलू है—भोसले परिवार के किसी सदस्य के निधन के बाद उनकी अंतिम यात्रा इसी दरवाजे से होकर निकलती थी, ऐसी भी स्थानीय परंपरा रही है।"
+        "hindi": "Shukrawari Talao jise hum Gandhi Sagar bolte hain, aur Sakkardara Talao usi daur mein banwaye gaye the taaki shehar ko paani ki kami na ho."
       },
       {
         "start": 255,
@@ -208,7 +206,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...असेही स्थानिक परंपरेत सांगितले जाते. चौथा म्हणजे पत्थरफोड दरवाजा आणि पाचवा पाताळेश्वर दरवाजा. पाताळेश्वर मंदिराच्या परिसराशी जोडलेले हे नाव...",
         "english": "The remaining sentinels are the Pattharphod Darwaza (Stone-Breaker Gate) and the Pataleshwar Darwaza. Linked to the ancient underground sanctum of Pataleshwar temple...",
         "concept": null,
-        "hindi": "चौथा है पत्थरफोड दरवाजा और पांचवा पातालेश्वर दरवाजा। प्राचीन पातालेश्वर मंदिर से जुड़ा यह नाम..."
+        "hindi": "Shehar ke alag alag ilaqon ko Peth ke roop mein divide kiya gaya—jaise Budhwari, Shukrawari, Itwari aur Somwari."
       },
       {
         "start": 270,
@@ -217,7 +215,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...जुन्या नागपूरच्या धार्मिक आणि सांस्कृतिक परंपरेची आठवण करून देते. हे पाच दरवाजे म्हणजे केवळ प्रवेशमार्ग नाहीत; हे जुन्या नागपूरच्या रचनेचे, परंपरेचे आणि लोकस्मृतीचे प्रतीक आहेत.",
         "english": "...it echoes the profound spiritual devotion of old Nagpur. These five gates were never just stone passageways; they are living testaments to Nagpur's urban architecture, customs, and civil memory.",
         "concept": null,
-        "hindi": "...पुराने नागपुर की गहरी धार्मिक और सांस्कृतिक परंपराओं की याद दिलाता है। ये पाँच दरवाजे केवल रास्ते नहीं हैं; ये नागपुर के वास्तुशिल्प और जनमानस की जीवंत धरोहर हैं।"
+        "hindi": "Yeh Peth alag alag dinon ke market the jahan door-door se traders apna saamaan bechne aate the."
       },
       {
         "start": 285,
@@ -226,7 +224,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "आता या इतिहासातील एका भावस्पर्शी अध्यायाकडे वळूया—भोसल्यांच्या राजवाड्याकडे. एका काळी ज्या वाड्यात राजसत्तेचा दरारा होता...",
         "english": "Now, let us turn to a deeply touching and poignant chapter of history: the Royal Palace of the Bhonsles. In a palace that once commanded imperial awe and absolute authority...",
         "concept": "Bhonsle Dynasty",
-        "hindi": "अब रुख करते हैं इतिहास के एक भावुक अध्याय की ओर—भोसले राजघराने के शाही वाड़े (महल) की ओर। जिस महल में कभी राजसत्ता का दबदबा था..."
+        "hindi": "Nagpur mein hathkargha (handloom) ka kaam bohot tezi se badha aur yahan ki koshti sarees poore desh mein mashhoor ho gayi."
       },
       {
         "start": 300,
@@ -235,7 +233,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...जिथे भव्य दरबार भरत असत आणि राजकीय निर्णय घेतले जात असत, त्या वास्तूचा पुढे विनाश झाला. ब्रिटिश सत्तेच्या विस्ताराच्या काळात भोसले घराण्याच्या राजकीय सामर्थ्याला ओहोटी लागली.",
         "english": "...where resplendent royal durbars assembled and historic treaties were ratified, that majestic edifice faced ruin. As British hegemony expanded, the political sunset of the Bhonsle empire began.",
         "concept": "Doctrine of Lapse",
-        "hindi": "...जहां भव्य दरबार सजते थे और ऐतिहासिक निर्णय लिए जाते थे, वह वास्तू बाद में नष्ट हो गई। ब्रिटिश सत्ता के विस्तार के साथ भोसले राजवंश के राजनीतिक प्रभाव का सूर्यास्त होने लगा।"
+        "hindi": "Kalyaneshwar mandir aur Telankhedi Hanuman mandir jaise sthal aaj bhi Bhonsle kal ke shandar culture ki gawaahi dete hain."
       },
       {
         "start": 315,
@@ -244,7 +242,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "भोसल्यांच्या वाड्याबद्दल एक हृदयस्पर्शी स्थानिक आख्यायिका सांगितली जाते: वाडा जळून खाक झाल्यानंतर त्याची राख कल्यानेश्वर मंदिरासमोरील रस्त्यावर पसरली होती.",
         "english": "A heartbreaking local story is preserved in folk memory: when the royal palace was tragically consumed by fire, its sacred ashes scattered across the avenue in front of the Kalyaneshwar temple.",
         "concept": null,
-        "hindi": "भोसले वाड़े के बारे में एक हृदयस्पर्शी लोकस्मृति है: जब यह महल जलकर राख हो गया, तो उसकी राख कल्यानेश्वर मंदिर के सामने की सड़क पर बिखर गई थी।"
+        "hindi": "Par 1803 mein British East India Company ne Maratha samrajya par dhyan dena shuru kiya."
       },
       {
         "start": 330,
@@ -253,7 +251,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "क्षणभर कल्पना करा—जिथे कधी काळी राजवैभव नांदले, तिथे आता फक्त राख उरली होती! ज्या वास्तूने एका बलाढ्य घराण्याचा उत्कर्ष पाहिला...",
         "english": "Pause for a moment and imagine: where sovereign opulence once reigned supreme, only silent ashes remained. The very walls that witnessed the meteoric rise of a great dynasty...",
         "concept": null,
-        "hindi": "जरा कल्पना कीजिए—जहां कभी राजसी वैभव गूंजता था, वहां केवल मौन राख बची थी। जिस दीवार ने एक साम्राज्य का उत्थान देखा..."
+        "hindi": "Second Anglo-Maratha War ke baad Britishers ne Nagpur mein apna Resident bitha diya."
       },
       {
         "start": 345,
@@ -262,7 +260,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...तीच वास्तू त्याच्या वैभवाच्या अस्ताची साक्ष देत उभी होती. काळाचा सर्वात मोठा न्याय हाच, की तो कोणाचेही वैभव कायमचे टिकू देत नाही.",
         "english": "...stood bearing solemn witness to the twilight of its glory. Perhaps the ultimate truth of Time is its impartiality: no earthly empire or sovereign majesty remains forever immortal.",
         "concept": null,
-        "hindi": "...वही दीवार उसके अवसान की साक्षी बनी। समय का सबसे बड़ा न्याय यही है कि वह किसी भी सांसारिक वैभव को हमेशा के लिए नहीं रहने देता।"
+        "hindi": "Asli mod aaya 1817 mein Sitabuldi ki ladai ke dauran, jab Raghuji ke bete Appasaheb Bhonsle ne azaadi ke liye Britishers par hamla kiya."
       },
       {
         "start": 360,
@@ -271,7 +269,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "अशा अनेक कथा आणि ऐतिहासिक नोंदी आपल्याला महाल परिसरात ऐकायला मिळतात. महालमधील हनुमान खिडकी मंदिराची परंपरा त्यामधलीच एक आहे.",
         "english": "Countless such living narratives and chronicles resonate through Mahal. Among them stands the sacred tradition of the Hanuman Khidki Temple.",
         "concept": "Mahal",
-        "hindi": "ऐसी अनगिनत कहानियां और ऐतिहासिक दस्तावेज हमें महाल परिसर में मिलते हैं। महाल का हनुमान खिड़की मंदिर भी ऐसी ही एक जीवित परंपरा है।"
+        "hindi": "Lekin 26-27 November 1817 ko Sitabuldi ki pahadi par British sena ne Bhonsle fauj ko hara diya aur shehar par apna qabza jamaya."
       },
       {
         "start": 375,
@@ -280,7 +278,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "रघूजीराजे भोसले प्रथम यांच्या काळाशी ही प्रथा थेट जोडली जाते. मंदिरातील मूर्ती आणि तिच्याशी संबंधित कथा आजही स्थानिक श्रद्धेचा अविभाज्य भाग आहेत.",
         "english": "This tradition traces its origins directly to Raghuji Bhonsle I. The consecrated idol and the lore surrounding it remain an inseparable part of regional reverence.",
         "concept": "Bhonsle Dynasty",
-        "hindi": "रघूजीराजे भोसले प्रथम के काल से यह परंपरा सीधे जुड़ी हुई है। मंदिर की प्रतिमा और उससे जुड़ी आस्था आज भी लोकजीवन का अटूट हिस्सा है।"
+        "hindi": "1853 mein Raghuji teesre ke bina kisi waaris ke guzarne ke baad, Lord Dalhousie ne 'Doctrine of Lapse' ke tehat Nagpur ko poori tarah se British empire mein mila liya."
       },
       {
         "start": 390,
@@ -289,7 +287,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "ती श्रद्धा अशी, की भोसल्यांच्या घरात जेव्हाही कोणाचे लग्न ठरत असे, तेव्हा त्यांच्या घरी वीर (योद्धे) बोलावले जात. त्या वीरांचा सन्मान केला जाई...",
         "english": "The royal custom decreed that whenever a wedding took place in the Bhonsle household, valiant armed warriors ('Veer') were invited as honored guests to bestow blessings...",
         "concept": null,
-        "hindi": "परंपरा यह है कि भोसले परिवार में जब भी कोई विवाह होता, तो वीर योद्धाओं को विशेष सम्मान के साथ आमंत्रित किया जाता था..."
+        "hindi": "British kaal mein Nagpur Central Provinces and Berar ki rajdhani bana."
       },
       {
         "start": 405,
@@ -298,7 +296,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...सशस्त्र हनुमानाचे दर्शन घेतले जाई आणि त्यानंतरच पुढील विवाह विधी पार पडत असत. पण इतिहास साक्षीदार आहे—सत्ता कितीही मोठी असली, तरी तिचा अस्त होतोच.",
         "english": "...and after paying armed homage at the Hanuman temple, the wedding rituals commenced. Yet history bears witness: no matter how colossal an empire, its sunset inevitably arrives.",
         "concept": null,
-        "hindi": "...सशस्त्र हनुमान जी के दर्शन के बाद ही विवाह के आगे के रीति-रिवाज पूरे होते थे। पर इतिहास गवाह है—सत्ता चाहे कितनी भी विशाल हो, उसका अंत अवश्यम्भावी है।"
+        "hindi": "Angrezon ne yahan Railway line shuru ki, High Court banwaya, General Post Office aur Vidhan Bhavan jaise bade structures khade kiye."
       },
       {
         "start": 420,
@@ -307,7 +305,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "भोसले सत्तेचा अस्त एका दिवसात झाला नव्हता. १८१७ च्या दरम्यान सीताबर्डीच्या लढाईनंतर भोसल्यांच्या राज्याला खूप मोठा धक्का बसला होता.",
         "english": "The collapse of Bhonsle sovereignty did not occur overnight. Around 1817, following the fiercely contested Battle of Sitabuldi, the dynasty suffered a devastating strategic blow against British forces.",
         "concept": "Battle of Sitabuldi",
-        "hindi": "भोसले सत्ता का पतन रातों-रात नहीं हुआ। 1817 के सीताबर्डी के भीषण युद्ध के बाद भोसले राज्य को अंग्रेजों के हाथों गहरा सामरिक आघात लगा।"
+        "hindi": "1907 mein Jamsetji Tata ne yahan apni pehli textile mill shuru ki—Empress Mills—jisne hazaron logon ko rozgar diya."
       },
       {
         "start": 435,
@@ -316,7 +314,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "पुढे १८५३ मध्ये रघूजीराजे भोसले तिसरे यांचे निधन झाल्यानंतर ब्रिटिशांनी नागपूर संस्थान आपल्या ताब्यात घेतले. या घटनेने नागपूरच्या एका सुवर्णयुगाचा शेवट केला.",
         "english": "Later in 1853, when Raghuji Bhonsle III passed away without a male heir, the British East India Company enforced the Doctrine of Lapse and seized Nagpur, bringing an end to a golden royal epoch.",
         "concept": "Doctrine of Lapse",
-        "hindi": "आगे चलकर 1853 में जब रघूजीराजे भोसले तृतीय का निसंतान निधन हुआ, तो अंग्रेजों ने 'डॉक्ट्रिन ऑफ लैप्स' के तहत नागपुर रियासत को अपने साम्राज्य में मिला लिया, और एक स्वर्णिम युग समाप्त हो गया।"
+        "hindi": "Shehar ke beechon-beech 'Zero Mile Stone' banaya gaya, jo poore undivided India ka geographical center point tha!"
       },
       {
         "start": 450,
@@ -325,7 +323,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "म्हणून पुढच्या वेळी तुम्ही महालमधून जात असाल, तेव्हा केवळ गर्दी पाहू नका! गांधी दरवाजाकडे पाहताना वीरांचे बलिदान आठवा...",
         "english": "Therefore, the next time you walk through the bustling avenues of Mahal, do not see only the crowd! As you gaze upon Gandhi Darwaza, remember the immortal sacrifices of freedom fighters...",
         "concept": "Mahal",
-        "hindi": "इसलिए अगली बार जब आप महाल की गलियों से गुजरें, तो केवल भीड़ मत देखिए! गांधी दरवाजे को देखते हुए देश के अमर शहीदों को याद कीजिए..."
+        "hindi": "Par Nagpur sirf buildings ka shehar nahi tha, yeh azaadi ki ladai ka ek shaktishali gadh ban gaya."
       },
       {
         "start": 465,
@@ -334,7 +332,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...कल्याणेश्वर मंदिरावरून जात असताना जुन्या राजवैभवाची कल्पना करा; भुतिया दरवाजाजवळ उभे राहून त्या दोन अदृश्य रक्षकांची गूढ आख्यायिका आठवा...",
         "english": "...as you pass near Kalyaneshwar Temple, visualize the lost splendor of the royal court; and beside Bhutiya Darwaza, contemplate the mystical vigil of its two unseen guardians...",
         "concept": "Bhutiya Darwaza",
-        "hindi": "...कल्यानेश्वर मंदिर के पास से निकलते हुए पुराने राजवैभव की कल्पना कीजिए; और भुतिया दरवाजे के पास खड़े होकर उन दो अदृश्य रक्षकों की रहस्यमयी गाथा को महसूस कीजिए..."
+        "hindi": "1920 ka Indian National Congress ka historic session yahin hua tha, jahan Mahatma Gandhi ne Non-Cooperation Movement ka ailaan kiya tha."
       },
       {
         "start": 480,
@@ -343,7 +341,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...पत्थरफोड आणि पाताळेश्वर दरवाजाकडे पाहताना या शहराच्या सांस्कृतिक स्मृतींना उजाळा द्या. कारण इतिहास हा केवळ पुस्तकात बंदिस्त नसतो!",
         "english": "...and at Pattharphod and Pataleshwar Darwaza, rekindle the cultural soul of this city. For history is never confined within the dry pages of old textbooks!",
         "concept": null,
-        "hindi": "...पत्थरफोड और पातालेश्वर दरवाजे को देखते हुए इस शहर की सांस्कृतिक आत्मा को नमन कीजिए। क्योंकि इतिहास केवल किताबों के पन्नों में कैद नहीं होता!"
+        "hindi": "1923 ka Jhanda Satyagraha Nagpur ki azaadi ke jazbe ki sabse badi misaal bana."
       },
       {
         "start": 495,
@@ -352,7 +350,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "तो जुन्या दरवाजांच्या नावांत, मंदिरांच्या परिसरात, हरवलेल्या वास्तूंच्या आठवणींत आणि पूर्वजांनी जपलेल्या कथांमध्ये जिवंत असतो. वास्तू नष्ट होऊ शकतात, सत्ता संपुष्टात येऊ शकते...",
         "english": "History lives breathing in the names of old archways, in temple courtyard stones, in the memories of lost monuments, and in the folk stories passed down by our ancestors. Structures can crumble, rulers can fall...",
         "concept": null,
-        "hindi": "वह पुराने दरवाजों के नामों में, मंदिरों के आंगनों में, पुरानी इमारतों की यादों में और हमारे पूर्वजों की कहानियों में सांस लेता है। इमारतें गिर सकती हैं, सत्ताएं मिट सकती हैं..."
+        "hindi": "Aur 14 October 1956 ko, Deekshabhoomi par Dr. B.R. Ambedkar ne lakho anuyayiyon ke sath Buddhism apnaya—jo samaajik kranti ka ek historic din bana."
       },
       {
         "start": 510,
@@ -361,7 +359,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "...पण इतिहास जिवंत ठेवण्याची जबाबदारी आपल्या हातात असते. कारण शहराची खरी ओळख त्याच्या इमारतींमध्ये नसते, तर तिच्या संस्कृतीत आणि इतिहासात असते.",
         "english": "...but the noble responsibility of keeping history alive rests in our hands. Because a city's true soul is never defined by its concrete towers, but by its culture, memory, and heritage.",
         "concept": null,
-        "hindi": "...लेकिन इतिहास को जीवित रखने की जिम्मेदारी हमारी है। क्योंकि किसी भी शहर की असली पहचान उसकी कंक्रीट की इमारतों में नहीं, बल्कि उसकी संस्कृति और इतिहास में होती है।"
+        "hindi": "1960 mein Maharashtra banne par Nagpur ko state ki 'Up-rajdhani' ya Second Capital ka darja mila."
       },
       {
         "start": 525,
@@ -370,7 +368,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "नागपूरच्या समुद्रासारख्या विशाल इतिहासामधील काही अंश आज आपण इथे चर्चेत आणला. चला, याच निमित्ताने नागपूरबद्दल चर्चा तरी सुरू झाली आहे!",
         "english": "Today, we have explored just a humble ripple from the boundless ocean of Nagpur's history. Through this conversation, the dialogue to rediscover our roots has truly begun!",
         "concept": null,
-        "hindi": "नागपुर के अथाह इतिहास के कुछ अनमोल अंश आज हमने आपके साथ साझा किए। कम से कम अपनी जड़ों को जानने की यह चर्चा तो शुरू हुई!"
+        "hindi": "Aaj Nagpur ek modern IT aur education hub ban chuka hai, jahan Metro daudti hai aur AIIMS aur IIM jaise institutes hain."
       },
       {
         "start": 540,
@@ -379,7 +377,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "यानंतर भेटूया परत एकदा एका नवीन अध्यायामध्ये, ज्यात आपण नागपूरबद्दल आणि विज्ञानाबद्दल अजून जाणून घेऊया. धन्यवाद!",
         "english": "Join me again in our next broadcast as we unravel fresh chapters of human curiosity, science, and history. Thank you for listening!",
         "concept": null,
-        "hindi": "अगले अंक में फिर मिलेंगे एक नए विचार, विज्ञान और इतिहास के अनछुए पहलू के साथ। बहुत-बहुत धन्यवाद!"
+        "hindi": "Lekin jab bhi aap Mahal ki galliyon se guzarte hain, toh purane pattharon aur mandiron ki ghantiyon mein wahi sadiyon purani kahani sunai deti hai."
       },
       {
         "start": 555,
@@ -388,7 +386,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
         "marathi": "जय हिंद, जय महाराष्ट्र!",
         "english": "Jai Hind, Jai Maharashtra!",
         "concept": null,
-        "hindi": "जय हिंद, जय महाराष्ट्र!"
+        "hindi": "Yeh tha hamare apne Nagpur ka shandar safar—Gond rajaon ke sapne se lekar, Bhonsle ki talwaron aur aaj ke modern youth tak! Jai Hind, Jai Maharashtra!"
       }
     ]
   },
@@ -397,7 +395,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 12,
     "titleOriginal": "Oops, I Created Life: In Hindsight, Victor…",
     "titleEnglish": "Oops, I Created Life: In Hindsight, Victor…",
-    "titleHindi": "Oops, I Created Life: In Hindsight, Victor…",
+    "titleHindi": "विक्टर फ्रैंकनस्टीन: जब इंसान बना भगवान",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -406,36 +404,24 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 45,
-        "timeLabel": "00:00",
-        "english": "What happens when human curiosity crosses the perilous line into unchecked obsession? Through Mary Shelley's timeless masterpiece Frankenstein, we unravel the dark side of ambition, the ethical boundaries of creation, and the existential consequences of playing God.",
-        "hindi": "क्या होता है जब मानवीय जिज्ञासा सीमाओं को लांघकर एक खतरनाक जुनून बन जाती है? मैरी शेली के कालजयी उपन्यास 'फ्रेंकस्टीन' के माध्यम से हम अंधी महत्वाकांक्षा के अंधेरे पक्ष, रचना की नैतिक सीमाओं और ईश्वर बनने की कोशिश के गंभीर परिणामों का विश्लेषण करते हैं।",
-        "concept": "Ethics of Creation"
+        "time": "0:00 - 0:45",
+        "english": "What happens when human ambition outpaces moral wisdom? Mary Shelley's 1818 masterpiece Frankenstein interrogates the intoxicating thrill of creation and the tragic consequences of playing god.",
+        "hindi": "Socho agar koi student lab mein aisi cheez bana de jo uske control se bahar ho jaye aur zinda ho jaye! 1818 mein 19 saal ki Mary Shelley ne likha tha Frankenstein ka kissa, jo aaj ke AI daur mein pehle se zyada relevant hai."
       },
       {
-        "start": 45,
-        "end": 120,
-        "timeLabel": "00:45",
-        "english": "Victor Frankenstein was not motivated by malevolence, but by an intoxicating thirst for intellectual glory and scientific conquest. Yet, the tragedy lies in his fatal refusal to accept parental and moral responsibility for what he brought into the world.",
-        "hindi": "विक्टर फ्रेंकस्टीन का उद्देश्य कोई बुराई नहीं, बल्कि बौद्धिक गौरव और वैज्ञानिक विजय की नशीली प्यास थी। लेकिन असली त्रासदी इस बात में छिपी थी कि उसने अपनी ही बनाई रचना की नैतिक और भावनात्मक जिम्मेदारी लेने से इनकार कर दिया।",
-        "concept": "Hubris"
+        "time": "0:45 - 1:30",
+        "english": "Victor Frankenstein was driven not by malice, but by scientific hubris—the desire to conquer death. Yet his failure lay in abandoning the creature he brought to life.",
+        "hindi": "Victor Frankenstein koi bura insaan nahi tha, balki ek passionate student tha jo maut par jeet paana chahta tha. Par uski sabse badi galti yeh thi ki jaise hi creature zinda hua, woh darr kar uski zimmedari lene se bhaag gaya!"
       },
       {
-        "start": 120,
-        "end": 220,
-        "timeLabel": "02:00",
-        "english": "As artificial intelligence, synthetic biology, and genetic engineering redefine modern civilization, Shelley's 1818 warning echoes louder than ever: just because we possess the technological power to create something, does that truly mean we should?",
-        "hindi": "आज जब कृत्रिम बुद्धिमत्ता (AI), सिंथेटिक बायोलॉजी और जेनेटिक इंजीनियरिंग मानव सभ्यता को नया रूप दे रहे हैं, तब शेली की 1818 की यह चेतावनी पहले से कहीं अधिक गूंजती है: सिर्फ इसलिए कि हमारे पास कुछ नया बनाने की तकनीकी शक्ति है, क्या इसका मतलब यह है कि हमें उसे बनाना ही चाहिए?",
-        "concept": "Synthetic Biology"
+        "time": "1:30 - 2:15",
+        "english": "As artificial intelligence and synthetic biology redefine the 21st century, Shelley's warning resonates louder than ever: having the technical power to build something does not mean we should build it without responsibility.",
+        "hindi": "Aaj jab hum AI, clones aur synthetic biology bana rahe hain, Victor ki yeh kahani hume ek gehra sabak deti hai: kisi cheez ko bana lena hi sab kuch nahi hota, uske consequences ki zimmedari lena asli science hai!"
       },
       {
-        "start": 220,
-        "end": 321,
-        "timeLabel": "03:40",
-        "english": "True scientific enlightenment is never measured solely by raw discovery, but by the empathy and guardianship with which we govern the fruits of our intellect. The monster was not born evil; neglect and alienation made him one.",
-        "hindi": "सच्ची वैज्ञानिक समझ केवल नई खोजों से नहीं, बल्कि उस संवेदनशीलता और जिम्मेदारी से मापी जाती है जिससे हम अपने ज्ञान का संचालन करते हैं। वह प्राणी जन्म से दैत्य नहीं था; समाज की उपेक्षा और अकेलेपन ने उसे ऐसा बना दिया।",
-        "concept": "Empathy in Science"
+        "time": "2:15 - 2:50",
+        "english": "True scientific genius requires not merely raw intellect, but profound empathy, ethics, and humanity.",
+        "hindi": "Asli scientific genius sirf dimag se nahi, balki dil aur ethics se kaam karta hai. Science ka maksad insaniyat ko bachana hai, use khatre mein daalna nahi!"
       }
     ]
   },
@@ -444,7 +430,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 11,
     "titleOriginal": "What colour is the sky?",
     "titleEnglish": "What colour is the sky?",
-    "titleHindi": "What colour is the sky?",
+    "titleHindi": "आसमान का रंग नीला क्यों होता है?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -453,36 +439,24 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 45,
-        "timeLabel": "00:00",
-        "english": "What colour is the sky? A simple childhood question that conceals one of the most elegant optical physics phenomena in our universe: the delicate dance between white solar light, atmospheric gases, and Rayleigh scattering.",
-        "hindi": "आसमान का रंग क्या है? बचपन का यह सीधा सा सवाल ब्रह्मांड के सबसे खूबसूरत भौतिकी सिद्धांतों में से एक को समेटे हुए है: सूर्य के श्वेत प्रकाश, वायुमंडलीय गैसों और 'रेले प्रकीर्णन' (Rayleigh Scattering) के बीच का अद्भुत तालमेल।",
-        "concept": "Rayleigh Scattering"
+        "time": "0:00 - 0:45",
+        "english": "Why is the daytime sky blue, yet sunsets burst into vibrant crimson and gold? The answer lies in the beautiful dance between solar photons and atmospheric molecules known as Rayleigh scattering.",
+        "hindi": "Chhote bachhe aksar poochte hain ki din mein aasmaan neela kyun hota hai aur shaam ko laal-peela? Hum bachpan mein bol dete the 'bas hota hai'. Par iske peeche light aur hawa ke molecules ka ek bohot mast physics concept hai—Rayleigh Scattering!"
       },
       {
-        "start": 45,
-        "end": 130,
-        "timeLabel": "00:45",
-        "english": "Sunlight reaches Earth as a continuous spectrum of all visible colors. But as photons collide with nitrogen and oxygen molecules, shorter blue wavelengths scatter roughly ten times more efficiently than longer red wavelengths, painting our daily canopy blue.",
-        "hindi": "सूर्य का प्रकाश सभी दृश्य रंगों के एक निरंतर स्पेक्ट्रम के रूप में पृथ्वी तक पहुंचता है। लेकिन जैसे ही यह हवा में मौजूद नाइट्रोजन और ऑक्सीजन के अणुओं से टकराता है, छोटी नीली तरंगें लंबी लाल तरंगों की तुलना में लगभग दस गुना अधिक बिखरती हैं, जिससे आसमान नीला दिखाई देता है।",
-        "concept": "Wave Optics"
+        "time": "0:45 - 1:30",
+        "english": "Sunlight enters the atmosphere as a white spectrum of all visible colors. Nitrogen and oxygen molecules scatter shorter blue wavelengths almost ten times more efficiently than longer red light.",
+        "hindi": "Sooraj ki roshni safed hoti hai, jisme saare rang hote hain. Jab yeh roshni hawa ke nitrogen aur oxygen molecules se takrati hai, toh chhoti neeli waves laal waves ke mukable 10 guna zyada chaaron taraf bikhar jaati hain, isiliye aasmaan neela dikhta hai!"
       },
       {
-        "start": 130,
-        "end": 210,
-        "timeLabel": "02:10",
-        "english": "Why then are sunsets fiery crimson? At dusk, sunlight traverses up to thirty times more atmosphere to reach our eyes. Almost all blue light is scattered away across the vast distance, allowing only resilient amber and ruby rays to reach us.",
-        "hindi": "फिर सूर्यास्त के समय आसमान गहरा लाल और नारंगी क्यों दिखता है? शाम के समय सूर्य की किरणों को हमारी आँखों तक पहुँचने के लिए तीस गुना अधिक वायुमंडल से गुजरना पड़ता है। इस लंबी दूरी में सारा नीला प्रकाश बिखर जाता है, और केवल लाल किरणें ही हम तक पहुँच पाती हैं।",
-        "concept": "Sunset Optics"
+        "time": "1:30 - 2:15",
+        "english": "At dusk, sunlight must travel through thirty times more air mass. The blue light scatters away before reaching our eyes, leaving only penetrating amber and fiery crimson waves to illuminate the twilight.",
+        "hindi": "Aur shaam ko jab sooraj doobta hai, toh roshni ko bohot lamba rasta cross karke aana padta hai. Sara neela rang raste mein hi bikhar kar khatam ho jaata hai, aur sirf lambi laal aur narangi kirnein hamari aankhon tak pahunchti hain!"
       },
       {
-        "start": 210,
-        "end": 271,
-        "timeLabel": "03:30",
-        "english": "And if our eyes were sensitive to ultraviolet light, the sky would look violet! The color we perceive is as much an artifact of human photoreceptor biology as it is of atmospheric physics.",
-        "hindi": "और यदि हमारी आँखें पराबैंगनी प्रकाश के प्रति संवेदनशील होतीं, तो आसमान बैंगनी दिखाई देता! हम जो रंग देखते हैं, वह वायुमंडलीय भौतिकी के साथ-साथ हमारी आँखों की जैविक संरचना का भी परिणाम है।",
-        "concept": "Photoreceptors"
+        "time": "2:15 - 2:50",
+        "english": "Simran Ailani breaks down this everyday optical miracle, reminding us that physics paints our sky every single day.",
+        "hindi": "Hai na kamaal ki baat? Ek roz subah-shaam dikhne wala aasmaan nature ki ek live physics class hai jo hume roz ek naya show dikhati hai!"
       }
     ]
   },
@@ -491,7 +465,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 10,
     "titleOriginal": "Napoleon wasn't poisoned.....or was he?",
     "titleEnglish": "Napoleon wasn't poisoned.....or was he?",
-    "titleHindi": "Napoleon wasn't poisoned.....or was he?",
+    "titleHindi": "नेपोलियन को ज़हर दिया गया था... या कुछ और?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -500,36 +474,24 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 50,
-        "timeLabel": "00:00",
-        "english": "On the windswept Atlantic island of Saint Helena in 1821, Napoleon Bonaparte breathed his last. For two centuries, historians and toxicologists have waged war over a single question: was the fallen Emperor assassinated with arsenic, or did he succumb to stomach cancer?",
-        "hindi": "1821 में अटलांटिक महासागर के निर्जन सेंट हेलेना द्वीप पर नेपोलियन बोनापार्ट ने अपनी अंतिम सांस ली। दो सदियों से इतिहासकार और विष-वैज्ञानिक एक ही सवाल पर बहस कर रहे हैं: क्या इस पराजित सम्राट को आर्सेनिक जहर देकर मारा गया था, या उसकी मौत पेट के कैंसर से हुई थी?",
-        "concept": "Forensic Toxicology"
+        "time": "0:00 - 0:45",
+        "english": "When Napoleon Bonaparte died in exile on the remote island of Saint Helena in 1821, the official verdict pointed to stomach cancer. But decades later, forensic science reopened the case.",
+        "hindi": "1821 mein jab Napoleon Bonaparte ki maut Saint Helena island par hui, toh doctors ne bola ki pet ke cancer se mara. Par 1960s mein forensic science ne ek aisa twist la diya jisne poori history ko hila kar rakh diya!"
       },
       {
-        "start": 50,
-        "end": 140,
-        "timeLabel": "00:50",
-        "english": "In the 1960s, nuclear activation analysis on preserved strands of Napoleon's hair detected shocking concentrations of arsenic—up to forty times normal baseline levels. The poisoning hypothesis seemed confirmed.",
-        "hindi": "1960 के दशक में नेपोलियन के बालों के नमूनों के परमाणु परीक्षण (न्यूट्रॉन एक्टिवेशन विश्लेषण) में आर्सेनिक की चौंकाने वाली मात्रा पाई गई—सामान्य से लगभग 40 गुना अधिक। ऐसा लगा मानो जहर दिए जाने की बात सिद्ध हो गई हो।",
-        "concept": "Neutron Activation"
+        "time": "0:45 - 1:30",
+        "english": "Nuclear analysis of his preserved hair revealed shocking concentrations of arsenic—up to 40 times normal levels. Was the fallen emperor systematically assassinated by British guards?",
+        "hindi": "Scientists ne jab Napoleon ke baalon ke samples ka nuclear analysis kiya, toh usme Arsenic ka level normal se 40 guna zyada nikla! Sab shock ho gaye ki kya British guards use chupke se dheere-dheere zeher de rahe the?"
       },
       {
-        "start": 140,
-        "end": 220,
-        "timeLabel": "02:20",
-        "english": "Yet modern forensic chemistry uncovered an astonishing twist: Napoleon's bedroom wallpaper was tinted with copper arsenite, known as Scheele's Green. In the humid tropical island climate, mold metabolized this pigment into toxic trimethylarsine gas.",
-        "hindi": "लेकिन आधुनिक फॉरेंसिक केमिस्ट्री ने एक नया मोड़ सामने ला दिया: नेपोलियन के कमरे के वॉलपेपर में 'शील्स ग्रीन' (Scheele's Green) नामक आर्सेनिक युक्त हरा रंग इस्तेमाल हुआ था। नम उष्णकटिबंधीय मौसम में फफूंद ने इसे जहरीली गैस में बदल दिया था।",
-        "concept": "Scheele's Green"
+        "time": "1:30 - 2:15",
+        "english": "Or was the silent killer his green bedroom wallpaper, dyed with copper arsenite (Scheele's Green) that tropical mold converted into lethal airborne trimethylarsine gas?",
+        "hindi": "Par asli twist toh abhi baaki tha! Asal mein uske kamre ka hara wallpaper 'Scheele's Green' naam ke arsenic dye se bana tha. Island ki nami aur fungus ne us wallpaper se zehrili gas nikaal kar hawa mein ghol di thi!"
       },
       {
-        "start": 220,
-        "end": 283,
-        "timeLabel": "03:40",
-        "english": "Furthermore, control hair samples from Napoleon's son and Josephine also revealed high arsenic, proving that 19th-century Europe was thoroughly saturated with arsenic in tonics, cosmetics, and dyes. Science turns historical conspiracy into environmental forensic reality.",
-        "hindi": "इसके अलावा नेपोलियन के बेटे और जोसेफिन के बालों में भी उतना ही आर्सेनिक मिला, जिससे साबित हुआ कि 19वीं सदी में दवाओं, सौंदर्य प्रसाधनों और रंगों में आर्सेनिक आम था। विज्ञान ने ऐतिहासिक साजिश को पर्यावरणीय रहस्य में बदल दिया।",
-        "concept": "Environmental Saturation"
+        "time": "2:15 - 2:50",
+        "english": "Analytical chemistry bridges the gap between historical rumor and atomic truth, turning a two-century-old conspiracy into a lesson in toxicology.",
+        "hindi": "Toh shaq murder ka tha, par kaatil nikla kamre ka wallpaper! Analytical chemistry ne do sau saal purane rahasya ko solve kar diya. Chemistry sach mein history ki sabse badi detective hai!"
       }
     ]
   },
@@ -538,7 +500,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 9,
     "titleOriginal": "Are we more than our Molecules?",
     "titleEnglish": "Are we more than our Molecules?",
-    "titleHindi": "Are we more than our Molecules?",
+    "titleHindi": "क्या हम सिर्फ मॉलिक्यूल्स का एक ढेर हैं?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -547,36 +509,24 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 60,
-        "timeLabel": "00:00",
+        "time": "0:00 - 0:45",
         "english": "What happens when inanimate matter begins to feel? From dopamine surges during romantic attachment to oxytocin cradling maternal bonds, neurochemistry explains the hardware of human affection. But can the chemistry of love ever explain its transcendent meaning?",
-        "hindi": "क्या होता है जब निर्जीव पदार्थ भावनाएं महसूस करने लगता है? प्रेम में डोपामाइन के प्रवाह से लेकर मातृत्व में ऑक्सीटोसिन के जुड़ाव तक, न्यूरोकेमिस्ट्री मानवीय संवेदनाओं के हर पहलू को समझाती है। लेकिन क्या प्यार के रसायन को समझना उसके वास्तविक अर्थ को समझा सकता है?",
-        "concept": "Neurochemistry"
+        "hindi": "Kabhi akele chatt par baith kar aasmaan ko dekhte huye socha hai ki hum insaan aakhir hain kya? Science kehti hai ki hamari body sirf carbon, hydrogen, nitrogen aur kuch molecules ka structure hai. Par jab hum kisi se bepanah pyaar karte hain, dukh mein rote hain, ya kisi ka hath thaamte hain—kya yeh sab sirf dopamine aur oxytocin ka chemical reaction hai? Kya chemistry pyaar aur ehsaas ka asli matlab samjha sakti hai?"
       },
       {
-        "start": 60,
-        "end": 180,
-        "timeLabel": "01:00",
+        "time": "0:45 - 1:30",
         "english": "When we reduce grief to cortisol spikes or inspiration to serotonin modulation, we encounter the hard problem of consciousness: how do electrical depolarizations and synaptic vesicles give rise to subjective, inner human experience?",
-        "hindi": "जब हम दुख को कोर्टिसोल के स्तर या प्रेरणा को सेरोटोनिन के प्रवाह तक सीमित कर देते हैं, तो हम चेतना के सबसे कठिन सवाल से टकराते हैं: विद्युत तरंगें और रासायनिक कण कैसे हमारे भीतर के व्यक्तिगत अनुभवों और अहसासों को जन्म देते हैं?",
-        "concept": "Hard Problem of Consciousness"
+        "hindi": "Agar hum kisi apne ke bichhadne ke dukh ko sirf cortisol ka badhna keh dein, ya kisi nayi khushi ko serotonin bol dein, toh dimaag mein ek ajeeb sa sawaal uthta hai: aakhir electrical signals aur bejaan chemical molecules milkar hamare andar itni gehri feelings aur yaadein kaise create kar dete hain?"
       },
       {
-        "start": 180,
-        "end": 300,
-        "timeLabel": "03:00",
+        "time": "1:30 - 2:15",
         "english": "We are physical beings constructed entirely from carbon forged in the hearts of dying stars. Yet in us, the cosmos has developed the miraculous capacity to write symphonies, ponder infinity, and love across distances.",
-        "hindi": "हम पूरी तरह से उन कार्बन परमाणुओं से बने हैं जो कभी मरते हुए तारों के केंद्र में बने थे। फिर भी हमारे भीतर इस ब्रह्मांड ने संगीत रचने, अनंत पर विचार करने और प्रेम करने की अद्भुत क्षमता विकसित की है।",
-        "concept": "Cosmic Stardust"
+        "hindi": "Hum sab physical beings hain jo usi carbon se bane hain jo arbon saal pehle taron ke phatne se paida hua tha. Yaani hum taron ki dhool hain! Lekin isi dhool se bane insaan ne music banaya, sitaron ko dekha, poetry likhi, aur door rehkar bhi kisi se beinteha pyaar karna seekha."
       },
       {
-        "start": 300,
-        "end": 430,
-        "timeLabel": "05:00",
+        "time": "2:15 - 2:55",
         "english": "Perhaps the answer is not that we are separate from our molecules, but that molecules themselves harbor the latent potential for wonder, consciousness, and profound emotional depth.",
-        "hindi": "शायद इसका उत्तर यह नहीं कि हम अपने अणुओं से अलग हैं, बल्कि यह है कि प्रकृति के इन छोटे कणों के भीतर ही चेतना, आश्चर्य और गहन भावनात्मक गहराई की असीम संभावनाएं छिपी हुई हैं।",
-        "concept": "Emergence"
+        "hindi": "Shayad iska jawab yeh nahi ki hum apne molecules se alag hain, balki yeh hai ki in chhote-chhote molecules ke andar hi is poore universe ki sabse khoobsurat chetna aur ehsaas chhipe huye hain. Hum sirf molecules nahi hain doston, hum woh zariya hain jisse yeh bramhand khud ko mehsus kar raha hai..."
       }
     ]
   },
@@ -585,7 +535,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 8,
     "titleOriginal": "There's always that one character",
     "titleEnglish": "There's always that one character",
-    "titleHindi": "There's always that one character",
+    "titleHindi": "पीरियोडिक टेबल का सबसे अतरंगी दोस्त",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -594,28 +544,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 60,
-        "timeLabel": "00:00",
-        "english": "In every unforgettable work of literature, there is always that one magnetic character—the morally ambiguous rogue, the quiet stoic, or the flawed mentor who steals every single scene from the traditional hero.",
-        "hindi": "साहित्य की हर अमर रचना में एक ऐसा सम्मोहक पात्र जरूर होता है—चाहे वह कोई रहस्यमयी बागी हो, शांत दार्शनिक हो या कोई ऐसा गुरु जो पारंपरिक नायक से भी ज्यादा पाठकों के दिलों पर छा जाता है।",
-        "concept": "Archetypes"
+        "time": "0:00 - 0:45",
+        "english": "Every classroom group has that one eccentric friend whose intense personality defines the vibe. In the periodic table, that role belongs unequivocally to Fluorine.",
+        "hindi": "Har friend group ya college batch mein ek aisa dost zaroor hota hai jo sabse alag, thoda ajeeb aur bohot ziddi hota hai—par uske bina group bilkul soona lagta hai! Chemistry ki periodic table mein bilkul aisa hi ek character hai—Fluorine!"
       },
       {
-        "start": 60,
-        "end": 160,
-        "timeLabel": "01:00",
-        "english": "Why do flawed, complicated figures resonate deeper within human psychology than immaculate paragons of virtue? Because perfection is alien to the human condition, while internal struggle mirrors our daily lives.",
-        "hindi": "कमियों से भरे, जटिल पात्र आदर्श नायकों की तुलना में हमारे दिल को ज्यादा क्यों छूते हैं? क्योंकि पूर्णता मानवीय स्वभाव का हिस्सा नहीं है, जबकि उनका आंतरिक संघर्ष हमारे अपने दैनिक जीवन का दर्पण होता है।",
-        "concept": "Psychological Resonance"
+        "time": "0:45 - 1:30",
+        "english": "With supreme electronegativity and violent reactivity, fluorine refuses to play by gentle rules, ripping electrons from nearly anything in its path.",
+        "hindi": "Fluorine itna hyperactive aur greedy hai ki kisi bhi doosre element se electron chheen leta hai. Yeh kisi se shanti se baat nahi karta, bas aate hi dhamaka kar deta hai!"
       },
       {
-        "start": 160,
-        "end": 297,
-        "timeLabel": "02:40",
-        "english": "Great storytellers don't construct characters as mere plot devices; they build vessels of empathy. By examining who we cheer for in fiction, we ultimately uncover the unspoken truths about who we wish to be.",
-        "hindi": "महान लेखक पात्रों को केवल कहानी आगे बढ़ाने का साधन नहीं बनाते; वे उन्हें संवेदनाओं का माध्यम बनाते हैं। हम कहानियों में किसे पसंद करते हैं, यह अंततः हमारे अपने अंतर्मन की गहराइयों को उजागर करता है।",
-        "concept": "Narrative Empathy"
+        "time": "1:30 - 2:10",
+        "english": "Yet taming this elemental wild card yields non-stick cookware, life-saving medicines, and refrigerants—proving that high reactivity, when guided, creates wonders.",
+        "hindi": "Par jab chemists ne iski taakat ko handle karna seekh liya, toh isne hume non-stick Teflon se lekar toothpaste aur zaroori dawaiyan di! Har group ko vibrant banane ke liye ek aisi hi unique energy chahiye hoti hai!"
       }
     ]
   },
@@ -624,7 +565,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 1,
     "titleOriginal": "Carbenes",
     "titleEnglish": "Carbenes",
-    "titleHindi": "Carbenes",
+    "titleHindi": "कार्बीन्स: जब कार्बन ने तोड़े नियम",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -633,28 +574,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 50,
-        "timeLabel": "00:00",
-        "english": "Simran Ailani ventures into the fleeting world of carbenes—ultra-reactive neutral molecules featuring divalent carbon with only six valence electrons, defying textbook stability rules.",
-        "hindi": "सिमरन ऐलानी कार्बीन्स की रहस्यमयी दुनिया में प्रवेश करती हैं—अत्यधिक प्रतिक्रियाशील अणु जिनमें कार्बन केवल दो बंधों और छह इलेक्ट्रॉनों के साथ पाठ्यपुस्तकों के नियमों को चुनौती देता है।",
-        "concept": "Carbene Chemistry"
+        "time": "0:00 - 0:45",
+        "english": "Simran Ailani enters the bizarre world of carbenes—highly reactive molecules where carbon defies textbook valence rules with only two bonds and six valence electrons.",
+        "hindi": "Hey guys, socho agar carbon apne standard char bonds ke rules tod de toh kya hoga? Aaj hum baat kar rahe hain Carbenes ki—yeh itne reactive aur unique molecules hain jo textbooks ke conventional rules ko challenge kar dete hain, jahan carbon sirf do bonds banata hai aur uske paas do unshared electrons hote hain."
       },
       {
-        "start": 50,
-        "end": 130,
-        "timeLabel": "00:50",
-        "english": "Whether existing in singlet states with paired electrons or triplet states with radical character, carbenes perform lightning-fast cyclopropanations and insertion reactions critical to synthesis.",
-        "hindi": "चाहे वे सिंगलेट अवस्था में हों या ट्रिपलेट अवस्था में, कार्बीन्स पलक झपकते ही रासायनिक संश्लेषण में महत्वपूर्ण साइक्लोप्रोपेनेशन और इन्सर्शन अभिक्रियाएं करने में सक्षम होते हैं।",
-        "concept": "Singlet vs Triplet"
+        "time": "0:45 - 1:30",
+        "english": "Existing as either fleeting singlets with paired electrons or energetic triplets with parallel spins, carbenes drive high-stakes reactions like cyclopropanation and insertion in milliseconds.",
+        "hindi": "Carbenes ya toh singlet state mein hote hain ya triplet state mein. Aur yeh itne fast hote hain ki milliseconds mein cyclopropanation aur insertion reactions kar daalte hain—chemistry mein inki speed sach mein mind-blowing hai!"
       },
       {
-        "start": 130,
-        "end": 224,
-        "timeLabel": "02:10",
-        "english": "From Nobel-winning olefin metathesis catalysts to revolutionary organic synthesis, understanding these transient chemical ghosts empowers modern materials and pharmaceutical breakthroughs.",
-        "hindi": "नोबेल पुरस्कार विजेता ओलेफिन मेटाथेसिस उत्प्रेरकों से लेकर आधुनिक दवा निर्माण तक, इन क्षणभंगुर रासायनिक कणों को समझना भविष्य की सामग्रियों के निर्माण में क्रांतिकारी भूमिका निभाता है।",
-        "concept": "Olefin Metathesis"
+        "time": "1:30 - 2:20",
+        "english": "From Nobel-winning olefin metathesis catalysts to building modern pharmaceuticals, unlocking these transient intermediates transforms how chemists synthesize complex architectures.",
+        "hindi": "Olefin metathesis ke Nobel prize winning catalysts se lekar modern dawaiyon ki manufacturing tak, in chhote aur fast chemical intermediates ko samajhna materials science mein ek nayi kranti la raha hai!"
       }
     ]
   },
@@ -663,7 +595,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 2,
     "titleOriginal": "AI in Chemistry: When machines meet molecules",
     "titleEnglish": "AI in Chemistry: When machines meet molecules",
-    "titleHindi": "AI in Chemistry: When machines meet molecules",
+    "titleHindi": "केमिस्ट्री में AI: जब कंप्यूटर बने वैज्ञानिक",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -672,28 +604,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 50,
-        "timeLabel": "00:00",
-        "english": "What happens when artificial neural networks enter the chemical laboratory? Explore how generative diffusion models, graph neural networks, and AlphaFold are compressing decades of drug discovery into mere hours.",
-        "hindi": "क्या होता है जब कृत्रिम तंत्रिका नेटवर्क (Neural Networks) रसायन विज्ञान की प्रयोगशाला में कदम रखते हैं? जानिए कैसे AI और AlphaFold दशकों की दवा खोज को कुछ ही घंटों में समेट रहे हैं।",
-        "concept": "AI in Chemistry"
+        "time": "0:00 - 0:45",
+        "english": "What happens when neural networks step into the wet lab? Discover how AI and AlphaFold are compressing decades of painstaking drug discovery into mere hours.",
+        "hindi": "Socho agar artificial intelligence sirf coding ya gaming ke bajaye chemistry lab mein ghus jaye toh kya hoga? Aaj hum dekh rahe hain ki kaise AI aur AlphaFold jo kaam pehle scientists ko 10-15 saal lagata tha, use kuch hi ghanton mein solve kar rahe hain!"
       },
       {
-        "start": 50,
-        "end": 140,
-        "timeLabel": "00:50",
-        "english": "Synthesizing a novel therapeutic compound used to demand thousands of laborious test-tube iterations. Today, machine learning algorithms screen trillions of virtual molecular candidates, predicting binding affinities before a single pipette is lifted.",
-        "hindi": "पहले किसी नई दवा को बनाने के लिए हजारों प्रयोगशाला परीक्षणों की जरूरत होती थी। आज मशीन लर्निंग मॉडल कंप्यूटर पर ही खरबों अणुओं की जांच कर लेते हैं, और यह बता देते हैं कि कौन सा अणु सबसे प्रभावी होगा।",
-        "concept": "In Silico Screening"
+        "time": "0:45 - 1:30",
+        "english": "By predicting 3D protein structures with atomic accuracy and screening billions of virtual candidates, machine learning bridges human curiosity with computational scale to unlock personalized medicine.",
+        "hindi": "Pehle ek nayi dawa dhoondhne ke liye hazaron experiments karne padte the. Par aaj machine learning models computer screen par hi arbon molecules ko screen kar lete hain aur protein ka 3D structure accurately predict kar dete hain!"
       },
       {
-        "start": 140,
-        "end": 240,
-        "timeLabel": "02:20",
-        "english": "By predicting how complex proteins fold into three-dimensional architectures with atomic precision, human curiosity augmented by silicon intelligence is unlocking the next great era of personalized medicine.",
-        "hindi": "परमाणु स्तर पर प्रोटीन की 3D संरचना की सटीक भविष्यवाणी करके, मानव जिज्ञासा और कंप्यूटर तकनीक मिलकर व्यक्तिगत चिकित्सा (Personalized Medicine) के एक नए युग की शुरुआत कर रहे हैं।",
-        "concept": "Protein Folding"
+        "time": "1:30 - 2:15",
+        "english": "This synergy between deep learning and organic chemistry is opening uncharted therapeutic frontiers against humanity's most intractable diseases.",
+        "hindi": "Yeh machine learning aur human curiosity ka ek aisa zabardast combination hai jo medicine aur healthcare ki poori duniya ko hum sabke liye hamesha ke liye badal raha hai!"
       }
     ]
   },
@@ -702,7 +625,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 3,
     "titleOriginal": "Why bananas are slightly radioactive?",
     "titleEnglish": "Why bananas are slightly radioactive?",
-    "titleHindi": "Why bananas are slightly radioactive?",
+    "titleHindi": "क्या केले सच में रेडियोधर्मी हैं?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -711,28 +634,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 45,
-        "timeLabel": "00:00",
-        "english": "Is your breakfast fruit bowl technically emitting nuclear radiation? Today we demystify the charming physics behind the 'Banana Equivalent Dose' and the natural abundance of Potassium-40.",
-        "hindi": "क्या सुबह के नाश्ते में रखा फल वास्तव में परमाणु विकिरण उत्सर्जित कर रहा होता है? आज हम 'केला समतुल्य खुराक' (Banana Equivalent Dose) और पोटैशियम-40 के प्राकृतिक विज्ञान के पीछे की भौतिकी को समझते हैं।",
-        "concept": "Banana Equivalent Dose"
+        "time": "0:00 - 0:40",
+        "english": "Is your favorite breakfast fruit emitting nuclear radiation? We unpack the physics behind the 'Banana Equivalent Dose' and the naturally occurring potassium-40 isotope.",
+        "hindi": "Kabhi subah breakfast mein kela khate huye dhyan diya hai ki isme thoda sa nuclear radiation hota hai? Haan, sunne mein ajeeb lagta hai, par physics mein ek concept hai jise kehte hain 'Banana Equivalent Dose'!"
       },
       {
-        "start": 45,
-        "end": 130,
-        "timeLabel": "00:45",
-        "english": "Bananas are famously rich in potassium, an essential electrolyte. A tiny fraction—about 0.012%—exists naturally as the unstable radioactive isotope Potassium-40, emitting positrons and beta particles as it decays.",
-        "hindi": "केले में पोटैशियम प्रचुर मात्रा में होता है, जो हमारे शरीर के लिए एक आवश्यक इलेक्ट्रोलाइट है। इसका एक छोटा सा हिस्सा (लगभग 0.012%) स्वाभाविक रूप से रेडियोधर्मी आइसोटोप पोटैशियम-40 के रूप में मौजूद होता है, जो धीरे-धीरे क्षय होता है।",
-        "concept": "Potassium-40 Decay"
+        "time": "0:40 - 1:20",
+        "english": "Bananas are rich in potassium, an essential electrolyte. A tiny fraction exists as potassium-40, undergoing spontaneous radioactive decay right in our fruit baskets.",
+        "hindi": "Asal mein kele mein potassium bohot zyada hota hai, jo hamari body ke liye zaroori electrolyte hai. Iska ek bohot chhota sa hissa natural radioactive isotope Potassium-40 hota hai, jo naturally decay hota rehta hai."
       },
       {
-        "start": 130,
-        "end": 218,
-        "timeLabel": "02:10",
-        "english": "Yet human homeostasis strictly regulates internal potassium levels; eating a banana simply expels surplus minerals, resulting in zero accumulated radiation risk. Radiation is not an unnatural menace, but a constant, gentle companion of our living Earth.",
-        "hindi": "लेकिन हमारा शरीर पोटैशियम के स्तर को प्राकृतिक रूप से संतुलित रखता है; केला खाने से अतिरिक्त खनिज शरीर से बाहर निकल जाता है। विकिरण कोई अस्वाभाविक खतरा नहीं, बल्कि इस धरती पर जीवन का एक स्वाभाविक हिस्सा है।",
-        "concept": "Biological Homeostasis"
+        "time": "1:20 - 2:05",
+        "english": "Yet human biology tightly regulates mineral levels, keeping us in homeostasis. Natural radioactivity isn't an alien hazard—it is woven into the very fabric of our living world.",
+        "hindi": "Par darrne ki bilkul baat nahi hai bhai! Hamari body potassium ko naturally balance rakhti hai aur extra mineral bahar nikal jaata hai. Radiation koi alien khatra nahi, balki nature aur hamari dharti ka ek regular hissa hai!"
       }
     ]
   },
@@ -741,7 +655,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 4,
     "titleOriginal": "How do drugs know where to go in the body?",
     "titleEnglish": "How do drugs know where to go in the body?",
-    "titleHindi": "How do drugs know where to go in the body?",
+    "titleHindi": "दवा को कैसे पता दर्द कहाँ है?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -750,28 +664,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 50,
-        "timeLabel": "00:00",
-        "english": "When you swallow a tiny pill for a headache, how does the molecule find the throbbing pain in your temple without getting lost in your bloodstream? Does it possess a molecular GPS or internal compass?",
-        "hindi": "जब आप सिरदर्द के लिए कोई छोटी सी गोली खाते हैं, तो वह दवा आपके खून में बिना भटके सीधे दर्द वाली जगह तक कैसे पहुंच जाती है? क्या दवा के पास कोई जीपीएस या आंतरिक दिशा-सूचक होता है?",
-        "concept": "Pharmacokinetics"
+        "time": "0:00 - 0:45",
+        "english": "When you swallow a tiny pill for a headache, it enters systemic circulation. But without eyes or GPS, how does the molecule find the exact site of inflammation?",
+        "hindi": "Yaar, jab sir dard hota hai aur hum ek choti si goli nigal lete hain, toh us dawa ko kaise pata chalta hai ki dard sir mein hai, pet ya pair mein nahi? Dawa ke paas koi Google Maps ya GPS toh hota nahi!"
       },
       {
-        "start": 50,
-        "end": 140,
-        "timeLabel": "00:50",
-        "english": "The truth is brilliant biochemistry: the drug circulates universally through thousands of kilometers of blood vessels, but acts only when its 3D molecular shape fits snugly into a specific protein receptor like a key into a lock.",
-        "hindi": "सच्चाई बहुत ही सुंदर बायोकेमिस्ट्री है: दवा रक्त नलिकाओं के माध्यम से पूरे शरीर में घूमती है, लेकिन वह काम केवल वहीं करती है जहां उसकी त्रिविमीय (3D) आणविक बनावट किसी विशिष्ट रिसेप्टर में ताले और चाबी की तरह सटीक बैठती है।",
-        "concept": "Lock and Key Model"
+        "time": "0:45 - 1:30",
+        "english": "The secret lies in molecular recognition: lock-and-key binding affinities, blood-brain barrier transport, and stereochemistry that ensure precision therapeutic targeting.",
+        "hindi": "Asal mein poora game biological lock-and-key system ka hai! Dawa pet se nikal kar khoon ke zariye poori body mein ghoomti hai, par bind sirf wahi hoti hai jahan uske target receptors hote hain—jaise ek khaas taale ke liye ek khaas chaabi!"
       },
       {
-        "start": 140,
-        "end": 254,
-        "timeLabel": "02:20",
-        "english": "By binding only to localized inflammatory enzymes like COX-2, the medicine halts pain signals at the source while remaining largely inert elsewhere—the triumph of targeted pharmacology.",
-        "hindi": "केवल सूजन और दर्द पैदा करने वाले एंजाइमों (जैसे COX-2) से जुड़कर, यह दवा सीधे स्रोत पर दर्द के संकेतों को रोक देती है जबकि शरीर के अन्य हिस्सों में शांत रहती है—यही लक्षित औषध विज्ञान की असली जीत है।",
-        "concept": "Targeted Pharmacology"
+        "time": "1:30 - 2:15",
+        "english": "Understanding pharmacokinetics and receptor kinetics reveals how human biochemistry turns raw chemical synthesis into life-saving biological harmony.",
+        "hindi": "Jaise hi dawa receptor se judti hai, dard ka chemical signal block ho jaata hai aur hume aaram milta hai. Chemistry aur human body ka yeh coordination sach mein kamaal hai!"
       }
     ]
   },
@@ -780,7 +685,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 5,
     "titleOriginal": "The dream that gave us Benzene",
     "titleEnglish": "The dream that gave us Benzene",
-    "titleHindi": "The dream that gave us Benzene",
+    "titleHindi": "बेंजीन का सपना: जब सांप ने रास्ता दिखाया",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -789,28 +694,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 50,
-        "timeLabel": "00:00",
-        "english": "How did an ancient mythological dream of a serpent swallowing its own tail solve the deepest structural enigma in organic chemistry? Let's explore August Kekulé's legendary breakthrough that revealed the cyclic ring of Benzene.",
-        "hindi": "अपनी ही पूंछ को निगलते हुए एक पौराणिक सांप के सपने ने ऑर्गेनिक केमिस्ट्री की सबसे बड़ी गुत्थी को कैसे सुलझाया? आइए जानते हैं वैज्ञानिक ऑगस्ट केकुले की उस ऐतिहासिक खोज के बारे में जिसने बेंजीन के चक्रीय वलय (Ring) का रहस्य खोला।",
-        "concept": "Kekulé Dream"
+        "time": "0:00 - 0:45",
+        "english": "On a cold evening in 1865, German chemist August Kekulé drifted into a daydream that revolutionized structural chemistry forever.",
+        "hindi": "1865 ki ek thandi shaam thi, aur German chemist August Kekule aag ke samne thak kar so gaye the. Saalon se duniya ke top scientists pareshan the ki Benzene ke 6 carbon aur 6 hydrogen aapas mein kaise jude hain."
       },
       {
-        "start": 50,
-        "end": 150,
-        "timeLabel": "00:50",
-        "english": "For decades, chemists struggled with benzene's formula C6H6: how could six carbons satisfy their tetravalency with so few hydrogens? Kekulé's vision of an alternating hexagonal ring unlocked modern aromatic chemistry.",
-        "hindi": "दशकों तक वैज्ञानिक बेंजीन के सूत्र C6H6 को लेकर परेशान रहे: इतने कम हाइड्रोजन के साथ छह कार्बन अपनी संयोजकता कैसे पूरी कर सकते हैं? केकुले की छह-कोणीय चक्रीय संरचना ने आधुनिक एरोमैटिक रसायन शास्त्र की नींव रखी।",
-        "concept": "Aromatic Ring"
+        "time": "0:45 - 1:30",
+        "english": "Puzzling over benzene's impossible formula, he envisioned a serpent seizing its own tail—the ancient Ouroboros—unlocking the symmetrical closed aromatic ring.",
+        "hindi": "Tabhi sapne mein Kekule ne dekha ki ek saanp apni hi poonchh pakad kar gol ghoom raha hai—jise purani kahaniyon mein Ouroboros kehte hain. Kekule achanak jag gaye aur bole: 'Benzene koi seedhi line nahi, balki ek gol ring hai!'"
       },
       {
-        "start": 150,
-        "end": 268,
-        "timeLabel": "02:30",
-        "english": "Today, quantum mechanics explains this through delocalized pi electrons—a cloud of resonance stability. The benzene ring sits at the core of life-saving antibiotics, polymers, and synthetic materials worldwide.",
-        "hindi": "आज क्वांटम भौतिकी इसे डीलोकलाइज्ड पाई-इलेक्ट्रॉनों के माध्यम से समझाती है—जो इसे विशेष स्थिरता प्रदान करते हैं। आज बेंजीन रिंग जीवन रक्षक दवाओं, प्लास्टिक और सिंथेटिक सामग्रियों का आधार है।",
-        "concept": "Resonance Stability"
+        "time": "1:30 - 2:20",
+        "english": "That single visionary insight paved the way for resonance theory, modern dyes, plastics, and the boundless universe of aromatic organic synthesis.",
+        "hindi": "Is ek visionary sapne ne resonance theory, dyes, plastics aur poori modern organic chemistry ki neev rakh di. Kabhi-kabhi sabse mushkil scientific answers hamare imagination mein hi chhipe hote hain!"
       }
     ]
   },
@@ -819,7 +715,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 6,
     "titleOriginal": "The secrets of Sadabahar",
     "titleEnglish": "The secrets of Sadabahar",
-    "titleHindi": "The secrets of Sadabahar",
+    "titleHindi": "सदाबहार: आँगन के फूल का कैंसर पर वार",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -828,28 +724,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 60,
-        "timeLabel": "00:00",
-        "english": "What if an unassuming tropical flower blooming on roadside pavements held the secret to curing childhood leukemia? Welcome to the incredible botanical and pharmaceutical journey of Catharanthus roseus, known across India as Sadabahar.",
-        "hindi": "क्या होगा अगर सड़कों के किनारे खिलने वाला एक साधारण सा फूल बच्चों के ब्लड कैंसर (ल्यूकेमिया) के इलाज का रहस्य छिपाए बैठा हो? आइए जानते हैं सदाबहार (Catharanthus roseus) की अद्भुत वानस्पतिक और औषधीय यात्रा।",
-        "concept": "Ethnobotany"
+        "time": "0:00 - 0:45",
+        "english": "Commonly grown in Indian courtyards, the humble Madagascar Periwinkle (Catharanthus roseus) hides an astonishing biochemical arsenal.",
+        "hindi": "Hamare ghar ke aangan ya college campus ke bagiche mein gulabi aur safed phoolon wala Sadabahar ka paudha toh sabne dekha hoga. Par kya aapko pata hai ki yeh aam sa paudha cancer ke khilaf ek deadly weapon hai?"
       },
       {
-        "start": 60,
-        "end": 170,
-        "timeLabel": "01:00",
-        "english": "Researchers initially investigated Sadabahar as a folk remedy for diabetes. Instead, they discovered two potent vinca alkaloids: Vinblastine and Vincristine, which dismantle the microtubule spindles cancer cells need to divide.",
-        "hindi": "वैज्ञानिकों ने शुरू में सदाबहार का अध्ययन मधुमेह की पारंपरिक दवा के रूप में किया था। लेकिन इसके बजाय उन्हें दो शक्तिशाली अल्कलॉइड मिले: विनब्लास्टिन और विन्क्रिस्टिन, जो कैंसर कोशिकाओं के विभाजन को रोक देते हैं।",
-        "concept": "Vinca Alkaloids"
+        "time": "0:45 - 1:30",
+        "english": "Within its petals and leaves lie vincristine and vinblastine—alkaloids that disrupt cancer cell division by halting microtubule polymerization.",
+        "hindi": "Is paudhe ki pattiyon mein Vincristine aur Vinblastine jaise alkaloids hote hain, jo cancer cells ke division ko beech mein hi freeze kar dete hain aur unhe badhne se rok dete hain!"
       },
       {
-        "start": 170,
-        "end": 286,
-        "timeLabel": "02:50",
-        "english": "Because of these tiny molecules extracted from periwinkle petals, survival rates for pediatric acute lymphoblastic leukemia leaped from under ten percent to over ninety percent, reminding us that nature remains the ultimate master chemist.",
-        "hindi": "सदाबहार की पंखुड़ियों से मिले इन चमत्कारी अणुओं की वजह से बचपन के ल्यूकेमिया से बचने की दर दस प्रतिशत से बढ़कर नब्बे प्रतिशत से अधिक हो गई। यह साबित करता है कि प्रकृति ही सबसे बड़ी रसायनज्ञ है।",
-        "concept": "Phytotherapy"
+        "time": "1:30 - 2:15",
+        "english": "What began as folk medicine for diabetes transformed oncology, illustrating that nature remains our most sophisticated and generous chemical apothecary.",
+        "hindi": "Jise log pehle diabetes ka desi ilaaj maante the, usne blood cancer aur leukemia ka ilaaj dhoondh liya. Ek chhota sa aangan ka phool hazaron zindagiyan bacha raha hai—yeh hai nature aur botany ki asli taakat!"
       }
     ]
   },
@@ -858,7 +745,7 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "number": 7,
     "titleOriginal": "Can Chemistry explain Consciousness?",
     "titleEnglish": "Can Chemistry explain Consciousness?",
-    "titleHindi": "Can Chemistry explain Consciousness?",
+    "titleHindi": "क्या केमिस्ट्री चेतना को समझा सकती है?",
     "origLang": "en",
     "availableTranslations": [
       "orig",
@@ -867,28 +754,19 @@ window.GYAN_SETU_TRANSCRIPTS = {
     "host": "Simran Ailani",
     "segments": [
       {
-        "start": 0,
-        "end": 60,
-        "timeLabel": "00:00",
-        "english": "Can the dance of chemical bonds, ion gradients, and molecular neurotransmitters explain the spark of self-awareness? Today we bridge molecular neuroscience and philosophy to tackle the greatest frontier in biology.",
-        "hindi": "क्या रासायनिक बंधों, आयन प्रवाह और न्यूरोट्रांसमीटर की हलचल हमारी आत्म-जागरूकता की चिंगारी को समझा सकती है? आज हम जीवविज्ञान के सबसे बड़े रहस्य को समझने के लिए मॉलिक्यूलर न्यूरोसाइंस और दर्शन का सेतु बनाते हैं।",
-        "concept": "Molecular Neuroscience"
+        "time": "0:00 - 0:45",
+        "english": "Are our deepest thoughts, loves, and fears merely an intricate chemical dance of dopamine, serotonin, and voltage-gated ion channels?",
+        "hindi": "Hum jo kuch bhi sochte hain, mehsus karte hain, pyaar ya darr—kya yeh sab dimaag mein chal rahe chemicals ka ek naach hai? Kya hamari feeling sirf dopamine aur serotonin ka flow hai?"
       },
       {
-        "start": 60,
-        "end": 180,
-        "timeLabel": "01:00",
-        "english": "Sodium-potassium ATPase pumps generate membrane potentials across billions of cortical neurons. When these networks synchronize at gamma frequencies, isolated sensory inputs crystallize into unified perception.",
-        "hindi": "सोडियम-पोटेशियम पंप हमारे मस्तिष्क के अरबों न्यूरॉन्स में विद्युत विभव उत्पन्न करते हैं। जब ये नेटवर्क विशेष आवृत्तियों पर तालमेल बिठाते हैं, तो अलग-अलग संवेदी अनुभूतियां एक एकीकृत चेतना का रूप ले लेती हैं।",
-        "concept": "Neural Synchrony"
+        "time": "0:45 - 1:30",
+        "english": "Neurochemistry tracks the electrical pulses and synaptic transmissions of the brain, yet confronting the 'Hard Problem' asks how inanimate ions yield subjective human experience.",
+        "hindi": "Science dimaag ke electrical signals aur nerves ko machine par dekh sakti hai. Par sawal yeh hai: bejaan sodium aur potassium ions milkar hamare andar 'main zinda hoon' ka ehsaas kaise paida karte hain?"
       },
       {
-        "start": 180,
-        "end": 312,
-        "timeLabel": "03:00",
-        "english": "Yet a complete physical ledger of neurochemicals leaves an explanatory gap. Consciousness may be an emergent property of immense systemic complexity—a testament to how nature transforms simple chemistry into mind.",
-        "hindi": "फिर भी रसायनों की पूरी सूची चेतना के वास्तविक अनुभव को पूरी तरह नहीं समझा पाती। चेतना अत्यंत जटिल व्यवस्था का एक उभरता हुआ गुण हो सकती है—प्रकृति का वह चमत्कार जो सरल रसायन विज्ञान को मन में बदल देता है।",
-        "concept": "Emergence of Mind"
+        "time": "1:30 - 2:20",
+        "english": "Simran Ailani explores where rigorous chemistry meets philosophy, investigating whether consciousness is an emergent property of matter or the universe observing itself.",
+        "hindi": "Yahi science aur philosophy ka sabse bada sawaal hai—'The Hard Problem of Consciousness'. Kya chetna sirf molecules ka combination hai, ya phir yeh universe khud ko hum sabke zariye observe kar raha hai?"
       }
     ]
   }

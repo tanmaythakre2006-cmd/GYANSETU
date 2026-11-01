@@ -2,16 +2,22 @@ package com.gyansetu.pocketradio;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Build;
 import android.view.WindowManager;
+import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.graphics.Color;
 import android.view.Window;
+import android.content.pm.PackageManager;
+import android.Manifest;
 
 public class MainActivity extends Activity {
     private WebView webView;
+    private static final int CAMERA_PERMISSION_CODE = 101;
+    private PermissionRequest mPermissionRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,13 @@ public class MainActivity extends Activity {
         window.setNavigationBarColor(Color.parseColor("#0b0d11"));
 
         setContentView(R.layout.activity_main);
+
+        // Prompt user for Camera permission upfront for Optical Mesh Beamer
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+            }
+        }
 
         webView = findViewById(R.id.webview);
         webView.setBackgroundColor(Color.parseColor("#0b0d11"));
@@ -56,11 +69,43 @@ public class MainActivity extends Activity {
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public void onPermissionRequest(final android.webkit.PermissionRequest request) {
-                request.grant(request.getResources());
+            public void onPermissionRequest(final PermissionRequest request) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                                request.grant(request.getResources());
+                            } else {
+                                mPermissionRequest = request;
+                                requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                            }
+                        } else {
+                            request.grant(request.getResources());
+                        }
+                    }
+                });
             }
         });
         webView.loadUrl("file:///android_asset/index.html");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (mPermissionRequest != null) {
+                    mPermissionRequest.grant(mPermissionRequest.getResources());
+                    mPermissionRequest = null;
+                }
+            } else {
+                if (mPermissionRequest != null) {
+                    mPermissionRequest.deny();
+                    mPermissionRequest = null;
+                }
+            }
+        }
     }
 
     @Override

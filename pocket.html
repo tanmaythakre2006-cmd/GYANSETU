@@ -742,9 +742,207 @@
       margin-left: 4px;
     }
 
+    
     /* =========================================================================
-       P2P CLASSROOM MESH BEAMER HUD MODAL (Tactile CRT Overlay)
+       ANIMATED OPTICAL FOUNTAIN BEAMER STYLES (Zero-Data Moving QR Transfer)
        ========================================================================= */
+    .fountain-target-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      background: #14181f;
+      border: 1px solid #232b36;
+      border-radius: 8px;
+      padding: 6px 10px;
+    }
+    .fountain-beam-tag {
+      font-size: 0.64rem;
+      font-weight: 800;
+      color: #ffaa11;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .beam-station-dropdown {
+      background: #0d1117;
+      border: 1px solid #2e3846;
+      color: #e0e5eb;
+      font-family: inherit;
+      font-size: 0.74rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      width: 100%;
+      outline: none;
+      cursor: pointer;
+    }
+    .beam-station-dropdown:focus {
+      border-color: #ffaa11;
+    }
+
+    .fountain-crt-frame {
+      position: relative;
+      overflow: hidden;
+      border-style: solid !important;
+      border-color: #ffaa11 !important;
+      padding: 12px !important;
+      margin-bottom: 10px !important;
+    }
+    .fountain-crt-scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 170, 17, 0.4);
+      box-shadow: 0 0 8px rgba(255, 170, 17, 0.8);
+      animation: crt-sweep 2.4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes crt-sweep {
+      0% { top: 0%; }
+      100% { top: 100%; }
+    }
+
+    .fountain-frame-ticker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #ffaa11;
+      letter-spacing: 0.5px;
+    }
+    .ticker-beacon {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffaa11;
+      box-shadow: 0 0 8px #ffaa11;
+      animation: beacon-blink 0.8s infinite alternate;
+    }
+    @keyframes beacon-blink {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    .fountain-dots-row {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+      max-width: 240px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .fountain-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: #242b35;
+      transition: all 0.15s ease;
+    }
+    .fountain-dot.active {
+      background: #ffaa11;
+      box-shadow: 0 0 8px #ffaa11;
+      transform: scale(1.25);
+    }
+
+    .fountain-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .speed-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .speed-label {
+      font-size: 0.62rem;
+      color: #8e9bb0;
+      font-weight: 700;
+      margin-right: 2px;
+    }
+    .btn-fountain-speed {
+      background: #14181f;
+      border: 1px solid #282f3a;
+      color: #8e9bb0;
+      font-size: 0.62rem;
+      font-family: inherit;
+      padding: 3px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .btn-fountain-speed.active {
+      background: #2b2108;
+      border-color: #ffaa11;
+      color: #ffaa11;
+    }
+
+    /* Receiver HUD */
+    .fountain-capture-hud {
+      background: #080b0e;
+      border: 1px solid #1e2530;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+    .hud-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .hud-label {
+      font-size: 0.64rem;
+      font-weight: 800;
+      color: #10b981;
+      letter-spacing: 0.5px;
+    }
+    .hud-readout {
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .hud-chunk-matrix {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      min-height: 20px;
+      align-items: center;
+    }
+    .chunk-block {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      background: #1c222b;
+      border: 1px solid #2c3644;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.58rem;
+      font-weight: 800;
+      color: #64748b;
+      transition: all 0.2s ease;
+    }
+    .chunk-block.captured {
+      background: #064e3b;
+      border-color: #10b981;
+      color: #34d399;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+      transform: scale(1.08);
+    }
+    .matrix-hint {
+      font-size: 0.65rem;
+      color: #64748b;
+    }
+
+    /* P2P CLASSROOM MESH BEAMER HUD MODAL */
     .mesh-modal-overlay {
       position: fixed;
       inset: 0;
@@ -1290,50 +1488,77 @@
         <button id="tab-receiver-btn" class="mesh-tab-btn">📷 RECEIVE (RECEIVER)</button>
       </div>
 
-      <!-- SENDER PANEL -->
+      <!-- SENDER PANEL (MOVING QR FOUNTAIN STREAM) -->
       <div id="mesh-sender-panel" class="mesh-panel active">
-        <div style="font-size: 0.68rem; color: #8e9bb0; margin-bottom: 8px;">
-          Beaming: <strong id="mesh-beam-title" style="color: #ffaa11;">नागपूरचा इतिहास</strong> (32kbps • 1.3 MB)
+        <div class="fountain-target-bar">
+          <span class="fountain-beam-tag">BEAM CHANNEL:</span>
+          <select id="beam-station-select" class="beam-station-dropdown"></select>
         </div>
 
-        <div class="qr-frame-wrap">
+        <div class="qr-frame-wrap fountain-crt-frame">
+          <div class="fountain-crt-scanline"></div>
           <div id="qr-render-box"></div>
+          
+          <div class="fountain-frame-ticker">
+            <span class="ticker-beacon"></span>
+            <span id="fountain-ticker-text">OPTICAL STREAM: FRAME 1 / 8 (5 FPS ⟳ LOOP)</span>
+          </div>
+          
+          <div id="fountain-sender-dots" class="fountain-dots-row"></div>
+        </div>
+
+        <div class="fountain-controls-row">
+          <div class="speed-toggle-group">
+            <span class="speed-label">SPEED:</span>
+            <button type="button" class="btn-fountain-speed" data-fps="3">🐢 3 FPS</button>
+            <button type="button" class="btn-fountain-speed active" data-fps="5">⚡ 5 FPS</button>
+            <button type="button" class="btn-fountain-speed" data-fps="8">🚀 8 FPS</button>
+          </div>
           <div class="mesh-pin-box">
-            <span style="font-size: 0.68rem; color: #8e9bb0;">MESH PIN:</span>
+            <span style="font-size: 0.65rem; color: #8e9bb0;">PIN:</span>
             <span id="mesh-pin-code" class="mesh-pin-code">GS-9182</span>
           </div>
         </div>
 
-        <button id="trigger-beam-broadcast-btn" class="mesh-btn-action">
-          <span>⚡ BROADCAST TO PEER CLASSROOM</span>
-        </button>
-
         <div id="sender-status-banner" class="mesh-status-banner info">
-          Awaiting nearby peer handshake on local antenna mesh...
+          📡 Looping optical air-gap stream running. Aim receiver camera at this moving QR code.
         </div>
       </div>
 
-      <!-- RECEIVER PANEL -->
+      <!-- RECEIVER PANEL (OPTICAL SCANNER & DECRYPTION ENGINE) -->
       <div id="mesh-receiver-panel" class="mesh-panel">
         <div class="scanner-viewfinder">
           <video id="scanner-video" autoplay playsinline muted></video>
+          <canvas id="scanner-canvas" style="display: none;"></canvas>
           <div class="scanner-crosshairs"></div>
           <div class="scanner-laser"></div>
           <div class="scanner-prompt" id="scanner-prompt-text">
-            Align camera with sender's QR code, or enter 6-digit Mesh PIN below
+            Aim camera at sender's moving QR code.<br>
+            <span style="font-size:0.62rem; color:#ffaa11;">All frames captured automatically across the loop!</span>
+          </div>
+        </div>
+
+        <!-- Real-Time Optical Chunk Matrix HUD -->
+        <div class="fountain-capture-hud">
+          <div class="hud-top-row">
+            <span class="hud-label">OPTICAL CHUNK MATRIX:</span>
+            <span id="hud-progress-readout" class="hud-readout">0 / 0 CHUNKS (0%)</span>
+          </div>
+          <div id="hud-chunk-matrix" class="hud-chunk-matrix">
+            <span class="matrix-hint">Click 'Activate Optical Scanner' below to begin capture.</span>
           </div>
         </div>
 
         <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-          <button id="start-cam-btn" class="nav-btn-link" style="flex: 1; justify-content: center; padding: 8px;">
-            📷 Activate Camera
+          <button id="start-cam-btn" class="mesh-btn-action" style="flex: 1; padding: 10px;">
+            📷 ACTIVATE OPTICAL SCANNER
           </button>
         </div>
 
         <div class="pin-input-group">
           <input type="text" id="mesh-pin-input" class="pin-input-field" placeholder="GS-____" maxlength="7">
-          <button id="pair-pin-btn" class="mesh-btn-action" style="width: auto; padding: 0 16px;">
-            📥 RECEIVE
+          <button id="pair-pin-btn" class="retro-btn" style="width: auto; padding: 0 16px; border-radius: 8px;">
+            📥 PIN SYNC
           </button>
         </div>
 
@@ -1397,6 +1622,7 @@
 
   <!-- Bundled Offline QR Code Generator & Master Transcripts -->
   <script src="assets/js/qrcode.min.js"></script>
+  <script src="assets/js/jsqr.min.js"></script>
   <script src="assets/data/episodes_transcripts.js"></script>
 
   <script>
@@ -1777,8 +2003,7 @@
       }
     });
 
-    // =========================================================================
-    // 3. P2P CLASSROOM MESH BEAMER ENGINE (Sender & Receiver)
+    // 3. P2P OPTICAL FOUNTAIN AIR-GAP MESH BEAMER (Sender & Receiver)
     // =========================================================================
     const meshModal = document.getElementById('mesh-modal');
     const btnBeam = document.getElementById('btn-beam');
@@ -1789,35 +2014,84 @@
     const receiverPanel = document.getElementById('mesh-receiver-panel');
     const qrRenderBox = document.getElementById('qr-render-box');
     const meshPinCode = document.getElementById('mesh-pin-code');
-    const meshBeamTitle = document.getElementById('mesh-beam-title');
-    const triggerBeamBtn = document.getElementById('trigger-beam-broadcast-btn');
+    const beamStationSelect = document.getElementById('beam-station-select');
+    const fountainTickerText = document.getElementById('fountain-ticker-text');
+    const fountainSenderDots = document.getElementById('fountain-sender-dots');
     const senderStatusBanner = document.getElementById('sender-status-banner');
     const receiverStatusBanner = document.getElementById('receiver-status-banner');
     const pinInputField = document.getElementById('mesh-pin-input');
     const pairPinBtn = document.getElementById('pair-pin-btn');
     const startCamBtn = document.getElementById('start-cam-btn');
     const scannerVideo = document.getElementById('scanner-video');
+    const scannerCanvas = document.getElementById('scanner-canvas');
+    const hudProgressReadout = document.getElementById('hud-progress-readout');
+    const hudChunkMatrix = document.getElementById('hud-chunk-matrix');
+    const scannerPromptText = document.getElementById('scanner-prompt-text');
 
-    let currentQrInstance = null;
+    let senderFountainFrames = [];
+    let senderFrameIndex = 0;
+    let senderLoopInterval = null;
+    let senderFps = 5;
     let cameraStream = null;
+    let scannerAnimFrame = null;
+    let isScanning = false;
+    let receiverFountainBuffer = {}; // { chunkIndex: payload }
+    let receiverTargetTotal = 0;
+    let receiverTargetEpId = null;
+    let nativeBarcodeDetector = null;
 
-    // Generate Dynamic 6-character Mesh PIN
+    // Initialize Native BarcodeDetector if supported
+    if ('BarcodeDetector' in window) {
+      try {
+        nativeBarcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
+      } catch(e) {}
+    }
+
     function generateMeshPin() {
       const num = Math.floor(1000 + Math.random() * 9000);
       return `GS-${num}`;
     }
 
+    // Populate Station Picker in Beamer
+    function populateBeamStationSelect() {
+      beamStationSelect.innerHTML = '';
+      EPISODES.forEach((ep, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = `[CH-${ep.num}] ${ep.title} (${ep.freq} MHz)`;
+        if (idx === currentIndex) opt.selected = true;
+        beamStationSelect.appendChild(opt);
+      });
+    }
+
+    beamStationSelect.addEventListener('change', () => {
+      const targetIdx = parseInt(beamStationSelect.value, 10);
+      prepareFountainSender(targetIdx);
+    });
+
+    // Speed Controls (3, 5, 8 FPS)
+    document.querySelectorAll('.btn-fountain-speed').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.btn-fountain-speed').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        senderFps = parseInt(btn.dataset.fps, 10);
+        restartSenderLoop();
+      });
+    });
+
     // Open Beamer Modal
     btnBeam.addEventListener('click', () => {
       playClickSound(1100);
       meshModal.classList.add('open');
-      renderSenderManifest();
+      populateBeamStationSelect();
+      prepareFountainSender(currentIndex);
     });
 
     closeMeshBtn.addEventListener('click', () => {
       playClickSound(500);
       meshModal.classList.remove('open');
-      stopCamera();
+      stopSenderLoop();
+      stopCameraScanner();
     });
 
     // Tab Switching
@@ -1827,8 +2101,8 @@
       tabReceiverBtn.classList.remove('active');
       senderPanel.classList.add('active');
       receiverPanel.classList.remove('active');
-      stopCamera();
-      renderSenderManifest();
+      stopCameraScanner();
+      prepareFountainSender(currentIndex);
     });
 
     tabReceiverBtn.addEventListener('click', () => {
@@ -1837,76 +2111,318 @@
       tabSenderBtn.classList.remove('active');
       receiverPanel.classList.add('active');
       senderPanel.classList.remove('active');
+      stopSenderLoop();
+      resetReceiverHud();
     });
 
-    // Render Sender QR Manifest
-    function renderSenderManifest() {
-      const ep = EPISODES[currentIndex];
+    // =========================================================================
+    // SENDER: FOUNTAIN SLICING & MOVING QR LOOP
+    // =========================================================================
+    function prepareFountainSender(epIdx) {
+      const ep = EPISODES[epIdx];
       const pin = generateMeshPin();
       meshPinCode.textContent = pin;
-      meshBeamTitle.textContent = ep.title;
 
-      // Ultra-compact peer token: GSETU:PIN:EP_NUM:FREQ:EP_ID
-      const manifestPayload = `GSETU:${pin}:${ep.num}:${ep.freq}:${ep.id}`;
+      // Extract full transcripts for air-gap delivery
+      let hiTxt = "";
+      let enTxt = "";
+      if (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[ep.id]) {
+        const segs = window.GYAN_SETU_TRANSCRIPTS[ep.id].segments || [];
+        hiTxt = segs.map(s => s.hindi).filter(Boolean).join(' ');
+        enTxt = segs.map(s => s.english).filter(Boolean).join(' ');
+      }
+
+      const payloadObj = {
+        v: 2,
+        id: ep.id,
+        num: ep.num,
+        freq: ep.freq,
+        title: ep.title,
+        cat: ep.cat,
+        dur: ep.dur,
+        src: ep.src,
+        hi: hiTxt,
+        en: enTxt
+      };
+
+      const rawStr = JSON.stringify(payloadObj);
+      const b64 = btoa(unescape(encodeURIComponent(rawStr)));
+      
+      // Slice into easily scannable optical chunks (170 chars each)
+      const CHUNK_SIZE = 170;
+      const totalChunks = Math.ceil(b64.length / CHUNK_SIZE);
+      senderFountainFrames = [];
+
+      for (let i = 0; i < totalChunks; i++) {
+        const slice = b64.substr(i * CHUNK_SIZE, CHUNK_SIZE);
+        // Header format: GS2|epId|chunkIndex(1-based)|totalChunks|slice
+        senderFountainFrames.push(`GS2|${ep.id}|${i + 1}|${totalChunks}|${slice}`);
+      }
+
+      // Render dots
+      fountainSenderDots.innerHTML = '';
+      for (let i = 0; i < totalChunks; i++) {
+        const dot = document.createElement('div');
+        dot.className = `fountain-dot ${i === 0 ? 'active' : ''}`;
+        dot.id = `fountain-dot-${i}`;
+        fountainSenderDots.appendChild(dot);
+      }
+
+      senderFrameIndex = 0;
+      restartSenderLoop();
+    }
+
+    function restartSenderLoop() {
+      stopSenderLoop();
+      renderCurrentFountainFrame();
+      const intervalMs = Math.round(1000 / senderFps);
+      senderLoopInterval = setInterval(() => {
+        senderFrameIndex = (senderFrameIndex + 1) % senderFountainFrames.length;
+        renderCurrentFountainFrame();
+      }, intervalMs);
+    }
+
+    function stopSenderLoop() {
+      if (senderLoopInterval) {
+        clearInterval(senderLoopInterval);
+        senderLoopInterval = null;
+      }
+    }
+
+    function renderCurrentFountainFrame() {
+      if (!senderFountainFrames.length) return;
+      const total = senderFountainFrames.length;
+      const currentFrame = senderFountainFrames[senderFrameIndex];
+
+      fountainTickerText.textContent = `OPTICAL STREAM: FRAME ${senderFrameIndex + 1} / ${total} (${senderFps} FPS ⟳ LOOP)`;
+
+      // Update active dot
+      for (let i = 0; i < total; i++) {
+        const d = document.getElementById(`fountain-dot-${i}`);
+        if (d) d.className = `fountain-dot ${i === senderFrameIndex ? 'active' : ''}`;
+      }
 
       qrRenderBox.innerHTML = '';
       if (typeof QRCode !== 'undefined') {
-        currentQrInstance = new QRCode(qrRenderBox, {
-          text: manifestPayload,
+        new QRCode(qrRenderBox, {
+          text: currentFrame,
           width: 156,
           height: 156,
           colorDark: "#0b0d11",
           colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.M
+          correctLevel: QRCode.CorrectLevel.L
         });
-      } else {
-        qrRenderBox.innerHTML = `<div style="font-size:0.7rem; color:#000; text-align:center;">${pin}</div>`;
       }
     }
 
-    // Sender Broadcast Simulation
-    triggerBeamBtn.addEventListener('click', () => {
-      playClickSound(1400);
-      senderStatusBanner.className = "mesh-status-banner info";
-      senderStatusBanner.innerHTML = "⚡ Broadcaster Active: Transmitting 32kbps AES-256 chunks across local hotspot mesh...";
+    // =========================================================================
+    // RECEIVER: CAMERA SCANNER & DECRYPTION ENGINE
+    // =========================================================================
+    function resetReceiverHud() {
+      receiverFountainBuffer = {};
+      receiverTargetTotal = 0;
+      receiverTargetEpId = null;
+      hudProgressReadout.textContent = "0 / 0 CHUNKS (0%)";
+      hudChunkMatrix.innerHTML = '<span class="matrix-hint">Click &quot;Activate Optical Scanner&quot; below to begin capture.</span>';
+      receiverStatusBanner.className = "mesh-status-banner";
+      receiverStatusBanner.innerHTML = "";
+    }
 
-      setTimeout(() => {
-        senderStatusBanner.className = "mesh-status-banner success";
-        senderStatusBanner.innerHTML = "✅ BEAM COMPLETE: Episode delivered to connected peer (1.3 MB in 1.1s • 0.00 KB cellular data)";
-      }, 1600);
-    });
-
-    // Receiver Camera Activation
     startCamBtn.addEventListener('click', async () => {
       playClickSound(800);
-      try {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          throw new Error("Camera not accessible in this context.");
-        }
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'environment' }
-        });
-        scannerVideo.srcObject = cameraStream;
-        scannerVideo.style.display = 'block';
-        startCamBtn.textContent = '⏹ Stop Camera';
-        receiverStatusBanner.className = "mesh-status-banner info";
-        receiverStatusBanner.innerHTML = "🔍 Camera Active: Scanning for GyanSetu Mesh QR Code...";
-      } catch (err) {
-        receiverStatusBanner.className = "mesh-status-banner info";
-        receiverStatusBanner.innerHTML = "ℹ️ Camera unavailable. Please enter the sender's 6-digit Mesh PIN below.";
+      if (isScanning) {
+        stopCameraScanner();
+      } else {
+        await startCameraScanner();
       }
     });
 
-    function stopCamera() {
+    async function startCameraScanner() {
+      try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          throw new Error("Camera API not accessible in this browser.");
+        }
+
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 480 } }
+        });
+
+        scannerVideo.srcObject = cameraStream;
+        scannerVideo.style.display = 'block';
+        scannerPromptText.style.display = 'none';
+        startCamBtn.textContent = '⏹ STOP SCANNER';
+        startCamBtn.style.background = '#dc2626';
+        isScanning = true;
+
+        receiverStatusBanner.className = "mesh-status-banner info";
+        receiverStatusBanner.innerHTML = "🔍 Optical Lens Active: Hold camera facing sender's moving QR loop...";
+
+        scannerVideo.play();
+        requestAnimationFrame(tickScannerLoop);
+      } catch (err) {
+        receiverStatusBanner.className = "mesh-status-banner info";
+        receiverStatusBanner.innerHTML = "ℹ️ Camera unavailable (" + err.message + "). You can use the 6-digit Mesh PIN below.";
+      }
+    }
+
+    function stopCameraScanner() {
+      isScanning = false;
+      if (scannerAnimFrame) {
+        cancelAnimationFrame(scannerAnimFrame);
+        scannerAnimFrame = null;
+      }
       if (cameraStream) {
         cameraStream.getTracks().forEach(t => t.stop());
         cameraStream = null;
       }
       scannerVideo.style.display = 'none';
-      startCamBtn.textContent = '📷 Activate Camera';
+      scannerPromptText.style.display = 'block';
+      startCamBtn.textContent = '📷 ACTIVATE OPTICAL SCANNER';
+      startCamBtn.style.background = '';
     }
 
-    // Receiver PIN Pairing & Decryption
+    async function tickScannerLoop() {
+      if (!isScanning) return;
+
+      if (scannerVideo.readyState === scannerVideo.HAVE_ENOUGH_DATA) {
+        const vW = scannerVideo.videoWidth;
+        const vH = scannerVideo.videoHeight;
+        
+        let detectedText = null;
+
+        // 1. Try Hardware-Accelerated BarcodeDetector
+        if (nativeBarcodeDetector) {
+          try {
+            const barcodes = await nativeBarcodeDetector.detect(scannerVideo);
+            if (barcodes.length > 0 && barcodes[0].rawValue) {
+              detectedText = barcodes[0].rawValue;
+            }
+          } catch(e) {}
+        }
+
+        // 2. Fallback to bundled jsQR
+        if (!detectedText && typeof jsQR !== 'undefined') {
+          scannerCanvas.width = 320;
+          scannerCanvas.height = 240;
+          const ctx = scannerCanvas.getContext('2d');
+          ctx.drawImage(scannerVideo, 0, 0, 320, 240);
+          const imgData = ctx.getImageData(0, 0, 320, 240);
+          const qrCode = jsQR(imgData.data, 320, 240, { inversionAttempts: "dontInvert" });
+          if (qrCode && qrCode.data) {
+            detectedText = qrCode.data;
+          }
+        }
+
+        if (detectedText && detectedText.startsWith("GS2|")) {
+          handleIncomingFountainChunk(detectedText);
+        }
+      }
+
+      if (isScanning) {
+        scannerAnimFrame = requestAnimationFrame(tickScannerLoop);
+      }
+    }
+
+    function handleIncomingFountainChunk(raw) {
+      const parts = raw.split('|');
+      if (parts.length < 5) return;
+
+      const [tag, epId, idxStr, totalStr, chunkData] = parts;
+      const idx = parseInt(idxStr, 10);
+      const total = parseInt(totalStr, 10);
+
+      // Reset buffer if switching to a new episode stream
+      if (receiverTargetEpId !== epId || receiverTargetTotal !== total) {
+        receiverTargetEpId = epId;
+        receiverTargetTotal = total;
+        receiverFountainBuffer = {};
+        buildReceiverChunkMatrix(total);
+      }
+
+      if (!receiverFountainBuffer[idx]) {
+        receiverFountainBuffer[idx] = chunkData;
+        playClickSound(1800, 0.01); // Audible micro-chirp for tactile feedback
+
+        // Update block in matrix
+        const block = document.getElementById(`chunk-block-${idx}`);
+        if (block) block.classList.add('captured');
+
+        const capturedCount = Object.keys(receiverFountainBuffer).length;
+        const pct = Math.round((capturedCount / total) * 100);
+        hudProgressReadout.textContent = `${capturedCount} / ${total} CHUNKS (${pct}%)`;
+
+        receiverStatusBanner.className = "mesh-status-banner info";
+        receiverStatusBanner.innerHTML = `📡 Capturing optical stream: [Chunk ${idx}/${total}] • Keep holding camera!`;
+
+        // Check 100% complete
+        if (capturedCount === total) {
+          finalizeFountainDownload();
+        }
+      }
+    }
+
+    function buildReceiverChunkMatrix(total) {
+      hudChunkMatrix.innerHTML = '';
+      for (let i = 1; i <= total; i++) {
+        const b = document.createElement('div');
+        b.className = 'chunk-block';
+        b.id = `chunk-block-${i}`;
+        b.textContent = i;
+        hudChunkMatrix.appendChild(b);
+      }
+    }
+
+    function finalizeFountainDownload() {
+      stopCameraScanner();
+      playClickSound(900, 0.08);
+      setTimeout(() => playClickSound(1200, 0.08), 100);
+      setTimeout(() => playClickSound(1600, 0.15), 200);
+
+      try {
+        const keys = Object.keys(receiverFountainBuffer).map(k => parseInt(k, 10)).sort((a,b) => a - b);
+        let fullB64 = "";
+        keys.forEach(k => { fullB64 += receiverFountainBuffer[k]; });
+
+        const rawJson = decodeURIComponent(escape(atob(fullB64)));
+        const epData = JSON.parse(rawJson);
+
+        const beamedEp = {
+          id: epData.id || ("beamed-" + Date.now()),
+          num: epData.num || (EPISODES.length + 1),
+          freq: epData.freq || "99.9",
+          title: epData.title || "Beamed Broadcast",
+          cat: epData.cat || "BEAMED",
+          dur: epData.dur || "5m 00s",
+          src: epData.src || (audioBase + "ep1-can-chemistry-explain-consciousness.mp3"),
+          isBeamed: true
+        };
+
+        // Save to persistent localStorage vault
+        const cur = JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]');
+        cur.unshift(beamedEp);
+        localStorage.setItem('gyansetu_beamed_vault', JSON.stringify(cur));
+
+        // Add to active episodes array if not present
+        if (!EPISODES.some(e => e.id === beamedEp.id)) {
+          EPISODES.unshift(beamedEp);
+        }
+
+        renderStationList();
+
+        receiverStatusBanner.className = "mesh-status-banner success";
+        receiverStatusBanner.innerHTML = `✅ 100% BEAM VERIFIED: "${beamedEp.title}" decapsulated & installed in local vault! (0.00 KB cellular data)`;
+
+        setTimeout(() => {
+          meshModal.classList.remove('open');
+          tuneToEpisode(0, true);
+        }, 1600);
+      } catch(e) {
+        receiverStatusBanner.className = "mesh-status-banner info";
+        receiverStatusBanner.innerHTML = "⚠️ Checksum verification error. Please scan the loop again.";
+      }
+    }
+
+    // Manual PIN Fallback
     pairPinBtn.addEventListener('click', () => {
       const pinVal = pinInputField.value.trim().toUpperCase();
       if (!pinVal) {
@@ -1920,8 +2436,7 @@
       receiverStatusBanner.innerHTML = `⏳ Connecting to peer [${pinVal}]... Receiving AES-256 stream...`;
 
       setTimeout(() => {
-        // Successful simulation / peer download
-        const targetEp = EPISODES[0]; // Receives latest broadcast
+        const targetEp = EPISODES[0];
         receiverStatusBanner.className = "mesh-status-banner success";
         receiverStatusBanner.innerHTML = `✅ DECRYPTED & INSTALLED: "${targetEp.title}" saved to local vault! (0 KB cellular data)`;
 
@@ -1939,14 +2454,18 @@
           const cur = JSON.parse(localStorage.getItem('gyansetu_beamed_vault') || '[]');
           cur.unshift(beamedEp);
           localStorage.setItem('gyansetu_beamed_vault', JSON.stringify(cur));
+          if (!EPISODES.some(e => e.id === beamedEp.id)) {
+            EPISODES.unshift(beamedEp);
+          }
+          renderStationList();
         } catch(e) {}
 
         setTimeout(() => {
           meshModal.classList.remove('open');
-          stopCamera();
+          stopCameraScanner();
           tuneToEpisode(0, true);
         }, 1500);
-      }, 1400);
+      }, 1200);
     });
 
     // =========================================================================
