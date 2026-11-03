@@ -1596,6 +1596,34 @@
       width: 100%;
     }
 
+    /* Mobile Screen Top Bar Optimization (360px - 600px) */
+    @media (max-width: 600px) {
+      .console-top-bar {
+        gap: 6px;
+      }
+      .top-bar-left .top-led-indicator {
+        display: none;
+      }
+      .master-theme-toggle-zone {
+        padding: 4px 8px;
+        gap: 6px;
+      }
+      .theme-label {
+        font-size: 0.60rem;
+      }
+      .theme-toggle-switch {
+        width: 32px;
+        height: 18px;
+      }
+      .theme-toggle-lever {
+        width: 14px;
+        height: 14px;
+      }
+      .btn-kiosk {
+        display: none !important;
+      }
+    }
+
     /* Media Query for Tablets & Desktop Landscape (Lenovo Tab M8 1280x800 Native) */
     @media (min-width: 900px) and (orientation: landscape), (min-width: 1024px) {
       body {
