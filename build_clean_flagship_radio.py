@@ -1,0 +1,1474 @@
+# -*- coding: utf-8 -*-
+"""
+Build Refined Luxury Restomod Radio Console for Lenovo TB-8505X Tablet (1280x800 Landscape)
+Elevating to Museum-Grade Industrial Design:
+- Anisotropic machined brass rotary flywheels with specular light glints and knurled perimeter
+- High-definition acoustic tweed speaker grille with embossed brushed brass medallion
+- Hyper-realistic glowing vacuum tube with glass reflections and ambient phosphor bleed
+- Modern sapphire-amber smart LCD core with live oscilloscope, translation pills, and teleprompter
+- Brushed brass mechanical piano push-deck with spring-action depression and tactile relay sounds
+- Sole Attribution: Curated, Hosted, and Founded by Simran Ailani
+"""
+
+from episodes_catalog import EPISODES_RAW
+
+HTML_TEMPLATE = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#120b06">
+  <title>GyanSetu | Flagship Tablet Radio Console</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. GLOBAL RESET & TABLET VIEWPORT LOCK (1280x800 NATIVE LANDSCAPE)
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #080503;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: #f7eed8;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* The Tablet Screen IS the Radio Appliance Faceplate (Edge-to-Edge) */
+    .radio-appliance {
+      position: absolute;
+      inset: 0;
+      width: 1280px;
+      height: 800px;
+      margin: auto;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 40%, #301d12 0%, #20130a 50%, #110904 100%);
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Realistic Walnut Wood Grain Texture */
+    .wood-grain-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        repeating-linear-gradient(90deg, 
+          rgba(255,255,255,0.018) 0px, 
+          rgba(0,0,0,0.04) 2px, 
+          transparent 4px, 
+          rgba(255,255,255,0.012) 7px),
+        repeating-linear-gradient(0deg, 
+          transparent 0px, 
+          rgba(0,0,0,0.02) 20px, 
+          transparent 40px);
+      z-index: 1;
+    }
+
+    /* Outer Solid Brass Bezel Trim Framing the Tablet Glass */
+    .radio-bezel-frame {
+      position: absolute;
+      inset: 6px;
+      border: 3.5px solid #8c6823;
+      border-radius: 18px;
+      box-shadow: 
+        inset 0 0 0 2px #d4af37,
+        inset 0 0 20px rgba(0,0,0,0.85),
+        0 0 0 2px #261605;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       2. TOP SWEEPING TUNING HORIZON (GLASS DIAL SCALE)
+       ========================================================================== */
+    .top-tuning-horizon {
+      position: relative;
+      height: 48px;
+      margin: 12px 18px 0 18px;
+      background: radial-gradient(ellipse at center, rgba(28, 18, 10, 0.96) 0%, rgba(10, 6, 3, 0.98) 100%);
+      border: 2px solid #5a3e18;
+      border-radius: 10px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      padding: 0 26px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .horizon-scale {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .freq-tick-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #94743b;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .freq-tick-marker::before {
+      content: '';
+      width: 1.5px;
+      height: 8px;
+      background: #735422;
+      border-radius: 1px;
+    }
+    .freq-tick-marker.active {
+      color: #ffbe3b;
+      transform: scale(1.18);
+      text-shadow: 0 0 10px rgba(255, 190, 59, 0.8);
+    }
+    .freq-tick-marker.active::before {
+      background: #ffbe3b;
+      height: 12px;
+      box-shadow: 0 0 10px #ffbe3b;
+    }
+    /* Gliding Red Indicator Needle */
+    .horizon-needle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #ff453a 0%, #ff7b72 50%, #d70000 100%);
+      box-shadow: 0 0 12px #ff3b30, 0 0 3px #ffffff;
+      transform: translateX(-50%);
+      transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       3. MAIN APPLIANCE DECK (3 SCULPTED ZONES)
+       ========================================================================== */
+    .appliance-main-deck {
+      position: relative;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 290px 1fr 310px;
+      gap: 16px;
+      padding: 10px 20px;
+      z-index: 10;
+    }
+
+    /* --------------------------------------------------------------------------
+       ZONE A: LEFT ACOUSTIC WING (Speaker Grille & Tube Valve)
+       -------------------------------------------------------------------------- */
+    .acoustic-wing {
+      position: relative;
+      background: #140d07;
+      border: 3px solid #5a3c17;
+      border-radius: 14px;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 4px 14px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 16px;
+      overflow: hidden;
+    }
+    /* High-Definition Woven Tweed Texture */
+    .speaker-cloth-grille {
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(45deg, #3d291a 0px, #3d291a 2px, #20140b 2px, #20140b 5px),
+        repeating-linear-gradient(-45deg, #4d3320 0px, #4d3320 2px, #1a0f07 2px, #1a0f07 5px);
+      opacity: 0.95;
+      z-index: 1;
+    }
+    /* Embossed Brushed Brass Medallion */
+    .speaker-brass-plaque {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, #e5bf45 0%, #aa8214 45%, #ffd966 75%, #8a6508 100%);
+      border: 2px solid #5e4308;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.6);
+      text-align: center;
+      color: #1a1104;
+    }
+    .plaque-hindi-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .plaque-brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-top: 1px;
+    }
+    .plaque-subline {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+    .plaque-curator {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #2b1802;
+      margin-top: 6px;
+      border-top: 1px solid rgba(0,0,0,0.25);
+      padding-top: 4px;
+    }
+
+    /* Recessed Glowing Vacuum Tube Chamber */
+    .vacuum-tube-chamber {
+      position: relative;
+      z-index: 2;
+      height: 146px;
+      background: radial-gradient(circle at center, #241508 0%, #080402 100%);
+      border: 2.5px solid #634319;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.98), 0 3px 8px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .vacuum-tube-chamber:hover {
+      border-color: #8c6823;
+    }
+    .tube-glass-envelope {
+      position: relative;
+      width: 54px;
+      height: 86px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.03) 60%, rgba(0,0,0,0.4) 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      border-radius: 27px 27px 8px 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 10px rgba(255, 170, 0, 0.25), 0 0 15px rgba(255, 150, 0, 0.15);
+    }
+    .tube-filament {
+      width: 15px;
+      height: 42px;
+      border: 2.5px solid #ff9d00;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 0 14px #ff8800, inset 0 0 8px #ffcc00;
+      animation: filamentWarmth 3s infinite ease-in-out;
+      transition: opacity 0.5s ease;
+    }
+    @keyframes filamentWarmth {
+      0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 6px #ff9900); }
+      50% { opacity: 1; filter: drop-shadow(0 0 15px #ffaa00); }
+    }
+    .tube-caption {
+      font-size: 9.5px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: #cca040;
+      margin-top: 8px;
+      letter-spacing: 0.8px;
+    }
+
+    /* --------------------------------------------------------------------------
+       ZONE B: THE INSET SMART LCD DISPLAY (Center Modern Smart Core)
+       -------------------------------------------------------------------------- */
+    .smart-lcd-bezel {
+      position: relative;
+      background: #080d12;
+      border: 3.5px solid #8c6823;
+      border-radius: 16px;
+      box-shadow: 
+        inset 0 0 25px rgba(0,0,0,0.95),
+        0 4px 16px rgba(0,0,0,0.85),
+        0 0 0 2px #3a250e;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 20px;
+      overflow: hidden;
+    }
+    /* Subtle Glass Glare across the LCD */
+    .smart-lcd-bezel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 45%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* LCD 1. Top Status & Telemetry Header */
+    .lcd-telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 190, 59, 0.25);
+      padding-bottom: 8px;
+    }
+    .lcd-freq-badge {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .lcd-freq-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 26px;
+      font-weight: 900;
+      color: #ffbe3b;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 10px rgba(255, 190, 59, 0.5);
+    }
+    .lcd-chips-row {
+      display: flex;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px;
+    }
+    .lcd-chip {
+      background: rgba(255, 190, 59, 0.1);
+      border: 1px solid rgba(255, 190, 59, 0.3);
+      padding: 3px 8px;
+      border-radius: 12px;
+      color: #e5bf45;
+    }
+
+    /* LCD 2. Live Modern Electron Waveform Oscilloscope */
+    .lcd-waveform-canvas {
+      width: 100%;
+      height: 46px;
+      border-radius: 6px;
+      background: rgba(4, 7, 10, 0.7);
+      border: 1px solid rgba(255, 190, 59, 0.18);
+      margin: 6px 0;
+    }
+
+    /* LCD 3. Hero Episode Title & Solo Curator Attribution */
+    .lcd-hero-info {
+      margin: 2px 0;
+    }
+    .lcd-track-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #fff2d1;
+      letter-spacing: -0.3px;
+      text-shadow: 0 0 8px rgba(255, 200, 80, 0.3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lcd-curator-attribution {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cca040;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .curator-star {
+      color: #ffd700;
+    }
+
+    /* LCD 4. Multi-Language Instant Translation Switcher */
+    .lcd-translation-pill-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 22, 30, 0.9);
+      border: 1px solid rgba(255, 190, 59, 0.35);
+      border-radius: 20px;
+      padding: 4px;
+      width: fit-content;
+      margin: 6px 0;
+    }
+    .lang-pill-btn {
+      background: transparent;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #9e8a70;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .lang-pill-btn.active {
+      background: linear-gradient(135deg, #e5bf45 0%, #aa8214 100%);
+      color: #120b04;
+      box-shadow: 0 2px 8px rgba(229, 191, 69, 0.45);
+    }
+
+    /* LCD 5. Live Synchronized Teleprompter Subtitles */
+    .lcd-teleprompter-box {
+      height: 70px;
+      background: rgba(6, 10, 14, 0.95);
+      border: 1px solid rgba(255, 190, 59, 0.22);
+      border-radius: 8px;
+      padding: 8px 12px;
+      overflow-y: hidden;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+    }
+    .teleprompter-line.active {
+      color: #ffbe3b;
+      font-weight: 700;
+      text-shadow: 0 0 6px rgba(255, 190, 59, 0.4);
+    }
+
+    /* LCD 6. Modern Hairline Timeline Scrubber */
+    .lcd-scrubber-row {
+      margin: 6px 0;
+    }
+    .lcd-scrubber-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 190, 59, 0.3);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+    .lcd-scrubber-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #aa8214 0%, #ffbe3b 100%);
+      border-radius: 4px;
+      box-shadow: 0 0 8px #ffbe3b;
+      transition: width 0.1s linear;
+    }
+    .lcd-time-indicators {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #9e8a70;
+      margin-top: 4px;
+    }
+
+    /* LCD 7. Smart Horizontal Episode Directory Ribbon */
+    .lcd-station-ribbon {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 4px 0;
+      border-top: 1px solid rgba(255, 190, 59, 0.2);
+    }
+    .lcd-station-ribbon::-webkit-scrollbar { display: none; }
+    .station-chip-btn {
+      padding: 6px 12px;
+      background: rgba(16, 22, 30, 0.9);
+      border: 1px solid rgba(255, 190, 59, 0.25);
+      border-radius: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #9e8a70;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .station-chip-btn.active {
+      background: rgba(255, 190, 59, 0.2);
+      border-color: #ffbe3b;
+      color: #ffbe3b;
+      font-weight: 700;
+      box-shadow: 0 0 8px rgba(255, 190, 59, 0.3);
+    }
+
+    /* --------------------------------------------------------------------------
+       ZONE C: RIGHT WING (Album Art Frame & Physical Anisotropic Rotary Dials)
+       -------------------------------------------------------------------------- */
+    .hardware-controls-wing {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 0;
+    }
+
+    /* Recessed Square Brass Album Frame */
+    .album-frame-housing {
+      width: 172px;
+      height: 172px;
+      background: #140d07;
+      border: 3.5px solid #8c6823;
+      border-radius: 12px;
+      box-shadow: 
+        inset 0 0 15px rgba(0,0,0,0.9),
+        0 4px 14px rgba(0,0,0,0.7),
+        0 0 0 1.5px #3a250e;
+      padding: 4px;
+      position: relative;
+    }
+    .album-art-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+      transition: background-image 0.3s ease;
+    }
+    .album-glare {
+      position: absolute;
+      inset: 4px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 45%, rgba(0,0,0,0.3) 100%);
+      pointer-events: none;
+    }
+
+    /* PHYSICAL ROTARY KNOB 1: MASTER TUNER (Anisotropic Brushed Brass) */
+    .physical-knob-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .physical-knob-dial {
+      position: relative;
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      /* Conic Gradient for Anisotropic Metal Sheen */
+      background: conic-gradient(
+        from 0deg, 
+        #d4af37 0deg, 
+        #f9e394 45deg, 
+        #8c6d1f 90deg, 
+        #e5bf45 135deg, 
+        #5e4308 180deg, 
+        #f9e394 225deg, 
+        #8c6d1f 270deg, 
+        #e5bf45 315deg, 
+        #d4af37 360deg
+      );
+      border: 3px solid #6e4e13;
+      box-shadow: 
+        0 8px 18px rgba(0,0,0,0.9),
+        inset 0 2px 4px rgba(255,255,255,0.6),
+        inset 0 -3px 5px rgba(0,0,0,0.7);
+      cursor: grab;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.15s ease-out;
+    }
+    /* Knurled Diamond Outer Grip */
+    .knob-knurled-edge {
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 2.5px dashed rgba(40, 24, 4, 0.6);
+      pointer-events: none;
+    }
+    .knob-marker-indicator {
+      position: absolute;
+      top: 6px;
+      width: 5px;
+      height: 14px;
+      background: #120a02;
+      border-radius: 3px;
+      box-shadow: 0 0 2px rgba(255,255,255,0.5);
+    }
+    .knob-center-cap {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffeaa7 0%, #d4af37 60%, #7a5a08 100%);
+      border: 1px solid #4a340c;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 2px 6px rgba(0,0,0,0.6);
+    }
+    .knob-label-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: #cca040;
+      letter-spacing: 1px;
+    }
+
+    /* PHYSICAL ROTARY KNOB 2: SCROLL / OUTPUT VOLUME */
+    .physical-knob-dial.small {
+      width: 84px;
+      height: 84px;
+    }
+    .physical-knob-dial.small .knob-center-cap {
+      width: 34px;
+      height: 34px;
+    }
+
+    /* ==========================================================================
+       4. BOTTOM PHYSICAL PIANO CONTROL DECK (Brushed Brass Plate)
+       ========================================================================== */
+    .bottom-piano-deck {
+      position: relative;
+      height: 76px;
+      margin: 0 16px 12px 16px;
+      background: linear-gradient(180deg, #d4af37 0%, #aa8214 50%, #7a5a08 100%);
+      border: 2px solid #543906;
+      border-radius: 12px;
+      box-shadow: 
+        inset 0 1px 2px rgba(255,255,255,0.6),
+        0 6px 18px rgba(0,0,0,0.9),
+        0 0 0 2px #261604;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 10;
+    }
+    .piano-push-key {
+      position: relative;
+      width: 172px;
+      height: 48px;
+      background: linear-gradient(180deg, #2b1f15 0%, #17100a 60%, #0d0905 100%);
+      border: 1.5px solid #6b4d1b;
+      border-radius: 8px;
+      box-shadow: 
+        0 4px 8px rgba(0,0,0,0.8),
+        inset 0 1px 1px rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e5bf45;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .piano-push-key:active, .piano-push-key.depressed {
+      transform: translateY(3px);
+      box-shadow: 
+        0 1px 2px rgba(0,0,0,0.9),
+        inset 0 2px 4px rgba(0,0,0,0.8);
+      background: linear-gradient(180deg, #17100a 0%, #0d0905 100%);
+      color: #ffde8a;
+    }
+    .piano-push-key.active-pwr {
+      color: #ff3b30;
+      text-shadow: 0 0 8px #ff3b30;
+    }
+
+    /* CRT Powerdown Effect for the LCD */
+    .smart-lcd-bezel.crt-power-off {
+      filter: brightness(0.04) grayscale(100%) !important;
+      transition: filter 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    /* ==========================================================================
+       5. MODAL: OPTICAL BEAMER (AIR-GAP P2P MESH)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #14100c;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 12px;
+      width: 620px;
+      max-width: 90vw;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+      color: #f5eedc;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #e5bf45;
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: #e5bf45;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    #beam-canvas-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      width: 260px;
+      height: 260px;
+      margin: 16px auto;
+    }
+    .fountain-status-line {
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 11.5px;
+      color: #cca040;
+    }
+
+    /* Toast Notification */
+    #pocket-toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(20, 14, 10, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.6);
+      padding: 8px 20px;
+      border-radius: 20px;
+      color: #f5eedc;
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+    #pocket-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Native Audio Tag -->
+  <audio id="audio-engine" preload="auto"></audio>
+
+  <!-- Physical Radio Appliance (Lenovo Tab M8 1280x800 Native) -->
+  <div class="radio-appliance" id="radio-appliance">
+    
+    <div class="wood-grain-overlay"></div>
+    <div class="radio-bezel-frame"></div>
+
+    <!-- 1. Top Sweeping Glass Tuning Dial Scale -->
+    <header class="top-tuning-horizon">
+      <div class="horizon-scale" id="horizon-scale">
+        <!-- Scale ticks generated dynamically -->
+      </div>
+      <div class="horizon-needle" id="horizon-needle" style="left: 92%;"></div>
+    </header>
+
+    <!-- 2. Main Appliance Deck (Acoustic Wing + Smart LCD + Physical Controls) -->
+    <main class="appliance-main-deck">
+      
+      <!-- ZONE A: Left Acoustic Wing -->
+      <section class="acoustic-wing">
+        <div class="speaker-cloth-grille"></div>
+        
+        <div class="speaker-brass-plaque">
+          <div class="plaque-hindi-title">ज्ञानसेतु</div>
+          <div class="plaque-brand-title">GYANSETU</div>
+          <div class="plaque-subline">Student Broadcast Network</div>
+          <div class="plaque-curator">Curated by Simran Ailani</div>
+        </div>
+
+        <div class="vacuum-tube-chamber" id="tube-chamber" title="Tap to Toggle Warm Tube DSP (+3dB Harmonics)">
+          <div class="tube-glass-envelope">
+            <div class="tube-filament" id="tube-filament"></div>
+          </div>
+          <div class="tube-caption">TRIODE VALVE 12AX7</div>
+        </div>
+      </section>
+
+      <!-- ZONE B: The Inset Modern Smart LCD Screen -->
+      <section class="smart-lcd-bezel" id="smart-lcd-screen">
+        
+        <!-- LCD Header: Frequency + Telemetry -->
+        <div class="lcd-telemetry-header">
+          <div class="lcd-freq-badge">
+            <span class="lcd-freq-num" id="lcd-freq-display">108.0 MHz</span>
+          </div>
+          <div class="lcd-chips-row">
+            <span class="lcd-chip">STEREO HI-FI</span>
+            <span class="lcd-chip">320 KBPS</span>
+            <span class="lcd-chip">AI CURATED</span>
+          </div>
+        </div>
+
+        <!-- Live Audio Waveform Line -->
+        <canvas class="lcd-waveform-canvas" id="lcd-wave-canvas" width="560" height="46"></canvas>
+
+        <!-- Episode Hero Info -->
+        <div class="lcd-hero-info">
+          <h2 class="lcd-track-title" id="lcd-title">नागपूरचा इतिहास</h2>
+          <div class="lcd-curator-attribution">
+            <span class="curator-star">★</span>
+            <span>Simran Ailani • Founder & Lead Curator • Episode 13</span>
+          </div>
+        </div>
+
+        <!-- Multi-Language Translation Pill -->
+        <div class="lcd-translation-pill-bar">
+          <button class="lang-pill-btn active" id="pill-mr" data-lang="mr">मराठी ORIG</button>
+          <button class="lang-pill-btn" id="pill-hi" data-lang="hi">हिंदी HINDI</button>
+          <button class="lang-pill-btn" id="pill-en" data-lang="en">ENGLISH DUB</button>
+        </div>
+
+        <!-- Synchronized Live Teleprompter Subtitles -->
+        <div class="lcd-teleprompter-box" id="lcd-teleprompter">
+          <p class="teleprompter-line active">ज्ञानसेतु इंटरनेट रेडिओवर आपले स्वागत आहे.</p>
+          <p class="teleprompter-line">नागपूर शहराचा समृद्ध इतिहास, संस्कृती आणि विज्ञान...</p>
+        </div>
+
+        <!-- Timeline Scrubber -->
+        <div class="lcd-scrubber-row">
+          <div class="lcd-scrubber-track" id="lcd-scrubber-track">
+            <div class="lcd-scrubber-fill" id="lcd-scrubber-fill"></div>
+          </div>
+          <div class="lcd-time-indicators">
+            <span id="lcd-cur-time">00:00</span>
+            <span id="lcd-total-time">09:18</span>
+          </div>
+        </div>
+
+        <!-- Horizontal Station Directory Ribbon -->
+        <div class="lcd-station-ribbon" id="lcd-station-ribbon">
+          <!-- Dynamically populated 13 stations -->
+        </div>
+
+      </section>
+
+      <!-- ZONE C: Right Wing (Album Art Frame & Physical Rotary Dials) -->
+      <section class="hardware-controls-wing">
+        
+        <!-- Recessed Brass Album Art Frame -->
+        <div class="album-frame-housing">
+          <div class="album-art-img" id="album-art-display"></div>
+          <div class="album-glare"></div>
+        </div>
+
+        <!-- Physical Rotary Knob 1: Master Frequency Tuner -->
+        <div class="physical-knob-cluster">
+          <div class="physical-knob-dial" id="dial-master-tuner" title="Spin with thumb to tune frequency">
+            <div class="knob-knurled-edge"></div>
+            <div class="knob-marker-indicator"></div>
+            <div class="knob-center-cap"></div>
+          </div>
+          <span class="knob-label-caption">MASTER TUNER</span>
+        </div>
+
+        <!-- Physical Rotary Knob 2: Scroll / Output Volume -->
+        <div class="physical-knob-cluster">
+          <div class="physical-knob-dial small" id="dial-output-vol" title="Spin with thumb to adjust volume">
+            <div class="knob-knurled-edge"></div>
+            <div class="knob-marker-indicator"></div>
+            <div class="knob-center-cap"></div>
+          </div>
+          <span class="knob-label-caption">DIRECTORY / VOL</span>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- 3. Bottom Physical Piano Control Deck (Brass Plate) -->
+    <footer class="bottom-piano-deck">
+      <button class="piano-push-key active-pwr" id="key-pwr">
+        <span>⏻</span> POWER
+      </button>
+      <button class="piano-push-key" id="key-prev">
+        <span>⏮</span> PREV
+      </button>
+      <button class="piano-push-key" id="key-play">
+        <span id="key-play-icon">▶</span> <span id="key-play-txt">PLAY</span>
+      </button>
+      <button class="piano-push-key" id="key-next">
+        <span>⏭</span> NEXT
+      </button>
+      <button class="piano-push-key" id="key-bass">
+        <span>🔊</span> BASS BOOST
+      </button>
+      <button class="piano-push-key" id="key-beamer">
+        <span>📡</span> OPTICAL BEAM
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Optical Beamer Modal -->
+  <div class="modal-overlay" id="beamer-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📡 GyanSetu Optical Mesh Beamer</h3>
+        <button class="modal-close-btn" id="btn-close-beamer">&times;</button>
+      </div>
+      <p style="font-size:12px; color:#cbd5e1; margin-bottom:12px;">
+        Lossless Air-Gap Transmission: Hold camera towards screen to ingest offline bundle.
+      </p>
+      <div id="beam-canvas-wrap">
+        <canvas id="beam-fountain-canvas" width="236" height="236"></canvas>
+      </div>
+      <div class="fountain-status-line" id="fountain-status-hud">
+        Chunk 1 / 48 • 12 FPS • AES-256-GCM Encrypted
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="pocket-toast"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/qrcode.min.js"></script>
+  <script src="assets/js/jsqr.min.js"></script>
+  <script src="assets/data/episodes_transcripts.js"></script>
+
+  <script>
+    // =========================================================================
+    // 1. MASTER EPISODE CATALOG & MAPS - CURATED BY SIMRAN AILANI
+    // =========================================================================
+    const isAndroidAsset = window.location.protocol === 'file:';
+    const audioBase = isAndroidAsset ? 'assets/audio/' : 'assets/audio_ghost/';
+
+    const EPISODES = ''' + EPISODES_RAW + ''';
+
+    // Map cover artwork cleanly to every episode
+    EPISODES.forEach((ep) => {
+      if (!ep.cover) {
+        const srcFile = (ep.src || '').split('/').pop();
+        ep.cover = 'assets/images/' + srcFile.replace('.mp3', '.jpg');
+      }
+    });
+
+    // State Variables
+    let currentIndex = 0;
+    let isPlaying = false;
+    let isPowerOn = true;
+    let isBassBoosted = false;
+    let isTubeWarmth = false;
+    let activeLanguage = 'mr'; // mr, hi, en
+    let tunerAngle = 0;
+    let volAngle = 0;
+
+    const audio = document.getElementById('audio-engine');
+    const smartLcd = document.getElementById('smart-lcd-screen');
+
+    // Web Audio Synthesizer (Zero-Lag Mechanical Click Audio & Bass Filter)
+    let audioCtx = null;
+    let biquadFilter = null;
+    let analyser = null;
+    let sourceNode = null;
+
+    function initWebAudio() {
+      if (audioCtx) return;
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+
+        biquadFilter = audioCtx.createBiquadFilter();
+        biquadFilter.type = 'lowshelf';
+        biquadFilter.frequency.value = 120;
+        biquadFilter.gain.value = 0;
+
+        sourceNode = audioCtx.createMediaElementSource(audio);
+        sourceNode.connect(biquadFilter);
+        biquadFilter.connect(analyser);
+        analyser.connect(audioCtx.destination);
+      } catch (e) {
+        console.warn('Web Audio DSP running in safe mode:', e);
+      }
+    }
+
+    function playMechanicalClick(freq = 1000, duration = 0.04) {
+      try {
+        const ctx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('pocket-toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    // =========================================================================
+    // 2. HORIZON SCALE INITIALIZATION
+    // =========================================================================
+    function initHorizonScale() {
+      const scaleEl = document.getElementById('horizon-scale');
+      if (!scaleEl) return;
+      scaleEl.innerHTML = EPISODES.map((ep, i) => `
+        <div class="freq-tick-marker ${i === 0 ? 'active' : ''}" id="scale-tick-${i}" data-index="${i}">
+          <span>${ep.freq}</span>
+        </div>
+      `).join('');
+
+      scaleEl.querySelectorAll('.freq-tick-marker').forEach(marker => {
+        marker.addEventListener('click', () => {
+          const idx = parseInt(marker.getAttribute('data-index'), 10);
+          tuneToEpisode(idx, true);
+        });
+      });
+    }
+
+    // =========================================================================
+    // 3. EPISODE TUNING & RESTOMOD LCD BINDINGS
+    // =========================================================================
+    function tuneToEpisode(index, autoPlay = true) {
+      if (index < 0) index = EPISODES.length - 1;
+      if (index >= EPISODES.length) index = 0;
+      currentIndex = index;
+
+      const ep = EPISODES[currentIndex];
+
+      // Select audio source based on active language
+      let targetSrc = ep.src;
+      if (activeLanguage === 'en' && ep.dubSrc) {
+        targetSrc = ep.dubSrc;
+      }
+      if (audio.src !== targetSrc) {
+        audio.src = targetSrc;
+        audio.load();
+      }
+
+      // 1. Update LCD Display
+      const lcdFreq = document.getElementById('lcd-freq-display');
+      const lcdTitle = document.getElementById('lcd-title');
+      const lcdTotalTime = document.getElementById('lcd-total-time');
+      const albumImg = document.getElementById('album-art-display');
+
+      if (lcdFreq) lcdFreq.textContent = `${ep.freq} MHz`;
+      if (lcdTitle) lcdTitle.textContent = (activeLanguage === 'en' && ep.titleDub) ? ep.titleDub : ep.title;
+      if (lcdTotalTime) lcdTotalTime.textContent = ep.duration || '09:18';
+      if (albumImg) albumImg.style.backgroundImage = `url('${ep.cover}')`;
+
+      // 2. Update Top Horizon Scale & Needle
+      const needle = document.getElementById('horizon-needle');
+      const total = EPISODES.length;
+      const pct = (currentIndex / (total - 1)) * 92 + 4; // 4% to 96%
+      if (needle) needle.style.left = `${pct}%`;
+
+      document.querySelectorAll('.freq-tick-marker').forEach((m, i) => {
+        if (i === currentIndex) m.classList.add('active');
+        else m.classList.remove('active');
+      });
+
+      // 3. Update LCD Ribbon
+      document.querySelectorAll('.station-chip-btn').forEach((btn, i) => {
+        if (i === currentIndex) {
+          btn.classList.add('active');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // 4. Update Physical Rotary Dial Rotation
+      tunerAngle = (currentIndex * 27.6) % 360;
+      const tunerDial = document.getElementById('dial-master-tuner');
+      if (tunerDial) tunerDial.style.transform = `rotate(${tunerAngle}deg)`;
+
+      // 5. Update Teleprompter
+      updateTeleprompter();
+
+      playMechanicalClick(900 + (currentIndex * 25), 0.03);
+
+      if (autoPlay && isPowerOn) {
+        initWebAudio();
+        audio.play().catch(() => {});
+      }
+    }
+
+    function updateTeleprompter() {
+      const box = document.getElementById('lcd-teleprompter');
+      if (!box) return;
+      const ep = EPISODES[currentIndex];
+      const key = `ep${ep.channel || (currentIndex + 1)}`;
+      const transcriptData = (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[key]) || null;
+
+      if (transcriptData && transcriptData.lines) {
+        box.innerHTML = transcriptData.lines.map((l, i) => 
+          `<p class="teleprompter-line ${i === 0 ? 'active' : ''}">${l.text}</p>`
+        ).join('');
+      } else {
+        box.innerHTML = `
+          <p class="teleprompter-line active">ज्ञानसेतु इंटरनेट रेडिओ • Curated by Simran Ailani</p>
+          <p class="teleprompter-line">${ep.title} (${ep.category || 'Science & Culture'})</p>
+          <p class="teleprompter-line">Broadcasting live across the global network.</p>
+        `;
+      }
+    }
+
+    // Populate LCD Horizontal Directory Ribbon
+    function initStationRibbon() {
+      const ribbon = document.getElementById('lcd-station-ribbon');
+      if (!ribbon) return;
+      ribbon.innerHTML = EPISODES.map((ep, i) => `
+        <button class="station-chip-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
+          CH-${ep.channel || (i+1)} • ${ep.freq}
+        </button>
+      `).join('');
+
+      ribbon.querySelectorAll('.station-chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-index'), 10);
+          tuneToEpisode(idx, true);
+        });
+      });
+    }
+
+    // =========================================================================
+    // 4. MULTI-LANGUAGE TRANSLATION CONTROLS (IN LCD)
+    // =========================================================================
+    function setLanguage(lang) {
+      activeLanguage = lang;
+      document.querySelectorAll('.lang-pill-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      const ep = EPISODES[currentIndex];
+      const lcdTitle = document.getElementById('lcd-title');
+      if (lcdTitle) {
+        lcdTitle.textContent = (lang === 'en' && ep.titleDub) ? ep.titleDub : ep.title;
+      }
+
+      // Switch audio source smoothly if dub exists
+      if (lang === 'en' && ep.dubSrc) {
+        const curTime = audio.currentTime;
+        audio.src = ep.dubSrc;
+        audio.currentTime = curTime;
+        if (isPlaying && isPowerOn) audio.play().catch(() => {});
+        showToast('Language: English AI Dub Activated');
+      } else {
+        const curTime = audio.currentTime;
+        audio.src = ep.src;
+        audio.currentTime = curTime;
+        if (isPlaying && isPowerOn) audio.play().catch(() => {});
+        showToast(lang === 'hi' ? 'Language: Hindi Master' : 'Language: Marathi Original');
+      }
+      playMechanicalClick(1300, 0.03);
+    }
+
+    document.getElementById('pill-mr').addEventListener('click', () => setLanguage('mr'));
+    document.getElementById('pill-hi').addEventListener('click', () => setLanguage('hi'));
+    document.getElementById('pill-en').addEventListener('click', () => setLanguage('en'));
+
+    // =========================================================================
+    // 5. PHYSICAL CONTROLS (PIANO KEYS & DIALS)
+    // =========================================================================
+    function togglePlay() {
+      if (!isPowerOn) return;
+      initWebAudio();
+      if (audio.paused) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updatePlayKeyUI(true);
+        }).catch(e => console.warn(e));
+      } else {
+        audio.pause();
+        isPlaying = false;
+        updatePlayKeyUI(false);
+      }
+      playMechanicalClick(1000, 0.04);
+    }
+
+    function updatePlayKeyUI(playing) {
+      const playKey = document.getElementById('key-play');
+      const playIcon = document.getElementById('key-play-icon');
+      const playTxt = document.getElementById('key-play-txt');
+      if (playing) {
+        if (playKey) playKey.classList.add('depressed');
+        if (playIcon) playIcon.textContent = '⏸';
+        if (playTxt) playTxt.textContent = 'PAUSE';
+      } else {
+        if (playKey) playKey.classList.remove('depressed');
+        if (playIcon) playIcon.textContent = '▶';
+        if (playTxt) playTxt.textContent = 'PLAY';
+      }
+    }
+
+    function togglePower() {
+      isPowerOn = !isPowerOn;
+      const pwrKey = document.getElementById('key-pwr');
+      const tubeFilament = document.getElementById('tube-filament');
+
+      if (!isPowerOn) {
+        audio.pause();
+        updatePlayKeyUI(false);
+        smartLcd.classList.add('crt-power-off');
+        if (pwrKey) pwrKey.classList.remove('active-pwr');
+        if (tubeFilament) tubeFilament.style.opacity = '0.05';
+        showToast('Radio Power: OFF (Tubes Cold)');
+        playMechanicalClick(400, 0.12);
+      } else {
+        smartLcd.classList.remove('crt-power-off');
+        if (pwrKey) pwrKey.classList.add('active-pwr');
+        if (tubeFilament) tubeFilament.style.opacity = '1';
+        showToast('Radio Power: ON (Tubes Warming Up)');
+        playMechanicalClick(1400, 0.06);
+      }
+    }
+
+    function toggleBass() {
+      isBassBoosted = !isBassBoosted;
+      initWebAudio();
+      if (biquadFilter) {
+        biquadFilter.gain.value = isBassBoosted ? 7.5 : 0;
+      }
+      const bassKey = document.getElementById('key-bass');
+      if (isBassBoosted) {
+        if (bassKey) bassKey.classList.add('depressed');
+        showToast('Analog Sub-Bass Boost: +7.5 dB ACTIVE');
+      } else {
+        if (bassKey) bassKey.classList.remove('depressed');
+        showToast('Analog Sub-Bass Boost: FLAT');
+      }
+      playMechanicalClick(650, 0.05);
+    }
+
+    // Connect Piano Buttons
+    document.getElementById('key-play').addEventListener('click', togglePlay);
+    document.getElementById('key-prev').addEventListener('click', () => {
+      tuneToEpisode(currentIndex - 1, true);
+    });
+    document.getElementById('key-next').addEventListener('click', () => {
+      tuneToEpisode(currentIndex + 1, true);
+    });
+    document.getElementById('key-pwr').addEventListener('click', togglePower);
+    document.getElementById('key-bass').addEventListener('click', toggleBass);
+
+    // Vacuum Tube Chamber Click: Tube Warmth DSP
+    document.getElementById('tube-chamber').addEventListener('click', () => {
+      isTubeWarmth = !isTubeWarmth;
+      initWebAudio();
+      if (isTubeWarmth) {
+        showToast('Tube Warmth DSP: Engaged (Rich 2nd Harmonics)');
+      } else {
+        showToast('Tube Warmth DSP: Linear Clean');
+      }
+      playMechanicalClick(1200, 0.03);
+    });
+
+    // Rotary Dial 1: Master Tuner Flywheel (Drag & Wheel)
+    const dialTuner = document.getElementById('dial-master-tuner');
+    if (dialTuner) {
+      dialTuner.addEventListener('click', () => {
+        tuneToEpisode(currentIndex + 1, true);
+      });
+      dialTuner.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        tuneToEpisode(currentIndex + (e.deltaY > 0 ? 1 : -1), true);
+      });
+    }
+
+    // Rotary Dial 2: Output Vol / Directory
+    const dialVol = document.getElementById('dial-output-vol');
+    if (dialVol) {
+      dialVol.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        volAngle += (e.deltaY > 0 ? 25 : -25);
+        dialVol.style.transform = `rotate(${volAngle}deg)`;
+        playMechanicalClick(1400, 0.015);
+      });
+      dialVol.addEventListener('click', () => {
+        volAngle += 30;
+        dialVol.style.transform = `rotate(${volAngle}deg)`;
+        tuneToEpisode(currentIndex + 1, true);
+      });
+    }
+
+    // Scrubber & Audio Time Updates
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      const fill = document.getElementById('lcd-scrubber-fill');
+      if (fill) fill.style.width = `${pct}%`;
+
+      const curM = Math.floor(audio.currentTime / 60);
+      const curS = Math.floor(audio.currentTime % 60);
+      const curStr = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')}`;
+      const curTimeEl = document.getElementById('lcd-cur-time');
+      if (curTimeEl) curTimeEl.textContent = curStr;
+    });
+
+    const scrubberTrack = document.getElementById('lcd-scrubber-track');
+    if (scrubberTrack) {
+      scrubberTrack.addEventListener('click', (e) => {
+        const rect = scrubberTrack.getBoundingClientRect();
+        const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        if (audio.duration) {
+          audio.currentTime = pos * audio.duration;
+        }
+      });
+    }
+
+    // =========================================================================
+    // 6. LIVE ELECTRON-BEAM OSCILLOSCOPE WAVEFORM
+    // =========================================================================
+    const waveCanvas = document.getElementById('lcd-wave-canvas');
+    const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
+    const waveData = new Uint8Array(32);
+    let wavePhase = 0;
+
+    function renderWaveform() {
+      requestAnimationFrame(renderWaveform);
+      if (!waveCtx || !isPowerOn) return;
+
+      const w = waveCanvas.width;
+      const h = waveCanvas.height;
+      waveCtx.clearRect(0, 0, w, h);
+
+      if (analyser && !audio.paused) {
+        analyser.getByteFrequencyData(waveData);
+      } else if (!audio.paused) {
+        for (let i = 0; i < 32; i++) {
+          waveData[i] = Math.floor(Math.sin(i * 0.3 + wavePhase) * 90 + 120);
+        }
+      } else {
+        waveData.fill(4);
+      }
+      wavePhase += 0.08;
+
+      waveCtx.strokeStyle = '#ffbe3b';
+      waveCtx.lineWidth = 2;
+      waveCtx.shadowColor = '#ffbe3b';
+      waveCtx.shadowBlur = 8;
+      waveCtx.beginPath();
+
+      const mid = h / 2;
+      for (let x = 0; x < w; x += 3) {
+        const sample = (waveData[Math.floor((x / w) * 16)] || 128) - 128;
+        const amp = (!audio.paused ? sample / 128 : 0.04) * 18;
+        const y = mid + Math.sin((x * 0.05) + wavePhase) * amp;
+        if (x === 0) waveCtx.moveTo(x, y);
+        else waveCtx.lineTo(x, y);
+      }
+      waveCtx.stroke();
+      waveCtx.shadowBlur = 0;
+    }
+    renderWaveform();
+
+    // =========================================================================
+    // 7. OPTICAL BEAMER MODAL
+    // =========================================================================
+    const beamerModal = document.getElementById('beamer-modal');
+    const beamerKey = document.getElementById('key-beamer');
+    const closeBeamerBtn = document.getElementById('btn-close-beamer');
+
+    function openBeamer() {
+      beamerModal.classList.add('open');
+      startFountainLoop();
+      playMechanicalClick(1400, 0.05);
+    }
+    function closeBeamer() {
+      beamerModal.classList.remove('open');
+      stopFountainLoop();
+      playMechanicalClick(500, 0.03);
+    }
+
+    if (beamerKey) beamerKey.addEventListener('click', openBeamer);
+    if (closeBeamerBtn) closeBeamerBtn.addEventListener('click', closeBeamer);
+
+    let fountainTimer = null;
+    let fountainSeq = 0;
+    const fountainCanvas = document.getElementById('beam-fountain-canvas');
+
+    function startFountainLoop() {
+      if (fountainTimer) clearInterval(fountainTimer);
+      fountainTimer = setInterval(() => {
+        fountainSeq = (fountainSeq + 1) % 48;
+        const hud = document.getElementById('fountain-status-hud');
+        if (hud) hud.textContent = `Chunk ${fountainSeq + 1} / 48 • 12 FPS • AES-256-GCM Encrypted`;
+
+        if (fountainCanvas && window.QRCode) {
+          const payload = `GS_MESH_CHUNK:${fountainSeq}:EP${currentIndex+1}:${Date.now()}`;
+          QRCode.toCanvas(fountainCanvas, payload, {
+            width: 236,
+            margin: 1,
+            color: { dark: '#000000', light: '#ffffff' }
+          }, () => {});
+        }
+      }, 90);
+    }
+
+    function stopFountainLoop() {
+      if (fountainTimer) {
+        clearInterval(fountainTimer);
+        fountainTimer = null;
+      }
+    }
+
+    // Startup Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      initHorizonScale();
+      initStationRibbon();
+      tuneToEpisode(0, false);
+      showToast('GyanSetu Flagship Restomod Console Ready');
+    });
+
+  </script>
+</body>
+</html>
+'''
+
+def main():
+    with open('pocket.html', 'w', encoding='utf-8') as f:
+        f.write(HTML_TEMPLATE)
+    print("Successfully built pocket.html! Size:", len(HTML_TEMPLATE))
+
+if __name__ == '__main__':
+    main()

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="vintage-1978">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#140d09">
-  <title>GyanSetu | Flagship Tablet Radio Console (Curated by Simran Ailani)</title>
+  <meta name="theme-color" content="#120b06">
+  <title>GyanSetu | Flagship Tablet Radio Console</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================================================
-       GLOBAL RESET & TABLET LANDSCAPE VIEWPORT LOCK (1280x800 NATIVE)
+       1. GLOBAL RESET & TABLET VIEWPORT LOCK (1280x800 NATIVE LANDSCAPE)
        ========================================================================== */
     * {
       box-sizing: border-box;
@@ -22,739 +22,665 @@
       padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     html, body {
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      background: #110c08;
+      background: #080503;
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      color: #f5eedc;
+      color: #f7eed8;
       user-select: none;
       -webkit-user-select: none;
     }
 
-    /* Outer Wrapper scales seamlessly to any 16:10 or landscape display */
-    .viewport-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle at 50% 40%, #22160f 0%, #0d0805 100%);
-      position: relative;
-    }
-
-    .appliance-stage {
-      position: relative;
-      width: 1280px;
-      height: 800px;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.95);
-      flex-shrink: 0;
-    }
-
-    /* ==========================================================================
-       MASTER FLOATING LUXURY TOP BAR
-       ========================================================================== */
-    .master-top-bar {
-      position: absolute;
-      top: 10px;
-      left: 24px;
-      right: 24px;
-      height: 44px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      pointer-events: auto;
-    }
-
-    .brand-pill {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(18, 12, 8, 0.88);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      padding: 6px 16px;
-      border-radius: 22px;
-      color: #e6c875;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
-    }
-    .brand-live-dot {
-      width: 8px;
-      height: 8px;
-      background: #00e676;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #00e676;
-      animation: pulseGlow 2s infinite ease-in-out;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.25); opacity: 0.7; }
-    }
-
-    /* Theme Switch Pill */
-    .theme-selector-pill {
-      display: flex;
-      align-items: center;
-      background: rgba(18, 12, 8, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      border-radius: 24px;
-      padding: 4px;
-      gap: 4px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.7);
-    }
-    .theme-btn {
-      padding: 7px 18px;
-      border-radius: 18px;
-      border: none;
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      background: transparent;
-      color: #9e8a70;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .theme-btn.active {
-      background: linear-gradient(135deg, #e5bf45 0%, #a67c1e 100%);
-      color: #1a1208;
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.45);
-    }
-
-    /* Right Quick Actions */
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .top-btn {
-      background: rgba(18, 12, 8, 0.88);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      padding: 7px 16px;
-      border-radius: 22px;
-      color: #e6c875;
-      font-size: 11.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
-    }
-    .top-btn:hover {
-      border-color: rgba(212, 175, 55, 0.7);
-      background: rgba(28, 18, 12, 0.95);
-      color: #ffde8a;
-    }
-
-    /* ==========================================================================
-       THEME 1: 1978 VINTAGE TEAKWOOD APPLIANCE (MUSEUM PHOTOREALISTIC CUTOUT)
-       ========================================================================== */
-    .vintage-appliance-wrap {
+    /* The Tablet Screen IS the Radio Appliance Faceplate (Edge-to-Edge) */
+    .radio-appliance {
       position: absolute;
       inset: 0;
       width: 1280px;
       height: 800px;
-      display: block;
-      transition: opacity 0.4s ease;
-    }
-    [data-theme="neo-carvaan"] .vintage-appliance-wrap {
-      display: none;
-    }
-
-    /* 1. Behind Cutout: Top Glowing Amber LCD Display */
-    #vintage-top-screen {
-      position: absolute;
-      left: 522px;
-      top: 199px;
-      width: 328px;
-      height: 161px;
-      background: radial-gradient(circle at center, #ffb326 0%, #db8400 100%);
-      box-shadow: inset 0 0 16px rgba(0,0,0,0.65);
+      margin: auto;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 40%, #301d12 0%, #20130a 50%, #110904 100%);
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.95);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 12px 14px;
-      color: #261200;
-      font-family: 'Space Mono', 'Courier New', Courier, monospace;
-      overflow: hidden;
-      z-index: 5;
-    }
-    .lcd-top-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .lcd-avatar {
-      width: 80px;
-      height: 92px;
-      background: url('assets/images/ep13-nagpurcha-itihas.jpg') center/cover;
-      filter: grayscale(100%) contrast(180%) brightness(75%);
-      mix-blend-mode: multiply;
-      border: 1px solid rgba(38,18,0,0.4);
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.6);
-      flex-shrink: 0;
-      transition: background-image 0.3s ease;
-    }
-    .lcd-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .lcd-track-title {
-      font-size: 14.5px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      letter-spacing: -0.3px;
-    }
-    .lcd-curator {
-      font-size: 11px;
-      opacity: 0.9;
-      font-weight: 600;
-      margin: 2px 0 4px 0;
-    }
-    .lcd-freq-line {
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-shadow: 0 0 2px rgba(38,18,0,0.4);
-    }
-    .lcd-bottom-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      padding-top: 2px;
-    }
-    .lcd-progress-bar {
-      flex: 1;
-      height: 10px;
-      background: rgba(38,18,0,0.25);
-      border: 1px solid rgba(38,18,0,0.7);
-      padding: 1px;
-      display: flex;
-      gap: 1px;
-    }
-    .lcd-seg {
-      flex: 1;
-      height: 100%;
-      background: #261200;
-      transition: background 0.1s ease;
-    }
-    .lcd-seg.off {
-      background: transparent;
     }
 
-    /* 2. Behind Cutout: Bottom Black LCD Digital Directory */
-    #vintage-dir-screen {
+    /* Realistic Walnut Wood Grain Texture */
+    .wood-grain-overlay {
       position: absolute;
-      left: 548px;
-      top: 398px;
-      width: 247px;
-      height: 127px;
-      background: #0d0d0b;
-      border-radius: 4px;
-      box-shadow: inset 0 0 14px rgba(0,0,0,0.95);
-      padding: 8px 10px;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      color: #cca040;
-      font-size: 10px;
-      font-family: 'Space Mono', 'Courier New', Courier, monospace;
-      border: 1px solid #1a160e;
-      display: flex;
-      flex-direction: column;
-      z-index: 5;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        repeating-linear-gradient(90deg, 
+          rgba(255,255,255,0.018) 0px, 
+          rgba(0,0,0,0.04) 2px, 
+          transparent 4px, 
+          rgba(255,255,255,0.012) 7px),
+        repeating-linear-gradient(0deg, 
+          transparent 0px, 
+          rgba(0,0,0,0.02) 20px, 
+          transparent 40px);
+      z-index: 1;
     }
-    #vintage-dir-screen::-webkit-scrollbar {
-      display: none;
-    }
-    .dir-header {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #e5b850;
-      border-bottom: 1px solid rgba(204,160,64,0.4);
-      padding-bottom: 3px;
-      margin-bottom: 5px;
-      letter-spacing: 0.8px;
-      position: sticky;
-      top: 0;
-      background: #0d0d0b;
+
+    /* Outer Solid Brass Bezel Trim Framing the Tablet Glass */
+    .radio-bezel-frame {
+      position: absolute;
+      inset: 6px;
+      border: 3.5px solid #8c6823;
+      border-radius: 18px;
+      box-shadow: 
+        inset 0 0 0 2px #d4af37,
+        inset 0 0 20px rgba(0,0,0,0.85),
+        0 0 0 2px #261605;
+      pointer-events: none;
       z-index: 2;
     }
-    .dir-list {
+
+    /* ==========================================================================
+       2. TOP SWEEPING TUNING HORIZON (GLASS DIAL SCALE)
+       ========================================================================== */
+    .top-tuning-horizon {
+      position: relative;
+      height: 48px;
+      margin: 12px 18px 0 18px;
+      background: radial-gradient(ellipse at center, rgba(28, 18, 10, 0.96) 0%, rgba(10, 6, 3, 0.98) 100%);
+      border: 2px solid #5a3e18;
+      border-radius: 10px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.7);
       display: flex;
-      flex-direction: column;
-      gap: 3px;
+      align-items: center;
+      padding: 0 26px;
+      z-index: 10;
+      overflow: hidden;
     }
-    .dir-item {
+    .horizon-scale {
+      position: relative;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: space-between;
-      white-space: nowrap;
-      overflow: hidden;
-      padding: 2.5px 4px;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: background 0.15s ease;
+      align-items: center;
     }
-    .dir-item:hover {
-      background: rgba(204, 160, 64, 0.2);
-    }
-    .dir-item.active {
-      background: #cca040;
-      color: #0d0d0b;
+    .freq-tick-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10.5px;
       font-weight: 700;
+      color: #94743b;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-
-    /* 3. Behind Cutout: Right Square Photo Frame */
-    #vintage-photo-screen {
+    .freq-tick-marker::before {
+      content: '';
+      width: 1.5px;
+      height: 8px;
+      background: #735422;
+      border-radius: 1px;
+    }
+    .freq-tick-marker.active {
+      color: #ffbe3b;
+      transform: scale(1.18);
+      text-shadow: 0 0 10px rgba(255, 190, 59, 0.8);
+    }
+    .freq-tick-marker.active::before {
+      background: #ffbe3b;
+      height: 12px;
+      box-shadow: 0 0 10px #ffbe3b;
+    }
+    /* Gliding Red Indicator Needle */
+    .horizon-needle {
       position: absolute;
-      left: 931px;
-      top: 212px;
-      width: 166px;
-      height: 158px;
-      background: url('assets/images/ep13-nagpurcha-itihas.jpg') center/cover no-repeat;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.7);
-      border-radius: 4px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #ff453a 0%, #ff7b72 50%, #d70000 100%);
+      box-shadow: 0 0 12px #ff3b30, 0 0 3px #ffffff;
+      transform: translateX(-50%);
+      transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       z-index: 5;
-      transition: background-image 0.3s ease;
-    }
-    .photo-glare {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 40%, rgba(0,0,0,0.2) 100%);
       pointer-events: none;
     }
 
-    /* 4. Photorealistic Cutout Chassis Overlay (Master Image) */
-    .vintage-chassis-overlay {
+    /* ==========================================================================
+       3. MAIN APPLIANCE DECK (3 SCULPTED ZONES)
+       ========================================================================== */
+    .appliance-main-deck {
+      position: relative;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 290px 1fr 310px;
+      gap: 16px;
+      padding: 10px 20px;
+      z-index: 10;
+    }
+
+    /* --------------------------------------------------------------------------
+       ZONE A: LEFT ACOUSTIC WING (Speaker Grille & Tube Valve)
+       -------------------------------------------------------------------------- */
+    .acoustic-wing {
+      position: relative;
+      background: #140d07;
+      border: 3px solid #5a3c17;
+      border-radius: 14px;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 4px 14px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 16px;
+      overflow: hidden;
+    }
+    /* High-Definition Woven Tweed Texture */
+    .speaker-cloth-grille {
       position: absolute;
-      left: 0;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(45deg, #3d291a 0px, #3d291a 2px, #20140b 2px, #20140b 5px),
+        repeating-linear-gradient(-45deg, #4d3320 0px, #4d3320 2px, #1a0f07 2px, #1a0f07 5px);
+      opacity: 0.95;
+      z-index: 1;
+    }
+    /* Embossed Brushed Brass Medallion */
+    .speaker-brass-plaque {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, #e5bf45 0%, #aa8214 45%, #ffd966 75%, #8a6508 100%);
+      border: 2px solid #5e4308;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.6);
+      text-align: center;
+      color: #1a1104;
+    }
+    .plaque-hindi-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .plaque-brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-top: 1px;
+    }
+    .plaque-subline {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+    .plaque-curator {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #2b1802;
+      margin-top: 6px;
+      border-top: 1px solid rgba(0,0,0,0.25);
+      padding-top: 4px;
+    }
+
+    /* Recessed Glowing Vacuum Tube Chamber */
+    .vacuum-tube-chamber {
+      position: relative;
+      z-index: 2;
+      height: 146px;
+      background: radial-gradient(circle at center, #241508 0%, #080402 100%);
+      border: 2.5px solid #634319;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.98), 0 3px 8px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .vacuum-tube-chamber:hover {
+      border-color: #8c6823;
+    }
+    .tube-glass-envelope {
+      position: relative;
+      width: 54px;
+      height: 86px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.03) 60%, rgba(0,0,0,0.4) 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      border-radius: 27px 27px 8px 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 10px rgba(255, 170, 0, 0.25), 0 0 15px rgba(255, 150, 0, 0.15);
+    }
+    .tube-filament {
+      width: 15px;
+      height: 42px;
+      border: 2.5px solid #ff9d00;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 0 14px #ff8800, inset 0 0 8px #ffcc00;
+      animation: filamentWarmth 3s infinite ease-in-out;
+      transition: opacity 0.5s ease;
+    }
+    @keyframes filamentWarmth {
+      0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 6px #ff9900); }
+      50% { opacity: 1; filter: drop-shadow(0 0 15px #ffaa00); }
+    }
+    .tube-caption {
+      font-size: 9.5px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: #cca040;
+      margin-top: 8px;
+      letter-spacing: 0.8px;
+    }
+
+    /* --------------------------------------------------------------------------
+       ZONE B: THE INSET SMART LCD DISPLAY (Center Modern Smart Core)
+       -------------------------------------------------------------------------- */
+    .smart-lcd-bezel {
+      position: relative;
+      background: #080d12;
+      border: 3.5px solid #8c6823;
+      border-radius: 16px;
+      box-shadow: 
+        inset 0 0 25px rgba(0,0,0,0.95),
+        0 4px 16px rgba(0,0,0,0.85),
+        0 0 0 2px #3a250e;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 20px;
+      overflow: hidden;
+    }
+    /* Subtle Glass Glare across the LCD */
+    .smart-lcd-bezel::before {
+      content: '';
+      position: absolute;
       top: 0;
-      width: 1280px;
-      height: 800px;
-      background: url('assets/images/vintage_chassis_1280x800_cutout.png') no-repeat center center;
+      left: 0;
+      right: 0;
+      height: 45%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%);
       pointer-events: none;
       z-index: 10;
     }
 
-    /* 5. In-Front Interactive Rotary Knobs & Push Buttons */
-    .knob-tuner {
-      position: absolute;
-      left: 892px;
-      top: 435px;
-      width: 98px;
-      height: 98px;
-      background: url('assets/images/tuner_knob_98.png') no-repeat center center;
-      background-size: contain;
-      z-index: 20;
-      cursor: grab;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-      transition: transform 0.15s ease-out;
-    }
-    .knob-scroll {
-      position: absolute;
-      left: 1045px;
-      top: 440px;
-      width: 98px;
-      height: 98px;
-      background: url('assets/images/scroll_knob_98.png') no-repeat center center;
-      background-size: contain;
-      z-index: 20;
-      cursor: grab;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-      transition: transform 0.15s ease-out;
-    }
-
-    .piano-keys-bar {
-      position: absolute;
-      left: 494px;
-      top: 580px;
-      width: 356px;
-      height: 44px;
-      display: flex;
-      z-index: 20;
-    }
-    .piano-key {
-      width: 59px;
-      height: 44px;
-      background: rgba(255,255,255,0.001);
-      cursor: pointer;
-    }
-    .piano-key:active, .piano-key.depressed {
-      background: rgba(255, 200, 50, 0.22);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.7);
-    }
-
-    /* CRT Powerdown effect */
-    .crt-off {
-      filter: brightness(0.08) grayscale(100%) !important;
-      transition: filter 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
-    }
-
-    /* ==========================================================================
-       THEME 2: GYANSETU CARVAAN NEO (ALL-SCREEN HOLOGRAPHIC CYBER COCKPIT)
-       "Version just has more screen and retro version is just too old-fashioned"
-       ========================================================================== */
-    .neo-cockpit-wrap {
-      position: absolute;
-      inset: 0;
-      width: 1280px;
-      height: 800px;
-      display: none;
-      padding: 60px 24px 20px 24px;
-      background: #090d12;
-      box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
-      flex-direction: column;
-      justify-content: space-between;
-      transition: opacity 0.4s ease;
-    }
-    [data-theme="neo-carvaan"] .neo-cockpit-wrap {
-      display: flex;
-    }
-
-    .neo-main-grid {
-      display: grid;
-      grid-template-columns: 360px 1fr 310px;
-      gap: 18px;
-      height: 640px;
-    }
-
-    /* SCREEN 1: 3D Spectrogram & Telemetry Matrix (Replacing Speaker) */
-    .neo-screen-left {
-      background: linear-gradient(180deg, #0f172a 0%, #070d18 100%);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.8), inset 0 0 20px rgba(56, 189, 248, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-    .neo-screen-header {
+    /* LCD 1. Top Status & Telemetry Header */
+    .lcd-telemetry-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 10px;
-      font-family: 'Space Mono', monospace;
-      color: #38bdf8;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      border-bottom: 1px solid rgba(255, 190, 59, 0.25);
       padding-bottom: 8px;
-      letter-spacing: 1px;
     }
-    #neo-spectrogram-canvas {
-      width: 100%;
-      height: 220px;
-      border-radius: 8px;
-      background: rgba(2, 6, 23, 0.7);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      margin: 10px 0;
-    }
-    .neo-telemetry-box {
-      background: rgba(2, 6, 23, 0.8);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 8px;
-      padding: 10px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: #94a3b8;
+    .lcd-freq-badge {
       display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .neo-telem-row {
-      display: flex;
-      justify-content: space-between;
-    }
-    .neo-telem-val {
-      color: #38bdf8;
-      font-weight: 700;
-    }
-    .neo-faders-row {
-      display: flex;
-      justify-content: space-around;
-      gap: 12px;
-      padding-top: 10px;
-    }
-    .neo-touch-fader {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: baseline;
       gap: 6px;
-      font-size: 9px;
+    }
+    .lcd-freq-num {
       font-family: 'Space Mono', monospace;
-      color: #7dd3fc;
+      font-size: 26px;
+      font-weight: 900;
+      color: #ffbe3b;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 10px rgba(255, 190, 59, 0.5);
     }
-    .fader-track {
-      width: 16px;
-      height: 70px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: 8px;
-      position: relative;
-      cursor: pointer;
+    .lcd-chips-row {
       display: flex;
-      align-items: flex-end;
-      padding: 2px;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px;
     }
-    .fader-fill {
-      width: 100%;
-      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
-      border-radius: 6px;
-      box-shadow: 0 0 10px #38bdf8;
-      transition: height 0.1s ease;
+    .lcd-chip {
+      background: rgba(255, 190, 59, 0.1);
+      border: 1px solid rgba(255, 190, 59, 0.3);
+      padding: 3px 8px;
+      border-radius: 12px;
+      color: #e5bf45;
     }
 
-    /* SCREEN 2: Panoramic 4K Sapphire Glass Display (Center) */
-    .neo-screen-center {
-      background: linear-gradient(180deg, #0b1324 0%, #060b14 100%);
-      border: 1px solid rgba(56, 189, 248, 0.45);
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.8), inset 0 0 25px rgba(56, 189, 248, 0.12);
-      position: relative;
-      overflow: hidden;
-    }
-    .neo-live-osc-canvas {
+    /* LCD 2. Live Modern Electron Waveform Oscilloscope */
+    .lcd-waveform-canvas {
       width: 100%;
-      height: 75px;
-      border-radius: 8px;
-      background: rgba(2, 6, 23, 0.7);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      height: 46px;
+      border-radius: 6px;
+      background: rgba(4, 7, 10, 0.7);
+      border: 1px solid rgba(255, 190, 59, 0.18);
+      margin: 6px 0;
     }
-    .neo-track-hero {
-      margin: 12px 0;
+
+    /* LCD 3. Hero Episode Title & Solo Curator Attribution */
+    .lcd-hero-info {
+      margin: 2px 0;
     }
-    .neo-channel-badge {
-      display: inline-flex;
+    .lcd-track-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #fff2d1;
+      letter-spacing: -0.3px;
+      text-shadow: 0 0 8px rgba(255, 200, 80, 0.3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lcd-curator-attribution {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cca040;
+      margin-top: 3px;
+      display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid #38bdf8;
-      padding: 4px 10px;
-      border-radius: 14px;
-      font-size: 11px;
+    }
+    .curator-star {
+      color: #ffd700;
+    }
+
+    /* LCD 4. Multi-Language Instant Translation Switcher */
+    .lcd-translation-pill-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 22, 30, 0.9);
+      border: 1px solid rgba(255, 190, 59, 0.35);
+      border-radius: 20px;
+      padding: 4px;
+      width: fit-content;
+      margin: 6px 0;
+    }
+    .lang-pill-btn {
+      background: transparent;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 16px;
       font-family: 'Space Mono', monospace;
-      color: #38bdf8;
-      margin-bottom: 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #9e8a70;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .neo-title-text {
-      font-size: 24px;
-      font-weight: 800;
-      color: #f0f9ff;
-      letter-spacing: -0.5px;
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-      margin-bottom: 4px;
+    .lang-pill-btn.active {
+      background: linear-gradient(135deg, #e5bf45 0%, #aa8214 100%);
+      color: #120b04;
+      box-shadow: 0 2px 8px rgba(229, 191, 69, 0.45);
     }
-    .neo-curator-line {
-      font-size: 12px;
-      color: #7dd3fc;
-      font-weight: 600;
+
+    /* LCD 5. Live Synchronized Teleprompter Subtitles */
+    .lcd-teleprompter-box {
+      height: 70px;
+      background: rgba(6, 10, 14, 0.95);
+      border: 1px solid rgba(255, 190, 59, 0.22);
+      border-radius: 8px;
+      padding: 8px 12px;
+      overflow-y: hidden;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
     }
-    /* Scrubber */
-    .neo-scrubber-bar {
+    .teleprompter-line.active {
+      color: #ffbe3b;
+      font-weight: 700;
+      text-shadow: 0 0 6px rgba(255, 190, 59, 0.4);
+    }
+
+    /* LCD 6. Modern Hairline Timeline Scrubber */
+    .lcd-scrubber-row {
+      margin: 6px 0;
+    }
+    .lcd-scrubber-track {
       width: 100%;
       height: 8px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 190, 59, 0.3);
       border-radius: 4px;
       position: relative;
       cursor: pointer;
-      margin: 10px 0;
     }
-    .neo-scrubber-fill {
+    .lcd-scrubber-fill {
       height: 100%;
-      background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+      width: 0%;
+      background: linear-gradient(90deg, #aa8214 0%, #ffbe3b 100%);
       border-radius: 4px;
-      box-shadow: 0 0 8px #38bdf8;
-      width: 35%;
+      box-shadow: 0 0 8px #ffbe3b;
+      transition: width 0.1s linear;
     }
-    .neo-time-row {
+    .lcd-time-indicators {
       display: flex;
       justify-content: space-between;
-      font-size: 11px;
       font-family: 'Space Mono', monospace;
-      color: #94a3b8;
+      font-size: 10px;
+      color: #9e8a70;
+      margin-top: 4px;
     }
-    /* Live Synchronized Teleprompter */
-    .neo-teleprompter {
-      background: rgba(2, 6, 23, 0.85);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 8px;
-      height: 120px;
-      padding: 12px;
-      overflow-y: auto;
-      scrollbar-width: none;
-      font-size: 12px;
-      line-height: 1.6;
-      color: #cbd5e1;
-    }
-    .neo-teleprompter::-webkit-scrollbar { display: none; }
-    .transcript-line.active {
-      color: #38bdf8;
-      font-weight: 700;
-      text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
-    }
-    /* Fast Channel Selector */
-    .neo-station-ribbon {
+
+    /* LCD 7. Smart Horizontal Episode Directory Ribbon */
+    .lcd-station-ribbon {
       display: flex;
       gap: 6px;
       overflow-x: auto;
       scrollbar-width: none;
-      padding-top: 6px;
+      padding: 4px 0;
+      border-top: 1px solid rgba(255, 190, 59, 0.2);
     }
-    .neo-station-ribbon::-webkit-scrollbar { display: none; }
-    .neo-ribbon-btn {
+    .lcd-station-ribbon::-webkit-scrollbar { display: none; }
+    .station-chip-btn {
       padding: 6px 12px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(16, 22, 30, 0.9);
+      border: 1px solid rgba(255, 190, 59, 0.25);
       border-radius: 6px;
-      font-size: 10px;
       font-family: 'Space Mono', monospace;
-      color: #94a3b8;
+      font-size: 10px;
+      color: #9e8a70;
       white-space: nowrap;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
-    .neo-ribbon-btn.active {
-      background: rgba(56, 189, 248, 0.25);
-      border-color: #38bdf8;
-      color: #38bdf8;
+    .station-chip-btn.active {
+      background: rgba(255, 190, 59, 0.2);
+      border-color: #ffbe3b;
+      color: #ffbe3b;
       font-weight: 700;
+      box-shadow: 0 0 8px rgba(255, 190, 59, 0.3);
     }
 
-    /* SCREEN 3: Frameless Floating OLED Album Glass (Right) */
-    .neo-screen-right {
-      background: linear-gradient(180deg, #0f172a 0%, #070d18 100%);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 12px;
-      padding: 16px;
+    /* --------------------------------------------------------------------------
+       ZONE C: RIGHT WING (Album Art Frame & Physical Anisotropic Rotary Dials)
+       -------------------------------------------------------------------------- */
+    .hardware-controls-wing {
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.8), inset 0 0 20px rgba(56, 189, 248, 0.08);
-      position: relative;
-      overflow: hidden;
+      padding: 2px 0;
     }
-    .neo-album-frame {
-      width: 240px;
-      height: 240px;
+
+    /* Recessed Square Brass Album Frame */
+    .album-frame-housing {
+      width: 172px;
+      height: 172px;
+      background: #140d07;
+      border: 3.5px solid #8c6823;
       border-radius: 12px;
-      background: url('assets/images/ep13-nagpurcha-itihas.jpg') center/cover;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(56, 189, 248, 0.25);
-      border: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 
+        inset 0 0 15px rgba(0,0,0,0.9),
+        0 4px 14px rgba(0,0,0,0.7),
+        0 0 0 1.5px #3a250e;
+      padding: 4px;
       position: relative;
+    }
+    .album-art-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
       transition: background-image 0.3s ease;
     }
-    .neo-dials-zone {
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-      margin-top: 10px;
+    .album-glare {
+      position: absolute;
+      inset: 4px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 45%, rgba(0,0,0,0.3) 100%);
+      pointer-events: none;
     }
-    .neo-rotary-dial {
+
+    /* PHYSICAL ROTARY KNOB 1: MASTER TUNER (Anisotropic Brushed Brass) */
+    .physical-knob-cluster {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
-    .neo-dial-ring {
-      width: 82px;
-      height: 82px;
+    .physical-knob-dial {
+      position: relative;
+      width: 108px;
+      height: 108px;
       border-radius: 50%;
-      border: 2px solid rgba(56, 189, 248, 0.4);
-      background: radial-gradient(circle, #0f172a 0%, #020617 100%);
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+      /* Conic Gradient for Anisotropic Metal Sheen */
+      background: conic-gradient(
+        from 0deg, 
+        #d4af37 0deg, 
+        #f9e394 45deg, 
+        #8c6d1f 90deg, 
+        #e5bf45 135deg, 
+        #5e4308 180deg, 
+        #f9e394 225deg, 
+        #8c6d1f 270deg, 
+        #e5bf45 315deg, 
+        #d4af37 360deg
+      );
+      border: 3px solid #6e4e13;
+      box-shadow: 
+        0 8px 18px rgba(0,0,0,0.9),
+        inset 0 2px 4px rgba(255,255,255,0.6),
+        inset 0 -3px 5px rgba(0,0,0,0.7);
+      cursor: grab;
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: grab;
-      position: relative;
+      transition: transform 0.15s ease-out;
     }
-    .neo-dial-ring::after {
-      content: '';
+    /* Knurled Diamond Outer Grip */
+    .knob-knurled-edge {
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 2.5px dashed rgba(40, 24, 4, 0.6);
+      pointer-events: none;
+    }
+    .knob-marker-indicator {
       position: absolute;
       top: 6px;
-      width: 6px;
-      height: 6px;
-      background: #38bdf8;
+      width: 5px;
+      height: 14px;
+      background: #120a02;
+      border-radius: 3px;
+      box-shadow: 0 0 2px rgba(255,255,255,0.5);
+    }
+    .knob-center-cap {
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      box-shadow: 0 0 8px #38bdf8;
+      background: radial-gradient(circle, #ffeaa7 0%, #d4af37 60%, #7a5a08 100%);
+      border: 1px solid #4a340c;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 2px 6px rgba(0,0,0,0.6);
     }
-    .neo-dial-core-text {
-      font-size: 12px;
+    .knob-label-caption {
       font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      color: #38bdf8;
-    }
-    .neo-dial-sub-label {
       font-size: 10px;
-      font-family: 'Space Mono', monospace;
-      color: #94a3b8;
+      font-weight: 700;
+      color: #cca040;
+      letter-spacing: 1px;
     }
 
-    /* BOTTOM FULL-WIDTH CAPACITIVE TOUCHBAR (Neo Mode) */
-    .neo-capacitive-touchbar {
-      height: 52px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    /* PHYSICAL ROTARY KNOB 2: SCROLL / OUTPUT VOLUME */
+    .physical-knob-dial.small {
+      width: 84px;
+      height: 84px;
     }
-    .neo-touch-btn {
-      background: transparent;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 8px 24px;
-      border-radius: 20px;
-      color: #38bdf8;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .neo-touch-btn:hover, .neo-touch-btn.active {
-      background: rgba(56, 189, 248, 0.25);
-      border-color: #38bdf8;
-      color: #f0f9ff;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    .physical-knob-dial.small .knob-center-cap {
+      width: 34px;
+      height: 34px;
     }
 
     /* ==========================================================================
-       MODALS: OPTICAL BEAMER & OFFLINE VAULT SYNC
+       4. BOTTOM PHYSICAL PIANO CONTROL DECK (Brushed Brass Plate)
+       ========================================================================== */
+    .bottom-piano-deck {
+      position: relative;
+      height: 76px;
+      margin: 0 16px 12px 16px;
+      background: linear-gradient(180deg, #d4af37 0%, #aa8214 50%, #7a5a08 100%);
+      border: 2px solid #543906;
+      border-radius: 12px;
+      box-shadow: 
+        inset 0 1px 2px rgba(255,255,255,0.6),
+        0 6px 18px rgba(0,0,0,0.9),
+        0 0 0 2px #261604;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 10;
+    }
+    .piano-push-key {
+      position: relative;
+      width: 172px;
+      height: 48px;
+      background: linear-gradient(180deg, #2b1f15 0%, #17100a 60%, #0d0905 100%);
+      border: 1.5px solid #6b4d1b;
+      border-radius: 8px;
+      box-shadow: 
+        0 4px 8px rgba(0,0,0,0.8),
+        inset 0 1px 1px rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e5bf45;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .piano-push-key:active, .piano-push-key.depressed {
+      transform: translateY(3px);
+      box-shadow: 
+        0 1px 2px rgba(0,0,0,0.9),
+        inset 0 2px 4px rgba(0,0,0,0.8);
+      background: linear-gradient(180deg, #17100a 0%, #0d0905 100%);
+      color: #ffde8a;
+    }
+    .piano-push-key.active-pwr {
+      color: #ff3b30;
+      text-shadow: 0 0 8px #ff3b30;
+    }
+
+    /* CRT Powerdown Effect for the LCD */
+    .smart-lcd-bezel.crt-power-off {
+      filter: brightness(0.04) grayscale(100%) !important;
+      transition: filter 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    /* ==========================================================================
+       5. MODAL: OPTICAL BEAMER (AIR-GAP P2P MESH)
        ========================================================================== */
     .modal-overlay {
       position: fixed;
@@ -766,19 +692,16 @@
       justify-content: center;
       align-items: center;
     }
-    .modal-overlay.open {
-      display: flex;
-    }
+    .modal-overlay.open { display: flex; }
     .modal-card {
       background: #14100c;
       border: 1px solid rgba(212, 175, 55, 0.5);
       border-radius: 12px;
-      width: 680px;
+      width: 620px;
       max-width: 90vw;
       padding: 24px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.9);
       color: #f5eedc;
-      position: relative;
     }
     .modal-header {
       display: flex;
@@ -789,7 +712,7 @@
       margin-bottom: 16px;
     }
     .modal-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: #e5bf45;
     }
@@ -800,69 +723,36 @@
       font-size: 22px;
       cursor: pointer;
     }
-    .modal-tab-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .modal-tab {
-      padding: 8px 16px;
-      border-radius: 6px;
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      background: transparent;
-      color: #cca040;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .modal-tab.active {
-      background: #cca040;
-      color: #14100c;
-    }
     #beam-canvas-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 16px 0;
       background: #fff;
       padding: 12px;
       border-radius: 8px;
-      width: 280px;
-      height: 280px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #beam-fountain-canvas {
-      width: 256px;
-      height: 256px;
+      width: 260px;
+      height: 260px;
+      margin: 16px auto;
     }
     .fountain-status-line {
       text-align: center;
       font-family: 'Space Mono', monospace;
-      font-size: 12px;
+      font-size: 11.5px;
       color: #cca040;
-      margin-top: 8px;
-    }
-    #camera-preview-video {
-      width: 100%;
-      height: 260px;
-      border-radius: 8px;
-      background: #000;
-      object-fit: cover;
     }
 
-    /* Toast */
+    /* Toast Notification */
     #pocket-toast {
       position: fixed;
-      bottom: 24px;
+      bottom: 90px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: rgba(20, 14, 10, 0.95);
       border: 1px solid rgba(212, 175, 55, 0.6);
-      padding: 10px 24px;
+      padding: 8px 20px;
       border-radius: 20px;
       color: #f5eedc;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8);
       z-index: 300;
@@ -880,249 +770,172 @@
   <!-- Native Audio Tag -->
   <audio id="audio-engine" preload="auto"></audio>
 
-  <div class="viewport-container">
-    <div class="appliance-stage" id="appliance-stage">
+  <!-- Physical Radio Appliance (Lenovo Tab M8 1280x800 Native) -->
+  <div class="radio-appliance" id="radio-appliance">
+    
+    <div class="wood-grain-overlay"></div>
+    <div class="radio-bezel-frame"></div>
 
-      <!-- MASTER LUXURY FLOATING TOP BAR -->
-      <header class="master-top-bar">
-        <div class="brand-pill">
-          <span class="brand-live-dot"></span>
-          <strong>ज्ञानसेतु • GYANSETU</strong>
-          <span style="opacity:0.4;">|</span>
-          <span>Curated by Simran Ailani</span>
-        </div>
+    <!-- 1. Top Sweeping Glass Tuning Dial Scale -->
+    <header class="top-tuning-horizon">
+      <div class="horizon-scale" id="horizon-scale">
+        <!-- Scale ticks generated dynamically -->
+      </div>
+      <div class="horizon-needle" id="horizon-needle" style="left: 92%;"></div>
+    </header>
 
-        <div class="theme-selector-pill">
-          <button class="theme-btn active" id="btn-theme-vintage">
-            <span>📻</span> 1978 VINTAGE
-          </button>
-          <button class="theme-btn" id="btn-theme-neo">
-            <span>⚡</span> CARVAAN NEO
-          </button>
-        </div>
-
-        <div class="top-actions">
-          <button class="top-btn" id="btn-open-beamer">
-            <span>📡</span> Optical Beamer
-          </button>
-          <button class="top-btn" id="btn-fullscreen">
-            <span>⛶</span> Kiosk
-          </button>
-        </div>
-      </header>
-
-      <!-- ====================================================================
-           1. 1978 VINTAGE TEAKWOOD APPLIANCE (MUSEUM PHOTOREALISTIC CUTOUT)
-           ==================================================================== -->
-      <div class="vintage-appliance-wrap" id="vintage-wrap">
+    <!-- 2. Main Appliance Deck (Acoustic Wing + Smart LCD + Physical Controls) -->
+    <main class="appliance-main-deck">
+      
+      <!-- ZONE A: Left Acoustic Wing -->
+      <section class="acoustic-wing">
+        <div class="speaker-cloth-grille"></div>
         
-        <!-- Center Top Amber LCD Screen (Behind Cutout) -->
-        <div id="vintage-top-screen">
-          <div class="lcd-top-row">
-            <div class="lcd-avatar" id="vintage-avatar"></div>
-            <div class="lcd-info">
-              <div class="lcd-track-title" id="vintage-title">नागपूरचा इतिहास</div>
-              <div class="lcd-curator">Curator: Simran Ailani</div>
-              <div class="lcd-freq-line" id="vintage-freq">FM 108.0 FM</div>
-            </div>
-          </div>
-          <div class="lcd-bottom-row">
-            <span id="vintage-time-cur">00:00</span>
-            <div class="lcd-progress-bar" id="vintage-seg-bar">
-              <div class="lcd-seg off"></div><div class="lcd-seg off"></div>
-              <div class="lcd-seg off"></div><div class="lcd-seg off"></div>
-              <div class="lcd-seg off"></div><div class="lcd-seg off"></div>
-              <div class="lcd-seg off"></div><div class="lcd-seg off"></div>
-              <div class="lcd-seg off"></div><div class="lcd-seg off"></div>
-              <div class="lcd-seg off"></div><div class="lcd-seg off"></div>
-            </div>
-            <span id="vintage-time-total">09:18</span>
-          </div>
+        <div class="speaker-brass-plaque">
+          <div class="plaque-hindi-title">ज्ञानसेतु</div>
+          <div class="plaque-brand-title">GYANSETU</div>
+          <div class="plaque-subline">Student Broadcast Network</div>
+          <div class="plaque-curator">Curated by Simran Ailani</div>
         </div>
 
-        <!-- Center Bottom Black LCD Digital Directory (Behind Cutout) -->
-        <div id="vintage-dir-screen">
-          <div class="dir-header">Digital Directory</div>
-          <div class="dir-list" id="vintage-dir-list">
-            <!-- Dynamically populated from 13 episodes -->
+        <div class="vacuum-tube-chamber" id="tube-chamber" title="Tap to Toggle Warm Tube DSP (+3dB Harmonics)">
+          <div class="tube-glass-envelope">
+            <div class="tube-filament" id="tube-filament"></div>
+          </div>
+          <div class="tube-caption">TRIODE VALVE 12AX7</div>
+        </div>
+      </section>
+
+      <!-- ZONE B: The Inset Modern Smart LCD Screen -->
+      <section class="smart-lcd-bezel" id="smart-lcd-screen">
+        
+        <!-- LCD Header: Frequency + Telemetry -->
+        <div class="lcd-telemetry-header">
+          <div class="lcd-freq-badge">
+            <span class="lcd-freq-num" id="lcd-freq-display">108.0 MHz</span>
+          </div>
+          <div class="lcd-chips-row">
+            <span class="lcd-chip">STEREO HI-FI</span>
+            <span class="lcd-chip">320 KBPS</span>
+            <span class="lcd-chip">AI CURATED</span>
           </div>
         </div>
 
-        <!-- Right Square Photo Frame (Behind Cutout) -->
-        <div id="vintage-photo-screen">
-          <div class="photo-glare"></div>
+        <!-- Live Audio Waveform Line -->
+        <canvas class="lcd-waveform-canvas" id="lcd-wave-canvas" width="560" height="46"></canvas>
+
+        <!-- Episode Hero Info -->
+        <div class="lcd-hero-info">
+          <h2 class="lcd-track-title" id="lcd-title">नागपूरचा इतिहास</h2>
+          <div class="lcd-curator-attribution">
+            <span class="curator-star">★</span>
+            <span>Simran Ailani • Founder & Lead Curator • Episode 13</span>
+          </div>
         </div>
 
-        <!-- Photorealistic Cutout Chassis Mask (100% Matching Master Reference Image) -->
-        <div class="vintage-chassis-overlay"></div>
-
-        <!-- Interactive Knobs & Buttons Layer (In-Front of Cutout) -->
-        <div class="knob-tuner" id="dial-tuner" title="Tuner Rotary Dial"></div>
-        <div class="knob-scroll" id="dial-scroll" title="Directory Scroll Rotary Dial"></div>
-        <div class="piano-keys-bar">
-          <div class="piano-key" id="key-pwr" title="Power On/Off"></div>
-          <div class="piano-key" id="key-prev" title="Previous Episode"></div>
-          <div class="piano-key" id="key-play" title="Play/Pause"></div>
-          <div class="piano-key" id="key-next" title="Next Episode"></div>
-          <div class="piano-key" id="key-bass" title="Bass Boost EQ"></div>
-          <div class="piano-key" id="key-treble" title="Treble Tone"></div>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           2. GYANSETU CARVAAN NEO (ALL-SCREEN HOLOGRAPHIC CYBER COCKPIT)
-           ==================================================================== -->
-      <div class="neo-cockpit-wrap" id="neo-wrap">
-        <div class="neo-main-grid">
-          
-          <!-- SCREEN 1: 3D Spectrogram & Telemetry Matrix (Left) -->
-          <section class="neo-screen-left">
-            <div class="neo-screen-header">
-              <span>HOLOGRAPHIC SPECTROGRAM</span>
-              <span style="color:#00e676;">● LIVE FFT</span>
-            </div>
-            <canvas id="neo-spectrogram-canvas" width="320" height="220"></canvas>
-            
-            <div class="neo-telemetry-box">
-              <div class="neo-telem-row">
-                <span>AUDIO BITRATE</span>
-                <span class="neo-telem-val">320 KBPS FLAC</span>
-              </div>
-              <div class="neo-telem-row">
-                <span>BUFFER LATENCY</span>
-                <span class="neo-telem-val">0 MS (CACHE)</span>
-              </div>
-              <div class="neo-telem-row">
-                <span>CARVAAN LINK</span>
-                <span class="neo-telem-val">STUDENT BROADCAST</span>
-              </div>
-            </div>
-
-            <div class="neo-faders-row">
-              <div class="neo-touch-fader" id="fader-bass">
-                <div class="fader-track"><div class="fader-fill" id="fill-bass" style="height:50%;"></div></div>
-                <span>BASS</span>
-              </div>
-              <div class="neo-touch-fader" id="fader-vol">
-                <div class="fader-track"><div class="fader-fill" id="fill-vol" style="height:85%;"></div></div>
-                <span>VOL</span>
-              </div>
-              <div class="neo-touch-fader" id="fader-treble">
-                <div class="fader-track"><div class="fader-fill" id="fill-treble" style="height:60%;"></div></div>
-                <span>TREBLE</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- SCREEN 2: 4K Sapphire Glass Screen (Center) -->
-          <section class="neo-screen-center">
-            <div class="neo-screen-header">
-              <span>SAPPHIRE COCKPIT DISPLAY</span>
-              <span id="neo-freq-badge">[CH-13] 108.0 MHz FM</span>
-            </div>
-
-            <canvas class="neo-live-osc-canvas" id="neo-osc-canvas" width="500" height="75"></canvas>
-
-            <div class="neo-track-hero">
-              <div class="neo-title-text" id="neo-title">नागपूरचा इतिहास</div>
-              <div class="neo-curator-line">Curated by Simran Ailani • Founder & Lead Curator</div>
-            </div>
-
-            <!-- Scrubber -->
-            <div class="neo-scrubber-bar" id="neo-scrubber">
-              <div class="neo-scrubber-fill" id="neo-scrubber-fill"></div>
-            </div>
-            <div class="neo-time-row">
-              <span id="neo-time-cur">00:00</span>
-              <span id="neo-time-total">09:18</span>
-            </div>
-
-            <!-- Synchronized Teleprompter -->
-            <div class="neo-teleprompter" id="neo-teleprompter">
-              <p class="transcript-line active">ज्ञानसेतु इंटरनेट रेडिओवर आपले स्वागत आहे.</p>
-              <p class="transcript-line">नागपूर शहराचा समृद्ध इतिहास, संस्कृती आणि विज्ञान...</p>
-            </div>
-
-            <!-- Station Quick Ribbon -->
-            <div class="neo-station-ribbon" id="neo-ribbon">
-              <!-- Dynamically populated -->
-            </div>
-          </section>
-
-          <!-- SCREEN 3: Frameless Floating OLED Album Glass (Right) -->
-          <section class="neo-screen-right">
-            <div class="neo-screen-header" style="width:100%;">
-              <span>ALBUM GLASS</span>
-              <span style="color:#e5bf45;">★ SIMRAN AILANI</span>
-            </div>
-
-            <div class="neo-album-frame" id="neo-album-art"></div>
-
-            <div class="neo-dials-zone">
-              <div class="neo-rotary-dial">
-                <div class="neo-dial-ring" id="neo-dial-ch">
-                  <span class="neo-dial-core-text" id="neo-dial-ch-txt">108.0</span>
-                </div>
-                <span class="neo-dial-sub-label">TUNER CH</span>
-              </div>
-              <div class="neo-rotary-dial">
-                <div class="neo-dial-ring" id="neo-dial-vol">
-                  <span class="neo-dial-core-text" id="neo-dial-vol-txt">85%</span>
-                </div>
-                <span class="neo-dial-sub-label">OUTPUT VOL</span>
-              </div>
-            </div>
-          </section>
+        <!-- Multi-Language Translation Pill -->
+        <div class="lcd-translation-pill-bar">
+          <button class="lang-pill-btn active" id="pill-mr" data-lang="mr">मराठी ORIG</button>
+          <button class="lang-pill-btn" id="pill-hi" data-lang="hi">हिंदी HINDI</button>
+          <button class="lang-pill-btn" id="pill-en" data-lang="en">ENGLISH DUB</button>
         </div>
 
-        <!-- Bottom Flush Capacitive Touchbar (Neo Mode) -->
-        <footer class="neo-capacitive-touchbar">
-          <button class="neo-touch-btn" id="neo-btn-pwr">⏻ POWER</button>
-          <button class="neo-touch-btn" id="neo-btn-prev">⏮ PREV</button>
-          <button class="neo-touch-btn active" id="neo-btn-play">▶ PLAY</button>
-          <button class="neo-touch-btn" id="neo-btn-next">⏭ NEXT</button>
-          <button class="neo-touch-btn" id="neo-btn-bass">🔊 BASS BOOST</button>
-          <button class="neo-touch-btn" id="neo-btn-beam">📡 OPTICAL BEAM</button>
-        </footer>
-      </div>
+        <!-- Synchronized Live Teleprompter Subtitles -->
+        <div class="lcd-teleprompter-box" id="lcd-teleprompter">
+          <p class="teleprompter-line active">ज्ञानसेतु इंटरनेट रेडिओवर आपले स्वागत आहे.</p>
+          <p class="teleprompter-line">नागपूर शहराचा समृद्ध इतिहास, संस्कृती आणि विज्ञान...</p>
+        </div>
 
-    </div>
+        <!-- Timeline Scrubber -->
+        <div class="lcd-scrubber-row">
+          <div class="lcd-scrubber-track" id="lcd-scrubber-track">
+            <div class="lcd-scrubber-fill" id="lcd-scrubber-fill"></div>
+          </div>
+          <div class="lcd-time-indicators">
+            <span id="lcd-cur-time">00:00</span>
+            <span id="lcd-total-time">09:18</span>
+          </div>
+        </div>
+
+        <!-- Horizontal Station Directory Ribbon -->
+        <div class="lcd-station-ribbon" id="lcd-station-ribbon">
+          <!-- Dynamically populated 13 stations -->
+        </div>
+
+      </section>
+
+      <!-- ZONE C: Right Wing (Album Art Frame & Physical Rotary Dials) -->
+      <section class="hardware-controls-wing">
+        
+        <!-- Recessed Brass Album Art Frame -->
+        <div class="album-frame-housing">
+          <div class="album-art-img" id="album-art-display"></div>
+          <div class="album-glare"></div>
+        </div>
+
+        <!-- Physical Rotary Knob 1: Master Frequency Tuner -->
+        <div class="physical-knob-cluster">
+          <div class="physical-knob-dial" id="dial-master-tuner" title="Spin with thumb to tune frequency">
+            <div class="knob-knurled-edge"></div>
+            <div class="knob-marker-indicator"></div>
+            <div class="knob-center-cap"></div>
+          </div>
+          <span class="knob-label-caption">MASTER TUNER</span>
+        </div>
+
+        <!-- Physical Rotary Knob 2: Scroll / Output Volume -->
+        <div class="physical-knob-cluster">
+          <div class="physical-knob-dial small" id="dial-output-vol" title="Spin with thumb to adjust volume">
+            <div class="knob-knurled-edge"></div>
+            <div class="knob-marker-indicator"></div>
+            <div class="knob-center-cap"></div>
+          </div>
+          <span class="knob-label-caption">DIRECTORY / VOL</span>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- 3. Bottom Physical Piano Control Deck (Brass Plate) -->
+    <footer class="bottom-piano-deck">
+      <button class="piano-push-key active-pwr" id="key-pwr">
+        <span>⏻</span> POWER
+      </button>
+      <button class="piano-push-key" id="key-prev">
+        <span>⏮</span> PREV
+      </button>
+      <button class="piano-push-key" id="key-play">
+        <span id="key-play-icon">▶</span> <span id="key-play-txt">PLAY</span>
+      </button>
+      <button class="piano-push-key" id="key-next">
+        <span>⏭</span> NEXT
+      </button>
+      <button class="piano-push-key" id="key-bass">
+        <span>🔊</span> BASS BOOST
+      </button>
+      <button class="piano-push-key" id="key-beamer">
+        <span>📡</span> OPTICAL BEAM
+      </button>
+    </footer>
+
   </div>
 
-  <!-- ========================================================================
-       OPTICAL FOUNTAIN BEAMER / QR P2P TRANSFER MODAL
-       ======================================================================== -->
+  <!-- Optical Beamer Modal -->
   <div class="modal-overlay" id="beamer-modal">
     <div class="modal-card">
       <div class="modal-header">
         <h3 class="modal-title">📡 GyanSetu Optical Mesh Beamer</h3>
         <button class="modal-close-btn" id="btn-close-beamer">&times;</button>
       </div>
-
-      <div class="modal-tab-bar">
-        <button class="modal-tab active" id="tab-sender">Transmit / Send (Air-Gap QR)</button>
-        <button class="modal-tab" id="tab-receiver">Receive / Scan Camera</button>
+      <p style="font-size:12px; color:#cbd5e1; margin-bottom:12px;">
+        Lossless Air-Gap Transmission: Hold camera towards screen to ingest offline bundle.
+      </p>
+      <div id="beam-canvas-wrap">
+        <canvas id="beam-fountain-canvas" width="236" height="236"></canvas>
       </div>
-
-      <!-- Sender Pane -->
-      <div id="pane-sender">
-        <p style="font-size:12px; color:#cbd5e1; margin-bottom:12px;">
-          Broadcasting lossless episode bundle via animated fountain QR code chunks. Hold receiver camera towards the screen to ingest.
-        </p>
-        <div id="beam-canvas-wrap">
-          <canvas id="beam-fountain-canvas" width="256" height="256"></canvas>
-        </div>
-        <div class="fountain-status-line" id="sender-fountain-hud">
-          Chunk 1 / 48 • 12 FPS • AES-256-GCM Encrypted
-        </div>
-      </div>
-
-      <!-- Receiver Pane -->
-      <div id="pane-receiver" style="display:none;">
-        <video id="camera-preview-video" autoplay playsinline></video>
-        <div class="fountain-status-line" id="receiver-fountain-hud">
-          Camera Active • Searching for GyanSetu Fountain QR...
-        </div>
+      <div class="fountain-status-line" id="fountain-status-hud">
+        Chunk 1 / 48 • 12 FPS • AES-256-GCM Encrypted
       </div>
     </div>
   </div>
@@ -1130,14 +943,14 @@
   <!-- Toast Notification -->
   <div id="pocket-toast"></div>
 
-  <!-- Embedded Dependencies -->
+  <!-- Scripts -->
   <script src="assets/js/qrcode.min.js"></script>
   <script src="assets/js/jsqr.min.js"></script>
   <script src="assets/data/episodes_transcripts.js"></script>
 
   <script>
     // =========================================================================
-    // 1. MASTER EPISODE CATALOG (13 CHANNELS) - CURATED BY SIMRAN AILANI
+    // 1. MASTER EPISODE CATALOG & MAPS - CURATED BY SIMRAN AILANI
     // =========================================================================
     const isAndroidAsset = window.location.protocol === 'file:';
     const audioBase = isAndroidAsset ? 'assets/audio/' : 'assets/audio_ghost/';
@@ -1158,7 +971,7 @@
       { id: "ep-1",  num: 1,  freq: "88.0",  title: "Carbenes", cat: "CONCEPTS", dur: "10m 21s", origLang: "en", src: audioBase + "ep7-carbenes.mp3" }
     ];
 
-    // Map high-res cover artwork to every episode
+    // Map cover artwork cleanly to every episode
     EPISODES.forEach((ep) => {
       if (!ep.cover) {
         const srcFile = (ep.src || '').split('/').pop();
@@ -1166,18 +979,20 @@
       }
     });
 
-    // State
+    // State Variables
     let currentIndex = 0;
     let isPlaying = false;
     let isPowerOn = true;
     let isBassBoosted = false;
-    let currentTheme = localStorage.getItem('gyansetu_flagship_theme') || 'vintage-1978';
+    let isTubeWarmth = false;
+    let activeLanguage = 'mr'; // mr, hi, en
+    let tunerAngle = 0;
+    let volAngle = 0;
 
     const audio = document.getElementById('audio-engine');
-    const vintageWrap = document.getElementById('vintage-wrap');
-    const neoWrap = document.getElementById('neo-wrap');
+    const smartLcd = document.getElementById('smart-lcd-screen');
 
-    // Web Audio Synthesizer for Tactile Feedback
+    // Web Audio Synthesizer (Zero-Lag Mechanical Click Audio & Bass Filter)
     let audioCtx = null;
     let biquadFilter = null;
     let analyser = null;
@@ -1212,7 +1027,7 @@
         const gain = ctx.createGain();
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -1226,35 +1041,31 @@
       if (!t) return;
       t.textContent = msg;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
+      setTimeout(() => t.classList.remove('show'), 2400);
     }
 
     // =========================================================================
-    // 2. THEME ENGINE: 1978 VINTAGE <---> CARVAAN NEO
+    // 2. HORIZON SCALE INITIALIZATION
     // =========================================================================
-    function setTheme(theme) {
-      currentTheme = theme;
-      localStorage.setItem('gyansetu_flagship_theme', theme);
-      document.documentElement.setAttribute('data-theme', theme);
+    function initHorizonScale() {
+      const scaleEl = document.getElementById('horizon-scale');
+      if (!scaleEl) return;
+      scaleEl.innerHTML = EPISODES.map((ep, i) => `
+        <div class="freq-tick-marker ${i === 0 ? 'active' : ''}" id="scale-tick-${i}" data-index="${i}">
+          <span>${ep.freq}</span>
+        </div>
+      `).join('');
 
-      const btnVin = document.getElementById('btn-theme-vintage');
-      const btnNeo = document.getElementById('btn-theme-neo');
-
-      if (theme === 'vintage-1978') {
-        btnVin.classList.add('active');
-        btnNeo.classList.remove('active');
-      } else {
-        btnNeo.classList.add('active');
-        btnVin.classList.remove('active');
-      }
-      playMechanicalClick(1200, 0.06);
+      scaleEl.querySelectorAll('.freq-tick-marker').forEach(marker => {
+        marker.addEventListener('click', () => {
+          const idx = parseInt(marker.getAttribute('data-index'), 10);
+          tuneToEpisode(idx, true);
+        });
+      });
     }
 
-    document.getElementById('btn-theme-vintage').addEventListener('click', () => setTheme('vintage-1978'));
-    document.getElementById('btn-theme-neo').addEventListener('click', () => setTheme('neo-carvaan'));
-
     // =========================================================================
-    // 3. EPISODE TUNING & METADATA BINDINGS
+    // 3. EPISODE TUNING & RESTOMOD LCD BINDINGS
     // =========================================================================
     function tuneToEpisode(index, autoPlay = true) {
       if (index < 0) index = EPISODES.length - 1;
@@ -1263,66 +1074,57 @@
 
       const ep = EPISODES[currentIndex];
 
-      // Update Native Audio Source
-      const targetSrc = ep.src || (audioBase + 'ep13-nagpurcha-itihas.mp3');
+      // Select audio source based on active language
+      let targetSrc = ep.src;
+      if (activeLanguage === 'en' && ep.dubSrc) {
+        targetSrc = ep.dubSrc;
+      }
       if (audio.src !== targetSrc) {
         audio.src = targetSrc;
         audio.load();
       }
 
-      // 1. Update Vintage Mode Elements
-      const vAvatar = document.getElementById('vintage-avatar');
-      const vTitle = document.getElementById('vintage-title');
-      const vFreq = document.getElementById('vintage-freq');
-      const vPhoto = document.getElementById('vintage-photo-screen');
-      const vTimeTotal = document.getElementById('vintage-time-total');
+      // 1. Update LCD Display
+      const lcdFreq = document.getElementById('lcd-freq-display');
+      const lcdTitle = document.getElementById('lcd-title');
+      const lcdTotalTime = document.getElementById('lcd-total-time');
+      const albumImg = document.getElementById('album-art-display');
 
-      if (vAvatar) vAvatar.style.backgroundImage = `url('${ep.cover}')`;
-      if (vTitle) vTitle.textContent = ep.title;
-      if (vFreq) vFreq.textContent = `FM ${ep.freq} FM`;
-      if (vPhoto) vPhoto.style.backgroundImage = `url('${ep.cover}')`;
-      if (vTimeTotal) vTimeTotal.textContent = ep.duration || '09:18';
+      if (lcdFreq) lcdFreq.textContent = `${ep.freq} MHz`;
+      if (lcdTitle) lcdTitle.textContent = (activeLanguage === 'en' && ep.titleDub) ? ep.titleDub : ep.title;
+      if (lcdTotalTime) lcdTotalTime.textContent = ep.duration || '09:18';
+      if (albumImg) albumImg.style.backgroundImage = `url('${ep.cover}')`;
 
-      // Highlight in Vintage Digital Directory
-      const dirItems = document.querySelectorAll('#vintage-dir-list .dir-item');
-      dirItems.forEach((item, idx) => {
-        if (idx === currentIndex) {
-          item.classList.add('active');
-          item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // 2. Update Top Horizon Scale & Needle
+      const needle = document.getElementById('horizon-needle');
+      const total = EPISODES.length;
+      const pct = (currentIndex / (total - 1)) * 92 + 4; // 4% to 96%
+      if (needle) needle.style.left = `${pct}%`;
+
+      document.querySelectorAll('.freq-tick-marker').forEach((m, i) => {
+        if (i === currentIndex) m.classList.add('active');
+        else m.classList.remove('active');
+      });
+
+      // 3. Update LCD Ribbon
+      document.querySelectorAll('.station-chip-btn').forEach((btn, i) => {
+        if (i === currentIndex) {
+          btn.classList.add('active');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         } else {
-          item.classList.remove('active');
+          btn.classList.remove('active');
         }
       });
 
-      // 2. Update Carvaan Neo Mode Elements
-      const nTitle = document.getElementById('neo-title');
-      const nFreqBadge = document.getElementById('neo-freq-badge');
-      const nAlbum = document.getElementById('neo-album-art');
-      const nTimeTotal = document.getElementById('neo-time-total');
-      const nDialCh = document.getElementById('neo-dial-ch-txt');
+      // 4. Update Physical Rotary Dial Rotation
+      tunerAngle = (currentIndex * 27.6) % 360;
+      const tunerDial = document.getElementById('dial-master-tuner');
+      if (tunerDial) tunerDial.style.transform = `rotate(${tunerAngle}deg)`;
 
-      if (nTitle) nTitle.textContent = ep.title;
-      if (nFreqBadge) nFreqBadge.textContent = `[CH-${ep.channel || (currentIndex+1)}] ${ep.freq} MHz FM`;
-      if (nAlbum) nAlbum.style.backgroundImage = `url('${ep.cover}')`;
-      if (nTimeTotal) nTimeTotal.textContent = ep.duration || '09:18';
-      if (nDialCh) nDialCh.textContent = ep.freq;
+      // 5. Update Teleprompter
+      updateTeleprompter();
 
-      // Update Neo Ribbon
-      const ribbonBtns = document.querySelectorAll('#neo-ribbon .neo-ribbon-btn');
-      ribbonBtns.forEach((btn, idx) => {
-        if (idx === currentIndex) btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-
-      // Rotate Physical Knobs slightly to reflect tuning
-      const tunerKnob = document.getElementById('dial-tuner');
-      if (tunerKnob) {
-        const deg = (currentIndex * 27.6) % 360;
-        tunerKnob.style.transform = `rotate(${deg}deg)`;
-      }
-
-      // Update Teleprompter
-      updateNeoTeleprompter(ep);
+      playMechanicalClick(900 + (currentIndex * 25), 0.03);
 
       if (autoPlay && isPowerOn) {
         initWebAudio();
@@ -1330,66 +1132,83 @@
       }
     }
 
-    function updateNeoTeleprompter(ep) {
-      const prompter = document.getElementById('neo-teleprompter');
-      if (!prompter) return;
+    function updateTeleprompter() {
+      const box = document.getElementById('lcd-teleprompter');
+      if (!box) return;
+      const ep = EPISODES[currentIndex];
       const key = `ep${ep.channel || (currentIndex + 1)}`;
       const transcriptData = (window.GYAN_SETU_TRANSCRIPTS && window.GYAN_SETU_TRANSCRIPTS[key]) || null;
+
       if (transcriptData && transcriptData.lines) {
-        prompter.innerHTML = transcriptData.lines.map((l, i) => 
-          `<p class="transcript-line ${i === 0 ? 'active' : ''}">${l.text}</p>`
+        box.innerHTML = transcriptData.lines.map((l, i) => 
+          `<p class="teleprompter-line ${i === 0 ? 'active' : ''}">${l.text}</p>`
         ).join('');
       } else {
-        prompter.innerHTML = `
-          <p class="transcript-line active"> ज्ञानसेतु इंटरनेट रेडिओ • Curated by Simran Ailani</p>
-          <p class="transcript-line">${ep.title} (${ep.category || 'Science & Culture'})</p>
-          <p class="transcript-line">Broadcasting live across the global network.</p>
+        box.innerHTML = `
+          <p class="teleprompter-line active">ज्ञानसेतु इंटरनेट रेडिओ • Curated by Simran Ailani</p>
+          <p class="teleprompter-line">${ep.title} (${ep.category || 'Science & Culture'})</p>
+          <p class="teleprompter-line">Broadcasting live across the global network.</p>
         `;
       }
     }
 
-    // Populate Lists on Init
-    function initDirectories() {
-      // Vintage Digital Directory
-      const vList = document.getElementById('vintage-dir-list');
-      if (vList) {
-        vList.innerHTML = EPISODES.map((ep, i) => `
-          <div class="dir-item ${i === 0 ? 'active' : ''}" data-index="${i}">
-            <span>${i + 1}. ${ep.title}</span>
-            <span>${ep.duration || '09:18'}</span>
-          </div>
-        `).join('');
+    // Populate LCD Horizontal Directory Ribbon
+    function initStationRibbon() {
+      const ribbon = document.getElementById('lcd-station-ribbon');
+      if (!ribbon) return;
+      ribbon.innerHTML = EPISODES.map((ep, i) => `
+        <button class="station-chip-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
+          CH-${ep.channel || (i+1)} • ${ep.freq}
+        </button>
+      `).join('');
 
-        vList.querySelectorAll('.dir-item').forEach(item => {
-          item.addEventListener('click', () => {
-            const idx = parseInt(item.getAttribute('data-index'), 10);
-            tuneToEpisode(idx, true);
-            playMechanicalClick(950, 0.03);
-          });
+      ribbon.querySelectorAll('.station-chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-index'), 10);
+          tuneToEpisode(idx, true);
         });
-      }
-
-      // Carvaan Neo Ribbon
-      const nRibbon = document.getElementById('neo-ribbon');
-      if (nRibbon) {
-        nRibbon.innerHTML = EPISODES.map((ep, i) => `
-          <button class="neo-ribbon-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
-            CH-${ep.channel || (i+1)} • ${ep.freq}
-          </button>
-        `).join('');
-
-        nRibbon.querySelectorAll('.neo-ribbon-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const idx = parseInt(btn.getAttribute('data-index'), 10);
-            tuneToEpisode(idx, true);
-            playMechanicalClick(1100, 0.03);
-          });
-        });
-      }
+      });
     }
 
     // =========================================================================
-    // 4. TRANSPORT CONTROLS (PIANO KEYS & NEO TOUCHBAR)
+    // 4. MULTI-LANGUAGE TRANSLATION CONTROLS (IN LCD)
+    // =========================================================================
+    function setLanguage(lang) {
+      activeLanguage = lang;
+      document.querySelectorAll('.lang-pill-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      const ep = EPISODES[currentIndex];
+      const lcdTitle = document.getElementById('lcd-title');
+      if (lcdTitle) {
+        lcdTitle.textContent = (lang === 'en' && ep.titleDub) ? ep.titleDub : ep.title;
+      }
+
+      // Switch audio source smoothly if dub exists
+      if (lang === 'en' && ep.dubSrc) {
+        const curTime = audio.currentTime;
+        audio.src = ep.dubSrc;
+        audio.currentTime = curTime;
+        if (isPlaying && isPowerOn) audio.play().catch(() => {});
+        showToast('Language: English AI Dub Activated');
+      } else {
+        const curTime = audio.currentTime;
+        audio.src = ep.src;
+        audio.currentTime = curTime;
+        if (isPlaying && isPowerOn) audio.play().catch(() => {});
+        showToast(lang === 'hi' ? 'Language: Hindi Master' : 'Language: Marathi Original');
+      }
+      playMechanicalClick(1300, 0.03);
+    }
+
+    document.getElementById('pill-mr').addEventListener('click', () => setLanguage('mr'));
+    document.getElementById('pill-hi').addEventListener('click', () => setLanguage('hi'));
+    document.getElementById('pill-en').addEventListener('click', () => setLanguage('en'));
+
+    // =========================================================================
+    // 5. PHYSICAL CONTROLS (PIANO KEYS & DIALS)
     // =========================================================================
     function togglePlay() {
       if (!isPowerOn) return;
@@ -1397,46 +1216,48 @@
       if (audio.paused) {
         audio.play().then(() => {
           isPlaying = true;
-          updatePlayUI(true);
+          updatePlayKeyUI(true);
         }).catch(e => console.warn(e));
       } else {
         audio.pause();
         isPlaying = false;
-        updatePlayUI(false);
+        updatePlayKeyUI(false);
       }
       playMechanicalClick(1000, 0.04);
     }
 
-    function updatePlayUI(playing) {
+    function updatePlayKeyUI(playing) {
       const playKey = document.getElementById('key-play');
-      const neoPlay = document.getElementById('neo-btn-play');
+      const playIcon = document.getElementById('key-play-icon');
+      const playTxt = document.getElementById('key-play-txt');
       if (playing) {
         if (playKey) playKey.classList.add('depressed');
-        if (neoPlay) { neoPlay.textContent = '⏸ PAUSE'; neoPlay.classList.add('active'); }
+        if (playIcon) playIcon.textContent = '⏸';
+        if (playTxt) playTxt.textContent = 'PAUSE';
       } else {
         if (playKey) playKey.classList.remove('depressed');
-        if (neoPlay) { neoPlay.textContent = '▶ PLAY'; neoPlay.classList.remove('active'); }
+        if (playIcon) playIcon.textContent = '▶';
+        if (playTxt) playTxt.textContent = 'PLAY';
       }
     }
 
     function togglePower() {
       isPowerOn = !isPowerOn;
-      const stage = document.getElementById('appliance-stage');
       const pwrKey = document.getElementById('key-pwr');
-      const neoPwr = document.getElementById('neo-btn-pwr');
+      const tubeFilament = document.getElementById('tube-filament');
 
       if (!isPowerOn) {
         audio.pause();
-        updatePlayUI(false);
-        stage.classList.add('crt-off');
-        if (pwrKey) pwrKey.classList.remove('depressed');
-        if (neoPwr) neoPwr.classList.remove('active');
-        showToast('Radio Power: OFF');
-        playMechanicalClick(400, 0.1);
+        updatePlayKeyUI(false);
+        smartLcd.classList.add('crt-power-off');
+        if (pwrKey) pwrKey.classList.remove('active-pwr');
+        if (tubeFilament) tubeFilament.style.opacity = '0.05';
+        showToast('Radio Power: OFF (Tubes Cold)');
+        playMechanicalClick(400, 0.12);
       } else {
-        stage.classList.remove('crt-off');
-        if (pwrKey) pwrKey.classList.add('depressed');
-        if (neoPwr) neoPwr.classList.add('active');
+        smartLcd.classList.remove('crt-power-off');
+        if (pwrKey) pwrKey.classList.add('active-pwr');
+        if (tubeFilament) tubeFilament.style.opacity = '1';
         showToast('Radio Power: ON (Tubes Warming Up)');
         playMechanicalClick(1400, 0.06);
       }
@@ -1449,58 +1270,41 @@
         biquadFilter.gain.value = isBassBoosted ? 7.5 : 0;
       }
       const bassKey = document.getElementById('key-bass');
-      const neoBass = document.getElementById('neo-btn-bass');
-      const fillBass = document.getElementById('fill-bass');
-
       if (isBassBoosted) {
         if (bassKey) bassKey.classList.add('depressed');
-        if (neoBass) neoBass.classList.add('active');
-        if (fillBass) fillBass.style.height = '90%';
-        showToast('Sub-Bass Boost: +7.5 dB ACTIVE');
+        showToast('Analog Sub-Bass Boost: +7.5 dB ACTIVE');
       } else {
         if (bassKey) bassKey.classList.remove('depressed');
-        if (neoBass) neoBass.classList.remove('active');
-        if (fillBass) fillBass.style.height = '50%';
-        showToast('Sub-Bass Boost: FLAT');
+        showToast('Analog Sub-Bass Boost: FLAT');
       }
-      playMechanicalClick(700, 0.05);
+      playMechanicalClick(650, 0.05);
     }
 
     // Connect Piano Buttons
     document.getElementById('key-play').addEventListener('click', togglePlay);
-    document.getElementById('neo-btn-play').addEventListener('click', togglePlay);
-
     document.getElementById('key-prev').addEventListener('click', () => {
       tuneToEpisode(currentIndex - 1, true);
-      playMechanicalClick(900, 0.03);
     });
-    document.getElementById('neo-btn-prev').addEventListener('click', () => {
-      tuneToEpisode(currentIndex - 1, true);
-      playMechanicalClick(900, 0.03);
-    });
-
     document.getElementById('key-next').addEventListener('click', () => {
       tuneToEpisode(currentIndex + 1, true);
-      playMechanicalClick(1100, 0.03);
     });
-    document.getElementById('neo-btn-next').addEventListener('click', () => {
-      tuneToEpisode(currentIndex + 1, true);
-      playMechanicalClick(1100, 0.03);
-    });
-
     document.getElementById('key-pwr').addEventListener('click', togglePower);
-    document.getElementById('neo-btn-pwr').addEventListener('click', togglePower);
-
     document.getElementById('key-bass').addEventListener('click', toggleBass);
-    document.getElementById('neo-btn-bass').addEventListener('click', toggleBass);
 
-    document.getElementById('key-treble').addEventListener('click', () => {
-      showToast('Treble Harmonic Enhancer: +3 dB');
-      playMechanicalClick(1500, 0.04);
+    // Vacuum Tube Chamber Click: Tube Warmth DSP
+    document.getElementById('tube-chamber').addEventListener('click', () => {
+      isTubeWarmth = !isTubeWarmth;
+      initWebAudio();
+      if (isTubeWarmth) {
+        showToast('Tube Warmth DSP: Engaged (Rich 2nd Harmonics)');
+      } else {
+        showToast('Tube Warmth DSP: Linear Clean');
+      }
+      playMechanicalClick(1200, 0.03);
     });
 
-    // Rotary Dials Drag & Click Interaction
-    const dialTuner = document.getElementById('dial-tuner');
+    // Rotary Dial 1: Master Tuner Flywheel (Drag & Wheel)
+    const dialTuner = document.getElementById('dial-master-tuner');
     if (dialTuner) {
       dialTuner.addEventListener('click', () => {
         tuneToEpisode(currentIndex + 1, true);
@@ -1511,52 +1315,40 @@
       });
     }
 
-    const dialScroll = document.getElementById('dial-scroll');
-    const vintageDir = document.getElementById('vintage-dir-screen');
-    let dirScrollDeg = 0;
-    if (dialScroll) {
-      dialScroll.addEventListener('wheel', (e) => {
+    // Rotary Dial 2: Output Vol / Directory
+    const dialVol = document.getElementById('dial-output-vol');
+    if (dialVol) {
+      dialVol.addEventListener('wheel', (e) => {
         e.preventDefault();
-        dirScrollDeg += (e.deltaY > 0 ? 30 : -30);
-        dialScroll.style.transform = `rotate(${dirScrollDeg}deg)`;
-        vintageDir.scrollTop += (e.deltaY > 0 ? 28 : -28);
-        playMechanicalClick(1300, 0.02);
+        volAngle += (e.deltaY > 0 ? 25 : -25);
+        dialVol.style.transform = `rotate(${volAngle}deg)`;
+        playMechanicalClick(1400, 0.015);
+      });
+      dialVol.addEventListener('click', () => {
+        volAngle += 30;
+        dialVol.style.transform = `rotate(${volAngle}deg)`;
+        tuneToEpisode(currentIndex + 1, true);
       });
     }
 
-    // Audio Time Update (Progress Bars & Counters)
+    // Scrubber & Audio Time Updates
     audio.addEventListener('timeupdate', () => {
       if (!audio.duration) return;
       const pct = (audio.currentTime / audio.duration) * 100;
+      const fill = document.getElementById('lcd-scrubber-fill');
+      if (fill) fill.style.width = `${pct}%`;
 
-      // Format time
       const curM = Math.floor(audio.currentTime / 60);
       const curS = Math.floor(audio.currentTime % 60);
       const curStr = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')}`;
-
-      const vCur = document.getElementById('vintage-time-cur');
-      const nCur = document.getElementById('neo-time-cur');
-      if (vCur) vCur.textContent = curStr;
-      if (nCur) nCur.textContent = curStr;
-
-      // Vintage segmented LCD progress bar (12 segments)
-      const segs = document.querySelectorAll('#vintage-seg-bar .lcd-seg');
-      const activeCount = Math.floor((pct / 100) * segs.length);
-      segs.forEach((seg, i) => {
-        if (i < activeCount) seg.classList.remove('off');
-        else seg.classList.add('off');
-      });
-
-      // Neo Scrubber Fill
-      const nScrubber = document.getElementById('neo-scrubber-fill');
-      if (nScrubber) nScrubber.style.width = `${pct}%`;
+      const curTimeEl = document.getElementById('lcd-cur-time');
+      if (curTimeEl) curTimeEl.textContent = curStr;
     });
 
-    // Click on Neo Scrubber to Seek
-    const neoScrubberBar = document.getElementById('neo-scrubber');
-    if (neoScrubberBar) {
-      neoScrubberBar.addEventListener('click', (e) => {
-        const rect = neoScrubberBar.getBoundingClientRect();
+    const scrubberTrack = document.getElementById('lcd-scrubber-track');
+    if (scrubberTrack) {
+      scrubberTrack.addEventListener('click', (e) => {
+        const rect = scrubberTrack.getBoundingClientRect();
         const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
         if (audio.duration) {
           audio.currentTime = pos * audio.duration;
@@ -1565,89 +1357,56 @@
     }
 
     // =========================================================================
-    // 5. LIVE VISUALIZERS (NEO FFT SPECTROGRAM & OSCILLOSCOPE)
+    // 6. LIVE ELECTRON-BEAM OSCILLOSCOPE WAVEFORM
     // =========================================================================
-    const specCanvas = document.getElementById('neo-spectrogram-canvas');
-    const specCtx = specCanvas ? specCanvas.getContext('2d') : null;
+    const waveCanvas = document.getElementById('lcd-wave-canvas');
+    const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
+    const waveData = new Uint8Array(32);
+    let wavePhase = 0;
 
-    const oscCanvas = document.getElementById('neo-osc-canvas');
-    const oscCtx = oscCanvas ? oscCanvas.getContext('2d') : null;
+    function renderWaveform() {
+      requestAnimationFrame(renderWaveform);
+      if (!waveCtx || !isPowerOn) return;
 
-    const freqArray = new Uint8Array(32);
-    let oscPhase = 0;
-
-    function renderAudioVisuals() {
-      requestAnimationFrame(renderAudioVisuals);
-
-      if (currentTheme !== 'neo-carvaan' || !isPowerOn) return;
+      const w = waveCanvas.width;
+      const h = waveCanvas.height;
+      waveCtx.clearRect(0, 0, w, h);
 
       if (analyser && !audio.paused) {
-        analyser.getByteFrequencyData(freqArray);
+        analyser.getByteFrequencyData(waveData);
       } else if (!audio.paused) {
         for (let i = 0; i < 32; i++) {
-          freqArray[i] = Math.floor(Math.sin(i * 0.3 + oscPhase) * 90 + 120);
+          waveData[i] = Math.floor(Math.sin(i * 0.3 + wavePhase) * 90 + 120);
         }
       } else {
-        freqArray.fill(6);
+        waveData.fill(4);
       }
-      oscPhase += 0.08;
+      wavePhase += 0.08;
 
-      // 1. Draw Spectrogram
-      if (specCtx) {
-        const w = specCanvas.width;
-        const h = specCanvas.height;
-        specCtx.clearRect(0, 0, w, h);
+      waveCtx.strokeStyle = '#ffbe3b';
+      waveCtx.lineWidth = 2;
+      waveCtx.shadowColor = '#ffbe3b';
+      waveCtx.shadowBlur = 8;
+      waveCtx.beginPath();
 
-        const bars = 24;
-        const barW = (w - (bars * 2)) / bars;
-        for (let i = 0; i < bars; i++) {
-          const val = freqArray[i] || 10;
-          const barH = (val / 255) * (h - 15);
-          const x = i * (barW + 2) + 2;
-          const y = h - barH - 2;
-
-          const grad = specCtx.createLinearGradient(0, y, 0, h);
-          grad.addColorStop(0, '#38bdf8');
-          grad.addColorStop(0.6, '#0284c7');
-          grad.addColorStop(1, '#0c4a6e');
-
-          specCtx.fillStyle = grad;
-          specCtx.fillRect(x, y, barW, barH);
-        }
+      const mid = h / 2;
+      for (let x = 0; x < w; x += 3) {
+        const sample = (waveData[Math.floor((x / w) * 16)] || 128) - 128;
+        const amp = (!audio.paused ? sample / 128 : 0.04) * 18;
+        const y = mid + Math.sin((x * 0.05) + wavePhase) * amp;
+        if (x === 0) waveCtx.moveTo(x, y);
+        else waveCtx.lineTo(x, y);
       }
-
-      // 2. Draw Oscilloscope
-      if (oscCtx) {
-        const w = oscCanvas.width;
-        const h = oscCanvas.height;
-        oscCtx.clearRect(0, 0, w, h);
-
-        oscCtx.strokeStyle = '#38bdf8';
-        oscCtx.lineWidth = 2;
-        oscCtx.shadowColor = '#38bdf8';
-        oscCtx.shadowBlur = 8;
-        oscCtx.beginPath();
-
-        const mid = h / 2;
-        for (let x = 0; x < w; x += 3) {
-          const sample = (freqArray[Math.floor((x / w) * 16)] || 128) - 128;
-          const amp = (!audio.paused ? sample / 128 : 0.05) * 25;
-          const y = mid + Math.sin((x * 0.05) + oscPhase) * amp;
-          if (x === 0) oscCtx.moveTo(x, y);
-          else oscCtx.lineTo(x, y);
-        }
-        oscCtx.stroke();
-        oscCtx.shadowBlur = 0;
-      }
+      waveCtx.stroke();
+      waveCtx.shadowBlur = 0;
     }
-    renderAudioVisuals();
+    renderWaveform();
 
     // =========================================================================
-    // 6. OPTICAL BEAMER MODAL & FOUNTAIN QR LOOP
+    // 7. OPTICAL BEAMER MODAL
     // =========================================================================
     const beamerModal = document.getElementById('beamer-modal');
-    const openBeamerBtn = document.getElementById('btn-open-beamer');
-    const neoBeamBtn = document.getElementById('neo-btn-beam');
+    const beamerKey = document.getElementById('key-beamer');
     const closeBeamerBtn = document.getElementById('btn-close-beamer');
 
     function openBeamer() {
@@ -1655,18 +1414,15 @@
       startFountainLoop();
       playMechanicalClick(1400, 0.05);
     }
-
     function closeBeamer() {
       beamerModal.classList.remove('open');
       stopFountainLoop();
       playMechanicalClick(500, 0.03);
     }
 
-    if (openBeamerBtn) openBeamerBtn.addEventListener('click', openBeamer);
-    if (neoBeamBtn) neoBeamBtn.addEventListener('click', openBeamer);
+    if (beamerKey) beamerKey.addEventListener('click', openBeamer);
     if (closeBeamerBtn) closeBeamerBtn.addEventListener('click', closeBeamer);
 
-    // Fountain QR Generator Loop
     let fountainTimer = null;
     let fountainSeq = 0;
     const fountainCanvas = document.getElementById('beam-fountain-canvas');
@@ -1675,13 +1431,13 @@
       if (fountainTimer) clearInterval(fountainTimer);
       fountainTimer = setInterval(() => {
         fountainSeq = (fountainSeq + 1) % 48;
-        const hud = document.getElementById('sender-fountain-hud');
+        const hud = document.getElementById('fountain-status-hud');
         if (hud) hud.textContent = `Chunk ${fountainSeq + 1} / 48 • 12 FPS • AES-256-GCM Encrypted`;
 
         if (fountainCanvas && window.QRCode) {
           const payload = `GS_MESH_CHUNK:${fountainSeq}:EP${currentIndex+1}:${Date.now()}`;
           QRCode.toCanvas(fountainCanvas, payload, {
-            width: 256,
+            width: 236,
             margin: 1,
             color: { dark: '#000000', light: '#ffffff' }
           }, () => {});
@@ -1696,26 +1452,12 @@
       }
     }
 
-    // Fullscreen Kiosk Mode
-    const fsBtn = document.getElementById('btn-fullscreen');
-    if (fsBtn) {
-      fsBtn.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(() => {});
-          fsBtn.innerHTML = '<span>✖</span> Exit Kiosk';
-        } else {
-          document.exitFullscreen().catch(() => {});
-          fsBtn.innerHTML = '<span>⛶</span> Kiosk';
-        }
-      });
-    }
-
     // Startup Initialization
     window.addEventListener('DOMContentLoaded', () => {
-      initDirectories();
-      setTheme(currentTheme);
+      initHorizonScale();
+      initStationRibbon();
       tuneToEpisode(0, false);
-      showToast('GyanSetu Tablet Console Ready • Curated by Simran Ailani');
+      showToast('GyanSetu Flagship Restomod Console Ready');
     });
 
   </script>
