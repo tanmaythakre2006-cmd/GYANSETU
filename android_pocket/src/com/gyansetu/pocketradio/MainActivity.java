@@ -3,6 +3,7 @@ package com.gyansetu.pocketradio;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Build;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
@@ -28,10 +29,13 @@ public class MainActivity extends Activity {
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         );
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        hideSystemUI();
 
         Window window = getWindow();
-        window.setStatusBarColor(Color.parseColor("#0b0d11"));
-        window.setNavigationBarColor(Color.parseColor("#0b0d11"));
+        window.setStatusBarColor(Color.parseColor("#000000"));
+        window.setNavigationBarColor(Color.parseColor("#000000"));
 
         setContentView(R.layout.activity_main);
 
@@ -43,7 +47,7 @@ public class MainActivity extends Activity {
         }
 
         webView = findViewById(R.id.webview);
-        webView.setBackgroundColor(Color.parseColor("#0b0d11"));
+        webView.setBackgroundColor(Color.parseColor("#000000"));
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -87,7 +91,29 @@ public class MainActivity extends Activity {
                 });
             }
         });
-        webView.loadUrl("file:///android_asset/index.html");
+
+        // Launch directly into Flagship Tabletop Radio Console (pocket.html)
+        webView.loadUrl("file:///android_asset/pocket.html");
+    }
+
+    private void hideSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
     }
 
     @Override

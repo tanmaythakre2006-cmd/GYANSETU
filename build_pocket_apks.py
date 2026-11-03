@@ -121,11 +121,17 @@ def main():
         except Exception:
             pass
 
-    # Build Full Offline Vault (with all 13 episodes)
-    build_variant("GyanSetu-PocketRadio", include_audio=True)
+    # Build Full Flagship Tablet Appliance (with all 13 episodes)
+    build_variant("GyanSetu-TabletConsole", include_audio=True)
+    shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole.apk"), os.path.join(out_dir, "GyanSetu-PocketRadio.apk"))
+    if os.path.exists(os.path.join(out_dir, "GyanSetu-TabletConsole.apk.idsig")):
+        shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole.apk.idsig"), os.path.join(out_dir, "GyanSetu-PocketRadio.apk.idsig"))
 
-    # Build Ultra-Lite Mesh Shell (with zero pre-baked audio)
-    build_variant("GyanSetu-PocketRadio-Lite", include_audio=False)
+    # Build Ultra-Lite Mesh Shell
+    build_variant("GyanSetu-TabletConsole-Lite", include_audio=False)
+    shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole-Lite.apk"), os.path.join(out_dir, "GyanSetu-PocketRadio-Lite.apk"))
+    if os.path.exists(os.path.join(out_dir, "GyanSetu-TabletConsole-Lite.apk.idsig")):
+        shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole-Lite.apk.idsig"), os.path.join(out_dir, "GyanSetu-PocketRadio-Lite.apk.idsig"))
 
 if __name__ == "__main__":
     main()

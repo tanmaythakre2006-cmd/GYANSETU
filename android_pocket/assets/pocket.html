@@ -1295,1077 +1295,1277 @@
     audio {
       display: none;
     }
+  </style>
+<style>
+
+/* ==========================================================================
+   GYANSETU MASTERPIECE TABLETOP RADIO CONSOLE (LENOVO TAB M8 1280x800 NATIVE)
+   Flagship Tablet Appliance Design - Curated by Simran Ailani
+   ========================================================================== */
+
+:root {
+  --font-display: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* THEME 1: 1978 VINTAGE TEAKWOOD CABINET (Classical Purist Hardware) */
+[data-theme="vintage-1978"] {
+  --cabinet-bg: linear-gradient(145deg, #1f140e 0%, #2e1c12 40%, #1a0f09 100%);
+  --cabinet-border: 10px solid #140b06;
+  --cabinet-bevel: inset 0 0 0 2px #5a381e, inset 0 0 25px rgba(0,0,0,0.9), 0 15px 40px rgba(0,0,0,0.85);
+  --faceplate-bg: linear-gradient(180deg, #1b120c 0%, #26170d 100%);
+  --faceplate-border: 1px solid #4a2d18;
   
-    /* ==========================================================================
-       TABLETOP LANDSCAPE CONSOLE (LENOVO TB-8505X 1280x800 NATIVE)
-       Dual-Theme Architecture: 1978 Royal Teak vs. GyanSetu Carvaan Neo-Edition
-       ========================================================================== */
+  --accent-metal: #d4af37;
+  --accent-metal-border: #8c6d1f;
+  --accent-glow: #ffaa11;
+  
+  --speaker-grille: repeating-linear-gradient(45deg, #2b1f15 0px, #2b1f15 2px, #18110b 2px, #18110b 5px),
+                    repeating-linear-gradient(-45deg, #3d2c1e 0px, #3d2c1e 2px, #150f09 2px, #150f09 5px);
+  --speaker-border: 2px solid #5a3c1e;
+  --badge-bg: linear-gradient(135deg, #e6ca65 0%, #a88118 50%, #d4af37 100%);
+  --badge-text: #1b1208;
+  
+  --vu-face: #fdf8e6;
+  --vu-text: #1a160f;
+  --vu-needle: #c5221f;
+  --vu-border: 2px solid #54391e;
+  
+  --dial-glass-bg: radial-gradient(ellipse at center, #26170d 0%, #0d0804 100%);
+  --dial-glass-border: 1px solid #6b471f;
+  --dial-text: #ffbe3b;
+  
+  --screen-bg: radial-gradient(circle at center, #1c1308 0%, #0c0803 100%);
+  --screen-border: 2px solid #6b471f;
+  --screen-text: #ffbe3b;
+  --screen-sub: #b37d1e;
+  --spec-bar-bg: #ffaa11;
+  --screen-shadow: inset 0 0 16px rgba(0,0,0,0.95), 0 0 8px rgba(255, 170, 17, 0.2);
+  
+  --dir-bg: #0d0905;
+  --dir-border: 1px solid #422a14;
+  --dir-item-hover: rgba(212, 175, 55, 0.15);
+  --dir-item-active: linear-gradient(90deg, #d4af37 0%, #916f1a 100%);
+  --dir-item-active-text: #000000;
+  
+  --piano-key-bg: linear-gradient(180deg, #e2cf9f 0%, #c4a96b 50%, #876d33 100%);
+  --piano-key-border: 1px solid #574116;
+  --piano-key-text: #181105;
+  --piano-key-shadow: 0 4px 6px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.4);
+  --piano-key-active-bg: linear-gradient(180deg, #ffd700 0%, #d4af37 100%);
+}
 
-    /* Theme 1: 1978 Vintage Teakwood Cabinet (Default) */
-    [data-theme="vintage-1978"] {
-      --chassis-bg: radial-gradient(circle at 50% 15%, rgba(255, 170, 17, 0.08), transparent 60%), linear-gradient(145deg, #34200f 0%, #1c1006 45%, #2a180b 100%);
-      --chassis-border: 3px solid #5a3818;
-      --chassis-shadow: 0 35px 80px rgba(0, 0, 0, 0.95), inset 0 2px 3px rgba(255, 200, 120, 0.25), inset 0 -3px 8px rgba(0, 0, 0, 0.9);
-      --accent-metal: #d4af37;
-      --accent-glow: #ffaa11;
-      --dial-glass: radial-gradient(ellipse at 50% 50%, rgba(255, 170, 17, 0.22), transparent 75%), #1c1408;
-      --dial-border: 2px solid #734e1c;
-      --needle-color: #ff5500;
-      --needle-glow: 0 0 12px #ff5500, 0 0 20px #ff3300;
-      --screen-bg: #161106;
-      --screen-text: #ffaa11;
-      --screen-border: 2px solid #6b4d1b;
-      --screen-shadow: inset 0 0 25px rgba(255, 157, 0, 0.25);
-      --vu-face: linear-gradient(180deg, #f7f1e1 0%, #e8dcbe 100%);
-      --vu-text: #2a1c0d;
-      --vu-needle: #111111;
-      --vu-glow: inset 0 0 16px rgba(255, 170, 17, 0.4), 0 3px 8px rgba(0,0,0,0.6);
-      --grille-bg: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.12), transparent 70%), repeating-linear-gradient(45deg, #2a1f14 0, #2a1f14 3px, #18110a 3px, #18110a 6px);
-      --grille-border: 2px solid #543919;
-      --jog-face: conic-gradient(from 0deg, #aa820a, #e6ca65, #7a5800, #d4af37, #aa820a);
-      --jog-cap: radial-gradient(circle, #2b1f14 0%, #150f08 100%);
-      --jog-halo: 0 0 16px rgba(255, 170, 17, 0.6);
-      --key-bg: linear-gradient(145deg, #3d2817, #1f140a);
-      --key-border: 1px solid #734c26;
-      --key-text: #ffca66;
-      --badge-metal: linear-gradient(135deg, #ffe082 0%, #d4af37 50%, #8c6d12 100%);
-      --magic-eye: #10b981;
-    }
+/* THEME 2: GYANSETU CARVAAN NEO (PANORAMIC OLED & CYBER COCKPIT) */
+/* "Version just has more screen!" - Left panel turns into 3D Spectrogram display */
+[data-theme="carvaan-neo"] {
+  --cabinet-bg: linear-gradient(135deg, #0b1120 0%, #0f172a 50%, #030712 100%);
+  --cabinet-border: 10px solid #1e293b;
+  --cabinet-bevel: inset 0 0 0 2px #0284c7, inset 0 0 25px rgba(2, 132, 199, 0.25), 0 15px 40px rgba(0,0,0,0.9);
+  --faceplate-bg: linear-gradient(180deg, #090e17 0%, #04070d 100%);
+  --faceplate-border: 1px solid rgba(56, 189, 248, 0.3);
+  
+  --accent-metal: #38bdf8;
+  --accent-metal-border: #0284c7;
+  --accent-glow: #00f0ff;
+  
+  --speaker-grille: #030712;
+  --speaker-border: 2px solid #0284c7;
+  --badge-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  --badge-text: #ffffff;
+  
+  --vu-face: #030712;
+  --vu-text: #38bdf8;
+  --vu-needle: #00f0ff;
+  --vu-border: 2px solid #0284c7;
+  
+  --dial-glass-bg: radial-gradient(ellipse at center, #0b1528 0%, #020610 100%);
+  --dial-glass-border: 1px solid #0284c7;
+  --dial-text: #38bdf8;
+  
+  --screen-bg: radial-gradient(circle at center, #081324 0%, #020610 100%);
+  --screen-border: 2px solid #0284c7;
+  --screen-text: #38bdf8;
+  --screen-sub: #7dd3fc;
+  --spec-bar-bg: #00f0ff;
+  --screen-shadow: inset 0 0 20px rgba(2, 132, 199, 0.3), 0 0 14px rgba(2, 132, 199, 0.4);
+  
+  --dir-bg: #030712;
+  --dir-border: 1px solid rgba(56, 189, 248, 0.25);
+  --dir-item-hover: rgba(56, 189, 248, 0.15);
+  --dir-item-active: linear-gradient(90deg, #0284c7 0%, #0369a1 100%);
+  --dir-item-active-text: #ffffff;
+  
+  --piano-key-bg: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  --piano-key-border: 1px solid rgba(56, 189, 248, 0.35);
+  --piano-key-text: #e2e8f0;
+  --piano-key-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+  --piano-key-active-bg: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+}
 
-    /* Theme 2: GyanSetu Carvaan Neo-Edition (Modern-Vintage Fusion) */
-    [data-theme="carvaan-neo"] {
-      --chassis-bg: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 55%, #cbd5e1 100%);
-      --chassis-border: 3px solid #94a3b8;
-      --chassis-shadow: 0 35px 80px rgba(0, 0, 0, 0.6), inset 0 2px 2px rgba(255, 255, 255, 0.95), inset 0 -3px 8px rgba(100, 116, 139, 0.4);
-      --accent-metal: #0284c7;
-      --accent-glow: #06b6d4;
-      --dial-glass: radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.22), transparent 75%), #05131f;
-      --dial-border: 2px solid #0284c7;
-      --needle-color: #06b6d4;
-      --needle-glow: 0 0 12px #06b6d4, 0 0 22px #0891b2;
-      --screen-bg: #020c14;
-      --screen-text: #22d3ee;
-      --screen-border: 2px solid #0284c7;
-      --screen-shadow: inset 0 0 30px rgba(6, 182, 212, 0.35);
-      --vu-face: linear-gradient(180deg, #091e2f 0%, #030e18 100%);
-      --vu-text: #38bdf8;
-      --vu-needle: #38bdf8;
-      --vu-glow: inset 0 0 18px rgba(6, 182, 212, 0.4), 0 3px 8px rgba(0,0,0,0.6);
-      --grille-bg: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.12), transparent 70%), repeating-radial-gradient(circle, #334155 0, #334155 1.5px, #0f172a 1.5px, #0f172a 4px);
-      --grille-border: 2px solid #94a3b8;
-      --jog-face: conic-gradient(from 0deg, #94a3b8, #ffffff, #64748b, #f1f5f9, #94a3b8);
-      --jog-cap: radial-gradient(circle, #0f172a 0%, #020617 100%);
-      --jog-halo: 0 0 20px rgba(6, 182, 212, 0.9), inset 0 0 10px rgba(6, 182, 212, 0.6);
-      --key-bg: linear-gradient(145deg, #1e293b, #0f172a);
-      --key-border: 1px solid #38bdf8;
-      --key-text: #e2e8f0;
-      --badge-metal: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%);
-      --magic-eye: #06b6d4;
-    }
+/* ==========================================================================
+   GLOBAL CHASSIS (Strictly 1280x800 Native Tablet Edge-to-Edge)
+   ========================================================================== */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  background: #000000 !important;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: var(--font-ui);
+}
 
-    /* Carvaan Neo Theme Specific Overrides for Porcelain Luxury Contrast */
-    [data-theme="carvaan-neo"] .console-top-bar {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    }
-    [data-theme="carvaan-neo"] .hardware-switch-btn {
-      background: #ffffff;
-      color: #0f172a;
-      border: 1px solid #94a3b8;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1), inset 0 1px 1px #fff;
-    }
-    [data-theme="carvaan-neo"] .hardware-switch-btn:hover {
-      background: #f1f5f9;
-      color: #0284c7;
-      border-color: #0284c7;
-    }
-    [data-theme="carvaan-neo"] .master-theme-toggle-zone {
-      background: #e2e8f0;
-      border-color: #cbd5e1;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
-    }
-    [data-theme="carvaan-neo"] .theme-label {
-      color: #64748b;
-    }
-    [data-theme="carvaan-neo"] .theme-label.active {
-      color: #0f172a;
-      text-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
-    }
-    [data-theme="carvaan-neo"] .dual-vu-chassis {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-    [data-theme="carvaan-neo"] .vu-badge-label {
-      color: #475569;
-    }
-    [data-theme="carvaan-neo"] .wing-left-controls {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-    }
-    [data-theme="carvaan-neo"] .knob-label {
-      color: #475569;
-    }
-    [data-theme="carvaan-neo"] .master-jog-wheel-module {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-    [data-theme="carvaan-neo"] .jog-wheel-header {
-      color: #475569;
-    }
-    [data-theme="carvaan-neo"] .heavy-transport-deck {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-    }
-    [data-theme="carvaan-neo"] .hardware-spec-plaque {
-      background: #e2e8f0;
-      border-color: #cbd5e1;
-    }
-    [data-theme="carvaan-neo"] .plaque-row {
-      color: #334155;
-    }
-    [data-theme="carvaan-neo"] .plaque-sub {
-      color: #0369a1;
-      font-weight: 700;
-    }
-    [data-theme="carvaan-neo"] .jog-arrow-btn {
-      background: #e2e8f0;
-      border: 1px solid #cbd5e1;
-      color: #0f172a;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    [data-theme="carvaan-neo"] .jog-arrow-btn:hover {
-      background: #0284c7;
-      color: #ffffff;
-      border-color: #0284c7;
-    }
-    [data-theme="carvaan-neo"] .station-list-drawer {
-      background: #f8fafc !important;
-      border-color: #cbd5e1 !important;
-    }
-    [data-theme="carvaan-neo"] .station-row {
-      color: #334155 !important;
-    }
-    [data-theme="carvaan-neo"] .station-row.active {
-      background: #0284c7 !important;
-      color: #ffffff !important;
-    }
+.radio-chassis {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 1280px;
+  max-height: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: var(--cabinet-bg);
+  border: var(--cabinet-border);
+  box-shadow: var(--cabinet-bevel);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 14px 8px 14px;
+  overflow: hidden;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
 
-    /* Hardware Top Bar (Header Panel) */
-    .console-top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      width: 100%;
-    }
+/* Top Hardware Trim Bar */
+.console-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
 
-    .top-bar-left,
-    .top-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.top-bar-left, .top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .hardware-switch-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #cbd5e1;
-      text-decoration: none;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 2px 4px rgba(0,0,0,0.5);
-    }
-    .hardware-switch-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-    .btn-notch {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-metal);
-      box-shadow: 0 0 6px var(--accent-glow);
-    }
+.hardware-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--accent-metal-border);
+  color: var(--accent-metal);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 4px rgba(0,0,0,0.5);
+  transition: all 0.2s ease;
+}
 
-    .antenna-segment-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.64rem;
-      font-weight: 800;
-      color: #94a3b8;
-      letter-spacing: 0.4px;
-    }
-    .antenna-led {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-      display: inline-block;
-    }
+.hardware-switch-btn:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
 
-    /* Master Physical Knife-Switch (Theme Switcher) */
-    .master-theme-toggle-zone {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      padding: 4px 12px;
-      border-radius: 9999px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.7);
-    }
+.top-led-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #a8a29e;
+  letter-spacing: 0.6px;
+}
 
-    .theme-label {
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: #64748b;
-      transition: all 0.25s ease;
-      user-select: none;
-    }
-    .theme-label.active {
-      color: #ffffff;
-      text-shadow: 0 0 10px var(--accent-glow);
-    }
+.led-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.led-dot.green {
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
 
-    .physical-knife-switch {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: inline-flex;
-      align-items: center;
-    }
-    .switch-housing {
-      width: 46px;
-      height: 22px;
-      background: #0f172a;
-      border: 1px solid #475569;
-      border-radius: 11px;
-      position: relative;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
-      transition: all 0.25s ease;
-    }
-    .switch-lever {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #f8fafc 0%, #d4af37 80%, #aa820a 100%);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.8), 0 0 8px var(--accent-glow);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
-    }
-    .physical-knife-switch.carvaan-active .switch-lever {
-      transform: translateX(26px);
-      background: radial-gradient(circle, #ffffff 0%, #38bdf8 80%, #0284c7 100%);
-    }
+/* Master Theme Knife Switch */
+.theme-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* Kiosk Button */
-    .btn-kiosk {
-      background: linear-gradient(135deg, rgba(255, 170, 17, 0.15), rgba(16, 185, 129, 0.15));
-      border-color: var(--accent-metal);
-      color: #ffffff;
-      font-weight: 800;
-    }
+.master-theme-toggle-zone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--accent-metal-border);
+  cursor: pointer;
+}
 
-    /* ==========================================================================
-       PANORAMIC STAGE LAYOUT
-       ========================================================================== */
-    .console-panoramic-stage {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-    }
+.theme-label {
+  font-size: 0.70rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #78716c;
+  transition: color 0.2s ease;
+}
 
-    /* Mobile Screen Top Bar Optimization (360px - 600px) */
-    @media (max-width: 600px) {
-      .console-top-bar {
-        gap: 6px;
-      }
-      .top-bar-left .top-led-indicator {
-        display: none;
-      }
-      .master-theme-toggle-zone {
-        padding: 4px 8px;
-        gap: 6px;
-      }
-      .theme-label {
-        font-size: 0.60rem;
-      }
-      .theme-toggle-switch {
-        width: 32px;
-        height: 18px;
-      }
-      .theme-toggle-lever {
-        width: 14px;
-        height: 14px;
-      }
-      .btn-kiosk {
-        display: none !important;
-      }
-    }
+.theme-label.active {
+  color: var(--accent-metal);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
 
-    /* Media Query for Tablets & Desktop Landscape (Lenovo Tab M8 1280x800 Native) */
-    @media (min-width: 900px) and (orientation: landscape), (min-width: 1024px) {
-      body {
-        padding: 6px 10px !important;
-        height: 100vh !important;
-        max-height: 100vh !important;
-        overflow: hidden !important;
-        justify-content: center !important;
-      }
-      .pocket-top-nav {
-        display: none !important;
-      }
-      .radio-header {
-        display: none !important; /* Managed by console-top-bar in landscape */
-      }
-      .radio-container {
-        max-width: 1260px !important;
-        width: 100% !important;
-        height: 98vh !important;
-        max-height: 785px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        padding: 12px 18px !important;
-        background: var(--chassis-bg) !important;
-        border: var(--chassis-border) !important;
-        box-shadow: var(--chassis-shadow) !important;
-      }
-      .console-panoramic-stage {
-        display: grid !important;
-        grid-template-columns: 29% 42% 29% !important;
-        gap: 12px !important;
-        align-items: stretch !important;
-        flex: 1 1 auto !important;
-        min-height: 0 !important;
-      }
-      .speaker-grille {
-        display: none !important; /* Replaced by rich acoustic left module in landscape */
-      }
-      .control-chassis {
-        display: none !important; /* Replaced by heavy transport deck right module in landscape */
-      }
-      .station-list-drawer {
-        display: flex !important;
-        flex-direction: row !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-        max-height: 48px !important;
-        padding: 4px 8px !important;
-        gap: 8px !important;
-        background: rgba(0, 0, 0, 0.45) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 8px !important;
-        margin-top: 6px !important;
-        scrollbar-width: none !important;
-      }
-      .station-list-drawer::-webkit-scrollbar {
-        display: none !important;
-      }
-      .station-row {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-        padding: 4px 10px !important;
-        font-size: 0.65rem !important;
-        border-radius: 6px !important;
-        flex-shrink: 0 !important;
-      }
-    }
+.theme-toggle-switch {
+  width: 40px;
+  height: 18px;
+  background: #1c1917;
+  border-radius: 9999px;
+  border: 1px solid #44403c;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+}
 
-    /* --- MODULE 1: LEFT WING (ACOUSTIC & METERS) --- */
-    .console-wing.wing-left {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      height: 100%;
-    }
+.theme-toggle-lever {
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #fff, #bbb);
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    .acoustic-speaker-module {
-      flex: 1 1 48%;
-      min-height: 110px;
-      background: var(--grille-bg);
-      border: var(--grille-border);
-      border-radius: 12px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.5);
-      overflow: hidden;
-    }
+[data-theme="carvaan-neo"] .theme-toggle-lever {
+  transform: translateX(20px);
+  background: radial-gradient(circle, #38bdf8, #0284c7);
+  box-shadow: 0 0 6px #00f0ff;
+}
 
-    .speaker-metal-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 14px;
-      background: rgba(0, 0, 0, 0.78);
-      border: 1px solid var(--accent-metal);
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.25);
-      text-align: center;
-    }
-    .badge-emblem-icon {
-      font-size: 1.05rem;
-      font-weight: 900;
-      background: var(--badge-metal);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 1px;
-    }
-    .badge-brand-sub {
-      font-size: 0.58rem;
-      font-weight: 800;
-      color: #94a3b8;
-      letter-spacing: 0.6px;
-    }
-    .badge-curator {
-      font-size: 0.52rem;
-      font-weight: 600;
-      color: var(--accent-metal);
-      opacity: 0.9;
-    }
+/* ==========================================================================
+   PANORAMIC 3-COLUMN STAGE (1280x800 Native)
+   ========================================================================== */
+.console-panoramic-stage {
+  display: grid;
+  grid-template-columns: 29% 43% 28%;
+  gap: 12px;
+  flex: 1 1 auto;
+  margin: 6px 0;
+  min-height: 0;
+  overflow: hidden;
+}
 
-    /* Dual Real-Time Bouncing Needle VU Meters */
-    .dual-vu-chassis {
-      flex: 1 1 34%;
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);
-    }
-    .vu-glass-frame {
-      display: flex;
-      gap: 8px;
-      flex: 1 1 auto;
-    }
-    .vu-analog-meter {
-      flex: 1 1 50%;
-      background: var(--vu-face);
-      border-radius: 6px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 4px;
-      box-shadow: var(--vu-glow);
-      min-height: 56px;
-    }
-    .vu-meter-scale {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.52rem;
-      font-weight: 800;
-      color: var(--vu-text);
-      z-index: 2;
-    }
-    .vu-text-db.red {
-      color: #dc2626 !important;
-    }
-    .vu-needle-assembly {
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 48px;
-      display: flex;
-      justify-content: center;
-      z-index: 3;
-    }
-    .vu-physical-needle {
-      position: absolute;
-      bottom: 6px;
-      width: 1.8px;
-      height: 40px;
-      background: var(--vu-needle);
-      transform-origin: bottom center;
-      transform: rotate(-38deg);
-      transition: transform 0.08s cubic-bezier(0.1, 0.9, 0.2, 1);
-      box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-    .vu-pivot-cap {
-      position: absolute;
-      bottom: 2px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #1e293b;
-      border: 1px solid #475569;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.8);
-    }
-    .vu-channel-tag {
-      font-size: 0.50rem;
-      font-weight: 900;
-      color: var(--vu-text);
-      opacity: 0.7;
-      text-align: center;
-      z-index: 2;
-    }
-    .vu-label-bar {
-      text-align: center;
-      margin-top: 3px;
-    }
-    .vu-badge-label {
-      font-size: 0.50rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: #64748b;
-    }
+.console-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  overflow: hidden;
+}
 
-    /* Left Wing Knobs (Volume & Tone) */
-    .wing-left-controls {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 8px;
-      padding: 6px 4px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .rotary-control-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-    }
-    .knob-label {
-      font-size: 0.50rem;
-      font-weight: 800;
-      color: #94a3b8;
-      letter-spacing: 0.3px;
-    }
-    .rotary-knob-casing {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #334155 0%, #0f172a 100%);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--accent-metal);
-      cursor: pointer;
-    }
-    .rotary-knob {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #64748b, #cbd5e1, #475569, #f1f5f9, #64748b);
-      position: relative;
-      transform: rotate(45deg);
-      transition: transform 0.15s ease;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
-    }
-    .knob-indicator-dot {
-      position: absolute;
-      top: 3px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 3px;
-      height: 6px;
-      background: var(--accent-metal);
-      border-radius: 2px;
-    }
-    .knob-value-display {
-      font-size: 0.52rem;
-      font-weight: 800;
-      color: var(--accent-metal);
-    }
+/* ==========================================================================
+   COLUMN 1 (LEFT): DUAL ARCHITECTURE
+   - Vintage 1978: Cloth Speaker + Dual Analog VU Needle Meters + Rotary Knobs
+   - Carvaan Neo: High-Tech Cyber Spectrogram & Telemetry Touchscreen (MORE SCREEN!)
+   ========================================================================== */
+.col-speaker {
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  border: var(--speaker-border);
+  padding: 8px;
+  box-sizing: border-box;
+}
 
-    /* --- MODULE 2: CENTER STAGE (TUNER & KNOWLEDGE SCREEN) --- */
-    .console-wing.wing-center {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      height: 100%;
-    }
+/* 1. Vintage Cluster */
+.speaker-vintage-cluster {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
-    /* Analog Tuning Glass with Magic Eye Phosphor Tube */
-    .glass-tuner-chassis {
-      background: var(--dial-glass);
-      border: var(--dial-border);
-      border-radius: 12px;
-      padding: 6px 12px;
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.4);
-      position: relative;
-    }
-    .tuner-scale-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.56rem;
-      font-weight: 800;
-      color: var(--screen-text);
-      margin-bottom: 5px;
-      letter-spacing: 0.4px;
-    }
+[data-theme="carvaan-neo"] .speaker-vintage-cluster {
+  display: none !important;
+}
 
-    .magic-eye-tube-module {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-    .magic-eye-label {
-      font-size: 0.48rem;
-      font-weight: 800;
-      color: #94a3b8;
-    }
-    .magic-eye-glass {
-      width: 38px;
-      height: 8px;
-      background: #022c22;
-      border-radius: 4px;
-      border: 1px solid var(--magic-eye);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 4px #000;
-    }
-    .magic-eye-beam {
-      width: 26px;
-      height: 100%;
-      background: var(--magic-eye);
-      box-shadow: 0 0 8px var(--magic-eye);
-      transition: width 0.12s ease;
-    }
+.speaker-grille-chamber {
+  position: relative;
+  height: 180px;
+  background: var(--speaker-grille);
+  background-size: 8px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.6);
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 2px 6px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    /* Illuminated Knowledge Screen (LCD/VFD/OLED) */
-    .knowledge-screen-chassis {
-      background: var(--screen-bg);
-      border: var(--screen-border);
-      border-radius: 12px;
-      padding: 8px 12px;
-      box-shadow: var(--screen-shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1 1 auto;
-      min-height: 135px;
-    }
-    .screen-status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-    .status-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .screen-badge-channel {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid var(--accent-metal);
-      color: #ffffff;
-      font-size: 0.68rem;
-      font-weight: 900;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-    .screen-freq-readout {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--screen-text);
-      letter-spacing: 0.5px;
-    }
+.speaker-diaphragm-pulse {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+}
 
-    /* Real-Time 16-Band Spectrum Analyzer */
-    .screen-spectrum-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 2px;
-      height: 18px;
-      padding: 0 4px;
-    }
-    .spec-bar {
-      width: 3px;
-      height: 20%;
-      background: var(--accent-glow);
-      border-radius: 1px;
-      transition: height 0.08s ease;
-      box-shadow: 0 0 4px var(--accent-glow);
-    }
+.metallic-brand-plaque {
+  position: relative;
+  z-index: 2;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 2px solid #fff3c4;
+  border-radius: 6px;
+  padding: 8px 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.7);
+}
 
-    .screen-track-pill {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 9999px;
-      color: #ffffff;
-      font-size: 0.64rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-    }
-    .screen-track-pill.dub-active {
-      background: rgba(16, 185, 129, 0.25);
-      border-color: #10b981;
-      color: #a7f3d0;
-    }
+.badge-sub-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: block;
+  letter-spacing: 1px;
+}
 
-    /* Main Screen Copy */
-    .screen-main-content {
-      margin: 6px 0;
-    }
-    .screen-episode-title {
-      font-size: 1.12rem;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1.2;
-      margin-bottom: 3px;
-      text-shadow: 0 0 12px var(--accent-glow);
-    }
-    .screen-meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.62rem;
-      font-weight: 700;
-      color: #94a3b8;
-    }
-    .screen-meta-badge {
-      color: var(--screen-text);
-    }
-    .screen-curator-tag {
-      font-size: 0.54rem;
-      color: var(--accent-metal);
-      letter-spacing: 0.5px;
-    }
+.badge-main-text {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 2px 0;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
 
-    /* Live English Teleprompter Ticker */
-    .screen-ticker-strip {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      padding: 4px 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow: hidden;
-    }
-    .ticker-badge {
-      background: var(--accent-glow);
-      color: #000;
-      font-size: 0.52rem;
-      font-weight: 900;
-      padding: 2px 4px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    .ticker-marquee-wrapper {
-      overflow: hidden;
-      white-space: nowrap;
-      flex: 1 1 auto;
-    }
-    .ticker-text-content {
-      font-size: 0.66rem;
-      font-weight: 600;
-      color: #e2e8f0;
-      letter-spacing: 0.3px;
-    }
+.badge-lead-caption {
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  display: block;
+  opacity: 0.9;
+}
 
-    /* Category & Mood Quick-Presets (Carvaan Style) */
-    .console-mood-presets {
-      display: flex;
-      gap: 6px;
-      justify-content: space-between;
-    }
-    .mood-preset-key {
-      flex: 1 1 20%;
-      background: var(--key-bg);
-      border: var(--key-border);
-      border-radius: 6px;
-      padding: 6px 3px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.6);
-      transition: all 0.15s ease;
-    }
-    .mood-preset-key:hover {
-      border-color: var(--accent-metal);
-      transform: translateY(-1px);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.8), 0 0 8px var(--accent-glow);
-    }
-    .mood-preset-key.active {
-      background: var(--accent-glow) !important;
-      color: #000 !important;
-    }
-    .mood-preset-key.active .key-name,
-    .mood-preset-key.active .key-ch-tag {
-      color: #000 !important;
-    }
-    .key-icon { font-size: 0.72rem; }
-    .key-name { font-size: 0.52rem; font-weight: 900; color: var(--key-text); letter-spacing: 0.4px; }
-    .key-ch-tag { font-size: 0.46rem; font-weight: 700; color: #94a3b8; }
+.badge-curator-line {
+  font-size: 0.52rem;
+  font-weight: 700;
+  display: block;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+}
 
-    /* --- MODULE 3: RIGHT WING (CARVAAN ROTARY JOG-WHEEL & PIANO DECK) --- */
-    .console-wing.wing-right {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      height: 100%;
-    }
+/* Dual Analog VU Meters */
+.vu-meter-chambers-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 6px 0;
+}
 
-    /* Master Carvaan Rotary Wheel */
-    .master-jog-wheel-module {
-      flex: 1 1 54%;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
-    }
-    .jog-wheel-header {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      font-size: 0.54rem;
-      font-weight: 800;
-      color: #94a3b8;
-      letter-spacing: 0.4px;
-    }
-    .jog-step-indicator {
-      color: var(--accent-metal);
-    }
+.vu-meter-box {
+  background: var(--vu-face);
+  border: var(--vu-border);
+  border-radius: 6px;
+  padding: 6px 8px 4px 8px;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.6), 0 3px 6px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 95px;
+  box-sizing: border-box;
+}
 
-    .jog-wheel-assembly {
-      position: relative;
-      width: 100%;
-      height: 125px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin: 4px auto;
-    }
-    .jog-wheel-outer-ring {
-      width: 115px;
-      height: 115px;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .jog-wheel-halo {
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 2px solid var(--accent-glow);
-      box-shadow: var(--jog-halo);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .jog-wheel-face {
-      width: 108px;
-      height: 108px;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      background: var(--jog-face);
-      border: 3px solid #334155;
-      position: relative;
-      cursor: grab;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.05s ease-out;
-      user-select: none;
-    }
-    .jog-wheel-face:active {
-      cursor: grabbing;
-    }
-    .jog-dimple {
-      position: absolute;
-      top: 14px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #0f172a 0%, #334155 80%, #64748b 100%);
-      box-shadow: inset 0 2px 3px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.4);
-    }
-    .jog-index-notch {
-      position: absolute;
-      top: 3px;
-      width: 3px;
-      height: 7px;
-      background: #ef4444;
-      border-radius: 1px;
-      box-shadow: 0 0 6px #ef4444;
-    }
-    .jog-center-cap {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--jog-cap);
-      border: 1px solid var(--accent-metal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.8);
-      pointer-events: none;
-    }
-    .jog-cap-text {
-      font-size: 0.50rem;
-      font-weight: 900;
-      letter-spacing: 0.8px;
-    }
+.vu-dial-scale {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.52rem;
+  font-weight: 800;
+  color: var(--vu-text);
+  margin-bottom: 2px;
+}
 
-    .jog-arrow-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #ffffff;
-      font-size: 0.72rem;
-      font-weight: 800;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-      flex-shrink: 0;
-    }
-    .jog-arrow-btn:hover {
-      background: var(--accent-glow);
-      color: #000;
-      border-color: var(--accent-glow);
-    }
+.vu-tick-lbl.red { color: #dc2626; }
 
-    /* Heavy Mechanical Transport Deck (Piano-Keys) */
-    .heavy-transport-deck {
-      flex: 1 1 36%;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 6px;
-    }
-    .transport-keys-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-    }
-    .mechanical-key {
-      background: var(--key-bg);
-      border: var(--key-border);
-      border-radius: 6px;
-      padding: 5px 3px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.15);
-      transition: all 0.1s ease;
-    }
-    .mechanical-key:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.6);
-    }
-    .key-cap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      pointer-events: none;
-    }
-    .key-icon-sym {
-      font-size: 0.78rem;
-      color: #ffffff;
-    }
-    .key-title-txt {
-      font-size: 0.48rem;
-      font-weight: 800;
-      color: var(--key-text);
-      letter-spacing: 0.4px;
-    }
-    .mechanical-key.key-power:hover { border-color: #ef4444; }
-    .mechanical-key.key-play:hover { border-color: #10b981; }
-    .mechanical-key.key-beam {
-      border-color: #f59e0b;
-      background: linear-gradient(145deg, rgba(245, 158, 11, 0.2), rgba(180, 83, 9, 0.25));
-    }
-    .mechanical-key.key-beam .key-icon-sym {
-      color: #fbbf24;
-    }
+.vu-needle-assembly {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
 
-    /* Plaque Spec Footer */
-    .hardware-spec-plaque {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      padding: 4px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .plaque-row {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.50rem;
-      font-weight: 800;
-      color: #94a3b8;
-    }
-    .plaque-sub {
-      font-size: 0.46rem;
-      color: var(--accent-metal);
-      letter-spacing: 0.4px;
-    }
-    .plaque-led-dot.green {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 6px #10b981;
-    }
+.vu-physical-needle {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 52px;
+  background: var(--vu-needle);
+  transform-origin: bottom center;
+  transform: rotate(-35deg);
+  transition: transform 0.08s cubic-bezier(0.1, 0.9, 0.2, 1);
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.vu-needle-pivot {
+  position: absolute;
+  bottom: -4px;
+  width: 10px;
+  height: 10px;
+  background: #111;
+  border-radius: 50%;
+  border: 1px solid #777;
+}
+
+.vu-ch-label {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: var(--vu-text);
+  margin-top: 2px;
+  letter-spacing: 0.6px;
+}
+
+/* Rotary Knobs in Column 1 */
+.speaker-bottom-knobs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(0,0,0,0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 6px 4px;
+}
+
+.rotary-control-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.rotary-knob {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #666, #ccc, #333, #bbb, #666);
+  border: 2px solid #222;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.7);
+}
+
+.knob-cap {
+  position: absolute;
+  inset: 3px;
+  background: radial-gradient(circle, #555, #222);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.knob-notch {
+  width: 2px;
+  height: 8px;
+  background: #fff;
+  border-radius: 1px;
+  position: absolute;
+  top: 1px;
+}
+
+.knob-label {
+  font-size: 0.50rem;
+  font-weight: 800;
+  color: #a8a29e;
+  letter-spacing: 0.4px;
+}
+
+.knob-val-readout {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: var(--accent-metal);
+}
+
+/* ==========================================================================
+   2. CARVAAN NEO OLED LEFT SCREEN ("VERSION JUST HAS MORE SCREEN!")
+   ========================================================================== */
+.modern-oled-left-screen {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background: radial-gradient(circle at center, #071526 0%, #020610 100%);
+  border: 2px solid #0284c7;
+  border-radius: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 25px rgba(2, 132, 199, 0.35), 0 0 16px rgba(2, 132, 199, 0.4);
+}
+
+[data-theme="carvaan-neo"] .modern-oled-left-screen {
+  display: flex !important;
+}
+
+.modern-screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+  padding-bottom: 4px;
+}
+
+.cyber-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 0.8px;
+}
+
+.cyber-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #00f0ff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: cyberPulse 1.2s infinite alternate;
+}
+
+@keyframes cyberPulse {
+  from { opacity: 0.4; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+.cyber-curator-tag {
+  font-size: 0.52rem;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.6px;
+}
+
+/* 3D Holographic Spectrogram Canvas */
+.modern-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 155px;
+  background: #020610;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#neo-spectrogram-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(2, 132, 199, 0.05) 0px, rgba(2, 132, 199, 0.05) 1px, transparent 1px, transparent 10px),
+              repeating-linear-gradient(90deg, rgba(2, 132, 199, 0.05) 0px, rgba(2, 132, 199, 0.05) 1px, transparent 1px, transparent 10px);
+  pointer-events: none;
+}
+
+/* Modern Telemetry Box */
+.modern-telemetry-box {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.telem-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.48rem;
+  font-weight: 700;
+}
+
+.telem-key { color: #64748b; letter-spacing: 0.4px; }
+.telem-val { color: #38bdf8; font-family: var(--font-mono); }
+.telem-val.highlight { color: #00f0ff; font-weight: 800; }
+.telem-val.author { color: #fde047; }
+
+/* Modern Capacitive Touch Faders */
+.modern-touch-faders {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 6px 8px;
+  margin-top: 4px;
+}
+
+.cyber-fader-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.fader-label {
+  font-size: 0.48rem;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.6px;
+}
+
+.cyber-slider-track {
+  width: 8px;
+  height: 48px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cyber-slider-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, #00f0ff 0%, #0284c7 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+.fader-val {
+  font-size: 0.46rem;
+  font-weight: 800;
+  color: #38bdf8;
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   COLUMN 2 (CENTER): DUAL SCREENS & FM SCALE
+   ========================================================================== */
+.col-screens {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+/* Analog FM Dial Frequency Scale */
+.analog-frequency-scale {
+  background: var(--dial-glass-bg);
+  border: var(--dial-glass-border);
+  border-radius: 6px;
+  height: 30px;
+  padding: 2px 10px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dial-markings-track {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.freq-tick {
+  font-size: 0.60rem;
+  font-weight: 800;
+  color: var(--dial-text);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+.physical-dial-needle {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 3px;
+  background: #dc2626;
+  left: 88%;
+  box-shadow: 0 0 8px #dc2626;
+  transition: left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="carvaan-neo"] .physical-dial-needle {
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+}
+
+/* Main LCD Display */
+.main-lcd-display {
+  background: var(--screen-bg);
+  border: var(--screen-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: var(--screen-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  min-height: 180px;
+}
+
+.lcd-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 4px;
+}
+
+.lcd-station-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.lcd-badge-tag {
+  background: var(--accent-metal);
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.lcd-freq-num {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--screen-text);
+  font-family: var(--font-mono);
+}
+
+.lcd-spectrum-visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.spec-bar {
+  width: 3px;
+  height: 4px;
+  background: var(--spec-bar-bg);
+  border-radius: 1px;
+}
+
+.lcd-dub-btn {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--accent-metal-border);
+  color: var(--accent-metal);
+  font-size: 0.60rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dub-dot {
+  width: 5px;
+  height: 5px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.lcd-body-content {
+  margin: 6px 0;
+}
+
+.lcd-title-row {
+  margin-bottom: 4px;
+}
+
+.lcd-track-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--screen-text);
+  line-height: 1.2;
+}
+
+.lcd-curator-name {
+  font-size: 0.60rem;
+  font-weight: 800;
+  color: var(--screen-sub);
+  letter-spacing: 0.8px;
+  display: block;
+  margin-top: 2px;
+}
+
+.lcd-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--screen-sub);
+  margin-bottom: 8px;
+}
+
+.lcd-progress-track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lcd-time-txt {
+  font-size: 0.60rem;
+  font-weight: 800;
+  color: var(--screen-text);
+  font-family: var(--font-mono);
+}
+
+.lcd-progress-bar-bg {
+  flex: 1 1 auto;
+  height: 6px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.lcd-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent-metal);
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.lcd-progress-scrubber-head {
+  position: absolute;
+  top: -4px;
+  left: 0%;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 2px solid var(--accent-metal);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.lcd-teleprompter-strip {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.tp-badge {
+  background: var(--accent-metal);
+  color: #000;
+  font-size: 0.50rem;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.tp-marquee-mask {
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1 1 auto;
+}
+
+.tp-text {
+  font-size: 0.56rem;
+  color: var(--screen-text);
+  font-family: var(--font-mono);
+}
+
+/* Secondary Screen: Digital Directory */
+.directory-screen-chassis {
+  background: var(--dir-bg);
+  border: var(--dir-border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+  flex-shrink: 0;
+}
+
+.dir-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+
+.dir-title {
+  font-size: 0.56rem;
+  font-weight: 800;
+  color: var(--screen-sub);
+  letter-spacing: 0.6px;
+}
+
+.dir-count-pill {
+  font-size: 0.50rem;
+  font-weight: 800;
+  color: var(--screen-text);
+  font-family: var(--font-mono);
+}
+
+.dir-episodes-scroll-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.station-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.56rem;
+  color: #a8a29e;
+  font-family: var(--font-mono);
+}
+
+.station-item:hover {
+  background: var(--dir-item-hover);
+  color: #fff;
+}
+
+.station-item.active {
+  background: var(--dir-item-active);
+  color: var(--dir-item-active-text);
+  font-weight: 800;
+}
+
+/* Category Mood Presets */
+.mood-presets-deck {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.mood-preset-key {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--accent-metal-border);
+  border-radius: 5px;
+  color: #d6d3d1;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  transition: all 0.2s ease;
+}
+
+.mood-preset-key.active, .mood-preset-key:hover {
+  background: var(--accent-metal);
+  color: #000;
+  font-weight: 800;
+}
+
+.mood-icon { font-size: 0.65rem; }
+.mood-title { font-size: 0.50rem; font-weight: 800; letter-spacing: 0.4px; }
+.mood-freq { font-size: 0.44rem; font-family: var(--font-mono); opacity: 0.8; }
+
+/* ==========================================================================
+   COLUMN 3 (RIGHT): ARTWORK & DUAL DIAL HUB
+   ========================================================================== */
+.col-artwork-dials {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+/* Framed Album Artwork */
+.album-artwork-frame-box {
+  background: #000;
+  border: 4px solid var(--accent-metal-border);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 185px;
+  position: relative;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.8), inset 0 0 10px rgba(0,0,0,0.7);
+  flex-shrink: 0;
+}
+
+.artwork-outer-bezel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.current-album-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.artwork-glass-reflection {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.artwork-overlay-pill {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  border-radius: 4px;
+  padding: 2px 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.50rem;
+  font-weight: 800;
+  color: var(--accent-metal);
+}
+
+/* Dual Rotary Dials Hub */
+.dual-rotary-dials-hub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 8px;
+  flex: 1 1 auto;
+}
+
+.rotary-station-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.jog-wheel-outer-ring, .secondary-scroll-knob-outer {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #d4af37, #8c6d1f, #d4af37, #5c4410, #d4af37);
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.3);
+  position: relative;
+  cursor: grab;
+}
+
+[data-theme="carvaan-neo"] .jog-wheel-outer-ring,
+[data-theme="carvaan-neo"] .secondary-scroll-knob-outer {
+  background: conic-gradient(from 0deg, #38bdf8, #0284c7, #38bdf8, #0369a1, #38bdf8);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
+.jog-wheel-face, .secondary-knob-face {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #2b1f15, #120b06);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.05s linear;
+}
+
+[data-theme="carvaan-neo"] .jog-wheel-face,
+[data-theme="carvaan-neo"] .secondary-knob-face {
+  background: radial-gradient(circle, #0f172a, #020610);
+}
+
+.jog-dimple {
+  position: absolute;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #000, #555);
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
+}
+
+.jog-center-cap, .secondary-center-cap {
+  font-size: 0.52rem;
+  font-weight: 900;
+  color: var(--accent-metal);
+  letter-spacing: 0.5px;
+}
+
+.dial-caption-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.dial-title-label {
+  font-size: 0.50rem;
+  font-weight: 800;
+  color: #a8a29e;
+  letter-spacing: 0.5px;
+}
+
+.dial-nudge-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.dial-nudge-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--accent-metal-border);
+  color: var(--accent-metal);
+  font-size: 0.54rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hardware Spec Plaque */
+.hardware-spec-plaque {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 3px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.plaque-row {
+  font-size: 0.46rem;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.4px;
+}
+
+.plaque-sub {
+  font-size: 0.42rem;
+  font-weight: 700;
+  color: var(--accent-metal);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BOTTOM DECK PIANO KEYS
+   ========================================================================== */
+.console-bottom-deck {
+  height: 48px;
+  border-top: 2px solid var(--accent-metal-border);
+  padding-top: 4px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.piano-transport-keys-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  height: 100%;
+}
+
+.mechanical-piano-key {
+  background: var(--piano-key-bg);
+  border: var(--piano-key-border);
+  border-radius: 4px;
+  color: var(--piano-key-text);
+  box-shadow: var(--piano-key-shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease, background 0.15s ease;
+  outline: none;
+}
+
+.mechanical-piano-key:active, .mechanical-piano-key.depressed {
+  transform: translateY(3px);
+  background: var(--piano-key-active-bg);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+}
+
+.piano-cap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.piano-icon { font-size: 0.70rem; }
+.piano-txt { font-size: 0.48rem; font-weight: 900; letter-spacing: 0.5px; }
+
+/* Hide legacy web navigations */
+.pocket-top-nav, .antenna-mount {
+  display: none !important;
+}
+
 
 </style>
 </head>
@@ -2389,370 +2589,430 @@
   </div>
 
   <!-- Pocket Transistor Radio Chassis -->
-  <main class="radio-container" id="radio-chassis" data-theme="vintage-1978">
-    <!-- Corner Screws -->
-    <div class="screw tl"></div>
-    <div class="screw tr"></div>
-    <div class="screw bl"></div>
-    <div class="screw br"></div>
+  
+<div class="radio-chassis" id="radio-chassis" data-theme="vintage-1978">
+  <!-- Top Hardware Accent Trim -->
+  <header class="console-top-bar">
+    <div class="top-bar-left">
+      <a href="index.html" class="hardware-switch-btn btn-studio" title="Return to Global Studio">
+        <span>◄ STUDIO</span>
+      </a>
+      <span class="top-led-indicator">
+        <span class="led-dot green"></span> HI-GAIN 13-CH
+      </span>
+    </div>
 
-    <!-- Hardware Top Bar: Return Switch, Master Knife Toggle & Tabletop Kiosk Lock -->
-    <header class="console-top-bar">
-      <div class="top-bar-left">
-        <a href="index.html" class="hardware-switch-btn" title="Return to Liquid Studio Desktop">
-          <span class="btn-notch"></span>
-          <span>&#9664; STUDIO</span>
-        </a>
-        <div class="antenna-segment-indicator">
-          <span class="antenna-led"></span>
-          <span>HI-GAIN 13-CH</span>
+    <!-- Master Theme Toggle Knife-Switch -->
+    <div class="theme-switch-container">
+      <div class="master-theme-toggle-zone" id="master-theme-switch" role="button" tabindex="0" title="Toggle between 1978 Vintage Teakwood & GyanSetu Carvaan Neo">
+        <span class="theme-label active" id="label-vintage">📻 1978 VINTAGE</span>
+        <div class="theme-toggle-switch">
+          <div class="theme-toggle-lever" id="theme-lever"></div>
         </div>
-      </div>
-
-      <!-- Master Physical 2-Way Theme Knife-Switch -->
-      <div class="master-theme-toggle-zone">
-        <span class="theme-label vintage-label active" id="label-vintage">&#128251; 1978 VINTAGE</span>
-        <button type="button" id="master-theme-switch" class="physical-knife-switch" aria-label="Toggle Master Chassis Theme (1978 Vintage vs Carvaan Neo)">
-          <span class="switch-housing">
-            <span class="switch-lever"></span>
-          </span>
-        </button>
-        <span class="theme-label carvaan-label" id="label-carvaan">&#127897;&#65039; CARVAAN NEO</span>
-      </div>
-
-      <div class="top-bar-right">
-        <button type="button" id="btn-kiosk-fullscreen" class="hardware-switch-btn btn-kiosk" title="Lock Tabletop Kiosk Mode (Edge-to-Edge Fullscreen)">
-          <span class="btn-notch"></span>
-          <span id="kiosk-btn-text">&#9974; TABLETOP KIOSK</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Header Brand Plate (Mobile Portrait fallback) -->
-    <div class="radio-header">
-      <div class="brand-group">
-        <h1 class="brand-title">&#2332;&#2381;&#2334;&#2366;&#2344;&#2360;&#2375;&#2340;&#2369;</h1>
-        <span class="brand-subtitle">TRANSISTOR 13-CH</span>
-      </div>
-      <div class="pilot-lamp-group">
-        <div id="pilot-lamp" class="pilot-lamp on"></div>
-        <span class="pilot-label">POWER</span>
+        <span class="theme-label" id="label-carvaan">✨ CARVAAN NEO (OLED)</span>
       </div>
     </div>
 
-    <!-- 3-Module Panoramic Hardware Stage -->
-    <div class="console-panoramic-stage">
+    <div class="top-bar-right">
+      <button type="button" id="btn-kiosk-fullscreen" class="hardware-switch-btn btn-kiosk" title="Lock Tabletop Kiosk Mode (Edge-to-Edge Fullscreen)">
+        <span id="kiosk-btn-text">⛶ TABLETOP KIOSK</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main 3-Column Appliance Stage (1280x800 Native) -->
+  <main class="console-panoramic-stage">
+    
+    <!-- COLUMN 1 (LEFT): DUAL ARCHITECTURE -->
+    <section class="console-column col-speaker">
       
-      <!-- ==============================================
-           MODULE 1: LEFT WING - ACOUSTIC & ANALOG VU STAGE
-           ============================================== -->
-      <section class="console-wing wing-left">
-        <!-- Acoustic Speaker Grille -->
-        <div class="acoustic-speaker-module">
-          <!-- Centered 3D Metallic Badge -->
-          <div class="speaker-metal-badge">
-            <span class="badge-emblem-icon">&#2332;&#2381;&#2334;&#2366;&#2344;&#2360;&#2375;&#2340;&#2369; &bull; GYANSETU</span>
-            <span class="badge-brand-sub">STUDENT BROADCAST NETWORK</span>
-            <span class="badge-curator">Curated by Simran Ailani</span>
+      <!-- VINTAGE 1978 CLUSTER: Cloth Speaker + Dual Analog VU Meters + Rotary Knobs -->
+      <div class="speaker-vintage-cluster">
+        <div class="speaker-grille-chamber">
+          <div class="speaker-diaphragm-pulse" id="speaker-pulse"></div>
+          <div class="metallic-brand-plaque">
+            <span class="badge-sub-text">ज्ञानसेतु</span>
+            <h1 class="badge-main-text">GYANSETU</h1>
+            <span class="badge-lead-caption">STUDENT BROADCAST NETWORK</span>
+            <span class="badge-curator-line">Curated by Simran Ailani</span>
           </div>
         </div>
 
-        <!-- Dual Analog Needles VU Meter Box (Audio Reactive) -->
-        <div class="dual-vu-chassis">
-          <div class="vu-glass-frame">
-            <!-- Left Channel Meter -->
-            <div class="vu-analog-meter meter-left">
-              <div class="vu-meter-scale">
-                <span class="vu-text-db">-20</span>
-                <span class="vu-text-db">-10</span>
-                <span class="vu-text-db">-5</span>
-                <span class="vu-text-db">0</span>
-                <span class="vu-text-db red">+3</span>
-              </div>
-              <div class="vu-needle-assembly">
-                <div id="vu-needle-left" class="vu-physical-needle"></div>
-                <div class="vu-pivot-cap"></div>
-              </div>
-              <span class="vu-channel-tag">CH-L</span>
+        <div class="vu-meter-chambers-wrap">
+          <div class="vu-meter-box">
+            <div class="vu-dial-scale">
+              <span class="vu-tick-lbl left">-20</span>
+              <span class="vu-tick-lbl mid">-5</span>
+              <span class="vu-tick-lbl zero">0</span>
+              <span class="vu-tick-lbl red">+3</span>
             </div>
-
-            <!-- Right Channel Meter -->
-            <div class="vu-analog-meter meter-right">
-              <div class="vu-meter-scale">
-                <span class="vu-text-db">-20</span>
-                <span class="vu-text-db">-10</span>
-                <span class="vu-text-db">-5</span>
-                <span class="vu-text-db">0</span>
-                <span class="vu-text-db red">+3</span>
-              </div>
-              <div class="vu-needle-assembly">
-                <div id="vu-needle-right" class="vu-physical-needle"></div>
-                <div class="vu-pivot-cap"></div>
-              </div>
-              <span class="vu-channel-tag">CH-R</span>
+            <div class="vu-needle-assembly">
+              <div id="vu-needle-left" class="vu-physical-needle"></div>
+              <div class="vu-needle-pivot"></div>
             </div>
+            <span class="vu-ch-label">CHANNEL LEVEL (dB)</span>
           </div>
-          <div class="vu-label-bar">
-            <span class="vu-badge-label">DYNAMIC SOUND PRESSURE LEVEL (dB)</span>
+
+          <div class="vu-meter-box">
+            <div class="vu-dial-scale">
+              <span class="vu-tick-lbl left">-20</span>
+              <span class="vu-tick-lbl mid">-5</span>
+              <span class="vu-tick-lbl zero">0</span>
+              <span class="vu-tick-lbl red">+3</span>
+            </div>
+            <div class="vu-needle-assembly">
+              <div id="vu-needle-right" class="vu-physical-needle"></div>
+              <div class="vu-needle-pivot"></div>
+            </div>
+            <span class="vu-ch-label">SIGNAL STRENGTH (dB)</span>
           </div>
         </div>
 
-        <!-- Rotary Output Level (Volume) & Tone Controls -->
-        <div class="wing-left-controls">
-          <div class="rotary-control-group">
-            <div class="knob-label">OUTPUT LEVEL</div>
-            <div class="rotary-knob-casing" id="knob-volume-container" title="Click or scroll to adjust volume">
-              <div class="rotary-knob" id="knob-volume">
-                <div class="knob-indicator-dot"></div>
-              </div>
+        <div class="speaker-bottom-knobs">
+          <div class="rotary-control-unit" id="unit-vol" title="Output Volume (0 - 100%)">
+            <div class="rotary-knob knob-vol" id="knob-volume">
+              <div class="knob-cap"><div class="knob-notch"></div></div>
             </div>
-            <span class="knob-value-display" id="knob-volume-val">85%</span>
+            <span class="knob-label">OUTPUT VOL</span>
+            <span class="knob-val-readout" id="lbl-volume">85%</span>
           </div>
 
-          <div class="rotary-control-group">
-            <div class="knob-label">ACOUSTIC TONE</div>
-            <div class="rotary-knob-casing" id="knob-tone-container" title="Click to toggle Warm Tube / Hi-Fi Tone">
-              <div class="rotary-knob" id="knob-tone">
-                <div class="knob-indicator-dot"></div>
-              </div>
+          <div class="rotary-control-unit" id="unit-bass" title="BASS EQ Resonance">
+            <div class="rotary-knob knob-bass" id="knob-bass">
+              <div class="knob-cap"><div class="knob-notch"></div></div>
             </div>
-            <span class="knob-value-display" id="knob-tone-val">RICH</span>
+            <span class="knob-label">BASS EQ</span>
+            <span class="knob-val-readout" id="lbl-bass">+3 dB</span>
+          </div>
+
+          <div class="rotary-control-unit" id="unit-treble" title="TREBLE Acoustic Tone">
+            <div class="rotary-knob knob-tone" id="knob-treble">
+              <div class="knob-cap"><div class="knob-notch"></div></div>
+            </div>
+            <span class="knob-label">TREBLE TONE</span>
+            <span class="knob-val-readout" id="lbl-treble">WARM</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- ==============================================
-           MODULE 2: CENTER STAGE - THE TUNING & KNOWLEDGE ENGINE
-           ============================================== -->
-      <section class="console-wing wing-center">
-        <!-- 1. Analog Tuning Glass Scale & Magic Eye Tube -->
-        <div class="glass-tuner-chassis tuning-dial-panel">
-          <div class="tuner-scale-header dial-top-row">
-            <span>FM MEGACYCLES (88 - 108 MHz)</span>
-            <div class="magic-eye-tube-module" title="EM84 Magic Eye Vacuum Phosphor Tube">
-              <span class="magic-eye-label">TUNING LOCK</span>
-              <div class="magic-eye-glass">
-                <div class="magic-eye-beam" id="magic-eye-beam"></div>
-              </div>
-            </div>
-            <span>GLOBAL KNOWLEDGE SCALE</span>
+      <!-- CARVAAN NEO OLED LEFT SCREEN: MORE SCREEN! -->
+      <div class="modern-oled-left-screen" id="modern-left-screen">
+        <div class="modern-screen-header">
+          <div class="cyber-badge-tag">
+            <span class="cyber-pulse-dot"></span>
+            <span>QUANTUM SPECTROGRAM • HD DSP</span>
           </div>
+          <span class="cyber-curator-tag">SIMRAN AILANI</span>
+        </div>
+        
+        <!-- 3D Holographic Audio Spectrogram Visualizer Canvas -->
+        <div class="modern-canvas-container">
+          <canvas id="neo-spectrogram-canvas" width="280" height="155"></canvas>
+          <div class="canvas-grid-overlay"></div>
+        </div>
 
-          <!-- Sliding Needle Track -->
-          <div class="frequency-track" id="freq-track">
-            <div class="freq-ticks">
-              <div class="tick major" data-freq="88"></div>
-              <div class="tick"></div>
-              <div class="tick"></div>
-              <div class="tick major" data-freq="92"></div>
-              <div class="tick"></div>
-              <div class="tick"></div>
-              <div class="tick major" data-freq="96"></div>
-              <div class="tick"></div>
-              <div class="tick"></div>
-              <div class="tick major" data-freq="100"></div>
-              <div class="tick"></div>
-              <div class="tick"></div>
-              <div class="tick major" data-freq="104"></div>
-              <div class="tick"></div>
-              <div class="tick"></div>
-              <div class="tick major" data-freq="108"></div>
-            </div>
-            <div id="tuning-needle" class="tuning-needle" style="left: 92%;"></div>
+        <!-- Live Telemetry Matrix -->
+        <div class="modern-telemetry-box">
+          <div class="telem-row">
+            <span class="telem-key">SIGNAL CARRIER</span>
+            <span class="telem-val" id="telem-freq">108.00 MHz FM</span>
+          </div>
+          <div class="telem-row">
+            <span class="telem-key">AUDIO BITRATE</span>
+            <span class="telem-val highlight">320 KBPS / 48kHz LOSSLESS</span>
+          </div>
+          <div class="telem-row">
+            <span class="telem-key">P2P MESH VAULT</span>
+            <span class="telem-val">13 OFFLINE CHUNKS READY</span>
+          </div>
+          <div class="telem-row">
+            <span class="telem-key">STATION CURATOR</span>
+            <span class="telem-val author">SIMRAN AILANI</span>
           </div>
         </div>
 
-        <!-- 2. Illuminated Multi-Band Knowledge Screen (LCD/VFD/OLED) -->
-        <div class="knowledge-screen-chassis lcd-display">
-          <!-- Top Info Bar -->
-          <div class="screen-status-bar lcd-channel-row">
-            <div class="status-left">
-              <span class="screen-badge-channel lcd-channel-badge" id="lcd-channel">CH-13</span>
-              <span class="screen-freq-readout lcd-station-freq" id="lcd-freq">108.0 MHz FM</span>
+        <!-- Modern Capacitive Touch Equalizer Faders -->
+        <div class="modern-touch-faders">
+          <div class="cyber-fader-item" id="touch-fader-vol">
+            <span class="fader-label">GAIN</span>
+            <div class="cyber-slider-track">
+              <div class="cyber-slider-fill" id="fader-vol-fill" style="height: 85%;"></div>
             </div>
-            
-            <!-- Real-Time 16-Band Spectrum Equalizer Bars -->
-            <div class="screen-spectrum-bars" id="screen-spectrum">
-              <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
-              <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
-              <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
-              <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
-            </div>
-
-            <!-- Bilingual Track Dub Switcher -->
-            <button id="btn-pocket-track" class="screen-track-pill lcd-track-switch-btn" type="button" title="Audio Dub Switcher (Original / English Dub)">
-              <span class="track-led" id="pocket-track-led"></span>
-              <span id="pocket-track-label">ORG (MR)</span>
-            </button>
+            <span class="fader-val" id="fader-vol-val">85%</span>
           </div>
-
-          <!-- Main Episode Title -->
-          <div class="screen-main-content">
-            <h2 class="screen-episode-title lcd-title" id="lcd-title">&#2344;&#2366;&#2327;&#2346;&#2370;&#2352;&#2330;&#2366; &#2311;&#2340;&#2363;&#2361;&#2366;&#2360;</h2>
-            <div class="screen-meta-row lcd-meta-row">
-              <span id="lcd-meta" class="screen-meta-badge">HISTORY &bull; 9m 18s &bull; AIR-GAP READY</span>
-              <span class="screen-curator-tag">CURATED BY SIMRAN AILANI</span>
-              <!-- Mobile VU meter bar fallback -->
-              <div class="vu-meter-bar" id="vu-meter" style="display:none;">
-                <div class="vu-seg active"></div><div class="vu-seg active"></div><div class="vu-seg active"></div>
-                <div class="vu-seg active"></div><div class="vu-seg active"></div><div class="vu-seg red"></div>
-              </div>
+          <div class="cyber-fader-item" id="touch-fader-bass">
+            <span class="fader-label">BASS</span>
+            <div class="cyber-slider-track">
+              <div class="cyber-slider-fill" id="fader-bass-fill" style="height: 65%;"></div>
             </div>
+            <span class="fader-val" id="fader-bass-val">+3dB</span>
           </div>
-
-          <!-- Live English Teleprompter Ticker Strip -->
-          <div class="screen-ticker-strip lcd-transcript-ticker" id="lcd-transcript-ticker" title="Live Synced English Teleprompter">
-            <span class="ticker-badge lcd-transcript-tag">ENG LIVE</span>
-            <div class="ticker-marquee-wrapper">
-              <span id="lcd-transcript-text" class="ticker-text-content lcd-transcript-content">Namaskar! If one truly wishes to understand the history of a city...</span>
+          <div class="cyber-fader-item" id="touch-fader-treble">
+            <span class="fader-label">TONE</span>
+            <div class="cyber-slider-track">
+              <div class="cyber-slider-fill" id="fader-treble-fill" style="height: 75%;"></div>
             </div>
+            <span class="fader-val" id="fader-treble-val">WARM</span>
           </div>
         </div>
+      </div>
 
-        <!-- 3. Category & Mood Quick-Presets (Carvaan Style) -->
-        <div class="console-mood-presets">
-          <button type="button" class="mood-preset-key" data-target-ch="11" title="Cosmic Curiosity & Astronomy">
-            <span class="key-icon">&#127756;</span>
-            <span class="key-name">COSMOS</span>
-            <span class="key-ch-tag">105.0 MHz</span>
-          </button>
-          <button type="button" class="mood-preset-key" data-target-ch="13" title="Deep Heritage & Nagpur History">
-            <span class="key-icon">&#127963;&#65039;</span>
-            <span class="key-name">HISTORY</span>
-            <span class="key-ch-tag">108.0 MHz</span>
-          </button>
-          <button type="button" class="mood-preset-key" data-target-ch="9" title="Biochemistry & Consciousness">
-            <span class="key-icon">&#129516;</span>
-            <span class="key-name">MOLECULES</span>
-            <span class="key-ch-tag">101.8 MHz</span>
-          </button>
-          <button type="button" class="mood-preset-key" data-target-ch="12" title="Scientific Serendipity">
-            <span class="key-icon">&#128161;</span>
-            <span class="key-name">ORIGINS</span>
-            <span class="key-ch-tag">106.5 MHz</span>
-          </button>
-          <button type="button" class="mood-preset-key" data-target-ch="10" title="Historical Forensic Science">
-            <span class="key-icon">&#128220;</span>
-            <span class="key-name">MYSTERY</span>
-            <span class="key-ch-tag">103.5 MHz</span>
+    </section>
+
+    <!-- COLUMN 2 (CENTER): DUAL SCREENS & FREQUENCY SCALE -->
+    <section class="console-column col-screens">
+      
+      <!-- Analog Radio Dial Frequency Scale with Active Needle -->
+      <div class="analog-frequency-scale" id="analog-dial-scale" title="Radio Megacycles (88 - 108 MHz FM)">
+        <div class="dial-markings-track">
+          <span class="freq-tick">88</span>
+          <span class="freq-tick">92</span>
+          <span class="freq-tick">96</span>
+          <span class="freq-tick">100</span>
+          <span class="freq-tick">104</span>
+          <span class="freq-tick">108</span>
+          <div class="physical-dial-needle" id="tuning-needle"></div>
+        </div>
+      </div>
+
+      <!-- Screen 1: Primary Information Screen (LCD/VFD) -->
+      <div class="main-lcd-display" id="main-lcd">
+        <div class="lcd-header-bar">
+          <div class="lcd-station-badge">
+            <span class="lcd-badge-tag" id="lcd-channel">CH-13</span>
+            <span class="lcd-freq-num" id="lcd-freq">108.0 MHz FM</span>
+          </div>
+          <div class="lcd-spectrum-visualizer" id="screen-spectrum">
+            <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
+            <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
+            <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
+            <div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div><div class="spec-bar"></div>
+          </div>
+          <button id="btn-pocket-track" class="lcd-dub-btn" type="button" title="Toggle Bilingual Dub (Original / English Dub)">
+            <span class="dub-dot" id="pocket-track-led"></span>
+            <span id="pocket-track-label">ORG (MR)</span>
           </button>
         </div>
 
-        <!-- Scrubber Track -->
-        <div class="console-scrubber-module">
-          <div class="progress-bar-wrap" id="progress-wrap">
-            <div class="progress-fill" id="progress-fill"></div>
+        <div class="lcd-body-content">
+          <div class="lcd-title-row">
+            <h2 class="lcd-track-title" id="lcd-title">नागपूरचा इतिहास</h2>
+            <span class="lcd-curator-name">CURATOR: SIMRAN AILANI</span>
+          </div>
+
+          <div class="lcd-meta-row">
+            <span class="lcd-category-badge" id="lcd-meta">HISTORY • 9m 18s</span>
+            <span class="lcd-signal-lock" id="lcd-signal">SIGNAL: OPTIMAL 99.8%</span>
+          </div>
+
+          <div class="lcd-progress-track" id="lcd-progress-track">
+            <span class="lcd-time-txt" id="time-current">00:00</span>
+            <div class="lcd-progress-bar-bg" id="progress-container">
+              <div class="lcd-progress-fill" id="progress-bar"></div>
+              <div class="lcd-progress-scrubber-head" id="progress-head"></div>
+            </div>
+            <span class="lcd-time-txt" id="time-duration">09:18</span>
           </div>
         </div>
-      </section>
 
-      <!-- ==============================================
-           MODULE 3: RIGHT WING - MASTER ROTARY JOG-WHEEL & HEAVY TRANSPORT DECK
-           ============================================== -->
-      <section class="console-wing wing-right">
-        <!-- The Master Carvaan Rotary Jog-Wheel -->
-        <div class="master-jog-wheel-module">
-          <div class="jog-wheel-header">
-            <span class="jog-wheel-title">MANUAL TUNER FLYWHEEL</span>
-            <span class="jog-step-indicator" id="jog-step-indicator">13 BROADCASTS</span>
+        <div class="lcd-teleprompter-strip" id="lcd-transcript-ticker" title="Live Synced English Teleprompter">
+          <span class="tp-badge">ENG LIVE</span>
+          <div class="tp-marquee-mask">
+            <span id="lcd-transcript-text" class="tp-text">Namaskar! If one truly wishes to understand the history of a city...</span>
           </div>
+        </div>
+      </div>
 
-          <div class="jog-wheel-assembly" id="jog-wheel-assembly" title="Drag, scroll, or swipe to manually rotate and tune between stations">
-            <button type="button" id="jog-step-prev" class="jog-arrow-btn" title="Previous Station (Counter-Clockwise)">&#9664;</button>
-            <div class="jog-wheel-outer-ring">
-              <!-- Illuminated Ring Gauge -->
-              <div class="jog-wheel-halo" id="jog-wheel-halo"></div>
-              <!-- Rotating Wheel Face -->
-              <div class="jog-wheel-face" id="jog-wheel-face">
-                <div class="jog-dimple"></div>
-                <div class="jog-index-notch"></div>
-                <div class="jog-center-cap">
-                  <span class="jog-cap-text">TUNE</span>
-                </div>
+      <!-- Screen 2: Secondary Scrollable Episode Directory Screen -->
+      <div class="directory-screen-chassis" id="directory-screen">
+        <div class="dir-header-bar">
+          <span class="dir-title">📚 BROADCAST ARCHIVE DIRECTORY</span>
+          <span class="dir-count-pill" id="dir-count">13 EPISODES LOADED</span>
+        </div>
+        <div class="dir-episodes-scroll-list" id="station-list">
+        </div>
+      </div>
+
+      <!-- Mood Presets Deck -->
+      <div class="mood-presets-deck">
+        <button type="button" class="mood-preset-key active" data-mood="HISTORY" title="Tune History Stations">
+          <span class="mood-icon">🏛️</span>
+          <span class="mood-title">HISTORY</span>
+          <span class="mood-freq">108.0 MHz</span>
+        </button>
+        <button type="button" class="mood-preset-key" data-mood="COSMOS" title="Tune Cosmos Stations">
+          <span class="mood-icon">🌌</span>
+          <span class="mood-title">COSMOS</span>
+          <span class="mood-freq">106.0 MHz</span>
+        </button>
+        <button type="button" class="mood-preset-key" data-mood="MOLECULES" title="Tune Molecules Stations">
+          <span class="mood-icon">🧬</span>
+          <span class="mood-title">MOLECULES</span>
+          <span class="mood-freq">101.8 MHz</span>
+        </button>
+        <button type="button" class="mood-preset-key" data-mood="ORIGINS" title="Tune Origins Stations">
+          <span class="mood-icon">💡</span>
+          <span class="mood-title">ORIGINS</span>
+          <span class="mood-freq">108.6 MHz</span>
+        </button>
+        <button type="button" class="mood-preset-key" data-mood="MYSTERY" title="Tune Mystery Stations">
+          <span class="mood-icon">📜</span>
+          <span class="mood-title">MYSTERY</span>
+          <span class="mood-freq">103.6 MHz</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- COLUMN 3 (RIGHT): ARTWORK & DUAL DIAL HUB -->
+    <section class="console-column col-artwork-dials">
+      <!-- 1. Physical Framed Album Artwork Display -->
+      <div class="album-artwork-frame-box" id="album-art-box">
+        <div class="artwork-outer-bezel">
+          <img id="current-episode-art" src="assets/images/ep13-nagpurcha-itihas.jpg" alt="Current Episode Artwork" class="current-album-img" />
+          <div class="artwork-glass-reflection"></div>
+          <div class="artwork-overlay-pill">
+            <span id="artwork-channel-tag">CH-13</span>
+            <span id="artwork-curator-tag">SIMRAN AILANI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Dual Knurled Rotary Dials -->
+      <div class="dual-rotary-dials-hub">
+        <!-- Master Episode Tuner Flywheel -->
+        <div class="rotary-station-unit" title="Master Episode Tuner Flywheel">
+          <div class="jog-wheel-outer-ring" id="jog-wheel-assembly">
+            <div class="jog-wheel-halo" id="jog-wheel-halo"></div>
+            <div class="jog-wheel-face" id="jog-wheel-face">
+              <div class="jog-dimple"></div>
+              <div class="jog-index-notch"></div>
+              <div class="jog-center-cap">
+                <span class="jog-cap-text" id="jog-cap-txt">TUNER</span>
               </div>
             </div>
-            <button type="button" id="jog-step-next" class="jog-arrow-btn" title="Next Station (Clockwise)">&#9654;</button>
+          </div>
+          <div class="dial-caption-group">
+            <span class="dial-title-label">MASTER TUNER</span>
+            <div class="dial-nudge-buttons">
+              <button type="button" id="jog-step-prev" class="dial-nudge-btn" title="Previous Station">◀</button>
+              <button type="button" id="jog-step-next" class="dial-nudge-btn" title="Next Station">▶</button>
+            </div>
           </div>
         </div>
 
-        <!-- Heavy Mechanical Transport Push-Buttons -->
-        <div class="heavy-transport-deck">
-          <div class="transport-keys-grid">
-            <!-- Power Key -->
-            <button id="btn-power" class="mechanical-key key-power retro-btn btn-power" title="Power On / Off">
-              <div class="key-cap">
-                <span class="key-icon-sym">&#9211;</span>
-                <span class="key-title-txt">PWR</span>
+        <!-- Directory Scroll Knob -->
+        <div class="rotary-station-unit" title="Directory Scroll Knob">
+          <div class="secondary-scroll-knob-outer" id="dir-knob-assembly">
+            <div class="secondary-knob-halo" id="dir-knob-halo"></div>
+            <div class="secondary-knob-face" id="dir-knob-face">
+              <div class="secondary-knob-notch"></div>
+              <div class="secondary-center-cap">
+                <span class="dir-cap-text" id="dir-cap-txt">SCROLL</span>
               </div>
-            </button>
-
-            <!-- Prev Key -->
-            <button id="btn-prev" class="mechanical-key retro-btn" title="Previous Station">
-              <div class="key-cap">
-                <span class="key-icon-sym">&#9198;</span>
-                <span class="key-title-txt">PREV</span>
-              </div>
-            </button>
-
-            <!-- Play/Pause Key -->
-            <button id="btn-play" class="mechanical-key key-play retro-btn btn-play" title="Play / Pause">
-              <div class="key-cap">
-                <span class="key-icon-sym" id="play-icon">&#9654;</span>
-                <span class="key-title-txt" id="play-label">PLAY</span>
-              </div>
-            </button>
-
-            <!-- Next Key -->
-            <button id="btn-next" class="mechanical-key retro-btn" title="Next Station">
-              <div class="key-cap">
-                <span class="key-icon-sym">&#9197;</span>
-                <span class="key-title-txt">NEXT</span>
-              </div>
-            </button>
-
-            <!-- Scan Key -->
-            <button id="btn-scan" class="mechanical-key retro-btn" title="Frequency Auto-Seek">
-              <div class="key-cap">
-                <span class="key-icon-sym">&#128269;</span>
-                <span class="key-title-txt">SCAN</span>
-              </div>
-            </button>
-
-            <!-- Beam Key -->
-            <button id="btn-beam" class="mechanical-key key-beam retro-btn btn-beam" title="Classroom P2P Mesh Beamer & 20MB QR Fountain">
-              <div class="key-cap">
-                <span class="key-icon-sym">&#9889;</span>
-                <span class="key-title-txt">BEAM</span>
-              </div>
-            </button>
+            </div>
+          </div>
+          <div class="dial-caption-group">
+            <span class="dial-title-label">DIR SCROLL</span>
+            <div class="dial-nudge-buttons">
+              <button type="button" id="dir-scroll-up" class="dial-nudge-btn" title="Scroll Directory Up">▲</button>
+              <button type="button" id="dir-scroll-down" class="dial-nudge-btn" title="Scroll Directory Down">▼</button>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Chassis Hardware Spec Plaque -->
-        <div class="hardware-spec-plaque">
-          <div class="plaque-row">
-            <span class="plaque-led-dot green"></span>
-            <span id="footer-stats-label">13 BROADCASTS &bull; P2P MESH READY</span>
-          </div>
-          <div class="plaque-row">
-            <span id="vault-mode-label" class="plaque-sub">100% ZERO-DATA OFFLINE TABLETOP CONSOLE</span>
-          </div>
+      <!-- 3. Hardware Spec Plaque -->
+      <div class="hardware-spec-plaque">
+        <div class="plaque-row">
+          <span class="spec-led online"></span>
+          <span>13 BROADCASTS • P2P MESH READY</span>
         </div>
-      </section>
-    </div>
+        <span class="plaque-sub">100% ZERO-DATA OFFLINE TABLETOP CONSOLE</span>
+      </div>
+    </section>
 
-    <!-- Speaker Slats fallback for mobile portrait -->
-    <div class="speaker-grille">
-      <div class="slat"></div><div class="slat"></div><div class="slat"></div><div class="slat"></div>
-    </div>
-
-    <!-- Quick Station Switcher Drawer -->
-    <div class="station-list-drawer" id="station-list">
-      <!-- Generated via JS -->
-    </div>
   </main>
 
-  <!-- =========================================================================
+  <!-- Bottom Mechanical Piano Keys Deck -->
+  <footer class="console-bottom-deck">
+    <div class="piano-transport-keys-grid">
+      <button id="btn-power" class="mechanical-piano-key" type="button" title="Master Power">
+        <span class="piano-cap">
+          <span class="piano-icon">⏻</span>
+          <span class="piano-txt">PWR</span>
+        </span>
+      </button>
+
+      <button id="btn-prev" class="mechanical-piano-key" type="button" title="Previous Episode">
+        <span class="piano-cap">
+          <span class="piano-icon">⏮</span>
+          <span class="piano-txt">PREV</span>
+        </span>
+      </button>
+
+      <button id="btn-play" class="mechanical-piano-key" type="button" title="Play / Pause">
+        <span class="piano-cap">
+          <span class="piano-icon" id="piano-play-icon">▶</span>
+          <span class="piano-txt" id="piano-play-txt">PLAY</span>
+        </span>
+      </button>
+
+      <button id="btn-next" class="mechanical-piano-key" type="button" title="Next Episode">
+        <span class="piano-cap">
+          <span class="piano-icon">⏭</span>
+          <span class="piano-txt">NEXT</span>
+        </span>
+      </button>
+
+      <button id="btn-scan" class="mechanical-piano-key" type="button" title="Auto Scan FM Band">
+        <span class="piano-cap">
+          <span class="piano-icon">🔍</span>
+          <span class="piano-txt">SCAN</span>
+        </span>
+      </button>
+
+      <button id="btn-beam" class="mechanical-piano-key" type="button" title="Optical Mesh Beamer">
+        <span class="piano-cap">
+          <span class="piano-icon">⚡</span>
+          <span class="piano-txt">BEAM</span>
+        </span>
+      </button>
+
+      <button id="btn-dub" class="mechanical-piano-key" type="button" title="Toggle English/Hindi Dub">
+        <span class="piano-cap">
+          <span class="piano-icon">🌐</span>
+          <span class="piano-txt">DUB</span>
+        </span>
+      </button>
+
+      <button id="btn-mute" class="mechanical-piano-key" type="button" title="Mute Audio">
+        <span class="piano-cap">
+          <span class="piano-icon" id="mute-icon">🔈</span>
+          <span class="piano-txt" id="mute-label">MUTE</span>
+        </span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Complete Fallback Compatibility Nodes -->
+  <div id="vu-meter" style="display:none;"><div class="vu-seg"></div></div>
+  <div id="progress-wrap" style="display:none;"><div id="progress-fill"></div></div>
+  <div id="pilot-lamp" class="pilot-lamp on" style="display:none;"></div>
+  <div id="play-icon" style="display:none;"></div>
+  <div id="play-label" style="display:none;"></div>
+  <div id="pocket-retro-toast" style="display:none;"></div>
+  <div id="pocket-beam-modal" style="display:none;"></div>
+  <div id="beamer-modal" style="display:none;"></div>
+  <button id="prev-btn" style="display:none;"></button>
+  <button id="next-btn" style="display:none;"></button>
+  <button id="play-btn" style="display:none;"></button>
+  <button id="pocket-prev-btn" style="display:none;"></button>
+  <button id="pocket-next-btn" style="display:none;"></button>
+  <button id="pocket-play-pause-btn" style="display:none;"></button>
+</div>
+
+
+<!-- =========================================================================
        P2P CLASSROOM MESH BEAMER MODAL
        ========================================================================= -->
   <div id="mesh-modal" class="mesh-modal-overlay">
@@ -4127,330 +4387,330 @@
     // Initial setup
     tuneToEpisode(0, false);
   
-    // ==========================================================================
-    // TABLETOP LANDSCAPE CONSOLE ENGINES (Web Audio VU Meters, Theme Toggle, Jog-Wheel)
-    // ==========================================================================
 
-    // 1. Dual-Theme Toggle Engine (1978 Vintage vs. Carvaan Neo)
-    const masterThemeSwitch = document.getElementById('master-theme-switch');
-    const labelVintage = document.getElementById('label-vintage');
-    const labelCarvaan = document.getElementById('label-carvaan');
+// =========================================================================
+// MASTERPIECE HARDWARE CONSOLE INTERACTIVE ENGINE
+// Dual-Mode Architecture: 1978 Vintage Teakwood & Carvaan Neo Panoramic OLED
+// =========================================================================
 
-    function applyRadioTheme(themeName) {
-      const chassisEl = document.getElementById('radio-chassis');
-      if (chassisEl) chassisEl.setAttribute('data-theme', themeName);
-      localStorage.setItem('gyansetu_radio_theme', themeName);
+(function initMasterpieceConsole() {
+  const chassis = document.getElementById('radio-chassis');
+  const themeSwitch = document.getElementById('master-theme-switch');
+  const labelVintage = document.getElementById('label-vintage');
+  const labelCarvaan = document.getElementById('label-carvaan');
+
+  let currentTheme = localStorage.getItem('gyansetu_masterpiece_theme') || 'vintage-1978';
+
+  function setRadioTheme(themeName) {
+    currentTheme = themeName;
+    localStorage.setItem('gyansetu_masterpiece_theme', themeName);
+    if (chassis) chassis.setAttribute('data-theme', themeName);
+    
+    if (labelVintage && labelCarvaan) {
       if (themeName === 'carvaan-neo') {
-        if (masterThemeSwitch) masterThemeSwitch.classList.add('carvaan-active');
-        if (labelVintage) labelVintage.classList.remove('active');
-        if (labelCarvaan) labelCarvaan.classList.add('active');
-        playClickSound(500, 0.04);
+        labelVintage.classList.remove('active');
+        labelCarvaan.classList.add('active');
       } else {
-        if (masterThemeSwitch) masterThemeSwitch.classList.remove('carvaan-active');
-        if (labelVintage) labelVintage.classList.add('active');
-        if (labelCarvaan) labelCarvaan.classList.remove('active');
-        playClickSound(750, 0.03);
+        labelVintage.classList.add('active');
+        labelCarvaan.classList.remove('active');
       }
     }
+  }
 
-    if (masterThemeSwitch) {
-      masterThemeSwitch.addEventListener('click', (e) => {
-        e.preventDefault();
-        const chassisEl = document.getElementById('radio-chassis');
-        const cur = (chassisEl ? chassisEl.getAttribute('data-theme') : null) || 'vintage-1978';
-        applyRadioTheme(cur === 'vintage-1978' ? 'carvaan-neo' : 'vintage-1978');
-      });
-    }
+  // Set initial theme
+  setRadioTheme(currentTheme);
 
-    // Restore saved theme preference
-    const savedTheme = localStorage.getItem('gyansetu_radio_theme') || 'vintage-1978';
-    applyRadioTheme(savedTheme);
-
-    // 2. Tabletop Kiosk Fullscreen Lock
-    const btnKiosk = document.getElementById('btn-kiosk-fullscreen');
-    const kioskBtnText = document.getElementById('kiosk-btn-text');
-    if (btnKiosk) {
-      btnKiosk.addEventListener('click', () => {
-        playClickSound(1000);
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().then(() => {
-            if (kioskBtnText) kioskBtnText.textContent = '✕ EXIT KIOSK';
-          }).catch(() => {});
-        } else {
-          document.exitFullscreen().then(() => {
-            if (kioskBtnText) kioskBtnText.textContent = '⛶ TABLETOP KIOSK';
-          }).catch(() => {});
-        }
-      });
-      document.addEventListener('fullscreenchange', () => {
-        if (kioskBtnText) {
-          kioskBtnText.textContent = document.fullscreenElement ? '✕ EXIT KIOSK' : '⛶ TABLETOP KIOSK';
-        }
-      });
-    }
-
-    // 3. Web Audio API Real-Time VU Meters & Spectrum Visualizer
-    let analyserNode = null;
-    let audioSourceNode = null;
-    let timeDomainBuffer = null;
-    let freqDomainBuffer = null;
-    let vuAnimId = null;
-
-    function initWebAudioEngine() {
-      if (audioSourceNode) return;
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        analyserNode = audioCtx.createAnalyser();
-        analyserNode.fftSize = 64;
-        analyserNode.smoothingTimeConstant = 0.75;
-        
-        audioSourceNode = audioCtx.createMediaElementSource(audio);
-        audioSourceNode.connect(analyserNode);
-        analyserNode.connect(audioCtx.destination);
-        
-        timeDomainBuffer = new Uint8Array(analyserNode.frequencyBinCount);
-        freqDomainBuffer = new Uint8Array(analyserNode.frequencyBinCount);
-        startRealtimeVisualizerLoop();
-      } catch (err) {
-        console.warn('Web Audio Analyser fallback:', err);
-      }
-    }
-
-    function startRealtimeVisualizerLoop() {
-      const needleLeft = document.getElementById('vu-needle-left');
-      const needleRight = document.getElementById('vu-needle-right');
-      const spectrumEl = document.getElementById('screen-spectrum');
-      const magicEyeBeam = document.getElementById('magic-eye-beam');
-
-      function tick() {
-        vuAnimId = requestAnimationFrame(tick);
-        if (!isPlaying || !isPoweredOn) {
-          if (needleLeft) needleLeft.style.transform = 'rotate(-38deg)';
-          if (needleRight) needleRight.style.transform = 'rotate(-38deg)';
-          if (spectrumEl) {
-            spectrumEl.querySelectorAll('.spec-bar').forEach(b => b.style.height = '15%');
-          }
-          if (magicEyeBeam) magicEyeBeam.style.width = '10px';
-          return;
-        }
-
-        if (analyserNode && timeDomainBuffer && freqDomainBuffer) {
-          analyserNode.getByteTimeDomainData(timeDomainBuffer);
-          analyserNode.getByteFrequencyData(freqDomainBuffer);
-
-          let sumSquares = 0;
-          for (let i = 0; i < timeDomainBuffer.length; i++) {
-            const norm = (timeDomainBuffer[i] - 128) / 128;
-            sumSquares += norm * norm;
-          }
-          const rms = Math.sqrt(sumSquares / timeDomainBuffer.length);
-          const meterNorm = Math.min(1.0, rms * 3.0);
-
-          // Angle range: -38deg to +38deg
-          const angleL = -38 + meterNorm * 76 + (Math.random() * 2 - 1);
-          const angleR = -38 + Math.min(1.0, meterNorm * 1.05) * 76 + (Math.random() * 2 - 1);
-
-          if (needleLeft) needleLeft.style.transform = `rotate(${Math.max(-42, Math.min(42, angleL))}deg)`;
-          if (needleRight) needleRight.style.transform = `rotate(${Math.max(-42, Math.min(42, angleR))}deg)`;
-
-          // 16-band Spectrum bars
-          if (spectrumEl) {
-            const bars = spectrumEl.querySelectorAll('.spec-bar');
-            for (let i = 0; i < bars.length; i++) {
-              const val = freqDomainBuffer[i % freqDomainBuffer.length] / 255;
-              const h = Math.max(12, Math.min(100, Math.round(val * 100)));
-              bars[i].style.height = `${h}%`;
-            }
-          }
-
-          // Magic Eye Phosphor Beam width
-          if (magicEyeBeam) {
-            const w = 14 + Math.round(meterNorm * 24);
-            magicEyeBeam.style.width = `${w}px`;
-          }
-        }
-      }
-      tick();
-    }
-
-    // Attach Web Audio initializer on first user gesture
-    ['click', 'touchstart'].forEach(ev => {
-      document.addEventListener(ev, () => {
-        if (!audioSourceNode) initWebAudioEngine();
-        if (audioCtx && audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-      }, { once: true });
+  if (themeSwitch) {
+    themeSwitch.addEventListener('click', () => {
+      const next = currentTheme === 'vintage-1978' ? 'carvaan-neo' : 'vintage-1978';
+      setRadioTheme(next);
+      playClickSound(1200, 0.05);
     });
+  }
 
-    // 4. Carvaan Master Rotary Jog-Wheel Engine
-    const jogWheelFace = document.getElementById('jog-wheel-face');
-    const jogWheelAssembly = document.getElementById('jog-wheel-assembly');
-    const jogStepPrev = document.getElementById('jog-step-prev');
-    const jogStepNext = document.getElementById('jog-step-next');
-    let currentWheelDeg = 0;
-    let isJogDragging = false;
-    let jogStartAngle = 0;
-    let jogBaseDeg = 0;
-
-    function getCenterAngle(clientX, clientY) {
-      if (!jogWheelFace) return 0;
-      const r = jogWheelFace.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      return Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
-    }
-
-    if (jogWheelFace) {
-      jogWheelFace.addEventListener('mousedown', (e) => {
-        isJogDragging = true;
-        jogStartAngle = getCenterAngle(e.clientX, e.clientY);
-        jogBaseDeg = currentWheelDeg;
-        e.preventDefault();
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!isJogDragging) return;
-        const curA = getCenterAngle(e.clientX, e.clientY);
-        const diff = curA - jogStartAngle;
-        currentWheelDeg = jogBaseDeg + diff;
-        jogWheelFace.style.transform = `rotate(${currentWheelDeg}deg)`;
-      });
-
-      window.addEventListener('mouseup', () => {
-        if (isJogDragging) {
-          isJogDragging = false;
-        }
-      });
-
-      // Touch handlers for Lenovo tablet screen
-      jogWheelFace.addEventListener('touchstart', (e) => {
-        if (!e.touches[0]) return;
-        isJogDragging = true;
-        jogStartAngle = getCenterAngle(e.touches[0].clientX, e.touches[0].clientY);
-        jogBaseDeg = currentWheelDeg;
-      }, { passive: true });
-
-      window.addEventListener('touchmove', (e) => {
-        if (!isJogDragging || !e.touches[0]) return;
-        const curA = getCenterAngle(e.touches[0].clientX, e.touches[0].clientY);
-        const diff = curA - jogStartAngle;
-        currentWheelDeg = jogBaseDeg + diff;
-        jogWheelFace.style.transform = `rotate(${currentWheelDeg}deg)`;
-      }, { passive: true });
-
-      window.addEventListener('touchend', () => {
-        if (isJogDragging) isJogDragging = false;
-      });
-
-      // Wheel scroll
-      if (jogWheelAssembly) {
-        jogWheelAssembly.addEventListener('wheel', (e) => {
-          e.preventDefault();
-          if (e.deltaY > 0) {
-            rotateJogStep(1);
-          } else {
-            rotateJogStep(-1);
-          }
-        }, { passive: false });
-      }
-    }
-
-    function rotateJogStep(direction) {
-      currentWheelDeg += direction * (360 / 13);
-      if (jogWheelFace) jogWheelFace.style.transform = `rotate(${currentWheelDeg}deg)`;
-      playClickSound(950, 0.025);
-      if (direction > 0) {
-        tuneToEpisode(currentIndex + 1, true);
+  // Kiosk Fullscreen
+  const btnKiosk = document.getElementById('btn-kiosk-fullscreen');
+  const kioskBtnText = document.getElementById('kiosk-btn-text');
+  if (btnKiosk) {
+    btnKiosk.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+        if (kioskBtnText) kioskBtnText.textContent = '✖ EXIT KIOSK';
       } else {
-        tuneToEpisode(currentIndex - 1, true);
+        document.exitFullscreen().catch(() => {});
+        if (kioskBtnText) kioskBtnText.textContent = '⛶ TABLETOP KIOSK';
       }
-    }
+    });
+  }
 
-    if (jogStepPrev) jogStepPrev.addEventListener('click', () => rotateJogStep(-1));
-    if (jogStepNext) jogStepNext.addEventListener('click', () => rotateJogStep(1));
+  // Web Audio Context & Analyser for Dual VU Meters & 3D Spectrogram
+  let audioCtx = null;
+  let analyserNode = null;
+  let audioSource = null;
+  const audioEl = document.getElementById('radio-audio') || document.querySelector('audio');
 
-    // Update jog wheel orientation on station change
-    const origUpdateDisplay = updateDisplay;
-    updateDisplay = function(ep) {
-      origUpdateDisplay(ep);
-      const angle = (currentIndex / EPISODES.length) * 360;
-      currentWheelDeg = angle;
-      if (jogWheelFace) jogWheelFace.style.transform = `rotate(${angle}deg)`;
+  function initAudioDSP() {
+    if (audioCtx || !audioEl) return;
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContextClass();
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = 64;
+      analyserNode.smoothingTimeConstant = 0.8;
       
-      // Update mood preset active state
-      document.querySelectorAll('.mood-preset-key').forEach(btn => {
-        const targetCh = parseInt(btn.getAttribute('data-target-ch'), 10);
-        if (targetCh === ep.num) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-    };
+      audioSource = audioCtx.createMediaElementSource(audioEl);
+      audioSource.connect(analyserNode);
+      analyserNode.connect(audioCtx.destination);
+    } catch (e) {
+      console.warn("Web Audio DSP initialized in fallback mode:", e);
+    }
+  }
 
-    // 5. Carvaan Mood Preset Keys
-    document.querySelectorAll('.mood-preset-key').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetCh = parseInt(btn.getAttribute('data-target-ch'), 10);
-        const targetIdx = EPISODES.findIndex(e => e.num === targetCh);
-        if (targetIdx !== -1) {
-          playClickSound(800, 0.03);
-          tuneToEpisode(targetIdx, true);
-        }
+  // Click & Mechanical Sound FX Synthesizer
+  function playClickSound(freq = 1000, duration = 0.04) {
+    try {
+      const ctx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (e) {}
+  }
+
+  // Visualizer Render Loop (Ballistic Analog VU Needles + 3D Spectrogram Canvas)
+  const needleLeft = document.getElementById('vu-needle-left');
+  const needleRight = document.getElementById('vu-needle-right');
+  const specCanvas = document.getElementById('neo-spectrogram-canvas');
+  let specCtx = specCanvas ? specCanvas.getContext('2d') : null;
+
+  let leftAngle = -35;
+  let rightAngle = -35;
+  const dataArray = new Uint8Array(32);
+
+  function renderVisualizers() {
+    requestAnimationFrame(renderVisualizers);
+
+    let levelL = 0;
+    let levelR = 0;
+
+    if (analyserNode && audioEl && !audioEl.paused) {
+      analyserNode.getByteFrequencyData(dataArray);
+      let sumL = 0;
+      let sumR = 0;
+      for (let i = 0; i < 16; i++) sumL += dataArray[i];
+      for (let i = 16; i < 32; i++) sumR += dataArray[i];
+      levelL = sumL / (16 * 255);
+      levelR = sumR / (16 * 255);
+    } else if (audioEl && !audioEl.paused) {
+      levelL = 0.3 + Math.random() * 0.4;
+      levelR = 0.3 + Math.random() * 0.4;
+    }
+
+    // 1. Vintage Mode: Analog Ballistic Needles
+    if (needleLeft && needleRight && currentTheme === 'vintage-1978') {
+      const targetL = -35 + (levelL * 70);
+      const targetR = -35 + (levelR * 70);
+      leftAngle += (targetL - leftAngle) * 0.25;
+      rightAngle += (targetR - rightAngle) * 0.25;
+      needleLeft.style.transform = `rotate(${leftAngle.toFixed(1)}deg)`;
+      needleRight.style.transform = `rotate(${rightAngle.toFixed(1)}deg)`;
+    }
+
+    // 2. Carvaan Neo Mode: High-Tech Cyber Spectrogram Canvas
+    if (specCtx && currentTheme === 'carvaan-neo') {
+      const w = specCanvas.width;
+      const h = specCanvas.height;
+      specCtx.clearRect(0, 0, w, h);
+
+      // Radar circles in background
+      specCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+      specCtx.lineWidth = 1;
+      const cx = w / 2;
+      const cy = h / 2;
+      specCtx.beginPath();
+      specCtx.arc(cx, cy, 30, 0, Math.PI * 2);
+      specCtx.arc(cx, cy, 60, 0, Math.PI * 2);
+      specCtx.stroke();
+
+      // 32-Band FFT Bars
+      const numBars = 24;
+      const barWidth = (w - (numBars * 2)) / numBars;
+      for (let i = 0; i < numBars; i++) {
+        const val = dataArray[i] || (audioEl && !audioEl.paused ? Math.random() * 160 + 40 : 10);
+        const barH = (val / 255) * (h - 20);
+        const x = i * (barWidth + 2) + 2;
+        const y = h - barH - 4;
+
+        const grad = specCtx.createLinearGradient(0, y, 0, h);
+        grad.addColorStop(0, '#00f0ff');
+        grad.addColorStop(0.5, '#0284c7');
+        grad.addColorStop(1, '#0369a1');
+
+        specCtx.fillStyle = grad;
+        specCtx.fillRect(x, y, barWidth, barH);
+
+        // Peak dot
+        specCtx.fillStyle = '#ffffff';
+        specCtx.fillRect(x, y - 2, barWidth, 1.5);
+      }
+    }
+
+    // 3. Center Screen Mini Spectrum Bars
+    const centerBars = document.querySelectorAll('.lcd-spectrum-visualizer .spec-bar');
+    if (centerBars.length > 0) {
+      centerBars.forEach((bar, idx) => {
+        const val = dataArray[idx % 16] || (audioEl && !audioEl.paused ? Math.random() * 180 + 30 : 6);
+        const barH = Math.max(3, (val / 255) * 16);
+        bar.style.height = `${barH}px`;
       });
+    }
+  }
+
+  renderVisualizers();
+
+  // Rotary Dial 1: Master Tuner Flywheel
+  const jogFace = document.getElementById('jog-wheel-face');
+  const jogHalo = document.getElementById('jog-wheel-halo');
+  const jogPrev = document.getElementById('jog-step-prev');
+  const jogNext = document.getElementById('jog-step-next');
+  let currentJogAngle = 0;
+
+  function rotateJog(deltaDeg) {
+    currentJogAngle += deltaDeg;
+    if (jogFace) jogFace.style.transform = `rotate(${currentJogAngle}deg)`;
+    if (jogHalo) jogHalo.style.transform = `rotate(${currentJogAngle}deg)`;
+    playClickSound(800 + Math.abs(currentJogAngle % 360), 0.02);
+  }
+
+  if (jogPrev) {
+    jogPrev.addEventListener('click', () => {
+      rotateJog(-30);
+      const prevBtn = document.getElementById('btn-piano-prev') || document.getElementById('prev-btn');
+      if (prevBtn) prevBtn.click();
     });
+  }
 
-    // 6. Volume Knob Controller
-    const knobVolContainer = document.getElementById('knob-volume-container');
-    const knobVol = document.getElementById('knob-volume');
-    const knobVolVal = document.getElementById('knob-volume-val');
-    let curVolPct = 85;
+  if (jogNext) {
+    jogNext.addEventListener('click', () => {
+      rotateJog(30);
+      const nextBtn = document.getElementById('btn-piano-next') || document.getElementById('next-btn');
+      if (nextBtn) nextBtn.click();
+    });
+  }
 
-    function setVolumePercent(pct) {
-      curVolPct = Math.max(0, Math.min(100, pct));
-      audio.volume = curVolPct / 100;
-      const rot = -135 + (curVolPct / 100) * 270;
-      if (knobVol) knobVol.style.transform = `rotate(${rot}deg)`;
-      if (knobVolVal) knobVolVal.textContent = `${curVolPct}%`;
+  // Rotary Dial 2: Directory Scroll Knob
+  const dirFace = document.getElementById('dir-knob-face');
+  const dirHalo = document.getElementById('dir-knob-halo');
+  const dirUp = document.getElementById('dir-scroll-up');
+  const dirDown = document.getElementById('dir-scroll-down');
+  const stationList = document.getElementById('station-list');
+  let currentDirAngle = 0;
+
+  function rotateDir(deltaDeg) {
+    currentDirAngle += deltaDeg;
+    if (dirFace) dirFace.style.transform = `rotate(${currentDirAngle}deg)`;
+    if (dirHalo) dirHalo.style.transform = `rotate(${currentDirAngle}deg)`;
+    if (stationList) {
+      stationList.scrollTop += (deltaDeg > 0 ? 32 : -32);
     }
-    setVolumePercent(85);
+    playClickSound(1400, 0.015);
+  }
 
-    if (knobVolContainer) {
-      knobVolContainer.addEventListener('click', () => {
-        playClickSound(700);
-        // Cycle volume: 85% -> 100% -> 30% -> 60% -> 85%
-        if (curVolPct === 85) setVolumePercent(100);
-        else if (curVolPct === 100) setVolumePercent(30);
-        else if (curVolPct === 30) setVolumePercent(60);
-        else setVolumePercent(85);
-      });
-      knobVolContainer.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        setVolumePercent(curVolPct + (e.deltaY < 0 ? 5 : -5));
-      }, { passive: false });
-    }
+  if (dirUp) dirUp.addEventListener('click', () => rotateDir(-25));
+  if (dirDown) dirDown.addEventListener('click', () => rotateDir(25));
 
-    // 7. Tone Knob Controller
-    const knobToneContainer = document.getElementById('knob-tone-container');
-    const knobTone = document.getElementById('knob-tone');
-    const knobToneVal = document.getElementById('knob-tone-val');
-    const TONES = [
-      { name: 'WARM', rot: -90 },
-      { name: 'RICH', rot: 0 },
-      { name: 'CLEAR', rot: 90 }
-    ];
-    let curToneIdx = 1;
+  // Connect Piano Bottom Keys to Audio Engine
+  const pianoPlay = document.getElementById('btn-piano-play');
+  const pianoPlayIcon = document.getElementById('piano-play-icon');
+  const pianoPlayTxt = document.getElementById('piano-play-txt');
+  const pianoPrev = document.getElementById('btn-piano-prev');
+  const pianoNext = document.getElementById('btn-piano-next');
+  const pianoMute = document.getElementById('btn-piano-mute');
+  const pianoDub = document.getElementById('btn-piano-dub');
+  const pianoBeam = document.getElementById('btn-piano-beam');
 
-    if (knobToneContainer) {
-      knobToneContainer.addEventListener('click', () => {
-        playClickSound(850);
-        curToneIdx = (curToneIdx + 1) % TONES.length;
-        const t = TONES[curToneIdx];
-        if (knobTone) knobTone.style.transform = `rotate(${t.rot}deg)`;
-        if (knobToneVal) knobToneVal.textContent = t.name;
-      });
-    }
+  if (pianoPlay) {
+    pianoPlay.addEventListener('click', () => {
+      initAudioDSP();
+      const legacyPlay = document.getElementById('play-btn') || document.getElementById('pocket-play-pause-btn');
+      if (legacyPlay) legacyPlay.click();
+      else if (audioEl) {
+        if (audioEl.paused) audioEl.play();
+        else audioEl.pause();
+      }
+      playClickSound(1000, 0.04);
+    });
+  }
+
+  if (audioEl) {
+    audioEl.addEventListener('play', () => {
+      if (pianoPlayIcon) pianoPlayIcon.textContent = '⏸';
+      if (pianoPlayTxt) pianoPlayTxt.textContent = 'PAUSE';
+      if (pianoPlay) pianoPlay.classList.add('depressed');
+    });
+    audioEl.addEventListener('pause', () => {
+      if (pianoPlayIcon) pianoPlayIcon.textContent = '▶';
+      if (pianoPlayTxt) pianoPlayTxt.textContent = 'PLAY';
+      if (pianoPlay) pianoPlay.classList.remove('depressed');
+    });
+  }
+
+  if (pianoPrev) {
+    pianoPrev.addEventListener('click', () => {
+      const prev = document.getElementById('prev-btn') || document.getElementById('pocket-prev-btn');
+      if (prev) prev.click();
+      playClickSound(900, 0.03);
+    });
+  }
+
+  if (pianoNext) {
+    pianoNext.addEventListener('click', () => {
+      const next = document.getElementById('next-btn') || document.getElementById('pocket-next-btn');
+      if (next) next.click();
+      playClickSound(1100, 0.03);
+    });
+  }
+
+  if (pianoDub) {
+    pianoDub.addEventListener('click', () => {
+      const dubBtn = document.getElementById('btn-pocket-track');
+      if (dubBtn) dubBtn.click();
+      playClickSound(1300, 0.03);
+    });
+  }
+
+  if (pianoBeam) {
+    pianoBeam.addEventListener('click', () => {
+      const beamModal = document.getElementById('beamer-modal') || document.getElementById('pocket-beam-modal');
+      if (beamModal) beamModal.style.display = 'flex';
+      playClickSound(1500, 0.04);
+    });
+  }
+
+  // Modern Fader Click Handlers (Volume, Bass, Treble)
+  const faderVol = document.getElementById('touch-fader-vol');
+  const faderVolFill = document.getElementById('fader-vol-fill');
+  const faderVolVal = document.getElementById('fader-vol-val');
+  if (faderVol && audioEl) {
+    faderVol.addEventListener('click', (e) => {
+      const rect = faderVol.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(1, 1 - ((e.clientY - rect.top) / rect.height)));
+      audioEl.volume = pct;
+      if (faderVolFill) faderVolFill.style.height = `${(pct * 100).toFixed(0)}%`;
+      if (faderVolVal) faderVolVal.textContent = `${(pct * 100).toFixed(0)}%`;
+      playClickSound(900 + pct * 600, 0.02);
+    });
+  }
+
+  window.setRadioTheme = setRadioTheme;
+})();
+
 
 </script>
 </body>
