@@ -1,28 +1,24 @@
 # -*- coding: utf-8 -*-
 """
 Build 10/10 Museum-Grade Restomod Flagship Radio Console for Lenovo TB-8505X Tablet (1280x800)
-Major Enhancements for 10/10 X-Factor:
-1. GIANT LUXURY BRASS KNOBS:
-   - Master Tuner enlarged to 154px with full circular laser-engraved frequency calibration ring (88..108 MHz).
-   - Volume / Directory knob enlarged to 122px with circular graduation ring (0..10).
-   - Real tactile circular rotary drag & mousewheel rotation physics with synchronized needle & station tuning.
-2. ORGANIC PHOTO INTEGRATION ("CURATOR'S ARCHIVAL VISUAL BAY"):
-   - The right wing is now a recessed mahogany/bronze chassis module matching the left acoustic wing, with corner machine screws.
-   - The photo is housed in a sunken brass escutcheon aperture with corner screws, convex crystal glass lens, and audio-reactive amber backlighting.
-   - Sliding & spinning grooved vinyl record with center gold foil label.
-   - Interactive Photo Inspector & Comment Studio: Tapping the photo opens a high-res archive inspector with curator historical notes by Simran Ailani and an interactive comment submission box for teachers/judges!
-   - Center LCD display features a live linked visual monitor chip.
-3. DUAL-MODE CRT OSCILLOSCOPE:
-   - Electron-beam waveform with persistent phosphor glow and trailing after-image.
-4. AUDIO-REACTIVE THERMIONIC VALVE:
-   - 12AX7 vacuum tube filament and warm orange spill micro-pulse dynamically to real bass & vocal frequencies.
-5. SOLID BRASS PIANO DECK:
-   - Countersunk machine screws (✛) on corners.
-   - Pinhole jewel micro-LEDs (Ruby on Power, Emerald breathing pulse on Play, Amber on Bass).
-6. Sole Attribution: Curated, Hosted, and Founded by Simran Ailani.
+Major User-Requested Evolution:
+1. SEAMLESS GLASSMORPHISM LCD BACKDROP:
+   - Episode photo is seamlessly blended as the dynamic background of the modern center LCD.
+   - Dual-stage frosted glass scrim (backdrop-filter: blur(10px)) with radial darkening preserves razor-sharp legibility.
+2. RIGHT WING REPURPOSED WITH KINETIC DYNAMICS & BLINKING BEACON:
+   - Dark, visible high-contrast metallic perforated acoustic speaker mesh.
+   - Embedded pulsating red incandescent "ON AIR" broadcast jewel beacon.
+   - Moving element: Dual illuminated analog VU meters (CH-L and CH-R) with needles bouncing dynamically to real audio energy!
+3. GIANT SCULPTED LUXURY KNOBS:
+   - Master Tuner dial enlarged to 160px with sweeping laser-etched circular calibration scale (88..108 MHz).
+   - Volume / Directory dial enlarged to 126px with graduated volume steps (0..10).
+   - Full circular drag & wheel rotation physics.
+4. DARK VISIBLE SPEAKER MESH ON LEFT & RIGHT:
+   - Dark, tactile woven metal cloth with depth and micro-hex perforations.
+5. SOLE ATTRIBUTION:
+   - Sole Founder, Host & Curator: Simran Ailani.
 """
 
-import os
 from episodes_catalog import EPISODES_RAW
 
 HTML_TEMPLATE = r'''<!DOCTYPE html>
@@ -69,8 +65,8 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       height: 800px;
       margin: auto;
       overflow: hidden;
-      background: radial-gradient(ellipse at 50% 40%, #331f13 0%, #22140b 50%, #100803 100%);
-      box-shadow: inset 0 0 60px rgba(0,0,0,0.95);
+      background: radial-gradient(ellipse at 50% 40%, #2e1a0e 0%, #1c0f07 50%, #0d0602 100%);
+      box-shadow: inset 0 0 70px rgba(0,0,0,0.98);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -89,7 +85,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
           rgba(255,255,255,0.015) 7px),
         repeating-linear-gradient(0deg, 
           transparent 0px, 
-          rgba(0,0,0,0.02) 15px, 
+          rgba(0,0,0,0.025) 15px, 
           transparent 30px);
       z-index: 1;
     }
@@ -102,7 +98,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       border-radius: 18px;
       box-shadow: 
         inset 0 0 0 2px #d4af37,
-        inset 0 0 22px rgba(0,0,0,0.85),
+        inset 0 0 24px rgba(0,0,0,0.88),
         0 0 0 2px #261605;
       pointer-events: none;
       z-index: 100;
@@ -113,13 +109,13 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
        ========================================================================== */
     .top-tuning-horizon {
       position: relative;
-      height: 58px;
+      height: 56px;
       margin: 14px 20px 0 20px;
-      background: #090604;
+      background: #080503;
       border: 2.5px solid #8c6823;
       border-radius: 10px;
       box-shadow: 
-        inset 0 0 20px rgba(0,0,0,0.95),
+        inset 0 0 20px rgba(0,0,0,0.98),
         0 4px 12px rgba(0,0,0,0.8),
         inset 0 1px 0 rgba(255, 215, 0, 0.4);
       display: flex;
@@ -207,25 +203,36 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
        -------------------------------------------------------------------------- */
     .acoustic-wing {
       position: relative;
-      background: #140d07;
+      background: #0d0804;
       border: 3px solid #5a3c17;
       border-radius: 14px;
-      box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 4px 14px rgba(0,0,0,0.7);
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.98), 0 4px 14px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 14px;
       overflow: hidden;
     }
-    .speaker-cloth-grille {
+    /* Visible Dark Woven Metallic Hex Speaker Mesh */
+    .dark-perforated-speaker-mesh {
       position: absolute;
       inset: 0;
       background: 
-        repeating-linear-gradient(45deg, #3d291a 0px, #3d291a 2px, #20140b 2px, #20140b 5px),
-        repeating-linear-gradient(-45deg, #4d3320 0px, #4d3320 2px, #1a0f07 2px, #1a0f07 5px);
-      opacity: 0.95;
+        repeating-linear-gradient(45deg, rgba(38, 25, 14, 0.85) 0px, rgba(38, 25, 14, 0.85) 1.5px, transparent 1.5px, transparent 5px),
+        repeating-linear-gradient(-45deg, rgba(22, 14, 8, 0.95) 0px, rgba(22, 14, 8, 0.95) 1.5px, transparent 1.5px, transparent 5px),
+        radial-gradient(ellipse at 50% 50%, #170e06 0%, #070402 100%);
+      box-shadow: inset 0 0 35px rgba(0,0,0,0.96);
+      opacity: 0.98;
       z-index: 1;
     }
+    .dark-perforated-speaker-mesh::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 40%, rgba(0,0,0,0.5) 100%);
+      pointer-events: none;
+    }
+
     /* Embossed Brushed Brass Medallion */
     .speaker-brass-plaque {
       position: relative;
@@ -314,15 +321,15 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     }
 
     /* --------------------------------------------------------------------------
-       ZONE B: CENTER SMART LCD COCKPIT (Modern Core Inside Brass Bezel)
+       ZONE B: CENTER SMART LCD COCKPIT (Seamless Glassmorphism Backdrop)
        -------------------------------------------------------------------------- */
     .smart-lcd-bezel {
       position: relative;
-      background: #080b0f;
+      background: #05080c;
       border: 3.5px solid #8c6823;
       border-radius: 16px;
       box-shadow: 
-        inset 0 0 35px rgba(0,0,0,0.98),
+        inset 0 0 40px rgba(0,0,0,0.98),
         0 8px 24px rgba(0,0,0,0.85),
         inset 0 1px 1px rgba(255, 220, 100, 0.4);
       display: flex;
@@ -331,25 +338,58 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       padding: 14px 18px;
       overflow: hidden;
     }
-    /* CRT Glass Scanlines */
+
+    /* Seamless Glassmorphism Artwork Backdrop */
+    .lcd-art-backdrop {
+      position: absolute;
+      inset: 0;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: brightness(0.68) saturate(1.25) contrast(1.1);
+      transition: background-image 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 0;
+      pointer-events: auto;
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+    /* Multi-Stop Frosted Glass Scrim & Radial Vignette */
+    .lcd-glass-scrim {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 50% 40%, rgba(6, 10, 15, 0.25) 0%, rgba(3, 5, 8, 0.75) 75%, rgba(2, 3, 5, 0.92) 100%),
+        linear-gradient(180deg, rgba(8, 12, 18, 0.35) 0%, rgba(3, 5, 8, 0.82) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Subtle CRT Glass Scanlines */
     .smart-lcd-bezel::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
       background-size: 100% 3px;
       pointer-events: none;
       z-index: 20;
-      opacity: 0.55;
+      opacity: 0.35;
     }
 
-    /* LCD 1. Top Telemetry Bar */
+    /* LCD 1. Top Telemetry Bar with Glassmorphism */
     .lcd-telemetry-header {
+      position: relative;
+      z-index: 2;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 190, 59, 0.2);
-      padding-bottom: 6px;
+      background: rgba(14, 20, 28, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 190, 59, 0.22);
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 2px;
     }
     .lcd-freq-badge {
       display: flex;
@@ -362,7 +402,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       font-weight: 700;
       color: #ffbe3b;
       letter-spacing: -0.5px;
-      text-shadow: 0 0 10px rgba(255, 190, 59, 0.6);
+      text-shadow: 0 0 10px rgba(255, 190, 59, 0.7);
     }
     .lcd-chips-row {
       display: flex;
@@ -371,14 +411,14 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       font-size: 9.5px;
     }
     .lcd-chip {
-      background: rgba(255, 190, 59, 0.1);
+      background: rgba(255, 190, 59, 0.12);
       border: 1px solid rgba(255, 190, 59, 0.3);
       padding: 3px 8px;
       border-radius: 12px;
       color: #e5bf45;
     }
     .lcd-chip.visual-chip {
-      background: rgba(255, 120, 20, 0.18);
+      background: rgba(255, 130, 20, 0.22);
       border-color: #ffaa33;
       color: #ffbe3b;
       cursor: pointer;
@@ -388,30 +428,41 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       transition: all 0.2s ease;
     }
     .lcd-chip.visual-chip:hover {
-      background: rgba(255, 160, 40, 0.35);
+      background: rgba(255, 160, 40, 0.4);
       transform: scale(1.04);
     }
 
     /* LCD 2. Live Modern Electron Waveform Oscilloscope */
     .lcd-waveform-canvas {
+      position: relative;
+      z-index: 2;
       width: 100%;
       height: 44px;
       border-radius: 6px;
-      background: rgba(4, 7, 10, 0.7);
-      border: 1px solid rgba(255, 190, 59, 0.18);
+      background: rgba(4, 7, 10, 0.65);
+      border: 1px solid rgba(255, 190, 59, 0.22);
       margin: 4px 0;
+      backdrop-filter: blur(6px);
     }
 
     /* LCD 3. Hero Episode Title & Solo Curator Attribution */
     .lcd-hero-info {
-      margin: 1px 0;
+      position: relative;
+      z-index: 2;
+      margin: 2px 0;
+      background: rgba(10, 16, 24, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 190, 59, 0.18);
+      border-radius: 8px;
+      padding: 6px 12px;
     }
     .lcd-track-title {
       font-size: 21px;
       font-weight: 800;
       color: #fff2d1;
       letter-spacing: -0.3px;
-      text-shadow: 0 0 8px rgba(255, 200, 80, 0.3);
+      text-shadow: 0 0 10px rgba(255, 200, 80, 0.35);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -429,10 +480,14 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
 
     /* LCD 4. Multi-Language Instant Translation Switcher */
     .lcd-translation-pill-bar {
+      position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 22, 30, 0.9);
+      background: rgba(14, 20, 28, 0.68);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 190, 59, 0.35);
       border-radius: 20px;
       padding: 4px;
@@ -459,9 +514,13 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
 
     /* LCD 5. Live Synchronized Teleprompter Subtitles */
     .lcd-teleprompter-box {
+      position: relative;
+      z-index: 2;
       height: 64px;
-      background: rgba(6, 10, 14, 0.95);
-      border: 1px solid rgba(255, 190, 59, 0.22);
+      background: rgba(5, 8, 12, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 190, 59, 0.25);
       border-radius: 8px;
       padding: 6px 12px;
       overflow-y: hidden;
@@ -478,7 +537,11 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     }
 
     /* LCD 6. Modern Hairline Timeline Scrubber */
-    .lcd-scrubber-row { margin: 4px 0; }
+    .lcd-scrubber-row { 
+      position: relative;
+      z-index: 2;
+      margin: 4px 0; 
+    }
     .lcd-scrubber-track {
       width: 100%;
       height: 8px;
@@ -507,6 +570,8 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
 
     /* LCD 7. Smart Horizontal Episode Directory Ribbon */
     .lcd-station-ribbon {
+      position: relative;
+      z-index: 2;
       display: flex;
       gap: 6px;
       overflow-x: auto;
@@ -517,7 +582,8 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     .lcd-station-ribbon::-webkit-scrollbar { display: none; }
     .station-chip-btn {
       padding: 5px 11px;
-      background: rgba(16, 22, 30, 0.9);
+      background: rgba(16, 22, 30, 0.85);
+      backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 190, 59, 0.25);
       border-radius: 6px;
       font-family: 'Space Mono', monospace;
@@ -528,22 +594,22 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       transition: all 0.2s ease;
     }
     .station-chip-btn.active {
-      background: rgba(255, 190, 59, 0.2);
+      background: rgba(255, 190, 59, 0.25);
       border-color: #ffbe3b;
       color: #ffbe3b;
       font-weight: 700;
-      box-shadow: 0 0 8px rgba(255, 190, 59, 0.3);
+      box-shadow: 0 0 8px rgba(255, 190, 59, 0.35);
     }
 
     /* --------------------------------------------------------------------------
-       ZONE C: RIGHT MASTER CONTROL & VISUAL DECK (Recessed Module)
+       ZONE C: RIGHT MASTER CONTROL WING (Mesh Bay + Blinking Beacon + VU Meters)
        -------------------------------------------------------------------------- */
     .hardware-controls-wing {
       position: relative;
-      background: #140d07;
+      background: #110b06;
       border: 3px solid #5a3c17;
       border-radius: 14px;
-      box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 4px 14px rgba(0,0,0,0.7);
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.98), 0 4px 14px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -578,147 +644,187 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     .deck-screw.bl { bottom: 7px; left: 7px; }
     .deck-screw.br { bottom: 7px; right: 7px; }
 
-    /* 1. CURATOR'S HISTORICAL ARCHIVAL VISUAL BAY */
-    .curator-visual-deck {
+    /* 1. TOP ACOUSTIC MESH BAY WITH BLINKING BEACON BEHIND MESH & DUAL ANALOG VU METERS */
+    .right-acoustic-mesh-bay {
       position: relative;
       width: 100%;
+      height: 145px;
+      background: #090503;
+      border: 2px solid #5e4310;
+      border-radius: 10px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.95), 0 4px 10px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      gap: 5px;
+      padding: 8px;
+      overflow: hidden;
       z-index: 2;
     }
-    .visual-top-strip {
+
+    /* Pulsating Red Incandescent Beacon Lamp (Mounted Directly BEHIND the Mesh) */
+    .beacon-behind-mesh {
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      width: 22px;
+      height: 22px;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .beacon-filament-pulse {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ff2200;
+      box-shadow: 0 0 20px #ff2200, 0 0 40px rgba(255, 34, 0, 0.85);
+      animation: beaconFilamentGlow 1.25s ease-in-out infinite alternate;
+    }
+    @keyframes beaconFilamentGlow {
+      0% {
+        transform: scale(0.75);
+        opacity: 0.3;
+        box-shadow: 0 0 8px #aa0000;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.85;
+        box-shadow: 0 0 24px #ff3b30, 0 0 45px rgba(255, 59, 48, 0.7);
+      }
+      100% {
+        transform: scale(1.3);
+        opacity: 1;
+        box-shadow: 0 0 35px #ff453a, 0 0 65px rgba(255, 69, 58, 0.95), inset 0 1px 2px #fff;
+      }
+    }
+
+    /* Visible Dark Woven Metallic Hex Speaker Mesh (Covers the Entire Bay) */
+    .mesh-bay-cloth {
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(45deg, rgba(38, 25, 14, 0.88) 0px, rgba(38, 25, 14, 0.88) 1.5px, transparent 1.5px, transparent 5px),
+        repeating-linear-gradient(-45deg, rgba(22, 14, 8, 0.95) 0px, rgba(22, 14, 8, 0.95) 1.5px, transparent 1.5px, transparent 5px),
+        radial-gradient(ellipse at 50% 50%, rgba(20, 12, 6, 0.8) 0%, rgba(7, 4, 2, 0.98) 100%);
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.95);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Broadcast Status Header (Floating on Surface) */
+    .mesh-bay-header {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 4px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .beacon-indicator-pod {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .beacon-label {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
       font-weight: 700;
-      color: #cca040;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      color: #ff5544;
+      letter-spacing: 1px;
+      text-shadow: 0 0 6px rgba(255, 69, 58, 0.6);
     }
-    .visual-top-strip::before, .visual-top-strip::after {
-      content: '◆';
-      font-size: 7px;
-      color: #e5bf45;
+    .broadcast-telemetry-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      color: #cca040;
+      letter-spacing: 0.5px;
     }
 
-    .album-turntable-bay {
+    /* DUAL ANALOG ILLUMINATED VU METERS (VINTAGE MASTER RECORDING BLOCK) */
+    .dual-vu-container {
       position: relative;
-      width: 250px;
-      height: 130px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    /* Sunken Brass Escutcheon Frame */
-    .album-frame-housing {
-      width: 126px;
-      height: 126px;
-      background: #0d0804;
-      border: 3px solid #8c6823;
-      border-radius: 10px;
-      box-shadow: 
-        inset 0 0 16px rgba(0,0,0,0.95),
-        0 6px 18px rgba(0,0,0,0.85),
-        0 0 0 1.5px #3a250e;
-      padding: 4px;
-      position: relative;
-      z-index: 5;
-      transition: all 0.25s ease;
-    }
-    .album-frame-housing:hover {
-      border-color: #d4af37;
-      box-shadow: 
-        inset 0 0 16px rgba(0,0,0,0.95),
-        0 8px 22px rgba(0,0,0,0.9),
-        0 0 14px rgba(212, 175, 55, 0.4);
-    }
-    .album-art-img {
+      z-index: 3;
       width: 100%;
-      height: 100%;
-      border-radius: 6px;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      box-shadow: inset 0 0 12px rgba(0,0,0,0.7);
-      transition: background-image 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0;
+      background: rgba(14, 9, 4, 0.6);
+      border: 1.5px solid #8c6823;
+      border-radius: 8px;
+      padding: 6px;
+      box-shadow: inset 0 0 14px rgba(0,0,0,0.9), 0 3px 8px rgba(0,0,0,0.7);
     }
-    /* Convex Optical Glass Glint */
-    .album-glare {
-      position: absolute;
-      inset: 4px;
-      border-radius: 6px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.02) 40%, rgba(0,0,0,0.3) 100%);
-      pointer-events: none;
+    .analog-vu-gauge {
+      position: relative;
+      width: 130px;
+      height: 64px;
+      background: radial-gradient(ellipse at 50% 80%, #ffe082 0%, #d4af37 60%, #5e4308 100%);
+      border: 2px solid #3d2905;
+      border-radius: 6px 6px 3px 3px;
+      box-shadow: 
+        inset 0 0 12px rgba(0,0,0,0.9),
+        0 2px 6px rgba(0,0,0,0.6);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
     }
-    /* Warm Backlight Halo */
-    .album-backlight-halo {
+    .vu-gauge-scale {
       position: absolute;
       inset: 0;
-      border-radius: 10px;
-      box-shadow: 0 0 18px rgba(255, 170, 40, 0.25);
       pointer-events: none;
-      transition: box-shadow 0.1s ease;
     }
-
-    /* Sliding & Spinning Grooved Vinyl Disc */
-    .vinyl-disc-reveal {
+    /* Moving Needle */
+    .vu-needle {
       position: absolute;
-      right: 38px;
-      width: 114px;
-      height: 114px;
-      border-radius: 50%;
-      background: 
-        repeating-radial-gradient(circle, #1a1a1a 0px, #1a1a1a 1.5px, #0b0b0b 1.5px, #0b0b0b 3px),
-        conic-gradient(from 45deg, rgba(255,255,255,0.12) 0deg, transparent 40deg, transparent 140deg, rgba(255,255,255,0.12) 180deg, transparent 220deg, transparent 320deg, rgba(255,255,255,0.12) 360deg);
-      border: 1px solid #000;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.95);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 4;
-      transform: translateX(0);
-      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .vinyl-disc-reveal.out {
-      transform: translateX(42px);
-    }
-    .vinyl-disc-reveal.spinning {
-      animation: spinVinyl 2s linear infinite;
-    }
-    @keyframes spinVinyl {
-      100% { transform: translateX(42px) rotate(360deg); }
-    }
-    .vinyl-center-label {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #d4af37 0%, #aa8214 70%, #5e4308 100%);
-      border: 2px solid #2b1f15;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      bottom: -6px;
+      left: 50%;
+      width: 2px;
+      height: 52px;
+      background: linear-gradient(180deg, #ff3b30 0%, #1a0000 100%);
+      border-radius: 1px;
+      transform-origin: bottom center;
+      transform: rotate(-25deg);
+      transition: transform 0.08s ease-out;
       box-shadow: 0 0 4px rgba(0,0,0,0.8);
-      font-family: 'Space Mono', monospace;
-      font-size: 6px;
-      font-weight: 700;
-      color: #120b03;
-      text-align: center;
-      line-height: 1;
+      z-index: 4;
     }
-    .vinyl-spindle-hole {
-      width: 7px;
-      height: 7px;
+    .vu-needle-pivot {
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: #080808;
-      border: 1px solid #d4af37;
+      background: #100802;
+      border: 2px solid #5e4308;
+      z-index: 5;
+    }
+    .vu-channel-title {
+      position: absolute;
+      top: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      font-weight: 700;
+      color: #2b1f07;
+      letter-spacing: 0.8px;
     }
 
-    /* Interactive "Inspect Archive & Comment" Brass Plate */
+    /* Archive Quick Inspect Action Bar */
+    .mesh-bay-action-row {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
     .btn-archive-inspect {
       display: flex;
       align-items: center;
@@ -730,12 +836,12 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       padding: 4px 10px;
       color: #ffd875;
       font-family: 'Space Mono', monospace;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-      width: 220px;
+      width: 100%;
     }
     .btn-archive-inspect:hover {
       background: linear-gradient(135deg, #422d14 0%, #2b1c0c 100%);
@@ -744,7 +850,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       box-shadow: 0 0 10px rgba(255, 216, 117, 0.4);
     }
 
-    /* 2. GIANT HARDWARE DIAL 1: MASTER TUNER (154px) */
+    /* 2. GIANT HARDWARE DIAL 1: MASTER TUNER (160px) */
     .dial-mounting-bay {
       position: relative;
       display: flex;
@@ -762,25 +868,25 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       z-index: 1;
     }
     .dial-calibration-rim.large {
-      width: 210px;
-      height: 210px;
-      top: -28px;
+      width: 220px;
+      height: 220px;
+      top: -30px;
       left: 50%;
       transform: translateX(-50%);
     }
     .dial-calibration-rim.small {
-      width: 170px;
-      height: 170px;
+      width: 174px;
+      height: 174px;
       top: -24px;
       left: 50%;
       transform: translateX(-50%);
     }
 
-    /* MASTER TUNER KNOB (154px) */
+    /* MASTER TUNER KNOB (160px) */
     .physical-knob-dial {
       position: relative;
-      width: 154px;
-      height: 154px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       background: conic-gradient(
         from var(--knob-angle, 0deg), 
@@ -796,7 +902,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       );
       border: 4px solid #634611;
       box-shadow: 
-        0 12px 28px rgba(0,0,0,0.95),
+        0 14px 30px rgba(0,0,0,0.96),
         inset 0 3px 6px rgba(255,255,255,0.7),
         inset 0 -5px 7px rgba(0,0,0,0.85);
       cursor: grab;
@@ -823,14 +929,14 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       position: absolute;
       top: 9px;
       width: 6px;
-      height: 18px;
+      height: 20px;
       background: linear-gradient(180deg, #ff3b30 0%, #aa0000 100%);
       border-radius: 3px;
       box-shadow: 0 0 6px #ff3b30, 0 0 2px #fff;
     }
     .knob-center-cap {
-      width: 66px;
-      height: 66px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: 
         repeating-radial-gradient(circle, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 4px),
@@ -848,19 +954,19 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       z-index: 2;
     }
 
-    /* 3. GIANT HARDWARE DIAL 2: DIRECTORY / VOLUME (122px) */
+    /* 3. GIANT HARDWARE DIAL 2: DIRECTORY / VOLUME (126px) */
     .physical-knob-dial.small {
-      width: 122px;
-      height: 122px;
+      width: 126px;
+      height: 126px;
       border: 3.5px solid #634611;
     }
     .physical-knob-dial.small .knob-center-cap {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
     }
     .physical-knob-dial.small .knob-marker-indicator {
       top: 7px;
-      height: 14px;
+      height: 15px;
       width: 5px;
     }
 
@@ -1158,14 +1264,14 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     <!-- 2. Main Appliance Deck (3 Recessed Modular Bays) -->
     <main class="appliance-main-deck">
       
-      <!-- ZONE A: Left Acoustic Wing -->
+      <!-- ZONE A: Left Acoustic Wing (Dark Perforated Mesh & Tube Valve) -->
       <section class="acoustic-wing">
         <div class="deck-screw tl"></div>
         <div class="deck-screw tr"></div>
         <div class="deck-screw bl"></div>
         <div class="deck-screw br"></div>
 
-        <div class="speaker-cloth-grille"></div>
+        <div class="dark-perforated-speaker-mesh"></div>
         
         <div class="speaker-brass-plaque">
           <div class="plaque-hindi-title">ज्ञानसेतु</div>
@@ -1182,10 +1288,14 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
         </div>
       </section>
 
-      <!-- ZONE B: The Inset Modern Smart LCD Screen -->
+      <!-- ZONE B: Center Smart LCD Cockpit (Seamless Glassmorphism Photo Backdrop) -->
       <section class="smart-lcd-bezel" id="smart-lcd-screen">
         
-        <!-- LCD Header: Frequency + Telemetry -->
+        <!-- Seamless Glassmorphic Artwork Backdrop & Multi-Stop Scrim -->
+        <div class="lcd-art-backdrop" id="lcd-art-backdrop"></div>
+        <div class="lcd-glass-scrim"></div>
+
+        <!-- LCD 1. Top Telemetry Bar with Glassmorphism -->
         <div class="lcd-telemetry-header">
           <div class="lcd-freq-badge">
             <span class="lcd-freq-num" id="lcd-freq-display">108.0 MHz</span>
@@ -1194,7 +1304,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
             <span class="lcd-chip">STEREO HI-FI</span>
             <span class="lcd-chip">320 KBPS</span>
             <span class="lcd-chip visual-chip" id="lcd-visual-chip" title="Click to view archive visual & comments">
-              👁 ARCHIVE VISUAL
+              👁 ARCHIVE LENS & NOTES
             </span>
           </div>
         </div>
@@ -1242,51 +1352,92 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
 
       </section>
 
-      <!-- ZONE C: Right Master Control & Visual Deck (Integrated Module) -->
+      <!-- ZONE C: Right Master Control Wing (Dark Mesh + Blinking Beacon + Dual VU Meters) -->
       <section class="hardware-controls-wing">
         <div class="deck-screw tl"></div>
         <div class="deck-screw tr"></div>
         <div class="deck-screw bl"></div>
         <div class="deck-screw br"></div>
 
-        <!-- 1. CURATOR'S HISTORICAL ARCHIVAL VISUAL BAY -->
-        <div class="curator-visual-deck">
-          <div class="visual-top-strip">Archive Monitor</div>
+        <!-- 1. TOP ACOUSTIC MESH BAY WITH BLINKING BEACON BEHIND MESH & DUAL ANALOG VU METERS -->
+        <div class="right-acoustic-mesh-bay">
+          <!-- Pulsating Red Beacon Lamp Mounted BEHIND the Dark Mesh -->
+          <div class="beacon-behind-mesh">
+            <div class="beacon-filament-pulse"></div>
+          </div>
 
-          <div class="album-turntable-bay" id="album-turntable-bay" title="Tap photo to inspect & comment, or toggle vinyl record">
-            <!-- Sunken Brass Escutcheon Frame -->
-            <div class="album-frame-housing" id="album-housing">
-              <div class="album-art-img" id="album-art-display"></div>
-              <div class="album-glare"></div>
-              <div class="album-backlight-halo" id="album-backlight"></div>
+          <!-- Visible Dark Metallic Woven Speaker Mesh Overlay -->
+          <div class="mesh-bay-cloth"></div>
+
+          <!-- Broadcast Header Floating on Top -->
+          <div class="mesh-bay-header">
+            <div class="beacon-indicator-pod">
+              <span class="beacon-label">● LIVE ON AIR</span>
+            </div>
+            <span class="broadcast-telemetry-tag">TRANSMITTER ACTIVE</span>
+          </div>
+
+          <!-- Dual Backlit Analog VU Meters (Moving Needle Element) -->
+          <div class="dual-vu-container">
+            <!-- VU Meter Left -->
+            <div class="analog-vu-gauge">
+              <svg class="vu-gauge-scale" viewBox="0 0 120 64">
+                <path d="M 16 52 A 52 52 0 0 1 104 52" fill="none" stroke="#2b1f07" stroke-width="1.2" />
+                <!-- Scale marks -->
+                <line x1="26" y1="46" x2="30" y2="40" stroke="#2b1f07" stroke-width="1.5" />
+                <line x1="42" y1="31" x2="45" y2="25" stroke="#2b1f07" stroke-width="1.5" />
+                <line x1="60" y1="24" x2="60" y2="17" stroke="#2b1f07" stroke-width="1.5" />
+                <line x1="78" y1="31" x2="75" y2="25" stroke="#ff3b30" stroke-width="1.5" />
+                <line x1="94" y1="46" x2="90" y2="40" stroke="#ff3b30" stroke-width="1.5" />
+                <text x="22" y="38" font-family="Space Mono" font-size="6" font-weight="700" fill="#2b1f07">-20</text>
+                <text x="60" y="14" font-family="Space Mono" font-size="6" font-weight="700" fill="#2b1f07">0</text>
+                <text x="96" y="38" font-family="Space Mono" font-size="6" font-weight="700" fill="#ff3b30">+3</text>
+              </svg>
+              <div class="vu-channel-title">CH-L</div>
+              <div class="vu-needle" id="vu-needle-left"></div>
+              <div class="vu-needle-pivot"></div>
             </div>
 
-            <!-- Sliding & Spinning Grooved Vinyl Disc -->
-            <div class="vinyl-disc-reveal" id="vinyl-disc">
-              <div class="vinyl-center-label">
-                <div>GYANSETU<br>33 RPM</div>
-              </div>
+            <!-- VU Meter Right -->
+            <div class="analog-vu-gauge">
+              <svg class="vu-gauge-scale" viewBox="0 0 120 64">
+                <path d="M 16 52 A 52 52 0 0 1 104 52" fill="none" stroke="#2b1f07" stroke-width="1.2" />
+                <line x1="26" y1="46" x2="30" y2="40" stroke="#2b1f07" stroke-width="1.5" />
+                <line x1="42" y1="31" x2="45" y2="25" stroke="#2b1f07" stroke-width="1.5" />
+                <line x1="60" y1="24" x2="60" y2="17" stroke="#2b1f07" stroke-width="1.5" />
+                <line x1="78" y1="31" x2="75" y2="25" stroke="#ff3b30" stroke-width="1.5" />
+                <line x1="94" y1="46" x2="90" y2="40" stroke="#ff3b30" stroke-width="1.5" />
+                <text x="22" y="38" font-family="Space Mono" font-size="6" font-weight="700" fill="#2b1f07">-20</text>
+                <text x="60" y="14" font-family="Space Mono" font-size="6" font-weight="700" fill="#2b1f07">0</text>
+                <text x="96" y="38" font-family="Space Mono" font-size="6" font-weight="700" fill="#ff3b30">+3</text>
+              </svg>
+              <div class="vu-channel-title">CH-R</div>
+              <div class="vu-needle" id="vu-needle-right"></div>
+              <div class="vu-needle-pivot"></div>
             </div>
           </div>
 
-          <button class="btn-archive-inspect" id="btn-open-inspect">
-            <span>💬</span> <span>INSPECT PHOTO & COMMENT</span>
-          </button>
+          <!-- Bottom Action Bar -->
+          <div class="mesh-bay-action-row">
+            <button class="btn-archive-inspect" id="btn-open-inspect">
+              <span>💬</span> <span>INSPECT PHOTO & COMMENT</span>
+            </button>
+          </div>
         </div>
 
-        <!-- 2. GIANT PHYSICAL ROTARY KNOB 1: MASTER TUNER (154px) -->
+        <!-- 2. GIANT PHYSICAL ROTARY KNOB 1: MASTER TUNER (160px) -->
         <div class="dial-mounting-bay">
-          <!-- Circular laser-engraved graduation SVG scale (88..108 MHz Sweeping Arc) -->
-          <svg class="dial-calibration-rim large" viewBox="0 0 210 210">
-            <path d="M 30 158 A 92 92 0 1 1 180 158" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5" />
-            <path d="M 30 158 A 92 92 0 1 1 180 158" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="2" stroke-dasharray="2 6" />
-            <!-- Frequency Numerals around circular bezel arc -->
-            <text x="32" y="156" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">88</text>
-            <text x="16" y="108" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">92</text>
-            <text x="42" y="44" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">96</text>
-            <text x="105" y="17" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">100</text>
-            <text x="168" y="44" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">104</text>
-            <text x="194" y="108" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">108</text>
+          <!-- Perfectly Symmetrical Sweeping Arc Scale (88..108 MHz) -->
+          <svg class="dial-calibration-rim large" viewBox="0 0 220 220">
+            <path d="M 38 166 A 96 96 0 1 1 182 166" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5" />
+            <path d="M 38 166 A 96 96 0 1 1 182 166" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="2" stroke-dasharray="2 7" />
+            <text x="36" y="166" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">88</text>
+            <text x="14" y="110" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">92</text>
+            <text x="44" y="46" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">96</text>
+            <text x="110" y="17" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">100</text>
+            <text x="176" y="46" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">104</text>
+            <text x="206" y="110" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">106</text>
+            <text x="184" y="166" fill="#cca040" font-family="Space Mono" font-size="9" font-weight="700" text-anchor="middle">108</text>
           </svg>
 
           <div class="physical-knob-dial" id="dial-master-tuner" title="Drag in circle or scroll to tune FM frequency">
@@ -1297,19 +1448,19 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
           <span class="knob-label-caption">MASTER TUNER (FM)</span>
         </div>
 
-        <!-- 3. GIANT PHYSICAL ROTARY KNOB 2: DIRECTORY / VOLUME (122px) -->
+        <!-- 3. GIANT PHYSICAL ROTARY KNOB 2: DIRECTORY / VOLUME (126px) -->
         <div class="dial-mounting-bay">
-          <!-- Circular laser-engraved graduation SVG scale (0..10 Sweeping Arc) -->
-          <svg class="dial-calibration-rim small" viewBox="0 0 170 170">
-            <path d="M 28 133 A 74 74 0 1 1 142 133" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5" />
-            <path d="M 28 133 A 74 74 0 1 1 142 133" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="1.8" stroke-dasharray="2 5" />
-            <text x="28" y="132" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">0</text>
-            <text x="13" y="88" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">2</text>
-            <text x="34" y="34" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">4</text>
-            <text x="85" y="15" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">5</text>
-            <text x="136" y="34" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">7</text>
-            <text x="157" y="88" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">9</text>
-            <text x="142" y="132" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">MAX</text>
+          <!-- Perfectly Symmetrical Sweeping Arc Scale (0..MAX) -->
+          <svg class="dial-calibration-rim small" viewBox="0 0 174 174">
+            <path d="M 30 136 A 76 76 0 1 1 144 136" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5" />
+            <path d="M 30 136 A 76 76 0 1 1 144 136" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="1.8" stroke-dasharray="2 6" />
+            <text x="28" y="136" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">0</text>
+            <text x="12" y="88" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">2</text>
+            <text x="35" y="34" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">4</text>
+            <text x="87" y="15" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">5</text>
+            <text x="139" y="34" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">7</text>
+            <text x="162" y="88" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">9</text>
+            <text x="146" y="136" fill="#cca040" font-family="Space Mono" font-size="8" font-weight="700" text-anchor="middle">MAX</text>
           </svg>
 
           <div class="physical-knob-dial small" id="dial-output-vol" title="Drag in circle or scroll to adjust volume">
@@ -1615,12 +1766,12 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     let tunerAngle = 0;
     let volAngle = 0;
     let masterVolume = 0.85;
-    let isVinylRevealed = false;
 
     const audio = document.getElementById('audio-engine');
     const smartLcd = document.getElementById('smart-lcd-screen');
-    const vinylDisc = document.getElementById('vinyl-disc');
-    const albumBacklight = document.getElementById('album-backlight');
+    const lcdArtBackdrop = document.getElementById('lcd-art-backdrop');
+    const vuNeedleLeft = document.getElementById('vu-needle-left');
+    const vuNeedleRight = document.getElementById('vu-needle-right');
 
     // Web Audio Synthesizer (Zero-Lag Mechanical Click Audio & Bass Filter)
     let audioCtx = null;
@@ -1721,16 +1872,15 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
         audio.load();
       }
 
-      // 1. Update LCD Display
+      // 1. Update LCD Display & Seamless Glass Backdrop
       const lcdFreq = document.getElementById('lcd-freq-display');
       const lcdTitle = document.getElementById('lcd-title');
       const lcdTotalTime = document.getElementById('lcd-total-time');
-      const albumImg = document.getElementById('album-art-display');
 
       if (lcdFreq) lcdFreq.textContent = `${ep.freq} MHz`;
       if (lcdTitle) lcdTitle.textContent = (activeLanguage === 'en' && ep.titleDub) ? ep.titleDub : ep.title;
       if (lcdTotalTime) lcdTotalTime.textContent = ep.duration || '09:18';
-      if (albumImg) albumImg.style.backgroundImage = `url('${ep.cover}')`;
+      if (lcdArtBackdrop) lcdArtBackdrop.style.backgroundImage = `url('${ep.cover}')`;
 
       // 2. Update Top Horizon Scale & Needle
       const needle = document.getElementById('horizon-needle');
@@ -1852,7 +2002,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     document.getElementById('pill-en').addEventListener('click', () => setLanguage('en'));
 
     // =========================================================================
-    // 5. PHYSICAL CONTROLS & VINYL REVEAL INTERACTION
+    // 5. PHYSICAL CONTROLS & VU METER DYNAMICS
     // =========================================================================
     function setPlaybackVisuals(playing) {
       isPlaying = playing;
@@ -1866,22 +2016,13 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
         if (playIcon) playIcon.textContent = '⏸';
         if (playTxt) playTxt.textContent = 'PAUSE';
         if (ledPlay) ledPlay.classList.add('active-green');
-
-        // Reveal and spin vinyl record
-        if (vinylDisc) {
-          vinylDisc.classList.add('out', 'spinning');
-          isVinylRevealed = true;
-        }
       } else {
         if (playKey) playKey.classList.remove('depressed');
         if (playIcon) playIcon.textContent = '▶';
         if (playTxt) playTxt.textContent = 'PLAY';
         if (ledPlay) ledPlay.classList.remove('active-green');
-
-        // Stop spinning vinyl record
-        if (vinylDisc) {
-          vinylDisc.classList.remove('spinning');
-        }
+        if (vuNeedleLeft) vuNeedleLeft.style.transform = 'rotate(-25deg)';
+        if (vuNeedleRight) vuNeedleRight.style.transform = 'rotate(-25deg)';
       }
     }
 
@@ -1955,20 +2096,6 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     document.getElementById('key-pwr').addEventListener('click', togglePower);
     document.getElementById('key-bass').addEventListener('click', toggleBass);
 
-    // Interactive Vinyl Sleeve Click (Manual Slide In / Out)
-    document.getElementById('album-turntable-bay').addEventListener('click', (e) => {
-      if (e.target.closest('#btn-open-inspect')) return;
-      if (!vinylDisc) return;
-      isVinylRevealed = !isVinylRevealed;
-      if (isVinylRevealed) {
-        vinylDisc.classList.add('out');
-        if (isPlaying) vinylDisc.classList.add('spinning');
-      } else {
-        vinylDisc.classList.remove('out', 'spinning');
-      }
-      playMechanicalClick(1150, 0.03);
-    });
-
     // Vacuum Tube Chamber Click: Tube Warmth DSP
     document.getElementById('tube-chamber').addEventListener('click', () => {
       isTubeWarmth = !isTubeWarmth;
@@ -2035,7 +2162,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       window.addEventListener('touchend', onEnd);
     }
 
-    // Connect Master Tuner Dial (154px)
+    // Connect Master Tuner Dial (160px)
     let tunerAccumulator = 0;
     const dialTuner = document.getElementById('dial-master-tuner');
     setupCircularKnob('dial-master-tuner', (angle, delta) => {
@@ -2061,7 +2188,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       });
     }
 
-    // Connect Directory & Volume Dial (122px)
+    // Connect Directory & Volume Dial (126px)
     const dialVol = document.getElementById('dial-output-vol');
     setupCircularKnob('dial-output-vol', (angle, delta) => {
       dialVol.style.transform = `rotate(${angle}deg)`;
@@ -2118,7 +2245,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 7. DUAL-MODE CRT OSCILLOSCOPE & AUDIO-REACTIVE TUBE & BACKLIGHT
+    // 7. DUAL-MODE CRT OSCILLOSCOPE, AUDIO-REACTIVE TUBE & DUAL VU METERS
     // =========================================================================
     const waveCanvas = document.getElementById('lcd-wave-canvas');
     const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
@@ -2131,18 +2258,22 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
       if (!isPowerOn) return;
 
       let bassEnergy = 0;
+      let midEnergy = 0;
 
       if (analyser && !audio.paused) {
         analyser.getByteFrequencyData(waveData);
         bassEnergy = (waveData[0] + waveData[1] + waveData[2]) / (3 * 255);
+        midEnergy = (waveData[3] + waveData[4] + waveData[5]) / (3 * 255);
       } else if (!audio.paused) {
         for (let i = 0; i < 32; i++) {
           waveData[i] = Math.floor(Math.sin(i * 0.3 + wavePhase) * 90 + 120);
         }
         bassEnergy = 0.4 + Math.sin(wavePhase * 2) * 0.2;
+        midEnergy = 0.35 + Math.cos(wavePhase * 2.5) * 0.2;
       } else {
         waveData.fill(4);
-        bassEnergy = 0.1;
+        bassEnergy = 0.05;
+        midEnergy = 0.05;
       }
       wavePhase += 0.08;
 
@@ -2153,10 +2284,12 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
         tubeFilamentEl.style.filter = `drop-shadow(0 0 ${(6 + bassEnergy * 10).toFixed(1)}px #ffaa00)`;
       }
 
-      // 2. Audio-Reactive Album Backlight Halo
-      if (albumBacklight) {
-        const haloGlow = 0.2 + (bassEnergy * 0.6);
-        albumBacklight.style.boxShadow = `0 0 ${(14 + bassEnergy * 18).toFixed(1)}px rgba(255, 170, 40, ${haloGlow.toFixed(2)})`;
+      // 2. Dual Analog VU Meter Needle Physics (Bouncing to Music Energy)
+      if (vuNeedleLeft && vuNeedleRight) {
+        const targetDegL = -28 + (bassEnergy * 56); // -28 deg to +28 deg
+        const targetDegR = -28 + (midEnergy * 56);
+        vuNeedleLeft.style.transform = `rotate(${targetDegL.toFixed(1)}deg)`;
+        vuNeedleRight.style.transform = `rotate(${targetDegR.toFixed(1)}deg)`;
       }
 
       // 3. CRT Oscilloscope Waveform with Persistence
@@ -2167,6 +2300,15 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
         // Faint black fill for phosphor persistence afterglow trail
         waveCtx.fillStyle = 'rgba(4, 7, 10, 0.28)';
         waveCtx.fillRect(0, 0, w, h);
+
+        // Faint Laboratory Graticule Division Lines
+        waveCtx.strokeStyle = 'rgba(255, 190, 59, 0.08)';
+        waveCtx.lineWidth = 1;
+        waveCtx.beginPath();
+        waveCtx.moveTo(0, h * 0.25); waveCtx.lineTo(w, h * 0.25);
+        waveCtx.moveTo(0, h * 0.5); waveCtx.lineTo(w, h * 0.5);
+        waveCtx.moveTo(0, h * 0.75); waveCtx.lineTo(w, h * 0.75);
+        waveCtx.stroke();
 
         waveCtx.strokeStyle = '#ffbe3b';
         waveCtx.lineWidth = 2.2;
@@ -2317,6 +2459,7 @@ HTML_TEMPLATE = r'''<!DOCTYPE html>
 
     if (btnOpenInspect) btnOpenInspect.addEventListener('click', openArchiveInspector);
     if (lcdVisualChip) lcdVisualChip.addEventListener('click', openArchiveInspector);
+    if (lcdArtBackdrop) lcdArtBackdrop.addEventListener('click', openArchiveInspector);
     if (btnCloseArchive) btnCloseArchive.addEventListener('click', closeArchiveInspector);
     if (btnPostComment) btnPostComment.addEventListener('click', postComment);
     if (commentInput) {
