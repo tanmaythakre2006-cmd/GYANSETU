@@ -1,0 +1,43 @@
+{
+  "name": "GyanSetu • The Bridge of Knowledge",
+  "short_name": "GyanSetu",
+  "description": "Democratizing science and complex human inquiry with hardware DRM and 100% zero-data offline radio suites.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#06090e",
+  "theme_color": "#0d131f",
+  "categories": ["education", "science", "podcasts", "news"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "assets/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pocket Radio (Transistor)",
+      "short_name": "Pocket Radio",
+      "description": "Launch the Handheld Transistor Radio with P2P Optical Mesh Beamer",
+      "url": "/pocket.html",
+      "icons": [{ "src": "assets/images/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tablet Radio Console",
+      "short_name": "Tablet Console",
+      "description": "Launch the Tabletop Appliance Console with Dual VU Meters",
+      "url": "/tablet.html",
+      "icons": [{ "src": "assets/images/logo.png", "sizes": "192x192" }]
+    }
+  ]
+}

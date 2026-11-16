@@ -2081,6 +2081,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Retro Radio Device Edition Selector (Android Phone vs Tab Console)
   initDeviceEditionSelector();
+
+  // Register Global Progressive Web App (PWA) Offline Service Worker
+  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        console.log('[GyanSetu PWA] Service Worker registered successfully with scope:', reg.scope);
+      }).catch((err) => {
+        console.warn('[GyanSetu PWA] Service Worker registration failed:', err);
+      });
+    });
+  }
 });
 
 // ==========================================================
