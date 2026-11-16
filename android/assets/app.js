@@ -437,14 +437,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  progressContainer.addEventListener('click', (e) => {
+  function handleProgressSeek(clientX) {
     const rect = progressContainer.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
+    const seekX = Math.max(0, Math.min(clientX - rect.left, rect.width));
     if (audio.duration) {
-      audio.currentTime = (clickX / width) * audio.duration;
+      audio.currentTime = (seekX / rect.width) * audio.duration;
+      progressFill.style.width = `${(seekX / rect.width) * 100}%`;
     }
+  }
+
+  progressContainer.addEventListener('click', (e) => {
+    handleProgressSeek(e.clientX);
   });
+
+  let isScrubbing = false;
+  progressContainer.addEventListener('touchstart', (e) => {
+    isScrubbing = true;
+    if (e.touches && e.touches[0]) handleProgressSeek(e.touches[0].clientX);
+  }, { passive: true });
+
+  progressContainer.addEventListener('touchmove', (e) => {
+    if (isScrubbing && e.touches && e.touches[0]) handleProgressSeek(e.touches[0].clientX);
+  }, { passive: true });
+
+  progressContainer.addEventListener('touchend', () => {
+    isScrubbing = false;
+  }, { passive: true });
 
   function formatTime(seconds) {
     if (isNaN(seconds)) return '0:00';
@@ -477,7 +495,10 @@ document.addEventListener('DOMContentLoaded', () => {
     currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
     const newSpeed = speeds[currentSpeedIndex];
     audio.playbackRate = newSpeed;
-    speedToggleBtn.textContent = `${newSpeed.toFixed(1)}×`;
+    const formattedSpeed = (newSpeed === 1 || newSpeed === 2) ? `${newSpeed}×` : `${newSpeed}×`;
+    speedToggleBtn.textContent = formattedSpeed;
+    speedToggleBtn.setAttribute('aria-label', `Playback speed: ${newSpeed}x`);
+    showToast(`⏩ Playback Speed: ${newSpeed}×`);
   });
 
   volumeSlider.addEventListener('input', (e) => {

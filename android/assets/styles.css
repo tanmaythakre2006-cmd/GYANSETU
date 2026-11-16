@@ -1934,6 +1934,17 @@ body.liquid-theme {
   font-size: 1.6rem;
   cursor: pointer;
   line-height: 1;
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
 .modal-dismiss-btn:hover {
@@ -5937,7 +5948,8 @@ body.is-host #nav-host-login-btn {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
-    padding: 7px 14px !important;
+    padding: 8px 15px !important;
+    min-height: 38px !important;
     font-size: 0.78rem !important;
     font-weight: 600 !important;
     color: rgba(255, 255, 255, 0.9) !important;
@@ -6575,7 +6587,8 @@ body.is-host #nav-host-login-btn {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
-    padding: 7px 14px !important;
+    padding: 8px 15px !important;
+    min-height: 38px !important;
     font-size: 0.78rem !important;
     font-weight: 600 !important;
     color: rgba(255, 255, 255, 0.9) !important;
@@ -6976,4 +6989,36 @@ body.is-host .btn-host-portal-nav {
   border-color: #5eead4 !important;
   color: #ffffff !important;
   box-shadow: 0 0 12px rgba(80, 155, 147, 0.35);
+}
+
+/* Cycle 6: Episode Card Tactile Feedback */
+.episode-card:active {
+  transform: scale(0.985);
+  transition: transform 0.1s ease;
+}
+
+/* Cycle 7: Notes Modal Momentum Scrolling */
+.notes-dialog-content,
+.modal-scroll-body {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Cycle 8: Light Theme Contrast Polish */
+[data-theme="light"] .dock-track-title {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+[data-theme="light"] .dock-track-sub {
+  color: #0369a1 !important;
+}
+
+/* Cycle 9: Form Input 16px font-size protection */
+@media (max-width: 768px) {
+  input.studio-text-input,
+  textarea.studio-textarea,
+  input.search-bar-input {
+    font-size: 16px !important;
+  }
 }
