@@ -1086,13 +1086,16 @@
             <span id="dock-artist" class="dock-track-sub">GyanSetu Radio • Global Stream</span>
             <!-- Discreet Micro Lingua Switcher Pill -->
             <div class="dock-lingua-dropdown-wrap">
-              <button type="button" id="dock-lingua-btn" class="dock-micro-lingua-btn" title="Switch Language Track (Default: Original)">
+              <button type="button" id="dock-lingua-btn" class="dock-micro-lingua-btn" title="Switch Language Track (Default: Original)" aria-haspopup="true" aria-expanded="false">
                 <span class="lingua-icon">🌐</span>
-                <span id="dock-lingua-label">ORG</span>
+                <span id="dock-lingua-label">EN</span>
                 <span class="lingua-caret">▾</span>
               </button>
-              <div id="dock-lingua-popover" class="dock-lingua-popover hidden">
-                <div class="lingua-popover-header">Language Audio Track</div>
+              <div id="dock-lingua-popover" class="dock-lingua-popover hidden" role="dialog" aria-label="Select Language Audio Track">
+                <div class="lingua-popover-header">
+                  <span>Language Audio Track</span>
+                  <button type="button" class="btn-lingua-popover-close" id="btn-lingua-close" aria-label="Close language selector">&times;</button>
+                </div>
                 <div id="dock-lingua-options-list">
                   <!-- Rendered dynamically based on episode -->
                 </div>

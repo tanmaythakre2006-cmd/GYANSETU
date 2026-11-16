@@ -158,6 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 3. Audio Loading, Playback & Multilingual Language Tracks
+  function getEffectiveLangCode(lang, ep) {
+    if (lang === 'orig') {
+      return (ep && ep.id === 'ep-13') ? 'MR' : 'EN';
+    }
+    return lang.toUpperCase();
+  }
+
   function renderLinguaPopoverOptions() {
     if (!dockLinguaOptionsList) return;
     const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
@@ -165,19 +172,19 @@ document.addEventListener('DOMContentLoaded', () => {
     dockLinguaOptionsList.innerHTML = '';
 
     const isEp13 = (ep.id === 'ep-13');
-    // STRICT USER RULE:
-    // Ep 13 (Marathi original): Available in Original (MR), English (EN), Hindi (HI)
-    // Ep 1-12 (English original): Available in Original (EN), Hindi (HI)
+    // STANDARDIZED MULTILINGUAL TRACKS (Online Website Exclusive)
+    // Ep 13: Original Marathi (Simran Ailani), English Master Dub, Hindi Master Dub
+    // Ep 1-12: Original English (Simran Ailani), Hindi Master Dub
     let options = [];
     if (isEp13) {
       options = [
-        { code: 'orig', label: '🇮🇳 Original Marathi', sub: 'Simran Ailani (Default)', badge: 'ORIGINAL' },
+        { code: 'orig', label: '🇮🇳 Original Marathi', sub: 'Simran Ailani (Studio Master • Default)', badge: 'ORIGINAL' },
         { code: 'en', label: '🇬🇧 English Master', sub: 'Neerja Voice (Studio Dub)', badge: 'STUDIO DUB' },
         { code: 'hi', label: '🇮🇳 Hindi Master', sub: 'Swara Voice (Studio Dub)', badge: 'STUDIO DUB' }
       ];
     } else {
       options = [
-        { code: 'orig', label: '🇬🇧 Original English', sub: 'Simran Ailani (Default)', badge: 'ORIGINAL' },
+        { code: 'orig', label: '🇬🇧 Original English', sub: 'Simran Ailani (Studio Master • Default)', badge: 'ORIGINAL' },
         { code: 'hi', label: '🇮🇳 Hindi Master', sub: 'Swara Voice (Neural Translation)', badge: 'TRANSLATION' }
       ];
     }
@@ -188,21 +195,33 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.className = `btn-lingua-option ${currentTrackLanguage === opt.code ? 'active' : ''}`;
       btn.innerHTML = `
         <div>
-          <div>${opt.label}</div>
-          <div style="font-size:0.62rem; color:rgba(255,255,255,0.5);">${opt.sub}</div>
+          <div style="font-weight:600; font-size:0.8rem; display:flex; align-items:center; gap:6px;">${opt.label}</div>
+          <div style="font-size:0.64rem; color:rgba(255,255,255,0.55); margin-top:2px;">${opt.sub}</div>
         </div>
         <span class="lingua-opt-badge">${opt.badge}</span>
       `;
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
+      
+      const selectOption = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         setTrackLanguage(opt.code);
-        if (dockLinguaPopover) dockLinguaPopover.classList.add('hidden');
-      });
+        if (dockLinguaPopover) {
+          dockLinguaPopover.classList.add('hidden');
+        }
+        if (dockLinguaBtn) {
+          dockLinguaBtn.setAttribute('aria-expanded', 'false');
+        }
+      };
+
+      btn.addEventListener('click', selectOption);
+      btn.addEventListener('touchend', selectOption, { passive: false });
       dockLinguaOptionsList.appendChild(btn);
     });
 
     if (dockLinguaLabel) {
-      dockLinguaLabel.textContent = currentTrackLanguage.toUpperCase();
+      dockLinguaLabel.textContent = getEffectiveLangCode(currentTrackLanguage, ep);
     }
   }
 
@@ -236,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wasPlaying) playAudio();
 
     if (dockLinguaLabel) {
-      dockLinguaLabel.textContent = currentTrackLanguage.toUpperCase();
+      dockLinguaLabel.textContent = getEffectiveLangCode(currentTrackLanguage, ep);
     }
     renderLinguaPopoverOptions();
 
@@ -248,20 +267,51 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast(toastMsgs[lang] || 'Language updated');
   }
 
-  // Lingua Micro-Switcher Event Listeners
+  // Lingua Micro-Switcher Event Listeners (Universal Desktop & Mobile Touch Safe)
   if (dockLinguaBtn && dockLinguaPopover) {
-    dockLinguaBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      renderLinguaPopoverOptions();
-      dockLinguaPopover.classList.toggle('hidden');
-    });
+    const toggleLinguaPopover = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const isHidden = dockLinguaPopover.classList.contains('hidden');
+      if (isHidden) {
+        renderLinguaPopoverOptions();
+        dockLinguaPopover.classList.remove('hidden');
+        dockLinguaBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        dockLinguaPopover.classList.add('hidden');
+        dockLinguaBtn.setAttribute('aria-expanded', 'false');
+      }
+    };
 
-    document.addEventListener('click', (e) => {
+    dockLinguaBtn.addEventListener('click', toggleLinguaPopover);
+    dockLinguaBtn.addEventListener('touchend', toggleLinguaPopover, { passive: false });
+
+    // Dedicated Header Close Button for Mobile
+    const linguaCloseBtn = document.getElementById('btn-lingua-close');
+    if (linguaCloseBtn) {
+      const closeHandler = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        dockLinguaPopover.classList.add('hidden');
+        dockLinguaBtn.setAttribute('aria-expanded', 'false');
+      };
+      linguaCloseBtn.addEventListener('click', closeHandler);
+      linguaCloseBtn.addEventListener('touchend', closeHandler, { passive: false });
+    }
+
+    // Dismiss when tapping outside popover or button
+    const outsideDismissHandler = (e) => {
       if (!dockLinguaPopover.contains(e.target) && !dockLinguaBtn.contains(e.target)) {
         dockLinguaPopover.classList.add('hidden');
+        dockLinguaBtn.setAttribute('aria-expanded', 'false');
       }
-    });
+    };
+    document.addEventListener('click', outsideDismissHandler);
+    document.addEventListener('touchend', outsideDismissHandler);
   }
 
   function loadEpisode(index, autoPlay = true) {
