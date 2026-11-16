@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/pocket", "destination": "/pocket.html" },
+    { "source": "/tablet", "destination": "/tablet.html" },
+    { "source": "/console", "destination": "/tablet.html" },
+    { "source": "/radio", "destination": "/pocket.html" }
+  ]
+}
