@@ -2078,4 +2078,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Network Monitoring
   initNetworkDetection();
+
+  // Initialize Retro Radio Device Edition Selector (Android Phone vs Tab Console)
+  initDeviceEditionSelector();
 });
+
+// ==========================================================
+// RETRO RADIO DEVICE EDITION SELECTOR (ANDROID PHONE vs TAB CONSOLE)
+// ==========================================================
+function initDeviceEditionSelector() {
+  const btnAndroid = document.getElementById('btn-device-android');
+  const btnTablet = document.getElementById('btn-device-tablet');
+  const btnReloadToggle = document.getElementById('btn-switch-and-reload');
+  const reloadText = document.getElementById('reload-action-btn-text');
+  const indicatorTag = document.getElementById('edition-indicator-tag');
+  const titleEl = document.getElementById('app-download-name');
+  const tagEl = document.getElementById('app-download-tag');
+  const containerAndroid = document.getElementById('edition-android-container');
+  const containerTablet = document.getElementById('edition-tablet-container');
+  const overlay = document.getElementById('edition-reloading-overlay');
+
+  if (!btnAndroid || !btnTablet) return;
+
+  // 1. Determine active device edition (Default is strictly Android Smartphone)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlDevice = urlParams.get('device');
+  const currentDevice = (urlDevice === 'tablet') ? 'tablet' : 'android';
+
+  // 2. Render state
+  function renderEditionState(device) {
+    if (device === 'tablet') {
+      btnAndroid.classList.remove('active');
+      btnTablet.classList.add('active');
+      if (indicatorTag) {
+        indicatorTag.innerHTML = '📟 Tablet Console Active';
+        indicatorTag.style.borderColor = 'rgba(80, 155, 147, 0.6)';
+        indicatorTag.style.color = '#5eead4';
+        indicatorTag.style.background = 'rgba(80, 155, 147, 0.2)';
+      }
+      if (titleEl) titleEl.textContent = 'GyanSetu Tablet Radio Console';
+      if (tagEl) tagEl.textContent = 'Tab Edition • Dual Analog VU Meters, Dark Mesh & 160px Knurled Tuner';
+      if (containerAndroid) containerAndroid.style.display = 'none';
+      if (containerTablet) containerTablet.style.display = 'grid';
+      if (reloadText) reloadText.textContent = 'Switch to Android Phone & Reload Options';
+    } else {
+      btnAndroid.classList.add('active');
+      btnTablet.classList.remove('active');
+      if (indicatorTag) {
+        indicatorTag.innerHTML = '📱 Android Smartphone Active (Default)';
+        indicatorTag.style.borderColor = 'rgba(249, 124, 34, 0.4)';
+        indicatorTag.style.color = '#ffa048';
+        indicatorTag.style.background = 'rgba(249, 124, 34, 0.15)';
+      }
+      if (titleEl) titleEl.textContent = 'GyanSetu Pocket Radio';
+      if (tagEl) tagEl.textContent = 'Android Smartphone Edition • Handheld Transistor Radio • Pocket Offline Suite';
+      if (containerAndroid) containerAndroid.style.display = 'grid';
+      if (containerTablet) containerTablet.style.display = 'none';
+      if (reloadText) reloadText.textContent = 'Switch to Tablet (Tab) Edition & Reload Options';
+    }
+  }
+
+  // 3. Trigger reload to switch target
+  function switchAndReload(targetDevice) {
+    try {
+      localStorage.setItem('gyansetu_device_edition', targetDevice);
+    } catch (e) {}
+
+    if (overlay) overlay.classList.add('is-active');
+    if (btnReloadToggle) btnReloadToggle.classList.add('reloading');
+    renderEditionState(targetDevice);
+
+    setTimeout(() => {
+      try {
+        const currentPath = window.location.pathname || '/index.html';
+        window.location.href = currentPath + '?device=' + targetDevice + '#app';
+      } catch (e) {
+        window.location.search = '?device=' + targetDevice;
+      }
+    }, 280);
+  }
+
+  btnAndroid.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentDevice !== 'android') {
+      switchAndReload('android');
+    }
+  });
+
+  btnTablet.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentDevice !== 'tablet') {
+      switchAndReload('tablet');
+    }
+  });
+
+  if (btnReloadToggle) {
+    btnReloadToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = currentDevice === 'tablet' ? 'android' : 'tablet';
+      switchAndReload(target);
+    });
+  }
+
+  // Initial render on page load
+  renderEditionState(currentDevice);
+}
+

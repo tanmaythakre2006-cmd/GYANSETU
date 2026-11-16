@@ -715,16 +715,98 @@
                   <div class="app-badge-glow"></div>
                 </div>
 
-                <h3 class="app-download-name">GyanSetu Android Suite</h3>
-                <p class="app-download-tag">Tri-Edition Offline Locker • Global Accessibility Suite v2.0</p>
+                <!-- Device Edition Switcher Terminal -->
+                <div class="device-edition-terminal">
+                  <div class="device-edition-header">
+                    <span class="edition-terminal-label">CHOOSE RETRO RADIO DEVICE TARGET</span>
+                    <span class="edition-active-indicator" id="edition-indicator-tag">📱 Android Smartphone Active (Default)</span>
+                  </div>
+                  <div class="device-toggle-group">
+                    <button type="button" class="device-tab-btn active" id="btn-device-android" data-device="android">
+                      <span class="device-tab-icon">📱</span>
+                      <span class="device-tab-text">Android Phone</span>
+                      <span class="device-tab-sub">Handheld Transistor (Default)</span>
+                    </button>
+                    <button type="button" class="device-tab-btn" id="btn-device-tablet" data-device="tablet">
+                      <span class="device-tab-icon">📟</span>
+                      <span class="device-tab-text">Tablet Console</span>
+                      <span class="device-tab-sub">Landscape Tabletop Appliance</span>
+                    </button>
+                  </div>
+                  
+                  <!-- Tactile Reload Action Button -->
+                  <div class="edition-reload-action-row">
+                    <button type="button" class="btn-edition-reload" id="btn-switch-and-reload" title="Switch device target and reload options">
+                      <svg class="reload-spin-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                      <span id="reload-action-btn-text">Switch to Tablet (Tab) Edition &amp; Reload Options</span>
+                    </button>
+                  </div>
+                </div>
 
-                <!-- Tri APK Edition Grid -->
-                <div class="tri-apk-grid">
-                  <!-- Edition 1: Flagship Vault -->
+                <h3 class="app-download-name" id="app-download-name">GyanSetu Pocket Radio</h3>
+                <p class="app-download-tag" id="app-download-tag">Android Smartphone Edition • Handheld Transistor Radio • Pocket Offline Suite</p>
+
+                <!-- 1. Android Smartphone Edition Grid (Default) -->
+                <div class="tri-apk-grid" id="edition-android-container">
+                  <!-- Edition 1: Pocket Full Vault (Offline) -->
+                  <div class="apk-card pocket-edition">
+                    <span class="apk-card-badge">Pocket Radio</span>
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Pocket Full Vault</h4>
+                      <p class="apk-card-sub">Handheld Smart Retro Radio • All 13 Episodes Pre-Bundled Offline</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val highlight-amber">28 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Format</span>
+                        <span class="mini-spec-val">Transistor</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu-PocketRadio.apk" download="GyanSetu-PocketRadio.apk" class="liquid-btn btn-secondary-glass btn-download-action" style="border-color: rgba(255, 157, 0, 0.45); color: #ffaa11;">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Download Pocket Radio (28MB)</span>
+                    </a>
+                    <a href="pocket.html?device=android" target="_blank" class="btn-simulator">
+                      <span>📻 Launch Pocket Radio</span>
+                      <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                    </a>
+                  </div>
+
+                  <!-- Edition 2: Pocket Ultra-Lite Shell -->
+                  <div class="apk-card lite-edition">
+                    <span class="apk-card-badge lite-badge">Ultra-Lite</span>
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Pocket Lite Shell</h4>
+                      <p class="apk-card-sub">Featherweight Handheld Shell • Low Bandwidth P2P / Cloud Stream</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val" style="color: #34d399; font-weight: 800;">2.7 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Sharing</span>
+                        <span class="mini-spec-val">Cloud Stream</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu-PocketRadio-Lite.apk" download="GyanSetu-PocketRadio-Lite.apk" class="liquid-btn btn-secondary-glass btn-download-action" style="border-color: rgba(16, 185, 129, 0.45); color: #34d399;">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Download Pocket Lite (2.7MB)</span>
+                    </a>
+                    <a href="pocket.html?device=android" target="_blank" class="btn-simulator" style="color: #34d399;">
+                      <span>⚡ Launch Lite Pocket Radio</span>
+                      <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M13 3H6M13 3V10"/></svg>
+                    </a>
+                  </div>
+
+                  <!-- Edition 3: Flagship Web Portal Vault -->
                   <div class="apk-card">
                     <div class="apk-card-header">
-                      <h4 class="apk-card-title">Flagship Vault</h4>
-                      <p class="apk-card-sub">Liquid Glass VisionOS UI &amp; Studio Audio</p>
+                      <h4 class="apk-card-title">Flagship Portal Vault</h4>
+                      <p class="apk-card-sub">Liquid Glass VisionOS Web Portal &amp; Studio Media Locker</p>
                     </div>
                     <div class="apk-mini-specs">
                       <div class="mini-spec-item">
@@ -736,6 +818,97 @@
                         <span class="mini-spec-val highlight-amber">FLAG_SECURE</span>
                       </div>
                     </div>
+                    <a href="assets/downloads/GyanSetu.apk" download="GyanSetu.apk" class="liquid-btn btn-primary-gradient btn-download-action">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Flagship Vault (93MB)</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- 2. Tablet (Tab) Edition Grid (Tab Specific Options) -->
+                <div class="tri-apk-grid" id="edition-tablet-container" style="display: none;">
+                  <!-- Edition 1: Tablet Console Masterpiece (Offline) -->
+                  <div class="apk-card tab-edition-card">
+                    <span class="apk-card-badge tab-edition-badge">Tablet Console</span>
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Tablet Console Masterpiece</h4>
+                      <p class="apk-card-sub">Tabletop Appliance Radio • Dual VU Meters, Ruby Beacon &amp; Knurled Dials</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val highlight-amber">28 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Screen</span>
+                        <span class="mini-spec-val" style="color: #5eead4;">1280×800+ Tab</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu-TabletConsole.apk" download="GyanSetu-TabletConsole.apk" class="liquid-btn btn-secondary-glass btn-download-action" style="border-color: rgba(80, 155, 147, 0.5); color: #5eead4;">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Download Tablet Console (28MB)</span>
+                    </a>
+                    <a href="pocket.html?device=tablet" target="_blank" class="btn-simulator" style="border-color: rgba(80, 155, 147, 0.4); color: #5eead4; background: rgba(80, 155, 147, 0.1);">
+                      <span>📻 Launch Tabletop Console (1280×800)</span>
+                      <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3H6M13 3V10"/></svg>
+                    </a>
+                  </div>
+
+                  <!-- Edition 2: Tablet Ultra-Lite Shell -->
+                  <div class="apk-card tab-edition-card">
+                    <span class="apk-card-badge tab-edition-badge">Tab Lite</span>
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Tablet Lite Shell</h4>
+                      <p class="apk-card-sub">Featherweight Tabletop Shell • Cloud Streaming Appliance</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val" style="color: #34d399; font-weight: 800;">2.7 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Interface</span>
+                        <span class="mini-spec-val">Tab Widescreen</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu-TabletConsole-Lite.apk" download="GyanSetu-TabletConsole-Lite.apk" class="liquid-btn btn-secondary-glass btn-download-action" style="border-color: rgba(16, 185, 129, 0.45); color: #34d399;">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Download Tablet Lite (2.7MB)</span>
+                    </a>
+                    <a href="pocket.html?device=tablet" target="_blank" class="btn-simulator" style="border-color: rgba(16, 185, 129, 0.4); color: #34d399; background: rgba(16, 185, 129, 0.1);">
+                      <span>⚡ Launch Lite Tablet Console</span>
+                      <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3H6M13 3V10"/></svg>
+                    </a>
+                  </div>
+
+                  <!-- Edition 3: Flagship Web Portal Vault -->
+                  <div class="apk-card">
+                    <div class="apk-card-header">
+                      <h4 class="apk-card-title">Flagship Portal Vault</h4>
+                      <p class="apk-card-sub">Liquid Glass VisionOS Web Portal &amp; Studio Media Locker</p>
+                    </div>
+                    <div class="apk-mini-specs">
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">Size</span>
+                        <span class="mini-spec-val">93 MB</span>
+                      </div>
+                      <div class="mini-spec-item">
+                        <span class="mini-spec-lbl">DRM</span>
+                        <span class="mini-spec-val highlight-amber">FLAG_SECURE</span>
+                      </div>
+                    </div>
+                    <a href="assets/downloads/GyanSetu.apk" download="GyanSetu.apk" class="liquid-btn btn-primary-gradient btn-download-action">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      <span>Flagship Vault (93MB)</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Reloading Glass Overlay -->
+                <div class="edition-reloading-overlay" id="edition-reloading-overlay">
+                  <div class="edition-reloading-spinner"></div>
+                  <div class="edition-reloading-text">Reloading Retro Radio Options...</div>
+                </div>
                     <a href="assets/downloads/GyanSetu.apk" download="GyanSetu.apk" class="liquid-btn btn-primary-gradient btn-download-action">
                       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                       <span>Flagship (93MB)</span>

@@ -6648,3 +6648,235 @@ body.is-host .btn-host-portal-nav {
     font-size: 0.76rem;
   }
 }
+
+
+/* ==========================================================
+   RETRO RADIO DUAL DEVICE EDITION SWITCHER TERMINAL (PHONE vs TAB)
+   ========================================================== */
+.device-edition-terminal {
+  background: rgba(10, 20, 35, 0.75);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(80, 155, 147, 0.35);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.device-edition-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 4px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.edition-terminal-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--teal-light);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.edition-active-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(249, 124, 34, 0.15);
+  border: 1px solid rgba(249, 124, 34, 0.4);
+  color: var(--orange-bright);
+  animation: indicatorGlowPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes indicatorGlowPulse {
+  0% { box-shadow: 0 0 6px rgba(249, 124, 34, 0.2); }
+  100% { box-shadow: 0 0 14px rgba(249, 124, 34, 0.5); }
+}
+
+.device-toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.device-tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  position: relative;
+  outline: none;
+}
+
+.device-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.device-tab-btn.active {
+  background: linear-gradient(135deg, rgba(80, 155, 147, 0.2), rgba(249, 124, 34, 0.15));
+  border: 1.5px solid var(--orange-bright);
+  box-shadow: 0 8px 24px rgba(249, 124, 34, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.device-tab-icon {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+  transition: transform 0.2s ease;
+}
+
+.device-tab-btn:hover .device-tab-icon {
+  transform: scale(1.1);
+}
+
+.device-tab-text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.device-tab-sub {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.device-tab-btn.active .device-tab-sub {
+  color: var(--teal-light);
+}
+
+/* Tactile Reload Row */
+.edition-reload-action-row {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-edition-reload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, rgba(80, 155, 147, 0.25), rgba(7, 19, 34, 0.85));
+  border: 1px solid rgba(80, 155, 147, 0.5);
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-edition-reload:hover {
+  background: linear-gradient(135deg, rgba(80, 155, 147, 0.4), rgba(249, 124, 34, 0.25));
+  border-color: var(--orange-bright);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(249, 124, 34, 0.2);
+}
+
+.btn-edition-reload .reload-spin-icon {
+  transition: transform 0.5s ease;
+}
+
+.btn-edition-reload:hover .reload-spin-icon {
+  transform: rotate(180deg);
+}
+
+.btn-edition-reload.reloading .reload-spin-icon {
+  animation: spinReload 0.75s linear infinite;
+}
+
+@keyframes spinReload {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Device specific card stylings */
+.tab-edition-card {
+  border-color: rgba(80, 155, 147, 0.45) !important;
+  background: linear-gradient(165deg, rgba(80, 155, 147, 0.06), rgba(20, 24, 30, 0.6)) !important;
+}
+
+.tab-edition-card:hover {
+  border-color: rgba(80, 155, 147, 0.75) !important;
+  box-shadow: 0 10px 30px rgba(80, 155, 147, 0.2) !important;
+}
+
+.tab-edition-badge {
+  background: rgba(80, 155, 147, 0.2) !important;
+  color: #5eead4 !important;
+  border-color: rgba(80, 155, 147, 0.5) !important;
+}
+
+/* Reloading glass overlay */
+.edition-reloading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 19, 34, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.edition-reloading-overlay.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.edition-reloading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(80, 155, 147, 0.2);
+  border-top-color: var(--orange-bright);
+  border-radius: 50%;
+  animation: spinReload 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+
+.edition-reloading-text {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .device-toggle-group {
+    grid-template-columns: 1fr;
+  }
+}

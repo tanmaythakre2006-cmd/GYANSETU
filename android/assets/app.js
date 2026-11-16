@@ -59,6 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const openQrLightboxBtn = document.getElementById('open-qr-lightbox-btn');
   const closeQrModalBtn = document.getElementById('close-qr-modal-btn');
 
+  // Multilingual Audio Track Switcher Elements
+  const dockLinguaBtn = document.getElementById('dock-lingua-btn');
+  const dockLinguaLabel = document.getElementById('dock-lingua-label');
+  const dockLinguaPopover = document.getElementById('dock-lingua-popover');
+  const dockLinguaOptionsList = document.getElementById('dock-lingua-options-list');
+  let currentTrackLanguage = 'orig'; // STRICT DEFAULT: 'orig' (Original composition by Simran Ailani)
+
   // 2G Ghost Stream & Network Elements
   const ghostModeBtn = document.getElementById('ghost-mode-btn');
   const ghostNavLabel = document.getElementById('ghost-nav-label');
@@ -150,13 +157,123 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Audio Loading and Playback Controls
+  // 3. Audio Loading, Playback & Multilingual Language Tracks
+  function renderLinguaPopoverOptions() {
+    if (!dockLinguaOptionsList) return;
+    const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+    if (!ep) return;
+    dockLinguaOptionsList.innerHTML = '';
+
+    const isEp13 = (ep.id === 'ep-13');
+    // STRICT USER RULE:
+    // Ep 13 (Marathi original): Available in Original (MR), English (EN), Hindi (HI)
+    // Ep 1-12 (English original): Available in Original (EN), Hindi (HI)
+    let options = [];
+    if (isEp13) {
+      options = [
+        { code: 'orig', label: '🇮🇳 Original Marathi', sub: 'Simran Ailani (Default)', badge: 'ORIGINAL' },
+        { code: 'en', label: '🇬🇧 English Master', sub: 'Neerja Voice (Studio Dub)', badge: 'STUDIO DUB' },
+        { code: 'hi', label: '🇮🇳 Hindi Master', sub: 'Swara Voice (Studio Dub)', badge: 'STUDIO DUB' }
+      ];
+    } else {
+      options = [
+        { code: 'orig', label: '🇬🇧 Original English', sub: 'Simran Ailani (Default)', badge: 'ORIGINAL' },
+        { code: 'hi', label: '🇮🇳 Hindi Master', sub: 'Swara Voice (Neural Translation)', badge: 'TRANSLATION' }
+      ];
+    }
+
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `btn-lingua-option ${currentTrackLanguage === opt.code ? 'active' : ''}`;
+      btn.innerHTML = `
+        <div>
+          <div>${opt.label}</div>
+          <div style="font-size:0.62rem; color:rgba(255,255,255,0.5);">${opt.sub}</div>
+        </div>
+        <span class="lingua-opt-badge">${opt.badge}</span>
+      `;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setTrackLanguage(opt.code);
+        if (dockLinguaPopover) dockLinguaPopover.classList.add('hidden');
+      });
+      dockLinguaOptionsList.appendChild(btn);
+    });
+
+    if (dockLinguaLabel) {
+      dockLinguaLabel.textContent = currentTrackLanguage.toUpperCase();
+    }
+  }
+
+  function setTrackLanguage(lang) {
+    if (currentTrackLanguage === lang) return;
+    const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+    currentTrackLanguage = lang;
+
+    const curTime = audio.currentTime;
+    const wasPlaying = isPlaying;
+
+    let targetSrc = ep.audioSrc;
+    if (ep.id === 'ep-13') {
+      if (lang === 'en' && ep.audioSrcEnglish) targetSrc = ep.audioSrcEnglish;
+      if (lang === 'hi' && ep.audioSrcHindi) targetSrc = ep.audioSrcHindi;
+    } else {
+      if (lang === 'hi' && ep.audioSrcHindi) targetSrc = ep.audioSrcHindi;
+    }
+
+    const finalSrc = isGhostMode 
+      ? targetSrc.replace('assets/audio/', 'assets/audio_ghost/') 
+      : targetSrc;
+
+    audio.src = finalSrc;
+    audio.onloadedmetadata = () => {
+      if (curTime > 0 && curTime < audio.duration) {
+        audio.currentTime = curTime;
+      }
+    };
+
+    if (wasPlaying) playAudio();
+
+    if (dockLinguaLabel) {
+      dockLinguaLabel.textContent = currentTrackLanguage.toUpperCase();
+    }
+    renderLinguaPopoverOptions();
+
+    const toastMsgs = {
+      orig: `🎙️ Playing Original Composition (${ep.hosts[0]} • Default)`,
+      en: `🇬🇧 Switched to English Master Translation (Neerja Voice)`,
+      hi: `🇮🇳 Switched to Hindi Master Translation (Swara Voice)`
+    };
+    showToast(toastMsgs[lang] || 'Language updated');
+  }
+
+  // Lingua Micro-Switcher Event Listeners
+  if (dockLinguaBtn && dockLinguaPopover) {
+    dockLinguaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      renderLinguaPopoverOptions();
+      dockLinguaPopover.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dockLinguaPopover.contains(e.target) && !dockLinguaBtn.contains(e.target)) {
+        dockLinguaPopover.classList.add('hidden');
+      }
+    });
+  }
+
   function loadEpisode(index, autoPlay = true) {
     if (index < 0) index = GYAN_SETU_EPISODES.length - 1;
     if (index >= GYAN_SETU_EPISODES.length) index = 0;
     
     currentEpisodeIndex = index;
     const ep = GYAN_SETU_EPISODES[currentEpisodeIndex];
+
+    // STRICT USER RULE: Always reset to Original composition by default!
+    currentTrackLanguage = 'orig';
+    renderLinguaPopoverOptions();
 
     const targetAudioSrc = isGhostMode 
       ? ep.audioSrc.replace('assets/audio/', 'assets/audio_ghost/') 
@@ -231,6 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const isCurrent = (epId === GYAN_SETU_EPISODES[currentEpisodeIndex].id);
       btn.querySelector('span').textContent = (isCurrent && playing) ? 'Pause' : 'Listen Now';
     });
+
+    if (typeof updateTpPlayState === 'function') {
+      updateTpPlayState(playing);
+    }
   }
 
   function highlightActiveCard() {
@@ -831,7 +952,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAnalyticsUI();
   initFirebaseRealtimeSync();
   detectAndRecordVisit();
-});
 
 
 
@@ -854,16 +974,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isGhostMode) {
       document.body.classList.add('ghost-mode-active');
-      if (ghostModeBtn) ghostModeBtn.classList.add('active');
-      if (ghostNavLabel) ghostNavLabel.textContent = '2G Ghost: ON';
-      if (dockGhostBtn) dockGhostBtn.classList.add('active');
-      if (dockGhostLabel) dockGhostLabel.textContent = '2G Active';
+      document.querySelectorAll('.btn-data-saver-switch').forEach(btn => {
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+      });
+      document.querySelectorAll('.ds-state-tag').forEach(lbl => {
+        lbl.textContent = 'ON';
+      });
+      if (dockGhostBtn) {
+        dockGhostBtn.classList.add('active');
+        dockGhostBtn.setAttribute('aria-checked', 'true');
+      }
+      if (dockGhostLabel) dockGhostLabel.textContent = 'ON';
     } else {
       document.body.classList.remove('ghost-mode-active');
-      if (ghostModeBtn) ghostModeBtn.classList.remove('active');
-      if (ghostNavLabel) ghostNavLabel.textContent = '2G Ghost Mode';
-      if (dockGhostBtn) dockGhostBtn.classList.remove('active');
-      if (dockGhostLabel) dockGhostLabel.textContent = '2G Saver';
+      document.querySelectorAll('.btn-data-saver-switch').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-checked', 'false');
+      });
+      document.querySelectorAll('.ds-state-tag').forEach(lbl => {
+        lbl.textContent = 'OFF';
+      });
+      if (dockGhostBtn) {
+        dockGhostBtn.classList.remove('active');
+        dockGhostBtn.setAttribute('aria-checked', 'false');
+      }
+      if (dockGhostLabel) dockGhostLabel.textContent = 'OFF';
     }
 
     // Seamless audio hot-swap if playing or loaded
@@ -888,11 +1024,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isAuto) {
-      showToast('⚡ 2G Network Detected: Auto-engaged Ghost Stream (82% Data Savings)');
+      showToast('⚡ Low Bandwidth Detected • Data Saver Auto-Engaged (82% Saved)');
     } else {
       showToast(isGhostMode 
-        ? '⚡ 2G Ghost Stream Enabled • 82% Lower Bandwidth' 
-        : '🎧 High-Fidelity Studio Stream Restored');
+        ? '⚡ Data Saver ON • 82% Lower Bandwidth (Voice Stream)' 
+        : '🎧 Data Saver OFF • High-Fidelity Studio Stream Restored');
     }
   }
 
@@ -917,11 +1053,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Button Click Handlers
-    if (ghostModeBtn) {
-      ghostModeBtn.addEventListener('click', () => {
+    document.querySelectorAll('.btn-data-saver-switch').forEach(btn => {
+      btn.addEventListener('click', () => {
         setGhostMode(!isGhostMode, false);
       });
-    }
+    });
 
     if (dockGhostBtn) {
       dockGhostBtn.addEventListener('click', () => {
@@ -936,5 +1072,1115 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // =========================================================================
+  // 12. GLOBAL LIVE TRANSMISSION STUDIO & COLLABORATIVE CURATION ENGINE
+  // =========================================================================
+  const liveStudioModal = document.getElementById('live-studio-modal');
+  const closeLiveStudioBtn = document.getElementById('close-live-studio-btn');
+  const navLiveStudioBtn = document.getElementById('nav-live-studio-btn');
+  const studioTabBtns = document.querySelectorAll('.studio-tab-btn[data-tab]');
+  const studioTabPanes = document.querySelectorAll('.studio-tab-pane');
+
+  // Tab 1 Elements
+  const liveStreamCanvas = document.getElementById('live-stream-canvas');
+  const btnToggleLiveListen = document.getElementById('btn-toggle-live-listen');
+  const liveListenLabel = document.getElementById('live-listen-label');
+  const liveListenIcon = document.getElementById('live-listen-icon');
+  const liveReactionsFloatingZone = document.getElementById('live-reactions-floating-zone');
+  let isListeningLiveStream = false;
+  let liveWaveformAnimId = null;
+
+  // Tab 2 Elements (Go Live & 10-Min Timer)
+  const goliveAuthGate = document.getElementById('golive-auth-gate');
+  const goliveCockpit = document.getElementById('golive-cockpit');
+  const studioPasscodeInput = document.getElementById('studio-passcode-input');
+  const btnVerifyPasscode = document.getElementById('btn-verify-passcode');
+  const btnRequestPasscodeTab = document.getElementById('btn-request-passcode-tab');
+  const studioCountdownClock = document.getElementById('studio-countdown-clock');
+  const btnStartLiveTransmit = document.getElementById('btn-start-live-transmit');
+  const btnTransmitLabel = document.getElementById('btn-transmit-label');
+  const btnRelockStudio = document.getElementById('btn-relock-studio');
+  const cockpitLamp = document.getElementById('cockpit-lamp');
+  const cockpitStatusText = document.getElementById('cockpit-status-text');
+  const studioMicCanvas = document.getElementById('studio-mic-canvas');
+  const studioVuMeter = document.getElementById('studio-vu-meter');
+  const micStatusDot = document.getElementById('mic-status-dot');
+  const micStatusLabel = document.getElementById('mic-status-label');
+
+  let isLiveTransmitting = false;
+  let liveSessionTimeRemaining = 600; // 10 minutes (600 seconds)
+  let liveSessionInterval = null;
+  let broadcasterMediaStream = null;
+  let broadcasterAudioCtx = null;
+  let broadcasterAnalyser = null;
+  let broadcasterAnimId = null;
+
+  // Broadcast Channel for Real-time Inter-window Communication
+  let liveBroadcastChannel = null;
+  try {
+    liveBroadcastChannel = new BroadcastChannel('gyansetu_live_transmission_channel');
+    liveBroadcastChannel.onmessage = (event) => {
+      const data = event.data;
+      if (data && data.type === 'LIVE_START') {
+        const liveOnAirText = document.getElementById('live-on-air-status-text');
+        const liveTitle = document.getElementById('live-stream-title');
+        const liveSpeaker = document.getElementById('live-speaker-name');
+        if (liveOnAirText) liveOnAirText.textContent = `🔴 TRANSMITTING LIVE FROM ${data.country.toUpperCase()}`;
+        if (liveTitle) liveTitle.textContent = data.topic || 'Global Collaborative Inquiry';
+        if (liveSpeaker) liveSpeaker.textContent = data.name || 'Guest Broadcaster';
+        showToast(`🔴 Live Broadcast Started: ${data.name} (${data.country})`);
+      }
+    };
+  } catch (e) {}
+
+  // Open & Close Studio Modal
+  function openLiveStudioModal(initialTab = 'listen') {
+    if (liveStudioModal) {
+      liveStudioModal.classList.add('is-active');
+      switchStudioTab(initialTab);
+      startLiveStreamWaveform();
+      renderCuratorQueue();
+    }
+  }
+
+  function closeLiveStudioModal() {
+    if (liveStudioModal) {
+      liveStudioModal.classList.remove('is-active');
+      if (liveWaveformAnimId) cancelAnimationFrame(liveWaveformAnimId);
+    }
+  }
+
+    const mobileLiveStudioBtn = document.getElementById('mobile-live-studio-btn');
+  if (mobileLiveStudioBtn) {
+    mobileLiveStudioBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  }
+
+  if (navLiveStudioBtn) {
+    navLiveStudioBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  }
+
+  document.querySelectorAll('.studio-open-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  });
+
+  if (radioModeBtn) {
+    radioModeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLiveStudioModal('listen');
+    });
+  }
+
+  if (closeLiveStudioBtn) {
+    closeLiveStudioBtn.addEventListener('click', closeLiveStudioModal);
+  }
+
+  if (liveStudioModal) {
+    liveStudioModal.addEventListener('click', (e) => {
+      if (e.target === liveStudioModal) closeLiveStudioModal();
+    });
+  }
+
+  // Tab Switching
+  function switchStudioTab(targetTab) {
+    studioTabBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === targetTab);
+    });
+
+    studioTabPanes.forEach(pane => {
+      pane.classList.remove('active');
+    });
+
+    const activePane = document.getElementById(`tab-content-${targetTab}`);
+    if (activePane) activePane.classList.add('active');
+
+    if (targetTab === 'curator') {
+      renderCuratorQueue();
+    }
+  }
+
+  studioTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchStudioTab(btn.dataset.tab);
+    });
+  });
+
+  if (btnRequestPasscodeTab) {
+    btnRequestPasscodeTab.addEventListener('click', () => {
+      switchStudioTab('collaborate');
+    });
+  }
+
+  // --- TAB 1: Live Stream Waveform & Reactions ---
+  function startLiveStreamWaveform() {
+    if (!liveStreamCanvas) return;
+    const ctx = liveStreamCanvas.getContext('2d');
+    let phase = 0;
+
+    function renderWave() {
+      ctx.clearRect(0, 0, liveStreamCanvas.width, liveStreamCanvas.height);
+      const width = liveStreamCanvas.width;
+      const height = liveStreamCanvas.height;
+      const mid = height / 2;
+
+      // Draw background glow grid
+      ctx.strokeStyle = 'rgba(239, 68, 68, 0.1)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, mid);
+      ctx.lineTo(width, mid);
+      ctx.stroke();
+
+      // Draw active sine harmonic lines
+      const colors = ['rgba(239, 68, 68, 0.8)', 'rgba(56, 189, 248, 0.7)', 'rgba(255, 190, 68, 0.6)'];
+      colors.forEach((col, cIdx) => {
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let x = 0; x < width; x += 4) {
+          const freq = 0.02 + cIdx * 0.01;
+          const amp = (isListeningLiveStream || isLiveTransmitting) ? 24 : 10;
+          const y = mid + Math.sin(x * freq + phase + cIdx) * amp * Math.sin(x / width * Math.PI);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      });
+
+      phase += 0.05;
+      liveWaveformAnimId = requestAnimationFrame(renderWave);
+    }
+
+    if (liveWaveformAnimId) cancelAnimationFrame(liveWaveformAnimId);
+    renderWave();
+  }
+
+  if (btnToggleLiveListen) {
+    btnToggleLiveListen.addEventListener('click', () => {
+      isListeningLiveStream = !isListeningLiveStream;
+      if (isListeningLiveStream) {
+        liveListenLabel.textContent = 'Disconnect from Live Stream';
+        liveListenIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        btnToggleLiveListen.classList.remove('btn-primary-gradient');
+        btnToggleLiveListen.classList.add('btn-secondary-glass');
+        showToast('🔴 Connected to Global Live Transmission • Nairobi Relay Active');
+      } else {
+        liveListenLabel.textContent = 'Tune In to Live Transmission';
+        liveListenIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        btnToggleLiveListen.classList.add('btn-primary-gradient');
+        btnToggleLiveListen.classList.remove('btn-secondary-glass');
+        showToast('Disconnected from Live Stream');
+      }
+    });
+  }
+
+  // Floating Reactions
+  document.querySelectorAll('.btn-live-reaction').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const reaction = btn.dataset.reaction;
+      const countEl = btn.querySelector('.reaction-count');
+      if (countEl) {
+        const cur = parseInt(countEl.textContent, 10) || 0;
+        countEl.textContent = cur + 1;
+      }
+
+      // Spawn floating emoji
+      if (liveReactionsFloatingZone) {
+        const emojiMap = { insight: '💡', clap: '👏', globe: '🌍', heart: '❤️' };
+        const bubble = document.createElement('div');
+        bubble.className = 'floating-reaction-emoji';
+        bubble.textContent = emojiMap[reaction] || '✨';
+        bubble.style.left = `${Math.floor(Math.random() * 80)}px`;
+        liveReactionsFloatingZone.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 2200);
+      }
+    });
+  });
+
+  // --- TAB 2: Go Live Authorization & 10-Minute Timer Cockpit ---
+  if (btnVerifyPasscode && studioPasscodeInput) {
+    btnVerifyPasscode.addEventListener('click', () => {
+      const code = studioPasscodeInput.value.trim().toUpperCase();
+      const codeObj = verifyAndConsumePasscode(code);
+      if (codeObj) {
+        goliveAuthGate.classList.add('hidden');
+        goliveCockpit.classList.remove('hidden');
+        
+        // Auto-fill guest metadata if registered by Lead Host
+        if (codeObj.guest) {
+          const nameInput = document.getElementById('broadcaster-name');
+          const countryInput = document.getElementById('broadcaster-country');
+          const topicInput = document.getElementById('broadcaster-topic');
+          if (nameInput && !nameInput.value) nameInput.value = codeObj.guest;
+          if (countryInput && !countryInput.value) countryInput.value = codeObj.country || '';
+          if (topicInput && !topicInput.value) topicInput.value = codeObj.topic || '';
+        }
+        
+        initBroadcasterMic();
+        showToast(`🔓 Broadcast Authorized: Welcome ${codeObj.guest || 'Guest'} (10-Minute Studio)`);
+      } else {
+        studioPasscodeInput.style.borderColor = '#ef4444';
+        showToast('❌ Invalid or Expired Passcode. Request authorization from Lead Host.');
+        setTimeout(() => studioPasscodeInput.style.borderColor = '', 2500);
+      }
+    });
+  }
+
+  if (btnRelockStudio) {
+    btnRelockStudio.addEventListener('click', () => {
+      stopLiveTransmission();
+      goliveCockpit.classList.add('hidden');
+      goliveAuthGate.classList.remove('hidden');
+      if (studioPasscodeInput) studioPasscodeInput.value = '';
+    });
+  }
+
+  async function initBroadcasterMic() {
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        if (micStatusLabel) micStatusLabel.textContent = 'Web Audio Studio Stream (Simulated)';
+        return;
+      }
+      broadcasterMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      if (micStatusDot) micStatusDot.style.background = '#10b981';
+      if (micStatusLabel) micStatusLabel.textContent = 'Studio Microphone Connected (Low Latency)';
+
+      broadcasterAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const source = broadcasterAudioCtx.createMediaStreamSource(broadcasterMediaStream);
+      broadcasterAnalyser = broadcasterAudioCtx.createAnalyser();
+      broadcasterAnalyser.fftSize = 64;
+      source.connect(broadcasterAnalyser);
+
+      renderBroadcasterMicVU();
+    } catch (err) {
+      console.warn('Microphone permission or hardware access note:', err);
+      if (micStatusDot) micStatusDot.style.background = '#ffaa11';
+      if (micStatusLabel) micStatusLabel.textContent = 'Audio Stream Ready (Browser Sandbox)';
+      startSimulatedMicVU();
+    }
+  }
+
+  function renderBroadcasterMicVU() {
+    if (!studioMicCanvas || !broadcasterAnalyser) return;
+    const ctx = studioMicCanvas.getContext('2d');
+    const dataArray = new Uint8Array(broadcasterAnalyser.frequencyBinCount);
+
+    function draw() {
+      broadcasterAnalyser.getByteFrequencyData(dataArray);
+      ctx.clearRect(0, 0, studioMicCanvas.width, studioMicCanvas.height);
+      const barWidth = (studioMicCanvas.width / dataArray.length) * 1.5;
+      let x = 0;
+
+      for (let i = 0; i < dataArray.length; i++) {
+        const barHeight = (dataArray[i] / 255) * studioMicCanvas.height;
+        ctx.fillStyle = isLiveTransmitting ? '#ef4444' : '#10b981';
+        ctx.fillRect(x, studioMicCanvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth + 1;
+      }
+
+      // Update VU meter blocks
+      let sum = 0;
+      for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+      const avg = sum / dataArray.length;
+      if (studioVuMeter) {
+        const segs = studioVuMeter.querySelectorAll('.vu-seg');
+        const activeCount = Math.floor((avg / 255) * segs.length);
+        segs.forEach((s, idx) => s.classList.toggle('active', idx < activeCount));
+      }
+
+      broadcasterAnimId = requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  function startSimulatedMicVU() {
+    if (broadcasterAnimId) cancelAnimationFrame(broadcasterAnimId);
+    let tick = 0;
+    function sim() {
+      tick++;
+      if (studioVuMeter) {
+        const segs = studioVuMeter.querySelectorAll('.vu-seg');
+        const level = isLiveTransmitting ? Math.floor(Math.sin(tick * 0.2) * 4 + 4) : 1;
+        segs.forEach((s, idx) => s.classList.toggle('active', idx < level));
+      }
+      broadcasterAnimId = requestAnimationFrame(sim);
+    }
+    sim();
+  }
+
+  if (btnStartLiveTransmit) {
+    btnStartLiveTransmit.addEventListener('click', () => {
+      if (!isLiveTransmitting) {
+        startLiveTransmission();
+      } else {
+        stopLiveTransmission();
+      }
+    });
+  }
+
+  function startLiveTransmission() {
+    isLiveTransmitting = true;
+    liveSessionTimeRemaining = 600; // 10 minutes
+    if (cockpitLamp) cockpitLamp.classList.add('live');
+    if (cockpitStatusText) cockpitStatusText.textContent = '🔴 ON AIR • LIVE TRANSMITTING ACROSS GYANSETU';
+    btnTransmitLabel.textContent = '⏹️ Conclude & End Broadcast';
+    btnStartLiveTransmit.style.background = 'linear-gradient(135deg, #1e293b 0%, #334155 100%)';
+
+    const bName = (document.getElementById('broadcaster-name') && document.getElementById('broadcaster-name').value.trim()) || 'Guest Researcher';
+    const bCountry = (document.getElementById('broadcaster-country') && document.getElementById('broadcaster-country').value.trim()) || 'Nairobi, Kenya';
+    const bTopic = (document.getElementById('broadcaster-topic') && document.getElementById('broadcaster-topic').value.trim()) || 'Global South Inquiry';
+
+    // Broadcast message via BroadcastChannel
+    if (liveBroadcastChannel) {
+      liveBroadcastChannel.postMessage({
+        type: 'LIVE_START',
+        name: bName,
+        country: bCountry,
+        topic: bTopic
+      });
+    }
+
+    showToast(`🔴 Transmission Active! You are Live to the World (10:00 Countdown Started)`);
+
+    // 10-Minute Timer
+    if (liveSessionInterval) clearInterval(liveSessionInterval);
+    liveSessionInterval = setInterval(() => {
+      liveSessionTimeRemaining--;
+      const mins = Math.floor(liveSessionTimeRemaining / 60);
+      const secs = liveSessionTimeRemaining % 60;
+      if (studioCountdownClock) {
+        studioCountdownClock.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        if (liveSessionTimeRemaining <= 120) {
+          studioCountdownClock.classList.add('warning');
+        }
+      }
+
+      if (liveSessionTimeRemaining <= 0) {
+        stopLiveTransmission();
+        showToast('⏰ 10-Minute Session Gracefully Concluded. Thank you for broadcasting!');
+      }
+    }, 1000);
+  }
+
+  function stopLiveTransmission() {
+    isLiveTransmitting = false;
+    if (liveSessionInterval) clearInterval(liveSessionInterval);
+    if (cockpitLamp) cockpitLamp.classList.remove('live');
+    if (cockpitStatusText) cockpitStatusText.textContent = 'STUDIO AUTHORIZED • STANDBY MODE';
+    if (btnTransmitLabel) btnTransmitLabel.textContent = '🔴 Transmit Live Across GyanSetu Network';
+    if (btnStartLiveTransmit) btnStartLiveTransmit.style.background = '';
+    if (studioCountdownClock) {
+      studioCountdownClock.textContent = '10:00';
+      studioCountdownClock.classList.remove('warning');
+    }
+  }
+
+  // --- TAB 3: Collaborate & In-Browser Audio Recorder ---
+  const collabForm = document.getElementById('collab-submission-form');
+  const collabReceiptBox = document.getElementById('collab-receipt-box');
+  const receiptIdTag = document.getElementById('receipt-id-tag');
+  const btnResetCollabForm = document.getElementById('btn-reset-collab-form');
+  const audioModeRadios = document.querySelectorAll('input[name="audio-mode-choice"]');
+  const collabUploadZone = document.getElementById('collab-upload-zone');
+  const collabRecordZone = document.getElementById('collab-record-zone');
+  const collabFileInput = document.getElementById('collab-file-input');
+  const collabFileNameLabel = document.getElementById('collab-file-name-label');
+
+  // In-Browser Recorder Elements
+  const btnCollabRecordStart = document.getElementById('btn-collab-record-start');
+  const btnCollabRecordStop = document.getElementById('btn-collab-record-stop');
+  const collabRecorderTimer = document.getElementById('collab-recorder-timer');
+  const collabRecordedAudioPreview = document.getElementById('collab-recorded-audio-preview');
+
+  let mediaRecorder = null;
+  let recordedAudioChunks = [];
+  let recordTimerInterval = null;
+  let recordSeconds = 0;
+  let recordedBlobUrl = null;
+
+  audioModeRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      const mode = radio.value;
+      if (mode === 'upload') {
+        collabUploadZone.classList.add('active');
+        collabRecordZone.classList.remove('active');
+      } else {
+        collabUploadZone.classList.remove('active');
+        collabRecordZone.classList.add('active');
+      }
+    });
+  });
+
+  if (collabFileInput && collabFileNameLabel) {
+    collabFileInput.addEventListener('change', () => {
+      const file = collabFileInput.files[0];
+      if (file) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        collabFileNameLabel.textContent = `Selected: ${file.name} (${sizeMb} MB)`;
+      } else {
+        collabFileNameLabel.textContent = 'No file selected';
+      }
+    });
+  }
+
+  // In-Browser Studio Recording Engine
+  if (btnCollabRecordStart && btnCollabRecordStop) {
+    btnCollabRecordStart.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        recordedAudioChunks = [];
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) recordedAudioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(recordedAudioChunks, { type: 'audio/mp3' });
+          if (recordedBlobUrl) URL.revokeObjectURL(recordedBlobUrl);
+          recordedBlobUrl = URL.createObjectURL(audioBlob);
+          if (collabRecordedAudioPreview) {
+            collabRecordedAudioPreview.src = recordedBlobUrl;
+            collabRecordedAudioPreview.classList.remove('hidden');
+          }
+          showToast('🎙️ Voice Recording Captured! You can review audio below.');
+        };
+
+        mediaRecorder.start();
+        btnCollabRecordStart.disabled = true;
+        btnCollabRecordStop.disabled = false;
+        recordSeconds = 0;
+
+        if (recordTimerInterval) clearInterval(recordTimerInterval);
+        recordTimerInterval = setInterval(() => {
+          recordSeconds++;
+          const mins = Math.floor(recordSeconds / 60);
+          const secs = recordSeconds % 60;
+          if (collabRecorderTimer) {
+            collabRecorderTimer.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+          }
+        }, 1000);
+      } catch (err) {
+        showToast('Microphone access needed to record in-browser.');
+      }
+    });
+
+    btnCollabRecordStop.addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        mediaRecorder.stream.getTracks().forEach(t => t.stop());
+      }
+      if (recordTimerInterval) clearInterval(recordTimerInterval);
+      btnCollabRecordStart.disabled = false;
+      btnCollabRecordStop.disabled = true;
+    });
+  }
+
+  // Form Submission
+  if (collabForm) {
+    collabForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('collab-name').value.trim();
+      const contact = document.getElementById('collab-contact').value.trim();
+      const country = document.getElementById('collab-country').value.trim();
+      const language = document.getElementById('collab-language').value.trim();
+      const title = document.getElementById('collab-title').value.trim();
+      const abstract = document.getElementById('collab-abstract').value.trim();
+
+      const receiptId = `GS-SUB-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      const newProposal = {
+        id: receiptId,
+        author: name,
+        contact: contact,
+        country: country,
+        language: language,
+        title: title,
+        abstract: abstract,
+        date: 'October 31, 2026',
+        audioSrc: recordedBlobUrl || 'assets/audio/ep-1-hindi-master.mp3',
+        status: 'Pending Review'
+      };
+
+      // Save to localStorage
+      try {
+        const stored = JSON.parse(localStorage.getItem('gyansetu_guest_proposals') || '[]');
+        stored.unshift(newProposal);
+        localStorage.setItem('gyansetu_guest_proposals', JSON.stringify(stored));
+      } catch (e) {}
+
+      if (receiptIdTag) receiptIdTag.textContent = receiptId;
+      collabForm.classList.add('hidden');
+      if (collabReceiptBox) collabReceiptBox.classList.remove('hidden');
+
+      showToast(`🚀 Transmission Logged: ${receiptId}. Sent to Simran Ailani's Curation Vault.`);
+      renderCuratorQueue();
+    });
+  }
+
+  if (btnResetCollabForm) {
+    btnResetCollabForm.addEventListener('click', () => {
+      if (collabForm) {
+        collabForm.reset();
+        collabForm.classList.remove('hidden');
+      }
+      if (collabReceiptBox) collabReceiptBox.classList.add('hidden');
+      if (collabRecordedAudioPreview) {
+        collabRecordedAudioPreview.classList.add('hidden');
+        collabRecordedAudioPreview.src = '';
+      }
+      if (collabFileNameLabel) collabFileNameLabel.textContent = 'No file selected';
+    });
+  }
+
+  // --- TAB 4: Curator Review Console (Simran Ailani Review Queue) ---
+  const defaultGlobalProposals = [
+    {
+      id: "GS-SUB-8491",
+      author: "Amara Okafor",
+      country: "Lagos, Nigeria • University of Lagos",
+      language: "English & Yoruba",
+      title: "Cassava Cyanide Detoxification: Indigenous Chemistry meets Modern Biochemistry",
+      abstract: "How traditional fermentation methods developed over centuries in West Africa chemically neutralize toxic linamarin glucosides in cassava roots, creating a safe dietary staple.",
+      audioSrc: "assets/audio/ep-2-hindi-master.mp3",
+      date: "October 30, 2026",
+      status: "Ready for Approval"
+    },
+    {
+      id: "GS-SUB-7922",
+      author: "Kofi Mensah",
+      country: "Nairobi, Kenya • University of Nairobi",
+      language: "English & Swahili",
+      title: "Geothermal Reservoirs of the Great Rift Valley: Volcanology & Frugal Clean Power",
+      abstract: "An exploration into the steam vents and subsurface thermodynamics of Olkaria, revealing how geological fissures provide decentralized green baseload electricity for rural communities.",
+      audioSrc: "assets/audio/ep-4-hindi-master.mp3",
+      date: "October 29, 2026",
+      status: "Ready for Approval"
+    }
+  ];
+
+  function getCuratorProposals() {
+    try {
+      const stored = localStorage.getItem('gyansetu_guest_proposals');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return defaultGlobalProposals;
+  }
+
+  function renderCuratorQueue() {
+    const listEl = document.getElementById('curator-queue-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    const proposals = getCuratorProposals();
+
+    proposals.forEach((p, idx) => {
+      const card = document.createElement('div');
+      card.className = 'curator-proposal-card';
+      card.innerHTML = `
+        <div class="proposal-card-header">
+          <div>
+            <span class="proposal-author">🌍 ${p.author} (${p.country})</span>
+            <span style="font-size:0.68rem; color:rgba(255,255,255,0.4); margin-left:8px;">Receipt: ${p.id} • ${p.date}</span>
+          </div>
+          <span class="proposal-lang-badge">${p.language}</span>
+        </div>
+        <h5 class="proposal-title">${p.title}</h5>
+        <p class="proposal-abstract">${p.abstract}</p>
+        <div class="proposal-actions">
+          <button type="button" class="liquid-btn btn-secondary-glass btn-sm btn-preview-proposal-audio">
+            <span>▶ Listen Audio</span>
+          </button>
+          <button type="button" class="btn-approve-catalog" data-id="${p.id}" data-idx="${idx}">
+            <span>✅ Approve &amp; Add to Global Catalog</span>
+          </button>
+        </div>
+      `;
+
+      // Audio preview click
+      const previewBtn = card.querySelector('.btn-preview-proposal-audio');
+      if (previewBtn) {
+        previewBtn.addEventListener('click', () => {
+          audio.src = p.audioSrc;
+          playAudio();
+          showToast(`🎧 Previewing Submission: "${p.title}"`);
+        });
+      }
+
+      // Approve & Add to Catalog
+      const approveBtn = card.querySelector('.btn-approve-catalog');
+      if (approveBtn) {
+        approveBtn.addEventListener('click', () => {
+          approveProposalToCatalog(p);
+        });
+      }
+
+      listEl.appendChild(card);
+    });
+  }
+
+  function approveProposalToCatalog(proposal) {
+    // Check if already in episodes
+    const exists = GYAN_SETU_EPISODES.some(e => e.title === proposal.title);
+    if (exists) {
+      showToast('⚠️ Episode is already in the official broadcast catalog!');
+      return;
+    }
+
+    const newEp = {
+      id: `ep-collab-${Date.now()}`,
+      number: GYAN_SETU_EPISODES.length + 1,
+      title: proposal.title,
+      category: "Global Inquiry",
+      date: proposal.date || "October 31, 2026",
+      duration: "6m 15s",
+      durationSec: 375,
+      description: `${proposal.abstract} • Guest Broadcaster: ${proposal.author} (${proposal.country}). Curated & approved by Simran Ailani.`,
+      image: "assets/images/ep1-can-chemistry-explain-consciousness.jpg",
+      audioSrc: proposal.audioSrc,
+      hosts: ["Simran Ailani", proposal.author]
+    };
+
+    // Add to active episodes list
+    GYAN_SETU_EPISODES.unshift(newEp);
+    filteredEpisodes = [...GYAN_SETU_EPISODES];
+    renderEpisodeCards(filteredEpisodes);
+    loadEpisode(0, true);
+
+    showToast(`🎉 Approved! "${proposal.title}" by ${proposal.author} is now live in the official GyanSetu catalog!`);
+    closeLiveStudioModal();
+  }
+
+  // =========================================================================
+  // 13. ROLE-BASED ACCESS CONTROL (RBAC) & LEAD HOST AUTHENTICATION ENGINE
+  // =========================================================================
+
+  const AUTHORIZED_HOSTS = [
+    { email: 'tanmaythakre2006@gmail.com', name: 'Tanmay Thakre' },
+    { email: 'simranailani2@gmail.com', name: 'Simran Ailani' }
+  ];
+  const AUTHORIZED_HOST_PASSWORD = '22102024';
+
+  // Elements: Gateway & Auth
+  const gatewayModal = document.getElementById('gyansetu-gateway-modal');
+  const btnChooseListener = document.getElementById('btn-gateway-choose-listener');
+  const btnChooseHost = document.getElementById('btn-gateway-choose-host');
+  const gatewayViewChoose = document.getElementById('gateway-view-choose');
+  const gatewayViewLogin = document.getElementById('gateway-view-login');
+  const btnGatewayBack = document.getElementById('btn-gateway-back-to-choose');
+  const hostLoginForm = document.getElementById('gateway-host-login-form');
+  const hostEmailInput = document.getElementById('gateway-host-email');
+  const hostPasswordInput = document.getElementById('gateway-host-password');
+  const hostLoginError = document.getElementById('gateway-login-error');
+  
+  // Navbar & Deck Host Badges
+  const navHostLoginBtn = document.getElementById('nav-host-login-btn');
+  const navHostLogoutBtn = document.getElementById('nav-host-logout-btn');
+  const btnHostDeckLogout = document.getElementById('btn-host-deck-logout');
+  const navHostNameTag = document.getElementById('nav-host-name-tag');
+  const curatorLoggedInLabel = document.getElementById('curator-logged-in-label');
+
+  // Passcode Mint Elements
+  const btnMintPasscode = document.getElementById('btn-mint-passcode');
+  const mintGuestName = document.getElementById('mint-guest-name');
+  const mintGuestCountry = document.getElementById('mint-guest-country');
+  const mintGuestTopic = document.getElementById('mint-guest-topic');
+  const mintedCodeResultBox = document.getElementById('minted-code-result-box');
+  const mintedCodeText = document.getElementById('minted-code-text');
+  const btnCopyMintedCode = document.getElementById('btn-copy-minted-code');
+  const activeCodesListEl = document.getElementById('active-codes-list');
+
+  // Role Session Accessors
+  function getActiveUserRole() {
+    return sessionStorage.getItem('gyansetu_user_role');
+  }
+
+  function getActiveHostEmail() {
+    return (sessionStorage.getItem('gyansetu_host_email') || '').trim().toLowerCase();
+  }
+
+  function isHostAuthenticated() {
+    const role = getActiveUserRole();
+    const email = getActiveHostEmail();
+    return role === 'host' && AUTHORIZED_HOSTS.some(h => h.email.toLowerCase() === email);
+  }
+
+  function getHostProfile() {
+    const email = getActiveHostEmail();
+    return AUTHORIZED_HOSTS.find(h => h.email.toLowerCase() === email) || { name: 'Lead Curator' };
+  }
+
+  // Update UI based on active role
+  function updateRoleUI() {
+    const hostActive = isHostAuthenticated();
+    if (hostActive) {
+      document.body.classList.add('is-host');
+      const profile = getHostProfile();
+      document.querySelectorAll('#nav-host-name-tag, #mob-nav-host-name-tag').forEach(el => {
+        el.textContent = `Host: ${profile.name}`;
+      });
+      if (curatorLoggedInLabel) curatorLoggedInLabel.textContent = `Lead Host Session Active: ${profile.name}`;
+      
+      // Render host exclusive components
+      renderActiveCodesList();
+      renderCuratorQueue();
+    } else {
+      document.body.classList.remove('is-host');
+      
+      // If user had curator tab open, switch back to listen tab
+      const curatorTabPane = document.getElementById('tab-content-curator');
+      if (curatorTabPane && curatorTabPane.classList.contains('active')) {
+        curatorTabPane.classList.remove('active');
+        const listenPane = document.getElementById('tab-content-listen');
+        if (listenPane) listenPane.classList.add('active');
+        studioTabBtns.forEach(btn => {
+          if (btn.getAttribute('data-tab') === 'listen') btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+      }
+    }
+  }
+
+  // Gateway Modal Controller
+  function initGatewayModal() {
+    const role = getActiveUserRole();
+    
+    // If user has not chosen role in this session, display gateway
+    if (!role) {
+      if (gatewayModal) gatewayModal.classList.add('is-active');
+    } else {
+      updateRoleUI();
+    }
+
+    // Choice 1: Listener
+    if (btnChooseListener) {
+      btnChooseListener.addEventListener('click', () => {
+        sessionStorage.setItem('gyansetu_user_role', 'listener');
+        if (gatewayModal) gatewayModal.classList.remove('is-active');
+        updateRoleUI();
+        showToast('🎧 Welcome to GyanSetu! Enjoy unrestricted global broadcasts.');
+      });
+    }
+
+    // Choice 2: Lead Host Login
+    if (btnChooseHost) {
+      btnChooseHost.addEventListener('click', () => {
+        if (gatewayViewChoose) gatewayViewChoose.classList.remove('active');
+        if (gatewayViewLogin) gatewayViewLogin.classList.add('active');
+        if (hostEmailInput) hostEmailInput.focus();
+      });
+    }
+
+    // Back to role selection
+    if (btnGatewayBack) {
+      btnGatewayBack.addEventListener('click', () => {
+        if (gatewayViewLogin) gatewayViewLogin.classList.remove('active');
+        if (gatewayViewChoose) gatewayViewChoose.classList.add('active');
+        if (hostLoginError) hostLoginError.classList.add('hidden');
+      });
+    }
+
+    // Host Login Form Submission
+    if (hostLoginForm) {
+      hostLoginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = (hostEmailInput ? hostEmailInput.value : '').trim().toLowerCase();
+        const pwd = (hostPasswordInput ? hostPasswordInput.value : '').trim();
+
+        const match = AUTHORIZED_HOSTS.find(h => h.email.toLowerCase() === email);
+        if (match && pwd === AUTHORIZED_HOST_PASSWORD) {
+          sessionStorage.setItem('gyansetu_user_role', 'host');
+          sessionStorage.setItem('gyansetu_host_email', email);
+          if (gatewayModal) gatewayModal.classList.remove('is-active');
+          if (hostLoginError) hostLoginError.classList.add('hidden');
+          
+          updateRoleUI();
+          showToast(`🎉 Lead Host Authenticated: Welcome, ${match.name}!`);
+        } else {
+          if (hostLoginError) {
+            hostLoginError.classList.remove('hidden');
+            hostLoginError.style.animation = 'none';
+            void hostLoginError.offsetWidth; // trigger reflow
+            hostLoginError.style.animation = 'shake 0.3s ease';
+          }
+        }
+      });
+    }
+
+    // Host Portal buttons click (open login directly)
+    document.querySelectorAll('.btn-host-portal-nav').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (gatewayModal) {
+          if (gatewayViewChoose) gatewayViewChoose.classList.remove('active');
+          if (gatewayViewLogin) gatewayViewLogin.classList.add('active');
+          gatewayModal.classList.add('is-active');
+          if (hostEmailInput) hostEmailInput.focus();
+        }
+      });
+    });
+
+    // Host Logout Handlers
+    function handleLogout() {
+      sessionStorage.setItem('gyansetu_user_role', 'listener');
+      sessionStorage.removeItem('gyansetu_host_email');
+      updateRoleUI();
+      showToast('👋 Host session logged out. Reverted to Listener mode.');
+    }
+
+    document.querySelectorAll('.btn-host-logout').forEach(btn => {
+      btn.addEventListener('click', handleLogout);
+    });
+    if (btnHostDeckLogout) btnHostDeckLogout.addEventListener('click', handleLogout);
+  }
+
+  // --- Dynamic 10-Minute Passcode Minting Engine ---
+  const DEFAULT_PASSCODES = [
+    { code: 'GS-AFRICA-2026', guest: 'Global South Initiative', country: 'Africa', topic: 'Solar Chemistry', issuedAt: 'Oct 31, 2026', status: 'ACTIVE' },
+    { code: 'GS-LIVE', guest: 'Live Host Override', country: 'Global Station', topic: 'Live Editorial', issuedAt: 'Oct 31, 2026', status: 'ACTIVE' },
+    { code: 'GS-STUDENT', guest: 'Student Researcher', country: 'India', topic: 'Biomolecules', issuedAt: 'Oct 31, 2026', status: 'ACTIVE' }
+  ];
+
+  function getIssuedPasscodes() {
+    try {
+      const stored = localStorage.getItem('gyansetu_issued_passcodes');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return DEFAULT_PASSCODES;
+  }
+
+  function saveIssuedPasscodes(list) {
+    localStorage.setItem('gyansetu_issued_passcodes', JSON.stringify(list));
+  }
+
+  function verifyAndConsumePasscode(enteredCode) {
+    const list = getIssuedPasscodes();
+    const found = list.find(p => p.code.toUpperCase() === enteredCode && p.status === 'ACTIVE');
+    if (found) {
+      // Mark as used unless it is the permanent host override
+      if (found.code !== 'GS-LIVE') {
+        found.status = 'USED';
+        saveIssuedPasscodes(list);
+        renderActiveCodesList();
+      }
+      return found;
+    }
+    return null;
+  }
+
+  function renderActiveCodesList() {
+    if (!activeCodesListEl) return;
+    activeCodesListEl.innerHTML = '';
+    const list = getIssuedPasscodes();
+
+    list.slice().reverse().forEach((item, revIdx) => {
+      const origIdx = list.length - 1 - revIdx;
+      const row = document.createElement('div');
+      row.className = 'active-code-row';
+      const statusClass = item.status === 'ACTIVE' ? 'active' : 'used';
+      
+      row.innerHTML = `
+        <div>
+          <span class="active-code-key">${item.code}</span>
+          <span class="active-code-meta"> &bull; ${item.guest} (${item.country || 'Global'})</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="active-code-status-pill ${statusClass}">${item.status}</span>
+          ${item.status === 'ACTIVE' ? `<button type="button" class="btn-revoke-code" data-idx="${origIdx}" style="background:none; border:none; color:#ef4444; font-size:0.7rem; cursor:pointer;" title="Revoke Passcode">✕ Revoke</button>` : ''}
+        </div>
+      `;
+
+      const revokeBtn = row.querySelector('.btn-revoke-code');
+      if (revokeBtn) {
+        revokeBtn.addEventListener('click', () => {
+          list[origIdx].status = 'REVOKED';
+          saveIssuedPasscodes(list);
+          renderActiveCodesList();
+          showToast(`Passcode ${item.code} revoked.`);
+        });
+      }
+
+      activeCodesListEl.appendChild(row);
+    });
+  }
+
+  // Passcode Minting Button
+  if (btnMintPasscode) {
+    btnMintPasscode.addEventListener('click', () => {
+      const gName = (mintGuestName ? mintGuestName.value : '').trim() || 'Global Guest Broadcaster';
+      const gCountry = (mintGuestCountry ? mintGuestCountry.value : '').trim() || 'Global';
+      const gTopic = (mintGuestTopic ? mintGuestTopic.value : '').trim() || 'Knowledge Inquiry';
+
+      // Clean country slug (e.g. "Kenya" -> "KENYA", "Lagos, Nigeria" -> "NIGERIA")
+      let slug = gCountry.replace(/[^a-zA-Z]/g, '').toUpperCase();
+      if (!slug || slug.length < 3) slug = 'STUDENT';
+      if (slug.length > 7) slug = slug.substring(0, 7);
+
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const newCode = `GS-${slug}-${randNum}`;
+
+      const list = getIssuedPasscodes();
+      list.push({
+        code: newCode,
+        guest: gName,
+        country: gCountry,
+        topic: gTopic,
+        issuedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        status: 'ACTIVE'
+      });
+      saveIssuedPasscodes(list);
+
+      // Display newly minted code box
+      if (mintedCodeResultBox && mintedCodeText) {
+        mintedCodeText.textContent = newCode;
+        mintedCodeResultBox.classList.remove('hidden');
+      }
+
+      renderActiveCodesList();
+      showToast(`🔑 Passcode ${newCode} minted for ${gName}!`);
+
+      // Clear input fields
+      if (mintGuestName) mintGuestName.value = '';
+      if (mintGuestCountry) mintGuestCountry.value = '';
+      if (mintGuestTopic) mintGuestTopic.value = '';
+    });
+  }
+
+  // Copy minted code button
+  if (btnCopyMintedCode && mintedCodeText) {
+    btnCopyMintedCode.addEventListener('click', () => {
+      const code = mintedCodeText.textContent.trim();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(() => {
+          showToast(`📋 Code "${code}" copied to clipboard! Send to your guest.`);
+        });
+      } else {
+        showToast(`Passcode: ${code}`);
+      }
+    });
+  }
+
+  // Initialize Gateway Modal & Role State
+  initGatewayModal();
+
   // Initialize Network Monitoring
   initNetworkDetection();
+
+  // Initialize Retro Radio Device Edition Selector (Android Phone vs Tab Console)
+  initDeviceEditionSelector();
+});
+
+// ==========================================================
+// RETRO RADIO DEVICE EDITION SELECTOR (ANDROID PHONE vs TAB CONSOLE)
+// ==========================================================
+function initDeviceEditionSelector() {
+  const btnAndroid = document.getElementById('btn-device-android');
+  const btnTablet = document.getElementById('btn-device-tablet');
+  const btnReloadToggle = document.getElementById('btn-switch-and-reload');
+  const reloadText = document.getElementById('reload-action-btn-text');
+  const indicatorTag = document.getElementById('edition-indicator-tag');
+  const titleEl = document.getElementById('app-download-name');
+  const tagEl = document.getElementById('app-download-tag');
+  const containerAndroid = document.getElementById('edition-android-container');
+  const containerTablet = document.getElementById('edition-tablet-container');
+  const overlay = document.getElementById('edition-reloading-overlay');
+
+  if (!btnAndroid || !btnTablet) return;
+
+  // 1. Determine active device edition (Default is strictly Android Smartphone)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlDevice = urlParams.get('device');
+  const currentDevice = (urlDevice === 'tablet') ? 'tablet' : 'android';
+
+  // 2. Render state
+  function renderEditionState(device) {
+    if (device === 'tablet') {
+      btnAndroid.classList.remove('active');
+      btnTablet.classList.add('active');
+      if (indicatorTag) {
+        indicatorTag.innerHTML = '📟 Tablet Console Active';
+        indicatorTag.style.borderColor = 'rgba(80, 155, 147, 0.6)';
+        indicatorTag.style.color = '#5eead4';
+        indicatorTag.style.background = 'rgba(80, 155, 147, 0.2)';
+      }
+      if (titleEl) titleEl.textContent = 'GyanSetu Tablet Radio Console';
+      if (tagEl) tagEl.textContent = 'Tab Edition • Dual Analog VU Meters, Dark Mesh & 160px Knurled Tuner';
+      if (containerAndroid) containerAndroid.style.display = 'none';
+      if (containerTablet) containerTablet.style.display = 'grid';
+      if (reloadText) reloadText.textContent = 'Switch to Android Phone & Reload Options';
+    } else {
+      btnAndroid.classList.add('active');
+      btnTablet.classList.remove('active');
+      if (indicatorTag) {
+        indicatorTag.innerHTML = '📱 Android Smartphone Active (Default)';
+        indicatorTag.style.borderColor = 'rgba(249, 124, 34, 0.4)';
+        indicatorTag.style.color = '#ffa048';
+        indicatorTag.style.background = 'rgba(249, 124, 34, 0.15)';
+      }
+      if (titleEl) titleEl.textContent = 'GyanSetu Pocket Radio';
+      if (tagEl) tagEl.textContent = 'Android Smartphone Edition • Handheld Transistor Radio • Pocket Offline Suite';
+      if (containerAndroid) containerAndroid.style.display = 'grid';
+      if (containerTablet) containerTablet.style.display = 'none';
+      if (reloadText) reloadText.textContent = 'Switch to Tablet (Tab) Edition & Reload Options';
+    }
+  }
+
+  // 3. Trigger reload to switch target
+  function switchAndReload(targetDevice) {
+    try {
+      localStorage.setItem('gyansetu_device_edition', targetDevice);
+    } catch (e) {}
+
+    if (overlay) overlay.classList.add('is-active');
+    if (btnReloadToggle) btnReloadToggle.classList.add('reloading');
+    renderEditionState(targetDevice);
+
+    setTimeout(() => {
+      try {
+        const currentPath = window.location.pathname || '/index.html';
+        window.location.href = currentPath + '?device=' + targetDevice + '#app';
+      } catch (e) {
+        window.location.search = '?device=' + targetDevice;
+      }
+    }, 280);
+  }
+
+  btnAndroid.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentDevice !== 'android') {
+      switchAndReload('android');
+    }
+  });
+
+  btnTablet.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentDevice !== 'tablet') {
+      switchAndReload('tablet');
+    }
+  });
+
+  if (btnReloadToggle) {
+    btnReloadToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = currentDevice === 'tablet' ? 'android' : 'tablet';
+      switchAndReload(target);
+    });
+  }
+
+  // Initial render on page load
+  renderEditionState(currentDevice);
+}
+
