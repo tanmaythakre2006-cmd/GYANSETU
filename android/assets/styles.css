@@ -6880,3 +6880,18 @@ body.is-host .btn-host-portal-nav {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Navigation Tablet Pill */
+.nav-pill-tablet {
+  color: #5eead4 !important;
+  border: 1px solid rgba(80, 155, 147, 0.35) !important;
+  background: rgba(80, 155, 147, 0.08) !important;
+}
+
+.nav-pill-tablet:hover {
+  background: rgba(80, 155, 147, 0.22) !important;
+  border-color: #5eead4 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(80, 155, 147, 0.35);
+}

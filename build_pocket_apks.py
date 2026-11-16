@@ -74,13 +74,18 @@ def main():
     dex_file = os.path.join(dex_dir, "classes.dex")
 
     # 4. Helper to build variant
-    def build_variant(apk_name, include_audio):
-        print(f"PACKAGING: {apk_name} (Include audio: {include_audio})", flush=True)
+    def build_variant(apk_name, default_html, include_audio):
+        print(f"PACKAGING: {apk_name} (Entry: {default_html}, Include audio: {include_audio})", flush=True)
         
         # Use temp directory outside OneDrive to avoid file locks
         temp_dir = tempfile.mkdtemp(prefix=f"gyansetu_{apk_name}_")
         variant_assets = os.path.join(temp_dir, "assets")
         shutil.copytree(os.path.join(android_dir, "assets"), variant_assets)
+        
+        # Point the default launch page
+        if default_html == "tablet.html":
+            # For Tablet Console APK: overwrite pocket.html with tablet.html
+            shutil.copy(os.path.join(variant_assets, "tablet.html"), os.path.join(variant_assets, "pocket.html"))
         
         if not include_audio:
             audio_dir = os.path.join(variant_assets, "assets", "audio")
@@ -121,17 +126,17 @@ def main():
         except Exception:
             pass
 
-    # Build Full Flagship Tablet Appliance (with all 13 episodes)
-    build_variant("GyanSetu-TabletConsole", include_audio=True)
-    shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole.apk"), os.path.join(out_dir, "GyanSetu-PocketRadio.apk"))
-    if os.path.exists(os.path.join(out_dir, "GyanSetu-TabletConsole.apk.idsig")):
-        shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole.apk.idsig"), os.path.join(out_dir, "GyanSetu-PocketRadio.apk.idsig"))
+    # 1. Build Handheld Pocket Transistor Radio (Full Offline 13-Ep)
+    build_variant("GyanSetu-PocketRadio", default_html="pocket.html", include_audio=True)
 
-    # Build Ultra-Lite Mesh Shell
-    build_variant("GyanSetu-TabletConsole-Lite", include_audio=False)
-    shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole-Lite.apk"), os.path.join(out_dir, "GyanSetu-PocketRadio-Lite.apk"))
-    if os.path.exists(os.path.join(out_dir, "GyanSetu-TabletConsole-Lite.apk.idsig")):
-        shutil.copy(os.path.join(out_dir, "GyanSetu-TabletConsole-Lite.apk.idsig"), os.path.join(out_dir, "GyanSetu-PocketRadio-Lite.apk.idsig"))
+    # 2. Build Handheld Pocket Transistor Radio (Ultra-Lite Shell)
+    build_variant("GyanSetu-PocketRadio-Lite", default_html="pocket.html", include_audio=False)
+
+    # 3. Build Flagship Tablet Appliance Console (Full Offline 13-Ep)
+    build_variant("GyanSetu-TabletConsole", default_html="tablet.html", include_audio=True)
+
+    # 4. Build Flagship Tablet Appliance Console (Ultra-Lite Shell)
+    build_variant("GyanSetu-TabletConsole-Lite", default_html="tablet.html", include_audio=False)
 
 if __name__ == "__main__":
     main()
