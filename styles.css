@@ -7022,3 +7022,329 @@ body.is-host .btn-host-portal-nav {
     font-size: 16px !important;
   }
 }
+
+/* ==========================================================================
+   ANDROID PORTRAIT FLAGSHIP EXPERIENCE (MOBILE APP TRANSFORMATION)
+   Engineered for Mobile Portrait Ergonomics, Judging Demos & Material Design
+   ========================================================================== */
+
+/* 1. Android Top App Bar */
+@media (max-width: 768px) {
+  .liquid-nav-container {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    z-index: 998 !important;
+  }
+
+  .liquid-nav {
+    border-radius: 0 0 16px 16px !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    padding: max(6px, env(safe-area-inset-top, 6px)) 14px 8px 14px !important;
+    background: rgba(9, 14, 22, 0.94) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+  }
+
+  .nav-mobile-layout {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .nav-brand-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+
+  .brand-text .brand-tagline {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 0.65rem !important;
+    color: #94a3b8 !important;
+  }
+
+  .mob-actions-cluster {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .mob-appbar-btn {
+    height: 32px !important;
+    padding: 0 10px !important;
+    border-radius: 9999px !important;
+    font-size: 0.72rem !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #f1f5f9 !important;
+  }
+
+  .mob-host-zone .btn-host-portal-nav {
+    height: 32px !important;
+    padding: 0 12px !important;
+    font-size: 0.75rem !important;
+    border-radius: 9999px !important;
+  }
+
+  /* 2. Above-the-Fold Mobile Hero Streamlining */
+  .hero-section {
+    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: 24px !important;
+  }
+
+  .hero-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .mob-onair-capsule {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    background: rgba(16, 185, 129, 0.12) !important;
+    border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    padding: 4px 12px !important;
+    border-radius: 9999px !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    color: #34d399 !important;
+    letter-spacing: 0.4px !important;
+    width: fit-content !important;
+    margin-top: 24px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .hero-brand-badge-card {
+    display: none !important; /* Hide duplicate branding to bring player and headline up */
+  }
+
+  .hero-headline {
+    font-size: clamp(1.55rem, 5.5vw, 1.95rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 8px !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .hero-lead {
+    font-size: 0.86rem !important;
+    line-height: 1.45 !important;
+    color: #94a3b8 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .hero-cta-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+    width: 100% !important;
+  }
+
+  .hero-cta-group > .liquid-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+  }
+
+  .hero-retro-duo {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .hero-retro-duo .btn-retro-launch {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    padding: 8px 10px !important;
+    font-size: 0.74rem !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .btn-retro-pocket {
+    border: 1px solid rgba(255, 170, 17, 0.45) !important;
+    background: linear-gradient(180deg, rgba(255, 170, 17, 0.15), rgba(255, 170, 17, 0.05)) !important;
+    color: #ffaa11 !important;
+  }
+
+  .btn-retro-tablet {
+    border: 1px solid rgba(94, 234, 212, 0.45) !important;
+    background: linear-gradient(180deg, rgba(94, 234, 212, 0.15), rgba(94, 234, 212, 0.05)) !important;
+    color: #5eead4 !important;
+  }
+
+  .hero-metric-bar {
+    padding: 10px 14px !important;
+    border-radius: 14px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .metric-val {
+    font-size: 1.2rem !important;
+  }
+
+  .metric-desc {
+    font-size: 0.62rem !important;
+  }
+
+  /* 3. Android Native Bottom Navigation Bar */
+  .android-bottom-nav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 56px !important;
+    background: rgba(8, 13, 20, 0.96) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.6) !important;
+    z-index: 1000 !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+  }
+
+  .bottom-nav-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    flex: 1 !important;
+    height: 100% !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    text-decoration: none !important;
+    font-size: 0.66rem !important;
+    font-weight: 600 !important;
+    font-family: inherit !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    transition: all 0.15s ease !important;
+    padding: 4px 0 !important;
+  }
+
+  .bottom-nav-item .bnav-icon {
+    font-size: 1.15rem !important;
+    line-height: 1 !important;
+  }
+
+  .bottom-nav-item.active,
+  .bottom-nav-item:hover {
+    color: #5eead4 !important;
+  }
+
+  .bottom-nav-item:active {
+    transform: scale(0.92) !important;
+  }
+
+  /* 4. Dock docked right above Bottom Nav */
+  .liquid-glass-dock {
+    left: 8px !important;
+    right: 8px !important;
+    bottom: calc(56px + max(6px, env(safe-area-inset-bottom, 0px))) !important;
+    height: 56px !important;
+    border-radius: 14px !important;
+    padding: 0 10px !important;
+    z-index: 999 !important;
+    background: rgba(12, 19, 30, 0.94) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .dock-track-column {
+    width: calc(100% - 92px) !important;
+  }
+
+  .dock-artwork-wrap {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .dock-track-title {
+    font-size: 0.82rem !important;
+  }
+
+  .dock-track-sub {
+    font-size: 0.68rem !important;
+  }
+
+  .dock-play-circle {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  /* Body scroll clearance so last items are never hidden */
+  body.liquid-theme {
+    padding-bottom: calc(56px + 56px + 28px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* 5. Mobile Modals as Native Bottom Sheets */
+  .modal-scrim,
+  .gateway-modal-scrim {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  .liquid-glass-modal,
+  .gateway-dialog-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    max-height: 85vh !important;
+    margin: 0 !important;
+    border-bottom: none !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.85) !important;
+    padding: 20px 16px max(24px, env(safe-area-inset-bottom, 24px)) 16px !important;
+  }
+
+  /* Toast notification position */
+  .network-toast {
+    top: calc(56px + env(safe-area-inset-top, 0px) + 8px) !important;
+    z-index: 1001 !important;
+  }
+}
+
+/* Hide Android Bottom Nav and Mobile Pill on Desktop (> 768px) */
+.android-bottom-nav {
+  display: none;
+}
+.mob-onair-capsule {
+  display: none;
+}
+.hero-retro-duo {
+  display: flex;
+  gap: 12px;
+}

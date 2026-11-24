@@ -2153,6 +2153,52 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Retro Radio Device Edition Selector (Android Phone vs Tab Console)
   initDeviceEditionSelector();
 
+  // Initialize Android Native Bottom Navigation Bar active highlights
+  function initAndroidBottomNav() {
+    const bottomNavItems = document.querySelectorAll('.android-bottom-nav .bottom-nav-item');
+    if (!bottomNavItems.length) return;
+
+    bottomNavItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        const href = item.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const targetEl = document.querySelector(href);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+        bottomNavItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+
+    // Auto-update based on scroll position
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 200;
+      const broadcastSection = document.getElementById('broadcast');
+      const episodesSection = document.getElementById('episodes');
+      const appSection = document.getElementById('app');
+
+      const bnavHome = document.getElementById('bnav-home');
+      const bnavEpisodes = document.getElementById('bnav-episodes');
+      const bnavVault = document.getElementById('bnav-vault');
+
+      if (appSection && scrollPos >= appSection.offsetTop - 100) {
+        bottomNavItems.forEach(i => i.classList.remove('active'));
+        if (bnavVault) bnavVault.classList.add('active');
+      } else if (episodesSection && scrollPos >= episodesSection.offsetTop - 100) {
+        bottomNavItems.forEach(i => i.classList.remove('active'));
+        if (bnavEpisodes) bnavEpisodes.classList.add('active');
+      } else if (broadcastSection) {
+        bottomNavItems.forEach(i => i.classList.remove('active'));
+        if (bnavHome) bnavHome.classList.add('active');
+      }
+    }, { passive: true });
+  }
+
+  initAndroidBottomNav();
+
   // Register Global Progressive Web App (PWA) Offline Service Worker
   if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {

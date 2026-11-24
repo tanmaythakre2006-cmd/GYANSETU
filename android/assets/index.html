@@ -124,63 +124,40 @@
           </div>
         </div>
 
-        <!-- Mobile Header Layout (< 992px) -->
+        <!-- Mobile Header Layout (< 992px) - Native Android Material App Bar -->
         <div class="nav-mobile-layout">
-          <!-- Row 1: Brand & Host Portal -->
           <div class="nav-brand-bar">
             <div class="nav-brand">
               <a href="#" class="brand-link" aria-label="GyanSetu Home">
                 <img src="assets/images/logo.png" alt="GyanSetu Emblem" class="brand-emblem">
                 <div class="brand-text">
                   <span class="brand-name">GYA<span class="brand-net">N</span>S<span class="brand-net">ET</span>U</span>
-                  <span class="brand-tagline">Global Inter<span class="net-tag-accent">net</span> Radio</span>
+                  <span class="brand-tagline"><span class="green-live-dot"></span> LIVE • Simran Ailani</span>
                 </div>
               </a>
             </div>
 
-            <div class="mob-host-zone">
-              <button type="button" id="mob-nav-host-login-btn" class="btn-host-portal-nav" title="Lead Host & Curator Access">
-                <span class="host-shield-icon">🛡️</span>
-                <span class="host-portal-word">Host</span>
+            <div class="mob-actions-cluster">
+              <button id="mob-ghost-mode-btn" class="btn-data-saver-switch mob-appbar-btn" role="switch" aria-checked="false" title="Data Saver: Toggle 32kbps Voice Stream (Saves 82% Data)">
+                <span class="ds-icon">⚡</span>
+                <span class="ds-label">32k</span>
+                <span id="mob-ghost-nav-label" class="ds-state-tag">OFF</span>
               </button>
-              <div id="mob-nav-host-active-cluster" class="nav-host-active-cluster host-only-element">
-                <span class="host-active-badge">
-                  <span class="green-live-dot"></span>
-                  <span id="mob-nav-host-name-tag">Host: Simran Ailani</span>
-                </span>
-                <button type="button" id="mob-nav-host-logout-btn" class="btn-host-logout" title="Sign out of Host Session">Logout</button>
+
+              <div class="mob-host-zone">
+                <button type="button" id="mob-nav-host-login-btn" class="btn-host-portal-nav" title="Lead Host & Curator Access">
+                  <span class="host-shield-icon">🛡️</span>
+                  <span class="host-portal-word">Host</span>
+                </button>
+                <div id="mob-nav-host-active-cluster" class="nav-host-active-cluster host-only-element">
+                  <span class="host-active-badge">
+                    <span class="green-live-dot"></span>
+                    <span id="mob-nav-host-name-tag">Host</span>
+                  </span>
+                  <button type="button" id="mob-nav-host-logout-btn" class="btn-host-logout" title="Sign out of Host Session">Logout</button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <!-- Row 2: Horizontally Scrollable Feature Ribbon -->
-          <div class="nav-scroll-ribbon" aria-label="Navigation Actions and Categories">
-            <button id="mob-ghost-mode-btn" class="btn-data-saver-switch ribbon-pill" role="switch" aria-checked="false" title="Data Saver: Toggle 32kbps Voice Stream (Saves 82% Data)">
-              <span class="ds-icon">⚡</span>
-              <span class="ds-label">Data Saver</span>
-              <span class="ds-switch-track">
-                <span class="ds-switch-knob"></span>
-              </span>
-              <span id="mob-ghost-nav-label" class="ds-state-tag">OFF</span>
-            </button>
-
-            <button id="mob-radio-mode-btn" class="btn-live-pill ribbon-pill" title="Tune into Live Stream">
-              <span class="pulse-beacon"></span>
-              <span>Live Stream</span>
-            </button>
-
-            <button type="button" id="mobile-live-studio-btn" class="mob-ribbon-pill mob-studio-pill studio-open-btn" title="Open Global Live Transmission Studio & Collaboration Hub">
-              <span class="live-dot-pulse"></span>
-              <span>🎙️ Studio &amp; Network</span>
-            </button>
-
-            <a href="pocket.html" class="mob-ribbon-pill mob-retro-pill" title="Switch to Pocket Transistor Radio">📻 Pocket</a>
-            <a href="tablet.html" class="mob-ribbon-pill" title="Switch to Tablet Radio Console" style="border-color: rgba(80, 155, 147, 0.45); color: #5eead4; background: rgba(80, 155, 147, 0.12);">📟 Tab</a>
-            <a href="#broadcast" class="mob-ribbon-pill">Broadcast</a>
-            <a href="#episodes" class="mob-ribbon-pill">Episodes</a>
-            <a href="#analytics" class="mob-ribbon-pill">Analytics</a>
-            <a href="#mission" class="mob-ribbon-pill">Mission &amp; Team</a>
-            <a href="#app" class="mob-ribbon-pill">GyanSetu App</a>
           </div>
         </div>
       </nav>
@@ -199,6 +176,12 @@
       <div class="container hero-layout">
         
         <div class="hero-text-block">
+          <!-- Mobile Station On-Air Capsule (< 768px) -->
+          <div class="mob-onair-capsule">
+            <span class="status-live-beacon"></span>
+            <span class="mob-onair-title">GLOBAL 24/7 INTERNET RADIO • SIMRAN AILANI</span>
+          </div>
+
           <!-- Prominent Brand Emblem Card -->
           <div class="hero-brand-badge-card">
             <div class="hero-emblem-frame">
@@ -233,9 +216,14 @@
             <a href="#episodes" class="liquid-btn btn-glass">
               <span>Explore All 13 Episodes</span>
             </a>
-            <a href="pocket.html" class="btn-retro-launch" title="Launch the Ultra-Lightweight Smart Retro Transistor Radio">
-              <span>📻 Retro Radio Mode</span>
-            </a>
+            <div class="hero-retro-duo">
+              <a href="pocket.html" class="btn-retro-launch btn-retro-pocket" title="Handheld Pocket Transistor Radio for Android">
+                <span>📻 Pocket Radio (Phone)</span>
+              </a>
+              <a href="tablet.html" class="btn-retro-launch btn-retro-tablet" title="Tabletop Appliance Console for Tablets">
+                <span>📟 Tab Console (Tablet)</span>
+              </a>
+            </div>
           </div>
 
           <!-- Apple Style Frosted Metric Grid -->
@@ -1171,6 +1159,30 @@
 
     </div>
   </footer>
+
+  <!-- Android Native Bottom Navigation Bar (< 768px) -->
+  <nav id="android-bottom-nav" class="android-bottom-nav" aria-label="Mobile Navigation">
+    <a href="#broadcast" class="bottom-nav-item active" id="bnav-home">
+      <span class="bnav-icon">📻</span>
+      <span class="bnav-label">On-Air</span>
+    </a>
+    <a href="#episodes" class="bottom-nav-item" id="bnav-episodes">
+      <span class="bnav-icon">📚</span>
+      <span class="bnav-label">Episodes</span>
+    </a>
+    <a href="pocket.html" class="bottom-nav-item" id="bnav-pocket" title="Handheld Pocket Transistor Radio">
+      <span class="bnav-icon">📱</span>
+      <span class="bnav-label">Pocket</span>
+    </a>
+    <a href="#app" class="bottom-nav-item" id="bnav-vault" title="Offline APK Locker">
+      <span class="bnav-icon">📥</span>
+      <span class="bnav-label">Vault</span>
+    </a>
+    <button type="button" class="bottom-nav-item studio-open-btn" id="bnav-studio" title="Live Transmission Studio & Collaboration Hub">
+      <span class="bnav-icon">🎙️</span>
+      <span class="bnav-label">Studio</span>
+    </button>
+  </nav>
 
   <!-- Liquid Glass Notes Modal -->
   <div id="notes-modal" class="modal-scrim">
