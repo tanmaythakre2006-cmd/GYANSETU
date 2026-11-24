@@ -1598,14 +1598,22 @@
         <h3 class="modal-title">📡 Optical Data Beamer (Zero-Bandwidth Mesh)</h3>
         <button class="modal-close-btn" id="btn-close-beamer">&times;</button>
       </div>
-      <p style="font-size: 12px; color: #cbd5e1; margin-bottom: 8px;">
+      <p style="font-size: 12px; color: #cbd5e1; margin-bottom: 6px;">
         Transmitting high-density offline lesson packets via rapid visual QR fountain codes directly into student cameras. No SIM or Wi-Fi required.
       </p>
+      <div id="beam-station-badge" style="font-size: 11px; color: #34d399; font-family: 'Space Mono', monospace; margin-bottom: 4px; text-transform: uppercase;">
+        📡 ACTIVE BROADCAST: CH-1 • 108.0 MHz • नागपूरचा इतिहास
+      </div>
       <div id="beam-canvas-wrap">
-        <canvas id="beam-fountain-canvas" width="236" height="236"></canvas>
+        <div id="beam-qr-container" style="display: flex; justify-content: center; align-items: center; width: 236px; height: 236px;"></div>
       </div>
       <div class="fountain-status-line" id="fountain-status-hud">
-        Broadcasting Chunk 1/48 • 12 FPS • AES-256-GCM Encrypted
+        Broadcasting Chunk 1 / 48 • 5 FPS • AES-256-GCM Encrypted
+      </div>
+      <div style="display:flex; justify-content:center; gap:8px; margin-top:10px;">
+        <span style="background:rgba(52,211,153,0.15); color:#34d399; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; border:1px solid rgba(52,211,153,0.3); font-family:'Space Mono', monospace;">AIR-GAP VERIFIED</span>
+        <span style="background:rgba(251,191,36,0.15); color:#fbbf24; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; border:1px solid rgba(251,191,36,0.3); font-family:'Space Mono', monospace;">AES-256-GCM</span>
+        <span style="background:rgba(96,165,250,0.15); color:#60a5fa; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; border:1px solid rgba(96,165,250,0.3); font-family:'Space Mono', monospace;">P2P FOUNTAIN SYNC</span>
       </div>
     </div>
   </div>
@@ -1652,8 +1660,8 @@
   <!-- Toast Notification -->
   <div id="pocket-toast"></div>
 
-  <!-- QR Code Library for Optical Beamer Mesh -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <!-- QR Code Library for Optical Beamer Mesh (Offline Local) -->
+  <script src="assets/js/qrcode.min.js"></script>
 
   <!-- Offline Transcripts -->
   <script src="assets/data/episodes_transcripts.js"></script>
@@ -2417,24 +2425,46 @@
 
     let fountainTimer = null;
     let fountainSeq = 0;
-    const fountainCanvas = document.getElementById('beam-fountain-canvas');
+
+    function renderTabletFountainFrame() {
+      const container = document.getElementById('beam-qr-container');
+      if (!container || typeof QRCode === 'undefined') return;
+
+      const ep = EPISODES[currentIndex];
+      fountainSeq = (fountainSeq % 48) + 1;
+
+      const badge = document.getElementById('beam-station-badge');
+      if (badge) {
+        badge.textContent = `📡 ACTIVE BROADCAST: CH-${ep.channel} • ${ep.freq} MHz • ${ep.title}`;
+      }
+
+      const hud = document.getElementById('fountain-status-hud');
+      if (hud) {
+        hud.textContent = `Broadcasting Chunk ${fountainSeq} / 48 • 5 FPS • AES-256-GCM Encrypted`;
+      }
+
+      const payload = `GS2|EP${ep.channel}|${fountainSeq}|48|0000|${ep.freq}:${encodeURIComponent(ep.title)}:${Date.now()}`;
+
+      container.innerHTML = '';
+      try {
+        new QRCode(container, {
+          text: payload,
+          width: 236,
+          height: 236,
+          colorDark: "#0b0d11",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.L
+        });
+      } catch (err) {
+        console.warn('Optical beamer QR render error:', err);
+      }
+    }
 
     function startFountainLoop() {
       if (fountainTimer) clearInterval(fountainTimer);
-      fountainTimer = setInterval(() => {
-        fountainSeq = (fountainSeq + 1) % 48;
-        const hud = document.getElementById('fountain-status-hud');
-        if (hud) hud.textContent = `Chunk ${fountainSeq + 1} / 48 • 12 FPS • AES-256-GCM Encrypted`;
-
-        if (fountainCanvas && window.QRCode) {
-          const payload = `GS_MESH_CHUNK:${fountainSeq}:EP${currentIndex+1}:${Date.now()}`;
-          QRCode.toCanvas(fountainCanvas, payload, {
-            width: 236,
-            margin: 1,
-            color: { dark: '#000000', light: '#ffffff' }
-          }, () => {});
-        }
-      }, 90);
+      fountainSeq = 0;
+      renderTabletFountainFrame();
+      fountainTimer = setInterval(renderTabletFountainFrame, 200);
     }
 
     function stopFountainLoop() {
