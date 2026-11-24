@@ -1144,7 +1144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 12. GLOBAL LIVE TRANSMISSION STUDIO & COLLABORATIVE CURATION ENGINE
+  // 12. CURIOSITY MAILBAG, MULTIMODAL THOUGHT DECK & CLASSROOM INQUIRY BRIEF
   // =========================================================================
   const liveStudioModal = document.getElementById('live-studio-modal');
   const closeLiveStudioBtn = document.getElementById('close-live-studio-btn');
@@ -1152,64 +1152,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const studioTabBtns = document.querySelectorAll('.studio-tab-btn[data-tab]');
   const studioTabPanes = document.querySelectorAll('.studio-tab-pane');
 
-  // Tab 1 Elements
-  const liveStreamCanvas = document.getElementById('live-stream-canvas');
-  const btnToggleLiveListen = document.getElementById('btn-toggle-live-listen');
-  const liveListenLabel = document.getElementById('live-listen-label');
-  const liveListenIcon = document.getElementById('live-listen-icon');
-  const liveReactionsFloatingZone = document.getElementById('live-reactions-floating-zone');
-  let isListeningLiveStream = false;
-  let liveWaveformAnimId = null;
-
-  // Tab 2 Elements (Go Live & 10-Min Timer)
-  const goliveAuthGate = document.getElementById('golive-auth-gate');
-  const goliveCockpit = document.getElementById('golive-cockpit');
-  const studioPasscodeInput = document.getElementById('studio-passcode-input');
-  const btnVerifyPasscode = document.getElementById('btn-verify-passcode');
-  const btnRequestPasscodeTab = document.getElementById('btn-request-passcode-tab');
-  const studioCountdownClock = document.getElementById('studio-countdown-clock');
-  const btnStartLiveTransmit = document.getElementById('btn-start-live-transmit');
-  const btnTransmitLabel = document.getElementById('btn-transmit-label');
-  const btnRelockStudio = document.getElementById('btn-relock-studio');
-  const cockpitLamp = document.getElementById('cockpit-lamp');
-  const cockpitStatusText = document.getElementById('cockpit-status-text');
-  const studioMicCanvas = document.getElementById('studio-mic-canvas');
-  const studioVuMeter = document.getElementById('studio-vu-meter');
-  const micStatusDot = document.getElementById('mic-status-dot');
-  const micStatusLabel = document.getElementById('mic-status-label');
-
-  let isLiveTransmitting = false;
-  let liveSessionTimeRemaining = 600; // 10 minutes (600 seconds)
-  let liveSessionInterval = null;
-  let broadcasterMediaStream = null;
-  let broadcasterAudioCtx = null;
-  let broadcasterAnalyser = null;
-  let broadcasterAnimId = null;
-
-  // Broadcast Channel for Real-time Inter-window Communication
-  let liveBroadcastChannel = null;
-  try {
-    liveBroadcastChannel = new BroadcastChannel('gyansetu_live_transmission_channel');
-    liveBroadcastChannel.onmessage = (event) => {
-      const data = event.data;
-      if (data && data.type === 'LIVE_START') {
-        const liveOnAirText = document.getElementById('live-on-air-status-text');
-        const liveTitle = document.getElementById('live-stream-title');
-        const liveSpeaker = document.getElementById('live-speaker-name');
-        if (liveOnAirText) liveOnAirText.textContent = `🔴 TRANSMITTING LIVE FROM ${data.country.toUpperCase()}`;
-        if (liveTitle) liveTitle.textContent = data.topic || 'Global Collaborative Inquiry';
-        if (liveSpeaker) liveSpeaker.textContent = data.name || 'Guest Broadcaster';
-        showToast(`🔴 Live Broadcast Started: ${data.name} (${data.country})`);
-      }
-    };
-  } catch (e) {}
-
-  // Open & Close Studio Modal
-  function openLiveStudioModal(initialTab = 'listen') {
+  // Open & Close Mailbag / Studio Modal
+  function openLiveStudioModal(initialTab = 'ask') {
     if (liveStudioModal) {
       liveStudioModal.classList.add('is-active');
       switchStudioTab(initialTab);
-      startLiveStreamWaveform();
+      renderMailbagInbox();
       renderCuratorQueue();
     }
   }
@@ -1217,36 +1165,35 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeLiveStudioModal() {
     if (liveStudioModal) {
       liveStudioModal.classList.remove('is-active');
-      if (liveWaveformAnimId) cancelAnimationFrame(liveWaveformAnimId);
     }
   }
 
-    const mobileLiveStudioBtn = document.getElementById('mobile-live-studio-btn');
+  const mobileLiveStudioBtn = document.getElementById('mobile-live-studio-btn');
   if (mobileLiveStudioBtn) {
     mobileLiveStudioBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      openLiveStudioModal('listen');
+      openLiveStudioModal('ask');
     });
   }
 
   if (navLiveStudioBtn) {
     navLiveStudioBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      openLiveStudioModal('listen');
+      openLiveStudioModal('ask');
     });
   }
 
   document.querySelectorAll('.studio-open-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      openLiveStudioModal('listen');
+      openLiveStudioModal('ask');
     });
   });
 
   if (radioModeBtn) {
     radioModeBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      openLiveStudioModal('listen');
+      openLiveStudioModal('ask');
     });
   }
 
@@ -1274,6 +1221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activePane) activePane.classList.add('active');
 
     if (targetTab === 'curator') {
+      renderMailbagInbox();
       renderCuratorQueue();
     }
   }
@@ -1284,274 +1232,659 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  if (btnRequestPasscodeTab) {
-    btnRequestPasscodeTab.addEventListener('click', () => {
-      switchStudioTab('collaborate');
-    });
-  }
+  // --- CURIOSITY MAILBAG ENGINE ("Ask Simran") ---
+  const mailbagQuestionForm = document.getElementById('mailbag-question-form');
+  const mailbagReceiptBox = document.getElementById('mailbag-receipt-box');
+  const mailbagReceiptIdTag = document.getElementById('mailbag-receipt-id-tag');
+  const btnResetMailbagForm = document.getElementById('btn-reset-mailbag-form');
 
-  // --- TAB 1: Live Stream Waveform & Reactions ---
-  function startLiveStreamWaveform() {
-    if (!liveStreamCanvas) return;
-    const ctx = liveStreamCanvas.getContext('2d');
-    let phase = 0;
-
-    function renderWave() {
-      ctx.clearRect(0, 0, liveStreamCanvas.width, liveStreamCanvas.height);
-      const width = liveStreamCanvas.width;
-      const height = liveStreamCanvas.height;
-      const mid = height / 2;
-
-      // Draw background glow grid
-      ctx.strokeStyle = 'rgba(239, 68, 68, 0.1)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(0, mid);
-      ctx.lineTo(width, mid);
-      ctx.stroke();
-
-      // Draw active sine harmonic lines
-      const colors = ['rgba(239, 68, 68, 0.8)', 'rgba(56, 189, 248, 0.7)', 'rgba(255, 190, 68, 0.6)'];
-      colors.forEach((col, cIdx) => {
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        for (let x = 0; x < width; x += 4) {
-          const freq = 0.02 + cIdx * 0.01;
-          const amp = (isListeningLiveStream || isLiveTransmitting) ? 24 : 10;
-          const y = mid + Math.sin(x * freq + phase + cIdx) * amp * Math.sin(x / width * Math.PI);
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      });
-
-      phase += 0.05;
-      liveWaveformAnimId = requestAnimationFrame(renderWave);
+  const DEFAULT_MAILBAG_QUESTIONS = [
+    {
+      id: "GS-ASK-4102",
+      author: "Priya Sharma",
+      location: "Kendriya Vidyalaya, Pune",
+      topic: "Everyday Phenomena & Physics",
+      episodeRef: "Ep 11: What colour is the sky?",
+      question: "Why do sunsets turn deep vibrant orange and red instead of violet, even though violet light has an even shorter wavelength than blue light and should scatter more?",
+      date: "October 30, 2026",
+      status: "Starred for Upcoming Episode",
+      starred: true
+    },
+    {
+      id: "GS-ASK-3891",
+      author: "Kwame Mensah",
+      location: "University of Nairobi, Kenya",
+      topic: "Chemistry & Solid-State Science",
+      episodeRef: "Ep 1: Can Chemistry Explain Consciousness?",
+      question: "Could solid-state ceramic electrolytes survive extreme Sahel desert temperatures without thermal runaway, allowing decentralized solar storage in rural off-grid villages?",
+      date: "October 29, 2026",
+      status: "Under Editorial Review",
+      starred: false
+    },
+    {
+      id: "GS-ASK-5520",
+      author: "Ananya Iyer",
+      location: "St. Xavier's, Mumbai",
+      topic: "History of Ideas & Forgotten Science",
+      episodeRef: "Ep 10: Napoleon wasn't poisoned.....or was he?",
+      question: "If Scheele's Green wallpaper produced toxic arsine gas through fungal methylation, could the British captors on Saint Helena have accidentally caused Napoleon's symptoms without deliberate poisoning?",
+      date: "October 28, 2026",
+      status: "Starred for Upcoming Episode",
+      starred: true
     }
+  ];
 
-    if (liveWaveformAnimId) cancelAnimationFrame(liveWaveformAnimId);
-    renderWave();
-  }
-
-  if (btnToggleLiveListen) {
-    btnToggleLiveListen.addEventListener('click', () => {
-      isListeningLiveStream = !isListeningLiveStream;
-      if (isListeningLiveStream) {
-        liveListenLabel.textContent = 'Disconnect from Live Stream';
-        liveListenIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-        btnToggleLiveListen.classList.remove('btn-primary-gradient');
-        btnToggleLiveListen.classList.add('btn-secondary-glass');
-        showToast('🔴 Connected to Global Live Transmission • Nairobi Relay Active');
-      } else {
-        liveListenLabel.textContent = 'Tune In to Live Transmission';
-        liveListenIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        btnToggleLiveListen.classList.add('btn-primary-gradient');
-        btnToggleLiveListen.classList.remove('btn-secondary-glass');
-        showToast('Disconnected from Live Stream');
-      }
-    });
-  }
-
-  // Floating Reactions
-  document.querySelectorAll('.btn-live-reaction').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const reaction = btn.dataset.reaction;
-      const countEl = btn.querySelector('.reaction-count');
-      if (countEl) {
-        const cur = parseInt(countEl.textContent, 10) || 0;
-        countEl.textContent = cur + 1;
-      }
-
-      // Spawn floating emoji
-      if (liveReactionsFloatingZone) {
-        const emojiMap = { insight: '💡', clap: '👏', globe: '🌍', heart: '❤️' };
-        const bubble = document.createElement('div');
-        bubble.className = 'floating-reaction-emoji';
-        bubble.textContent = emojiMap[reaction] || '✨';
-        bubble.style.left = `${Math.floor(Math.random() * 80)}px`;
-        liveReactionsFloatingZone.appendChild(bubble);
-        setTimeout(() => bubble.remove(), 2200);
-      }
-    });
-  });
-
-  // --- TAB 2: Go Live Authorization & 10-Minute Timer Cockpit ---
-  if (btnVerifyPasscode && studioPasscodeInput) {
-    btnVerifyPasscode.addEventListener('click', () => {
-      const code = studioPasscodeInput.value.trim().toUpperCase();
-      const codeObj = verifyAndConsumePasscode(code);
-      if (codeObj) {
-        goliveAuthGate.classList.add('hidden');
-        goliveCockpit.classList.remove('hidden');
-        
-        // Auto-fill guest metadata if registered by Lead Host
-        if (codeObj.guest) {
-          const nameInput = document.getElementById('broadcaster-name');
-          const countryInput = document.getElementById('broadcaster-country');
-          const topicInput = document.getElementById('broadcaster-topic');
-          if (nameInput && !nameInput.value) nameInput.value = codeObj.guest;
-          if (countryInput && !countryInput.value) countryInput.value = codeObj.country || '';
-          if (topicInput && !topicInput.value) topicInput.value = codeObj.topic || '';
-        }
-        
-        initBroadcasterMic();
-        showToast(`🔓 Broadcast Authorized: Welcome ${codeObj.guest || 'Guest'} (10-Minute Studio)`);
-      } else {
-        studioPasscodeInput.style.borderColor = '#ef4444';
-        showToast('❌ Invalid or Expired Passcode. Request authorization from Lead Host.');
-        setTimeout(() => studioPasscodeInput.style.borderColor = '', 2500);
-      }
-    });
-  }
-
-  if (btnRelockStudio) {
-    btnRelockStudio.addEventListener('click', () => {
-      stopLiveTransmission();
-      goliveCockpit.classList.add('hidden');
-      goliveAuthGate.classList.remove('hidden');
-      if (studioPasscodeInput) studioPasscodeInput.value = '';
-    });
-  }
-
-  async function initBroadcasterMic() {
+  function getMailbagQuestions() {
     try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        if (micStatusLabel) micStatusLabel.textContent = 'Web Audio Studio Stream (Simulated)';
-        return;
+      const stored = localStorage.getItem('gyansetu_mailbag_questions');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       }
-      broadcasterMediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-      if (micStatusDot) micStatusDot.style.background = '#10b981';
-      if (micStatusLabel) micStatusLabel.textContent = 'Studio Microphone Connected (Low Latency)';
-
-      broadcasterAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const source = broadcasterAudioCtx.createMediaStreamSource(broadcasterMediaStream);
-      broadcasterAnalyser = broadcasterAudioCtx.createAnalyser();
-      broadcasterAnalyser.fftSize = 64;
-      source.connect(broadcasterAnalyser);
-
-      renderBroadcasterMicVU();
-    } catch (err) {
-      console.warn('Microphone permission or hardware access note:', err);
-      if (micStatusDot) micStatusDot.style.background = '#ffaa11';
-      if (micStatusLabel) micStatusLabel.textContent = 'Audio Stream Ready (Browser Sandbox)';
-      startSimulatedMicVU();
-    }
+    } catch (e) {}
+    return DEFAULT_MAILBAG_QUESTIONS;
   }
 
-  function renderBroadcasterMicVU() {
-    if (!studioMicCanvas || !broadcasterAnalyser) return;
-    const ctx = studioMicCanvas.getContext('2d');
-    const dataArray = new Uint8Array(broadcasterAnalyser.frequencyBinCount);
-
-    function draw() {
-      broadcasterAnalyser.getByteFrequencyData(dataArray);
-      ctx.clearRect(0, 0, studioMicCanvas.width, studioMicCanvas.height);
-      const barWidth = (studioMicCanvas.width / dataArray.length) * 1.5;
-      let x = 0;
-
-      for (let i = 0; i < dataArray.length; i++) {
-        const barHeight = (dataArray[i] / 255) * studioMicCanvas.height;
-        ctx.fillStyle = isLiveTransmitting ? '#ef4444' : '#10b981';
-        ctx.fillRect(x, studioMicCanvas.height - barHeight, barWidth - 1, barHeight);
-        x += barWidth + 1;
-      }
-
-      // Update VU meter blocks
-      let sum = 0;
-      for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
-      const avg = sum / dataArray.length;
-      if (studioVuMeter) {
-        const segs = studioVuMeter.querySelectorAll('.vu-seg');
-        const activeCount = Math.floor((avg / 255) * segs.length);
-        segs.forEach((s, idx) => s.classList.toggle('active', idx < activeCount));
-      }
-
-      broadcasterAnimId = requestAnimationFrame(draw);
-    }
-    draw();
+  function saveMailbagQuestions(questions) {
+    try {
+      localStorage.setItem('gyansetu_mailbag_questions', JSON.stringify(questions));
+    } catch (e) {}
   }
 
-  function startSimulatedMicVU() {
-    if (broadcasterAnimId) cancelAnimationFrame(broadcasterAnimId);
-    let tick = 0;
-    function sim() {
-      tick++;
-      if (studioVuMeter) {
-        const segs = studioVuMeter.querySelectorAll('.vu-seg');
-        const level = isLiveTransmitting ? Math.floor(Math.sin(tick * 0.2) * 4 + 4) : 1;
-        segs.forEach((s, idx) => s.classList.toggle('active', idx < level));
-      }
-      broadcasterAnimId = requestAnimationFrame(sim);
-    }
-    sim();
+  if (mailbagQuestionForm) {
+    mailbagQuestionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = (document.getElementById('ask-name')?.value || '').trim();
+      const location = (document.getElementById('ask-location')?.value || '').trim();
+      const topic = document.getElementById('ask-topic')?.value || 'Everyday Phenomena & Physics';
+      const episodeRef = document.getElementById('ask-episode-ref')?.value || 'General Question';
+      const questionText = (document.getElementById('ask-question-text')?.value || '').trim();
+
+      if (!questionText) return;
+
+      const trackingId = `GS-ASK-${Math.floor(1000 + Math.random() * 9000)}`;
+      const newQuestion = {
+        id: trackingId,
+        author: name || 'Curious Learner',
+        location: location || 'Global Classroom',
+        topic: topic,
+        episodeRef: episodeRef,
+        question: questionText,
+        date: 'October 31, 2026',
+        status: 'Under Editorial Review',
+        starred: false
+      };
+
+      const questions = getMailbagQuestions();
+      questions.unshift(newQuestion);
+      saveMailbagQuestions(questions);
+
+      if (mailbagReceiptIdTag) mailbagReceiptIdTag.textContent = trackingId;
+      mailbagQuestionForm.classList.add('hidden');
+      if (mailbagReceiptBox) mailbagReceiptBox.classList.remove('hidden');
+
+      showToast(`📬 Question Sent to Simran! Tracking ID: ${trackingId}`);
+      renderMailbagInbox();
+    });
   }
 
-  if (btnStartLiveTransmit) {
-    btnStartLiveTransmit.addEventListener('click', () => {
-      if (!isLiveTransmitting) {
-        startLiveTransmission();
-      } else {
-        stopLiveTransmission();
+  if (btnResetMailbagForm) {
+    btnResetMailbagForm.addEventListener('click', () => {
+      if (mailbagQuestionForm) {
+        mailbagQuestionForm.reset();
+        mailbagQuestionForm.classList.remove('hidden');
+      }
+      if (mailbagReceiptBox) mailbagReceiptBox.classList.add('hidden');
+    });
+  }
+
+  function renderMailbagInbox() {
+    const listEl = document.getElementById('mailbag-inbox-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    const questions = getMailbagQuestions();
+    questions.forEach((q, idx) => {
+      const item = document.createElement('div');
+      item.className = 'mailbag-inbox-item';
+      item.innerHTML = `
+        <div class="mailbag-item-meta">
+          <div>
+            <span class="mailbag-item-author">💬 ${q.author} &bull; ${q.location}</span>
+            <span style="font-size:0.68rem; color:rgba(255,255,255,0.4); margin-left:8px;">${q.id} &bull; ${q.date}</span>
+          </div>
+          <span class="mailbag-item-topic-badge">${q.topic}</span>
+        </div>
+        <div class="mailbag-item-text">"${q.question}"</div>
+        <div style="font-size:0.72rem; color:rgba(255,255,255,0.5);">Target Episode: <strong>${q.episodeRef}</strong> &bull; Status: <span style="color:#38bdf8;">${q.status}</span></div>
+        <div class="mailbag-item-actions">
+          <button type="button" class="btn-star-question ${q.starred ? 'starred' : ''}" data-idx="${idx}">
+            <span>${q.starred ? '★ Starred for On-Air Segment' : '☆ Star Question for Episode'}</span>
+          </button>
+        </div>
+      `;
+
+      const starBtn = item.querySelector('.btn-star-question');
+      if (starBtn) {
+        starBtn.addEventListener('click', () => {
+          q.starred = !q.starred;
+          q.status = q.starred ? 'Starred for Upcoming Episode' : 'Under Editorial Review';
+          saveMailbagQuestions(questions);
+          renderMailbagInbox();
+          showToast(q.starred ? `⭐ Starred question from ${q.author} for Simran's next episode!` : 'Question unstarred');
+        });
+      }
+
+      listEl.appendChild(item);
+    });
+  }
+
+  // --- MULTIMODAL VISUAL THOUGHT DECK ENGINE ---
+  const thoughtDeckModal = document.getElementById('thought-deck-modal');
+  const closeThoughtDeckBtn = document.getElementById('close-thought-deck-btn');
+  const btnHeroThoughtDeck = document.getElementById('btn-hero-thought-deck');
+  const thoughtDeckPlayBtn = document.getElementById('thought-deck-play-btn');
+  const thoughtDeckToBriefBtn = document.getElementById('thought-deck-to-brief-btn');
+
+  let activeThoughtDeckEpisode = null;
+
+  const THOUGHT_DECK_CONTENT = {
+    "ep-11": {
+      diagramLabel: "Rayleigh Scattering & Atmospheric Geometry",
+      svg: `<svg viewBox="0 0 540 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.2"/>
+          </radialGradient>
+          <linearGradient id="atmoGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#0284c7" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05"/>
+          </linearGradient>
+        </defs>
+        <!-- Sun -->
+        <circle cx="50" cy="90" r="32" fill="url(#sunGlow)"/>
+        <text x="50" y="94" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">White Sun</text>
+        <!-- Incoming Multi-wavelength rays -->
+        <line x1="86" y1="90" x2="220" y2="90" stroke="#f8fafc" stroke-width="3" stroke-dasharray="6,3"/>
+        <text x="145" y="80" font-size="9" fill="#94a3b8" text-anchor="middle">Unscattered Sunlight (λ=400-700nm)</text>
+        <!-- Atmosphere Boundary -->
+        <rect x="220" y="20" width="220" height="140" rx="14" fill="url(#atmoGrad)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <text x="330" y="38" font-size="10" font-weight="bold" fill="#7dd3fc" text-anchor="middle">Earth Atmosphere (N₂ / O₂ Molecules ~0.3nm)</text>
+        <!-- Microscopic Air Molecule Target -->
+        <circle cx="280" cy="90" r="8" fill="#38bdf8"/>
+        <!-- Blue Scattering (Short λ scattered everywhere) -->
+        <path d="M280,90 L240,45" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M280,90 L320,45" stroke="#38bdf8" stroke-width="2.5"/>
+        <path d="M280,90 L250,135" stroke="#38bdf8" stroke-width="2.5"/>
+        <path d="M280,90 L310,135" stroke="#38bdf8" stroke-width="2.5"/>
+        <text x="280" y="152" font-size="9" font-weight="bold" fill="#38bdf8" text-anchor="middle">Blue &amp; Violet Light Scattered in All Directions (∝ 1/λ⁴)</text>
+        <!-- Transmitted Red/Orange (Long λ passes straight) -->
+        <line x1="288" y1="90" x2="480" y2="90" stroke="#f97316" stroke-width="3.5"/>
+        <polygon points="480,90 470,85 470,95" fill="#f97316"/>
+        <text x="430" y="80" font-size="9" font-weight="bold" fill="#fb923c">Red / Amber Passes Through</text>
+        <!-- Observer Eye -->
+        <circle cx="500" cy="90" r="16" fill="#1e293b" stroke="#f1f5f9" stroke-width="2"/>
+        <circle cx="500" cy="90" r="6" fill="#38bdf8"/>
+        <text x="500" y="125" font-size="9" fill="#e2e8f0" text-anchor="middle">Sunset Observer</text>
+      </svg>`,
+      cards: [
+        {
+          num: "CONCEPT 01",
+          title: "The Inverse 4th Power Law",
+          desc: "Lord Rayleigh proved that scattering efficiency is inversely proportional to wavelength to the 4th power (1/λ⁴). Blue light (400nm) scatters almost 10 times more efficiently than red light (700nm)."
+        },
+        {
+          num: "CONCEPT 02",
+          title: "The Human Vision Paradox",
+          desc: "Sunlight contains violet light which scatters even more than blue, but human cone receptors are peak-sensitive to blue/green wavelengths, causing our brains to perceive the sky as sky-blue."
+        },
+        {
+          num: "CONCEPT 03",
+          title: "Twilight Optical Geometry",
+          desc: "At sunset, sunlight must traverse through 10× greater atmospheric depth. Almost all high-frequency blue rays are scattered away, leaving only direct low-frequency orange and red waves."
+        }
+      ],
+      anchorTitle: "Frugal Observation & Cosmic Counterpart",
+      anchorText: "On Mars, where thin atmosphere contains coarse suspended iron-oxide dust, Mie scattering dominates: daytime skies look butterscotch-brown, and sunsets turn mesmerizing cobalt blue!"
+    },
+    "ep-1": {
+      diagramLabel: "Electrochemical Synapse & Action Potential",
+      svg: `<svg viewBox="0 0 540 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Presynaptic Bulb -->
+        <path d="M40,30 C120,30 160,50 170,90 C160,130 120,150 40,150" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="2"/>
+        <text x="90" y="48" font-size="10" font-weight="bold" fill="#7dd3fc">Axon Terminal</text>
+        <!-- Synaptic Vesicles with Neurotransmitters -->
+        <circle cx="80" cy="80" r="9" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+        <circle cx="110" cy="95" r="9" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+        <circle cx="135" cy="75" r="9" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+        <!-- Synaptic Cleft (20nm gap) -->
+        <line x1="180" y1="40" x2="180" y2="140" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="180" y="26" font-size="9" fill="#94a3b8" text-anchor="middle">Synaptic Cleft (20nm)</text>
+        <!-- Diffusing Molecules -->
+        <circle cx="188" cy="70" r="3" fill="#f59e0b"/>
+        <circle cx="192" cy="90" r="3" fill="#f59e0b"/>
+        <circle cx="186" cy="110" r="3" fill="#f59e0b"/>
+        <!-- Postsynaptic Membrane & Receptors -->
+        <path d="M210,40 C220,70 220,110 210,140 L340,140 C350,110 350,70 340,40 Z" fill="rgba(249,124,34,0.12)" stroke="#f97316" stroke-width="2"/>
+        <text x="270" y="55" font-size="10" font-weight="bold" fill="#fdba74" text-anchor="middle">Postsynaptic Dendrite</text>
+        <rect x="206" y="65" width="8" height="14" rx="2" fill="#f59e0b"/>
+        <rect x="206" y="100" width="8" height="14" rx="2" fill="#f59e0b"/>
+        <!-- Action Potential Wave -->
+        <path d="M370,90 Q400,30 420,90 T470,90 T520,90" fill="none" stroke="#10b981" stroke-width="3"/>
+        <text x="440" y="48" font-size="10" font-weight="bold" fill="#34d399">Action Potential (-70mV &rarr; +40mV)</text>
+        <text x="440" y="125" font-size="9" fill="#94a3b8">Na⁺ / K⁺ Ion Translocation</text>
+      </svg>`,
+      cards: [
+        {
+          num: "CONCEPT 01",
+          title: "The Ion Gradient Battery",
+          desc: "Every thinking neuron is an electrochemical battery maintained by ATP-driven sodium-potassium pumps (3 Na⁺ out for 2 K⁺ in), creating a resting -70 millivolt polarity."
+        },
+        {
+          num: "CONCEPT 02",
+          title: "Neurochemical Modulation",
+          desc: "Feelings of curiosity and drive are mediated by neurotransmitter kinetics (dopamine, serotonin) altering protein channel conformations across synaptic junctions in milliseconds."
+        },
+        {
+          num: "CONCEPT 03",
+          title: "The Hard Problem Boundary",
+          desc: "While physical chemistry maps neural circuits and signal propagation completely, explaining how subjective qualia (the internal feeling of curiosity) arises remains an open frontier."
+        }
+      ],
+      anchorTitle: "Everyday Clinical Link",
+      anchorText: "General anesthetics shut down conscious perception not by destroying chemical bonds, but by physically altering lipid membrane fluidity and halting synchronized neuronal firing!"
+    },
+    "ep-10": {
+      diagramLabel: "The 1836 Marsh Arsenic Mirror Test",
+      svg: `<svg viewBox="0 0 540 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Generator Flask -->
+        <path d="M60,140 L100,140 L90,90 L90,60 L70,60 L70,90 Z" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+        <text x="80" y="115" font-size="9" fill="#7dd3fc" text-anchor="middle">Zn + H₂SO₄</text>
+        <text x="80" y="160" font-size="9" font-weight="bold" fill="#e2e8f0" text-anchor="middle">Reaction Flask</text>
+        <!-- Delivery Tube -->
+        <path d="M80,60 L80,45 L240,45 L240,80 L290,80" fill="none" stroke="#38bdf8" stroke-width="3"/>
+        <text x="160" y="38" font-size="9" fill="#94a3b8">Volatile Arsine Gas (AsH₃)</text>
+        <!-- Heat Source (Bunsen Burner) -->
+        <path d="M330,130 L350,130 L345,95 L335,95 Z" fill="#475569" stroke="#64748b"/>
+        <path d="M336,95 Q340,70 345,95 Z" fill="#ef4444"/>
+        <text x="340" y="152" font-size="9" fill="#cbd5e1" text-anchor="middle">Thermal Pyrolysis</text>
+        <!-- Reduction Tube & Arsenic Metallic Mirror -->
+        <rect x="290" y="74" width="160" height="12" rx="4" fill="rgba(255,255,255,0.1)" stroke="#94a3b8" stroke-width="1.5"/>
+        <rect x="375" y="75" width="28" height="10" rx="2" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
+        <text x="389" y="65" font-size="10" font-weight="bold" fill="#f8fafc" text-anchor="middle">Black Arsenic Mirror (As)</text>
+        <text x="389" y="112" font-size="9" fill="#38bdf8" text-anchor="middle">Sublimed Metallic Ring</text>
+      </svg>`,
+      cards: [
+        {
+          num: "CONCEPT 01",
+          title: "Birth of Modern Forensic Toxicology",
+          desc: "Before James Marsh invented his test in 1836, arsenic was known as 'inheritance powder' because it left no definitive chemical trace. Marsh converted arsenic trioxide into volatile arsine gas."
+        },
+        {
+          num: "CONCEPT 02",
+          title: "Scheele's Green Wallpaper",
+          desc: "Napoleon's Longwood residence was decorated with vibrant copper-arsenite wallpaper. In St. Helena's humid climate, Penicillium mold metabolized the dye into toxic gaseous trimethylarsine."
+        },
+        {
+          num: "CONCEPT 03",
+          title: "Contextual Environmental Baseline",
+          desc: "While 1961 neutron activation analysis revealed arsenic in Napoleon's hair, 19th-century control specimens also showed elevated arsenic from tonics, wine, and coal dust."
+        }
+      ],
+      anchorTitle: "Scientific Investigation Takeaway",
+      anchorText: "Forensic truth requires understanding historical baselines. What looks like targeted assassination today was often ubiquitous environmental background exposure 200 years ago."
+    },
+    "ep-12": {
+      diagramLabel: "Galvanism & The Bioethical Boundary",
+      svg: `<svg viewBox="0 0 540 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Voltaic Pile / Galvanic Battery -->
+        <rect x="60" y="50" width="40" height="80" rx="4" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2"/>
+        <line x1="60" y1="70" x2="100" y2="70" stroke="#f59e0b" stroke-width="2"/>
+        <line x1="60" y1="90" x2="100" y2="90" stroke="#f59e0b" stroke-width="2"/>
+        <line x1="60" y1="110" x2="100" y2="110" stroke="#f59e0b" stroke-width="2"/>
+        <text x="80" y="150" font-size="9" font-weight="bold" fill="#fbbf24" text-anchor="middle">Voltaic Pile (1800)</text>
+        <!-- Spark Arc Wires -->
+        <path d="M80,50 L80,30 L220,30 L220,70" fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <path d="M100,110 L140,110 L140,70 L200,70" fill="none" stroke="#94a3b8" stroke-width="2"/>
+        <!-- Electric Spark -->
+        <polygon points="210,65 215,70 208,72 216,78 206,75 210,65" fill="#38bdf8"/>
+        <!-- Bioethical Line of Responsibility -->
+        <line x1="270" y1="20" x2="270" y2="160" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="270" y="172" font-size="9" font-weight="bold" fill="#ef4444" text-anchor="middle">The Moral Responsibility Boundary</text>
+        <!-- Ethical Dilemma Balance -->
+        <circle cx="410" cy="80" r="34" fill="rgba(56,189,248,0.1)" stroke="#38bdf8" stroke-width="2"/>
+        <text x="410" y="75" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">Curiosity vs</text>
+        <text x="410" y="92" font-size="10" font-weight="bold" fill="#f97316" text-anchor="middle">Custodianship</text>
+      </svg>`,
+      cards: [
+        {
+          num: "CONCEPT 01",
+          title: "Galvanism in the Romantic Era",
+          desc: "Luigi Galvani and Giovanni Aldini demonstrated that static electric sparks caused dead muscular tissue to contract, suggesting electricity was the vital driving fluid of animal life."
+        },
+        {
+          num: "CONCEPT 02",
+          title: "The Myth of Prometheus",
+          desc: "Shelley subtitled her novel 'The Modern Prometheus.' Victor's failing was not daring to discover the secret of life, but refusing moral responsibility and empathy toward the being he created."
+        },
+        {
+          num: "CONCEPT 03",
+          title: "Modern Synthetic Biology",
+          desc: "Today's discussions around CRISPR gene editing, synthetic embryos, and autonomous intelligence systems mirror Shelley's warning: innovation without stewardship leads to crisis."
+        }
+      ],
+      anchorTitle: "Modern Ethical Philosophy",
+      anchorText: "The Precautionary Principle: Just because scientific capability allows humanity to engineer something does not relieve creators of the duty to protect and nurture its consequences."
+    },
+    "ep-13": {
+      diagramLabel: "Geography & Stone Hydrology of Historical Nagpur",
+      svg: `<svg viewBox="0 0 540 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Zero Mile Monument -->
+        <rect x="70" y="80" width="30" height="60" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2"/>
+        <polygon points="70,80 85,45 100,80" fill="#f97316"/>
+        <text x="85" y="155" font-size="9" font-weight="bold" fill="#fdba74" text-anchor="middle">Zero Mile Stone</text>
+        <text x="85" y="168" font-size="8" fill="#94a3b8" text-anchor="middle">Center of India (1907)</text>
+        <!-- Nag River Basin Line -->
+        <path d="M120,110 Q200,140 280,100 T440,110" fill="none" stroke="#0284c7" stroke-width="3"/>
+        <text x="250" y="135" font-size="9" font-weight="bold" fill="#38bdf8">Nag River Natural Basin</text>
+        <!-- Mahal Basalt Fortification & Cooling Corridor -->
+        <rect x="360" y="50" width="120" height="70" rx="8" fill="rgba(249,124,34,0.15)" stroke="#ea580c" stroke-width="2"/>
+        <text x="420" y="75" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">Mahal Fort &amp; Stepwells</text>
+        <text x="420" y="92" font-size="8" fill="#fdba74" text-anchor="middle">Deccan Basalt Masonry</text>
+        <text x="420" y="106" font-size="8" fill="#94a3b8" text-anchor="middle">Passive Geothermal Cooling</text>
+      </svg>`,
+      cards: [
+        {
+          num: "CONCEPT 01",
+          title: "Geographical Keystone of India",
+          desc: "Nagpur was chosen as the geographical center of undivided British India for the Great Trigonometrical Survey of 1907, with all national distances calibrated from the Zero Mile Stone."
+        },
+        {
+          num: "CONCEPT 02",
+          title: "Deogarh Gond Foundations",
+          desc: "Founded in 1702 by Gond Raja Bakht Buland Shah and later expanded into a thriving administrative capital under Raghuji Bhonsle I of the Maratha Empire."
+        },
+        {
+          num: "CONCEPT 03",
+          title: "Frugal Stone Hydrology",
+          desc: "Traditional builders used high-thermal-mass basalt lava rock and interconnected lake reservoirs (Futala, Ambazari) to maintain cool living environments during 45°C summers."
+        }
+      ],
+      anchorTitle: "Modern Architectural Lesson",
+      anchorText: "Ancient Vidarbha stepwells and natural ventilation shafts in Mahal prove that passive thermal cooling and decentralized rainwater harvesting beat energy-intensive mechanical air conditioning!"
+    }
+  };
+
+  function openThoughtDeck(ep) {
+    if (!ep || !thoughtDeckModal) return;
+    activeThoughtDeckEpisode = ep;
+
+    const epTag = document.getElementById('thought-deck-ep-tag');
+    const titleEl = document.getElementById('thought-deck-title');
+    const subtitleEl = document.getElementById('thought-deck-subtitle');
+    const diagramLabelEl = document.getElementById('thought-diagram-label');
+    const canvasWrapEl = document.getElementById('thought-diagram-canvas-wrap');
+    const cardsContainer = document.getElementById('thought-cards-container');
+    const anchorContainer = document.getElementById('thought-anchor-container');
+
+    if (epTag) epTag.textContent = `EPISODE #${ep.number || ''} • ${ep.category}`;
+    if (titleEl) titleEl.textContent = ep.title;
+    if (subtitleEl) subtitleEl.textContent = `Multimodal Conceptual Blueprint & Scientific Mental Models • Curated by Simran Ailani`;
+
+    const deckData = THOUGHT_DECK_CONTENT[ep.id] || {
+      diagramLabel: `${ep.title} • Structural Overview`,
+      svg: `<svg viewBox="0 0 540 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="270" cy="90" r="45" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+        <text x="270" y="86" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">GyanSetu Concept</text>
+        <text x="270" y="104" font-size="9" fill="#7dd3fc" text-anchor="middle">${ep.category}</text>
+        <path d="M120,90 Q180,40 225,90" fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <path d="M315,90 Q360,140 420,90" fill="none" stroke="#10b981" stroke-width="2"/>
+        <text x="170" y="60" font-size="9" fill="#94a3b8">Inquiry Genesis</text>
+        <text x="370" y="130" font-size="9" fill="#94a3b8">Scientific Resonance</text>
+      </svg>`,
+      cards: [
+        {
+          num: "CONCEPT 01",
+          title: "Fundamental Hypothesis",
+          desc: ep.description.slice(0, 140) + '...'
+        },
+        {
+          num: "CONCEPT 02",
+          title: "Conversational Clarity",
+          desc: "Simran Ailani breaks down daunting terminology into intuitive everyday metaphors designed for listeners of all educational backgrounds."
+        },
+        {
+          num: "CONCEPT 03",
+          title: "Universal Access",
+          desc: "Optimized for offline storage in rural schools and bandwidth-free streaming across 2G mobile networks worldwide."
+        }
+      ],
+      anchorTitle: "Everyday Connection",
+      anchorText: "Every episode connects abstract knowledge to tangible real-world phenomena observable in daily life."
+    };
+
+    if (diagramLabelEl) diagramLabelEl.textContent = deckData.diagramLabel;
+    if (canvasWrapEl) canvasWrapEl.innerHTML = deckData.svg;
+
+    if (cardsContainer) {
+      cardsContainer.innerHTML = deckData.cards.map(c => `
+        <div class="thought-card">
+          <div class="thought-card-num">${c.num}</div>
+          <div class="thought-card-title">${c.title}</div>
+          <div class="thought-card-desc">${c.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    if (anchorContainer) {
+      anchorContainer.innerHTML = `
+        <div class="thought-anchor-title">${deckData.anchorTitle}</div>
+        <div class="thought-anchor-text">${deckData.anchorText}</div>
+      `;
+    }
+
+    thoughtDeckModal.classList.add('is-active');
+  }
+
+  function closeThoughtDeck() {
+    if (thoughtDeckModal) thoughtDeckModal.classList.remove('is-active');
+  }
+
+  if (closeThoughtDeckBtn) closeThoughtDeckBtn.addEventListener('click', closeThoughtDeck);
+  if (thoughtDeckModal) {
+    thoughtDeckModal.addEventListener('click', (e) => {
+      if (e.target === thoughtDeckModal) closeThoughtDeck();
+    });
+  }
+
+  if (btnHeroThoughtDeck) {
+    btnHeroThoughtDeck.addEventListener('click', () => {
+      const ep = GYAN_SETU_EPISODES[currentEpisodeIndex] || GYAN_SETU_EPISODES[0];
+      openThoughtDeck(ep);
+    });
+  }
+
+  if (thoughtDeckPlayBtn) {
+    thoughtDeckPlayBtn.addEventListener('click', () => {
+      closeThoughtDeck();
+      if (activeThoughtDeckEpisode) {
+        const idx = GYAN_SETU_EPISODES.findIndex(e => e.id === activeThoughtDeckEpisode.id);
+        if (idx !== -1) loadEpisode(idx, true);
       }
     });
   }
 
-  function startLiveTransmission() {
-    isLiveTransmitting = true;
-    liveSessionTimeRemaining = 600; // 10 minutes
-    if (cockpitLamp) cockpitLamp.classList.add('live');
-    if (cockpitStatusText) cockpitStatusText.textContent = '🔴 ON AIR • LIVE TRANSMITTING ACROSS GYANSETU';
-    btnTransmitLabel.textContent = '⏹️ Conclude & End Broadcast';
-    btnStartLiveTransmit.style.background = 'linear-gradient(135deg, #1e293b 0%, #334155 100%)';
-
-    const bName = (document.getElementById('broadcaster-name') && document.getElementById('broadcaster-name').value.trim()) || 'Guest Researcher';
-    const bCountry = (document.getElementById('broadcaster-country') && document.getElementById('broadcaster-country').value.trim()) || 'Nairobi, Kenya';
-    const bTopic = (document.getElementById('broadcaster-topic') && document.getElementById('broadcaster-topic').value.trim()) || 'Global South Inquiry';
-
-    // Broadcast message via BroadcastChannel
-    if (liveBroadcastChannel) {
-      liveBroadcastChannel.postMessage({
-        type: 'LIVE_START',
-        name: bName,
-        country: bCountry,
-        topic: bTopic
-      });
-    }
-
-    showToast(`🔴 Transmission Active! You are Live to the World (10:00 Countdown Started)`);
-
-    // 10-Minute Timer
-    if (liveSessionInterval) clearInterval(liveSessionInterval);
-    liveSessionInterval = setInterval(() => {
-      liveSessionTimeRemaining--;
-      const mins = Math.floor(liveSessionTimeRemaining / 60);
-      const secs = liveSessionTimeRemaining % 60;
-      if (studioCountdownClock) {
-        studioCountdownClock.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        if (liveSessionTimeRemaining <= 120) {
-          studioCountdownClock.classList.add('warning');
-        }
-      }
-
-      if (liveSessionTimeRemaining <= 0) {
-        stopLiveTransmission();
-        showToast('⏰ 10-Minute Session Gracefully Concluded. Thank you for broadcasting!');
-      }
-    }, 1000);
+  if (thoughtDeckToBriefBtn) {
+    thoughtDeckToBriefBtn.addEventListener('click', () => {
+      closeThoughtDeck();
+      if (activeThoughtDeckEpisode) openClassroomBrief(activeThoughtDeckEpisode);
+    });
   }
 
-  function stopLiveTransmission() {
-    isLiveTransmitting = false;
-    if (liveSessionInterval) clearInterval(liveSessionInterval);
-    if (cockpitLamp) cockpitLamp.classList.remove('live');
-    if (cockpitStatusText) cockpitStatusText.textContent = 'STUDIO AUTHORIZED • STANDBY MODE';
-    if (btnTransmitLabel) btnTransmitLabel.textContent = '🔴 Transmit Live Across GyanSetu Network';
-    if (btnStartLiveTransmit) btnStartLiveTransmit.style.background = '';
-    if (studioCountdownClock) {
-      studioCountdownClock.textContent = '10:00';
-      studioCountdownClock.classList.remove('warning');
+  // --- 1-PAGE PRINTABLE CLASSROOM INQUIRY BRIEF ENGINE ---
+  const classroomBriefModal = document.getElementById('classroom-brief-modal');
+  const closeClassroomBriefBtn = document.getElementById('close-classroom-brief-btn');
+  const btnPrintBrief = document.getElementById('btn-print-brief');
+  const btnHeroClassroomBrief = document.getElementById('btn-hero-classroom-brief');
+
+  const CLASSROOM_BRIEFS = {
+    "ep-11": {
+      bigIdea: "Sunlight is composed of all colors of the visible spectrum. Because microscopic air molecules (nitrogen and oxygen) are much smaller than light wavelengths, they scatter short blue and violet wavelengths across the entire sky (Rayleigh scattering), while longer red wavelengths pass straight through.",
+      sparks: [
+        "If Earth had no atmosphere whatsoever, what color would the sky appear during midday, and how would stars look?",
+        "Why don't we see the sky as violet, even though violet light has an even shorter wavelength than blue and scatters the most?",
+        "During a dust storm or heavy fog, why does the sky turn gray or white instead of remaining blue?"
+      ],
+      vocab: [
+        { term: "Rayleigh Scattering", def: "The scattering of light by particles much smaller than the wavelength of the radiation, proportional to 1/λ⁴." },
+        { term: "Visible Spectrum", def: "The portion of electromagnetic radiation (400nm to 700nm) that can be detected by human eye cone cells." },
+        { term: "Optical Path Length", def: "The distance light travels through a medium, which multiplies tenfold when the sun is near the horizon." }
+      ],
+      experiment: "Fill a clear glass with water and stir in 2 drops of milk. Shine a white flashlight through the glass: viewed from the side, the scattered water glows faint sky-blue; viewed directly through the end, the transmitted beam glows sunset-orange!"
+    },
+    "ep-1": {
+      bigIdea: "Every human thought, emotion, and sensation corresponds to electrochemical impulses jumping across trillions of synaptic clefts. Yet science still faces the 'Hard Problem': how physical ion channels create subjective conscious experience.",
+      sparks: [
+        "If an artificial computer could simulate every single molecule and neuron of a human brain, would that computer genuinely feel joy and sadness?",
+        "Why can simple physical changes (like lack of sleep or low blood glucose) drastically change our emotional patience and personality?",
+        "Can physical chemistry explain both 'how' the brain detects light and 'why' the subjective experience of redness feels the way it does?"
+      ],
+      vocab: [
+        { term: "Action Potential", def: "A temporary electrical voltage reversal across a neuron membrane (-70mV to +40mV) that propagates nerve signals." },
+        { term: "Synaptic Cleft", def: "The microscopic 20-nanometer gap between communicating neurons across which chemical neurotransmitters diffuse." },
+        { term: "The Hard Problem", def: "The philosophical question of why and how physical physical brain processes produce subjective conscious experience." }
+      ],
+      experiment: "Two-Point Touch Test: Gently touch two pencil tips 1 cm apart to your fingertip (you clearly feel two distinct points). Touch the same 1 cm tips to your upper arm or back (your brain perceives it as a single point), proving varying sensory receptor density!"
+    },
+    "ep-10": {
+      bigIdea: "Forensic toxicology relies on detecting trace chemical signatures in biological tissues. While arsenic was discovered in Napoleon's hair, 19th-century everyday items—from wallpaper dyed with copper arsenite to tonics—routinely contained high arsenic levels.",
+      sparks: [
+        "How can modern forensic scientists distinguish between intentional poisoning versus everyday environmental exposure from two centuries ago?",
+        "If an entire historic town drank from lead pipes and wore arsenic-dyed clothing, what baseline should researchers use to prove homicide?",
+        "Why is quantitative chemical evidence sometimes interpreted differently by two reputable scientific teams?"
+      ],
+      vocab: [
+        { term: "Forensic Toxicology", def: "The application of analytical chemistry and pharmacology to legal, medical, and historical investigations." },
+        { term: "Scheele's Green", def: "A copper-arsenite pigment widely used in 19th-century wallpapers that emitted toxic arsine gas in damp conditions." },
+        { term: "Neutron Activation", def: "A high-precision nuclear technique measuring trace elements by bombarding hair or tissue samples with neutrons." }
+      ],
+      experiment: "Examine common household food and cleaning products for hazard labels (corrosive, flammable). Discuss how table salt (NaCl) is completely safe to eat, yet made of explosive sodium metal and poisonous chlorine gas!"
+    },
+    "ep-12": {
+      bigIdea: "Mary Shelley was inspired by 1818 bioelectric experiments showing electricity stimulated muscle contractions. The story is a timeless reminder that scientific ingenuity requires deep ethical responsibility and compassion for what we create.",
+      sparks: [
+        "Should inventors and scientists be held morally responsible for how society uses their discoveries centuries after they are gone?",
+        "Where should society draw the line between using biotechnology to cure diseases versus artificially creating new life forms?",
+        "Why was Victor Frankenstein horrified by his creation the moment it opened its eyes, despite years of obsessive work?"
+      ],
+      vocab: [
+        { term: "Galvanism", def: "The contraction of biological muscles stimulated by electric current, discovered by Luigi Galvani." },
+        { term: "Bioethics", def: "The discipline dealing with ethical, social, and moral implications of biological and medical research." },
+        { term: "Precautionary Principle", def: "The rule that if an innovation carries suspected risks of irreversible harm, the burden of proof falls on the innovator." }
+      ],
+      experiment: "Feel the electrical rhythm in your own body: check your pulse at your wrist (triggered by the sinoatrial pacemaker node in your heart). Notice how lightning in the sky and heartbeat in your chest use the exact same electron physics!"
+    },
+    "ep-13": {
+      bigIdea: "Nagpur's strategic location as the geographical crossroads of India shaped its urban evolution—from the early 18th-century Gond kingdom of Deogarh through the Maratha Bhonsle era, featuring heat-resilient basalt architecture and lake hydrology.",
+      sparks: [
+        "How does the physical geology of a landscape (such as river basins and basalt quarries) determine where ancient rulers built capitals?",
+        "What can modern architects learn from historic stone stepwells that remained naturally cool during 45°C summers without electricity?",
+        "Why was the Zero Mile Stone placed specifically in Nagpur during the Great Trigonometrical Survey of India?"
+      ],
+      vocab: [
+        { term: "Trigonometrical Survey", def: "A nationwide geodetic survey measuring exact distances across the subcontinent using triangulation geometry." },
+        { term: "Basalt Masonry", def: "Durable stone construction using ancient Deccan volcanic rock with high thermal inertia." },
+        { term: "Hydrological Stepwell", def: "Engineered underground water reservoirs designed to capture seasonal monsoons and prevent winter drought." }
+      ],
+      experiment: "Place a cup of dry dark stone and a cup of water in midday sunlight for 20 minutes. Touch both: the stone heats quickly while water warms slowly. Notice how ancient architects used water bodies and heavy stone to regulate building temperatures!"
     }
+  };
+
+  function openClassroomBrief(ep) {
+    if (!ep || !classroomBriefModal) return;
+
+    const epNumEl = document.getElementById('brief-sheet-ep-num');
+    const titleEl = document.getElementById('brief-sheet-title');
+    const catEl = document.getElementById('brief-sheet-category');
+    const durEl = document.getElementById('brief-sheet-duration');
+    const bigIdeaEl = document.getElementById('brief-sheet-big-idea');
+    const sparksEl = document.getElementById('brief-sheet-sparks');
+    const vocabEl = document.getElementById('brief-sheet-vocab');
+    const expEl = document.getElementById('brief-sheet-experiment');
+
+    if (epNumEl) epNumEl.textContent = `EPISODE #${ep.number || ''}`;
+    if (titleEl) titleEl.textContent = ep.title;
+    if (catEl) catEl.textContent = ep.category;
+    if (durEl) durEl.textContent = ep.duration;
+
+    const briefData = CLASSROOM_BRIEFS[ep.id] || {
+      bigIdea: ep.description,
+      sparks: [
+        `What fundamental questions does "${ep.title}" raise about our understanding of the universe?`,
+        "How does the historical context of this discovery change how we view science today?",
+        "If you could ask Simran Ailani one question about this topic on the Curiosity Mailbag, what would it be?"
+      ],
+      vocab: [
+        { term: "Scientific Method", def: "Systematic observation, measurement, experiment, and the formulation and testing of hypotheses." },
+        { term: "Pedagogy", def: "The method and practice of teaching, especially as an academic subject or theoretical concept." },
+        { term: "Knowledge Equity", def: "Ensuring open, barrier-free access to high-quality learning materials for students in every region." }
+      ],
+      experiment: "Listen to the episode with a friend and spend 5 minutes discussing which concept surprised you the most. Formulate your own inquiry question to send to Simran!"
+    };
+
+    if (bigIdeaEl) bigIdeaEl.textContent = briefData.bigIdea;
+
+    if (sparksEl) {
+      sparksEl.innerHTML = briefData.sparks.map(s => `<li>${s}</li>`).join('');
+    }
+
+    if (vocabEl) {
+      vocabEl.innerHTML = briefData.vocab.map(v => `
+        <div class="sheet-vocab-item">
+          <div class="vocab-term">${v.term}</div>
+          <div class="vocab-def">${v.def}</div>
+        </div>
+      `).join('');
+    }
+
+    if (expEl) expEl.textContent = briefData.experiment;
+
+    classroomBriefModal.classList.add('is-active');
+  }
+
+  function closeClassroomBrief() {
+    if (classroomBriefModal) classroomBriefModal.classList.remove('is-active');
+  }
+
+  if (closeClassroomBriefBtn) closeClassroomBriefBtn.addEventListener('click', closeClassroomBrief);
+  if (classroomBriefModal) {
+    classroomBriefModal.addEventListener('click', (e) => {
+      if (e.target === classroomBriefModal) closeClassroomBrief();
+    });
+  }
+
+  if (btnPrintBrief) {
+    btnPrintBrief.addEventListener('click', () => {
+      window.print();
+    });
+  }
+
+  if (btnHeroClassroomBrief) {
+    btnHeroClassroomBrief.addEventListener('click', () => {
+      const ep = GYAN_SETU_EPISODES[currentEpisodeIndex] || GYAN_SETU_EPISODES[0];
+      openClassroomBrief(ep);
+    });
+  }
+
+  // Hook into notes modal "Classroom Brief (PDF)" button
+  const modalOpenBriefBtn = document.getElementById('modal-open-brief-btn');
+  if (modalOpenBriefBtn) {
+    modalOpenBriefBtn.addEventListener('click', () => {
+      if (notesModal) notesModal.classList.remove('is-active');
+      const ep = GYAN_SETU_EPISODES[currentEpisodeIndex] || GYAN_SETU_EPISODES[0];
+      openClassroomBrief(ep);
+    });
   }
 
   // --- TAB 3: Collaborate & In-Browser Audio Recorder ---
@@ -1904,19 +2237,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (curatorLoggedInLabel) curatorLoggedInLabel.textContent = `Lead Host Session Active: ${profile.name}`;
       
       // Render host exclusive components
-      renderActiveCodesList();
+      renderMailbagInbox();
       renderCuratorQueue();
     } else {
       document.body.classList.remove('is-host');
       
-      // If user had curator tab open, switch back to listen tab
+      // If user had curator tab open, switch back to ask tab
       const curatorTabPane = document.getElementById('tab-content-curator');
       if (curatorTabPane && curatorTabPane.classList.contains('active')) {
         curatorTabPane.classList.remove('active');
-        const listenPane = document.getElementById('tab-content-listen');
-        if (listenPane) listenPane.classList.add('active');
+        const askPane = document.getElementById('tab-content-ask');
+        if (askPane) askPane.classList.add('active');
         studioTabBtns.forEach(btn => {
-          if (btn.getAttribute('data-tab') === 'listen') btn.classList.add('active');
+          if (btn.getAttribute('data-tab') === 'ask') btn.classList.add('active');
           else btn.classList.remove('active');
         });
       }

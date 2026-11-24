@@ -95,16 +95,16 @@
               <span id="ghost-nav-label" class="ds-state-tag">OFF</span>
             </button>
 
-            <!-- Studio & Collaboration Button -->
-            <button type="button" id="desktop-live-studio-btn" class="btn-studio-pill studio-open-btn" title="Open Global Live Transmission Studio & Collaboration Hub">
-              <span class="live-dot-pulse"></span>
-              <span>🎙️ Studio</span>
+            <!-- Curiosity Mailbag Button -->
+            <button type="button" id="desktop-live-studio-btn" class="btn-studio-pill studio-open-btn" title="Curiosity Mailbag: Ask Simran a Question or Propose a Topic">
+              <span class="live-dot-pulse" style="background:#5eead4; box-shadow:0 0 8px #5eead4;"></span>
+              <span>📬 Ask Simran</span>
             </button>
 
-            <!-- Live Stream Action -->
-            <button id="radio-mode-btn" class="btn-live-pill" title="Tune into Live Stream">
+            <!-- Continuous Broadcast Radio Action -->
+            <button id="radio-mode-btn" class="btn-live-pill" title="Tune into 24/7 Continuous Radio Broadcast">
               <span class="pulse-beacon"></span>
-              <span>Live Stream</span>
+              <span>On-Air Stream</span>
             </button>
 
             <!-- Lead Host Entry Portal & Session Status -->
@@ -286,6 +286,16 @@
 
               <button id="featured-next-btn" class="liquid-icon-btn" title="Next Episode">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+              </button>
+            </div>
+
+            <!-- Multimodal Concept Deck & 1-Page Printable Brief Actions -->
+            <div class="card-extra-dock">
+              <button type="button" id="btn-hero-thought-deck" class="deck-pill-action" title="View Multimodal Visual Concept Deck">
+                <span>💡 Concept Deck</span>
+              </button>
+              <button type="button" id="btn-hero-classroom-brief" class="deck-pill-action" title="Export 1-Page Printable Classroom Inquiry Brief">
+                <span>📄 Classroom Brief</span>
               </button>
             </div>
 
@@ -1178,9 +1188,9 @@
       <span class="bnav-icon">📥</span>
       <span class="bnav-label">Vault</span>
     </a>
-    <button type="button" class="bottom-nav-item studio-open-btn" id="bnav-studio" title="Live Transmission Studio & Collaboration Hub">
-      <span class="bnav-icon">🎙️</span>
-      <span class="bnav-label">Studio</span>
+    <button type="button" class="bottom-nav-item studio-open-btn" id="bnav-studio" title="Curiosity Mailbag: Ask Simran a Question">
+      <span class="bnav-icon">📬</span>
+      <span class="bnav-label">Ask Simran</span>
     </button>
   </nav>
 
@@ -1206,6 +1216,165 @@
           <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           <span>Play Full Episode</span>
         </button>
+        <button id="modal-open-brief-btn" class="liquid-btn btn-secondary-glass" title="Export 1-Page Printable Classroom Inquiry Brief">
+          <span>📄 Classroom Brief (PDF)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Multimodal Visual Thought Deck Modal (Concept Cards & Schematic Mental Models) -->
+  <div id="thought-deck-modal" class="modal-scrim">
+    <div class="liquid-glass-modal thought-deck-modal-card">
+      <div class="modal-top-bar">
+        <div class="thought-badge-row">
+          <span class="brief-badge">💡 MULTIMODAL CONCEPT DECK</span>
+          <span id="thought-deck-ep-tag" class="modal-time-badge">Episode Concept Map</span>
+        </div>
+        <button id="close-thought-deck-btn" class="modal-dismiss-btn" aria-label="Close Concept Deck">&times;</button>
+      </div>
+
+      <div class="thought-deck-scroll-body">
+        <div class="thought-hero-banner">
+          <h3 id="thought-deck-title" class="thought-deck-title">Visual Thought Deck</h3>
+          <p id="thought-deck-subtitle" class="thought-deck-subtitle">Intuitive conceptual breakdown, schematic mental models, and real-world mechanisms curated by Simran Ailani.</p>
+        </div>
+
+        <!-- Interactive Diagram Box -->
+        <div class="thought-diagram-card">
+          <div class="diagram-header">
+            <span class="diagram-tag">SCHEMATIC MENTAL MODEL</span>
+            <span id="thought-diagram-label" class="diagram-name">Scientific Mechanism</span>
+          </div>
+          <div id="thought-diagram-canvas-wrap" class="thought-diagram-canvas-wrap">
+            <!-- Dynamic SVG or visual concept render -->
+          </div>
+        </div>
+
+        <!-- Keynote Takeaway Cards -->
+        <div class="thought-cards-grid" id="thought-cards-container">
+          <!-- Dynamically populated 3 intuitive concept cards -->
+        </div>
+
+        <!-- Everyday Phenomenon / Real-world Application Anchor -->
+        <div class="thought-anchor-card" id="thought-anchor-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div class="modal-footer-bar">
+        <button id="thought-deck-play-btn" class="liquid-btn btn-primary-gradient">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span>Listen to Audio Story</span>
+        </button>
+        <button id="thought-deck-to-brief-btn" class="liquid-btn btn-secondary-glass">
+          <span>📄 View 1-Page Teacher Brief</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1-Page Printable Classroom Inquiry Brief Modal (Optimized for Teachers & Low-Data Classrooms) -->
+  <div id="classroom-brief-modal" class="modal-scrim">
+    <div class="liquid-glass-modal classroom-brief-modal-card">
+      <div class="modal-top-bar brief-top-bar no-print">
+        <div class="brief-title-block">
+          <span class="brief-badge">📄 RURAL CLASSROOM &amp; TEACHER COMPANION</span>
+          <h3 class="brief-modal-heading">1-Page Classroom Curiosity Brief</h3>
+        </div>
+        <div class="brief-actions-top">
+          <button id="btn-print-brief" class="liquid-btn btn-primary-gradient btn-sm">
+            <span>🖨️ Print / Save as PDF</span>
+          </button>
+          <button id="close-classroom-brief-btn" class="modal-dismiss-btn" aria-label="Close Brief">&times;</button>
+        </div>
+      </div>
+
+      <!-- Printable 1-Page Document Container -->
+      <div id="printable-brief-content" class="printable-brief-sheet">
+        <div class="sheet-header">
+          <div class="sheet-brand">
+            <div class="sheet-logo-title">GYANSETU &bull; ज्ञानसेतु</div>
+            <div class="sheet-subtitle">Student-Led Global Knowledge Platform &bull; Curated by Simran Ailani</div>
+          </div>
+          <div class="sheet-meta-box">
+            <div class="sheet-ep-num" id="brief-sheet-ep-num">EPISODE #11</div>
+            <div class="sheet-tagline">Demystifying Complex Ideas for Every Classroom</div>
+          </div>
+        </div>
+
+        <div class="sheet-divider"></div>
+
+        <div class="sheet-title-section">
+          <h2 class="sheet-episode-title" id="brief-sheet-title">What colour is the sky?</h2>
+          <div class="sheet-details-row">
+            <span><strong>Discipline:</strong> <span id="brief-sheet-category">Everyday Phenomena &amp; Physics</span></span>
+            <span><strong>Runtime:</strong> <span id="brief-sheet-duration">4m 31s</span></span>
+            <span><strong>Lead Host:</strong> Simran Ailani</span>
+            <span><strong>Format:</strong> Audio Broadcast &amp; Offline Brief</span>
+          </div>
+        </div>
+
+        <!-- Section 1: Core Scientific Principle -->
+        <div class="sheet-block">
+          <div class="sheet-block-header">
+            <span class="sheet-num-circle">1</span>
+            <h4 class="sheet-block-title">Core Scientific Principle (The "Big Idea")</h4>
+          </div>
+          <div class="sheet-block-body" id="brief-sheet-big-idea">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Section 2: Teacher Classroom Discussion Spark -->
+        <div class="sheet-block">
+          <div class="sheet-block-header">
+            <span class="sheet-num-circle">2</span>
+            <h4 class="sheet-block-title">Classroom Discussion Sparks (Open-Ended Debate)</h4>
+          </div>
+          <p class="sheet-hint">Teachers: Read these prompts aloud to stimulate inquiry, critical reasoning, and peer debate.</p>
+          <ol class="sheet-spark-list" id="brief-sheet-sparks">
+            <!-- Dynamically populated 3 thought-provoking debate prompts -->
+          </ol>
+        </div>
+
+        <!-- Section 3: Essential Vocabulary -->
+        <div class="sheet-block">
+          <div class="sheet-block-header">
+            <span class="sheet-num-circle">3</span>
+            <h4 class="sheet-block-title">Essential Scientific Vocabulary</h4>
+          </div>
+          <div class="sheet-vocab-grid" id="brief-sheet-vocab">
+            <!-- Dynamically populated terms -->
+          </div>
+        </div>
+
+        <!-- Section 4: Everyday Observation / Micro-Experiment -->
+        <div class="sheet-block">
+          <div class="sheet-block-header">
+            <span class="sheet-num-circle">4</span>
+            <h4 class="sheet-block-title">Everyday Observation &bull; Frugal Science Connection</h4>
+          </div>
+          <div class="sheet-block-body" id="brief-sheet-experiment">
+            <!-- Dynamically populated observation prompt -->
+          </div>
+        </div>
+
+        <!-- Sheet Footer: Offline Access & QR -->
+        <div class="sheet-footer">
+          <div class="sheet-footer-qr">
+            <img src="assets/images/gyansetu_qr_vercel.png" alt="Scan to Listen" class="sheet-qr-img">
+            <div class="sheet-qr-caption">
+              <strong>Scan to Listen Free</strong><br>
+              Zero subscription &bull; 2G optimized<br>
+              <code>gyansetu-five.vercel.app</code>
+            </div>
+          </div>
+          <div class="sheet-footer-note">
+            GyanSetu Democratic Acoustic Commons &bull; Produced by Simran Ailani.<br>
+            Designed for rural and low-resource classrooms. Reproducible for educational purposes without royalty.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1239,183 +1408,144 @@
     </div>
   </div>
 
-  <!-- Liquid Glass Global Live Studio & Voice Curation Hub -->
+  <!-- Liquid Glass Curiosity Mailbag & Student Voice Hub (Curated by Simran Ailani) -->
   <div id="live-studio-modal" class="modal-scrim">
     <div class="liquid-glass-modal live-studio-modal">
       <div class="modal-top-bar studio-top-bar">
         <div class="studio-header-info">
           <div class="studio-badge-row">
-            <span class="studio-badge live-beacon-pulse">🔴 GYANSETU GLOBAL TRANSMISSION NETWORK</span>
+            <span class="studio-badge mailbag-beacon-pulse">📬 GYANSETU CURIOSITY MAILBAG &amp; VOICE DESK</span>
             <span class="studio-badge-sub">Democratic Acoustic Commons • Curated by Simran Ailani</span>
           </div>
-          <h3 class="studio-modal-title">Global Live Studio &amp; Collaborator Vault</h3>
+          <h3 class="studio-modal-title">Ask Simran &amp; Student Voice Hub</h3>
         </div>
-        <button id="close-live-studio-btn" class="modal-dismiss-btn" aria-label="Close Live Studio">&times;</button>
+        <button id="close-live-studio-btn" class="modal-dismiss-btn" aria-label="Close Mailbag">&times;</button>
       </div>
 
-      <!-- Studio Navigation Tabs -->
+      <!-- Studio / Mailbag Navigation Tabs -->
       <div class="studio-tabs-bar">
-        <button type="button" class="studio-tab-btn active" data-tab="listen">
-          <span>🔴 On-Air Stream</span>
-        </button>
-        <button type="button" class="studio-tab-btn" data-tab="golive">
-          <span>🎙️ Go Live (10-Min Studio)</span>
+        <button type="button" class="studio-tab-btn active" data-tab="ask">
+          <span>📬 Ask Simran</span>
         </button>
         <button type="button" class="studio-tab-btn" data-tab="collaborate">
-          <span>🌍 Submit Episode / Voice</span>
+          <span>🌍 Propose Story / Audio</span>
         </button>
         <button type="button" class="studio-tab-btn host-only-tab" data-tab="curator">
-          <span>🛡️ Curator &amp; Host Deck</span>
+          <span>🛡️ Host Editorial Desk</span>
         </button>
       </div>
 
       <div class="studio-modal-body">
-        <!-- Tab 1: On-Air Live Stream (Listener Lounge) -->
-        <div id="tab-content-listen" class="studio-tab-pane active">
-          <div class="live-stream-hero-card">
-            <div class="live-stream-header">
-              <div class="live-status-pill">
-                <span class="pulse-beacon-red"></span>
-                <span id="live-on-air-status-text">TRANSMITTING LIVE • GLOBAL FREQUENCY</span>
+        <!-- Tab 1: Curiosity Mailbag (Ask Simran a Question) -->
+        <div id="tab-content-ask" class="studio-tab-pane active">
+          <div class="mailbag-hero-card">
+            <div class="mailbag-header">
+              <div class="mailbag-status-pill">
+                <span class="pulse-beacon-blue"></span>
+                <span>OPEN LISTENER MAILBAG &bull; ALL QUESTIONS WELCOME</span>
               </div>
-              <div class="live-listener-pill">
-                <span class="listener-icon">👥</span>
-                <span id="live-listeners-count">384 Listeners Across 18 Countries</span>
+              <div class="mailbag-stats-pill">
+                <span class="mailbag-icon">💬</span>
+                <span id="mailbag-answered-count">48 Questions Answered On-Air</span>
               </div>
             </div>
 
-            <div class="live-broadcast-meta">
-              <div class="live-country-chip" id="live-country-tag">🌍 Nairobi, Kenya &bull; Global South Initiative</div>
-              <h4 class="live-broadcast-title" id="live-stream-title">Solar Micro-Grids &amp; Solid-State Chemistry in Rural Sub-Saharan Africa</h4>
-              <p class="live-broadcast-speaker" id="live-stream-speaker">Broadcaster: <strong id="live-speaker-name">Kwame Mensah</strong> (University of Nairobi) &bull; Lead Host: <strong>Simran Ailani</strong></p>
+            <div class="mailbag-intro-block">
+              <div class="mailbag-avatar-row">
+                <img src="assets/images/logo.png" alt="Simran Ailani" class="mailbag-curator-avatar">
+                <div>
+                  <h4 class="mailbag-heading">Ask Lead Host Simran Ailani</h4>
+                  <p class="mailbag-sub">Curiosity is the engine of science! If you have an inquiry about chemistry, astrophysics, history, or the natural world, ask Simran below. Selected questions and voice clips are answered on upcoming GyanSetu episodes.</p>
+                </div>
+              </div>
             </div>
 
-            <div class="live-waveform-wrapper">
-              <canvas id="live-stream-canvas" class="live-waveform-canvas" width="600" height="90"></canvas>
-              <div class="live-frequency-callsign">GS-LIVE // 108.0 MHz SATELLITE RELAY</div>
-            </div>
+            <form id="mailbag-question-form" class="collab-form mailbag-form">
+              <div class="collab-form-grid">
+                <div class="studio-field">
+                  <label for="ask-name">Your Full Name / Nickname</label>
+                  <input type="text" id="ask-name" class="studio-text-input" placeholder="e.g. Priya Sharma" required>
+                </div>
+                <div class="studio-field">
+                  <label for="ask-location">School / College / City</label>
+                  <input type="text" id="ask-location" class="studio-text-input" placeholder="e.g. Kendriya Vidyalaya, Pune" required>
+                </div>
+                <div class="studio-field">
+                  <label for="ask-topic">Inquiry Theme / Domain</label>
+                  <select id="ask-topic" class="studio-text-input studio-select">
+                    <option value="Everyday Phenomena & Physics">Everyday Phenomena &amp; Physics (Light, Sky, Sound)</option>
+                    <option value="Chemistry & Solid-State Science">Chemistry &amp; Solid-State Science (Batteries, Atoms)</option>
+                    <option value="Mind, Neuroscience & Consciousness">Mind, Neuroscience &amp; Consciousness</option>
+                    <option value="History of Ideas & Forgotten Science">History of Ideas &amp; Forensic Science</option>
+                    <option value="Clean Tech & Energy Transitions">Clean Tech &amp; Energy Transitions</option>
+                    <option value="General Curiosity & Philosophy">General Curiosity &amp; Philosophy</option>
+                  </select>
+                </div>
+                <div class="studio-field">
+                  <label for="ask-episode-ref">Related Episode (Optional)</label>
+                  <select id="ask-episode-ref" class="studio-text-input studio-select">
+                    <option value="General Question">General Question for Simran</option>
+                    <option value="Ep 11: What colour is the sky?">Ep 11: What colour is the sky?</option>
+                    <option value="Ep 10: Napoleon wasn't poisoned">Ep 10: Napoleon wasn't poisoned.....or was he?</option>
+                    <option value="Ep 9: Are we more than our Molecules?">Ep 9: Are we more than our Molecules?</option>
+                    <option value="Ep 12: Oops, I Created Life">Ep 12: Oops, I Created Life (Frankenstein)</option>
+                    <option value="Ep 13: नागपूरचा इतिहास">Ep 13: नागपूरचा इतिहास</option>
+                    <option value="Ep 1: Can Chemistry Explain Consciousness?">Ep 1: Can Chemistry Explain Consciousness?</option>
+                  </select>
+                </div>
+                <div class="studio-field full-width">
+                  <label for="ask-question-text">Your Question or Curious Thought</label>
+                  <textarea id="ask-question-text" class="studio-textarea" rows="3" placeholder="What scientific mystery or everyday puzzle has been on your mind? Tell Simran what to explore on air..." required></textarea>
+                </div>
+              </div>
 
-            <div class="live-stream-controls-row">
-              <button id="btn-toggle-live-listen" class="liquid-btn btn-primary-gradient live-listen-btn">
-                <svg id="live-listen-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                <span id="live-listen-label">Tune In to Live Transmission</span>
+              <div class="collab-submit-row">
+                <button type="submit" id="btn-submit-mailbag-form" class="liquid-btn btn-primary-gradient collab-submit-btn">
+                  <span>📬 Send Question to Simran</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Success Receipt Box -->
+            <div id="mailbag-receipt-box" class="collab-receipt-box hidden">
+              <div class="receipt-emblem">✓</div>
+              <h4 class="receipt-title">Question Received for Simran!</h4>
+              <p class="receipt-code">MAILBAG TRACKING ID: <strong id="mailbag-receipt-id-tag">GS-ASK-4102</strong></p>
+              <p class="receipt-prose">
+                Your question has been added to Simran Ailani's editorial reading desk. Every week, top community questions are selected to be featured and answered on future GyanSetu episodes!
+              </p>
+              <button type="button" id="btn-reset-mailbag-form" class="liquid-btn btn-secondary-glass btn-sm">
+                <span>Ask Another Question</span>
               </button>
+            </div>
 
-              <div class="live-reactions-bar">
-                <span class="reactions-title">Live Solidary Reactions:</span>
-                <button type="button" class="btn-live-reaction" data-reaction="insight" title="Send Insight">
-                  <span>💡</span>
-                  <span class="reaction-count" id="count-insight">142</span>
-                </button>
-                <button type="button" class="btn-live-reaction" data-reaction="clap" title="Send Applause">
-                  <span>👏</span>
-                  <span class="reaction-count" id="count-clap">219</span>
-                </button>
-                <button type="button" class="btn-live-reaction" data-reaction="globe" title="Global South Solidarity">
-                  <span>🌍</span>
-                  <span class="reaction-count" id="count-globe">308</span>
-                </button>
-                <button type="button" class="btn-live-reaction" data-reaction="heart" title="Send Love">
-                  <span>❤️</span>
-                  <span class="reaction-count" id="count-heart">451</span>
-                </button>
+            <!-- Recent Featured Questions Carousel -->
+            <div class="mailbag-recent-box">
+              <h5 class="mailbag-recent-title">Recent Community Questions Answered on Air:</h5>
+              <div class="mailbag-sample-grid">
+                <div class="mailbag-sample-card">
+                  <div class="sample-q-author">Priya S. &bull; Pune, India</div>
+                  <div class="sample-q-text">"Why do sunsets turn vibrant orange and red instead of violet if violet scatters the most?"</div>
+                  <div class="sample-q-ans">Featured in <strong>Ep 11 (What colour is the sky?)</strong></div>
+                </div>
+                <div class="mailbag-sample-card">
+                  <div class="sample-q-author">Kwame M. &bull; Nairobi, Kenya</div>
+                  <div class="sample-q-text">"Could solid-state battery electrolytes survive extreme heat without degradation?"</div>
+                  <div class="sample-q-ans">Featured in <strong>Clean Tech Series</strong></div>
+                </div>
               </div>
             </div>
-            <div id="live-reactions-floating-zone" class="live-reactions-floating-zone"></div>
+
           </div>
         </div>
 
-        <!-- Tab 2: Go Live (10-Minute Guest Broadcaster) -->
-        <div id="tab-content-golive" class="studio-tab-pane">
-          <!-- Gate: Code Required -->
-          <div id="golive-auth-gate" class="studio-gate-box">
-            <div class="gate-icon-frame">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#ffaa11" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
-            <h4 class="gate-title">Curator Passcode Verification</h4>
-            <p class="gate-prose">
-              GyanSetu connects knowledge seekers worldwide completely free of charge. To maintain rigorous educational accuracy and protect listeners from harassment, guest broadcasters must enter an authorization code issued by Lead Curator <strong>Simran Ailani</strong>.
-            </p>
-
-            <div class="gate-input-wrapper">
-              <input type="text" id="studio-passcode-input" class="studio-text-input" placeholder="Enter Authorization Code (e.g. GS-AFRICA-2026)" autocomplete="off">
-              <button id="btn-verify-passcode" class="liquid-btn btn-primary-gradient">
-                <span>Unlock 10-Minute Studio</span>
-              </button>
-            </div>
-
-            <div class="gate-helper-row">
-              <span class="gate-demo-tip host-only-element">💡 Host Override: <code>GS-AFRICA-2026</code> &bull; <code>GS-LIVE</code> &bull; <code>GS-STUDENT</code></span>
-              <button type="button" id="btn-request-passcode-tab" class="btn-text-link">Need a 10-minute broadcast code? Request one from Lead Host &rarr;</button>
-            </div>
-          </div>
-
-          <!-- Studio Cockpit (Visible Once Unlocked) -->
-          <div id="golive-cockpit" class="studio-cockpit-box hidden">
-            <div class="cockpit-header">
-              <div class="cockpit-status-lamp">
-                <span class="studio-lamp" id="cockpit-lamp"></span>
-                <span id="cockpit-status-text">STUDIO AUTHORIZED &bull; STANDBY MODE</span>
-              </div>
-              <div class="cockpit-timekeeper">
-                <span class="timer-desc">MAX SESSION DURATION:</span>
-                <div class="digital-clock" id="studio-countdown-clock">10:00</div>
-              </div>
-            </div>
-
-            <div class="cockpit-form-grid">
-              <div class="studio-field">
-                <label for="broadcaster-name">Your Full Name &amp; Title</label>
-                <input type="text" id="broadcaster-name" class="studio-text-input" placeholder="e.g. Amara Okafor, Undergraduate Researcher">
-              </div>
-              <div class="studio-field">
-                <label for="broadcaster-country">Country / Institution</label>
-                <input type="text" id="broadcaster-country" class="studio-text-input" placeholder="e.g. Lagos, Nigeria &bull; University of Lagos">
-              </div>
-              <div class="studio-field full-width">
-                <label for="broadcaster-topic">Broadcast Inquiry Topic</label>
-                <input type="text" id="broadcaster-topic" class="studio-text-input" placeholder="e.g. Cassava Cyanide Detoxification: Indigenous Chemistry meets Modern Biochemistry">
-              </div>
-            </div>
-
-            <div class="cockpit-mic-deck">
-              <div class="mic-meta-line">
-                <div class="mic-status-badge">
-                  <span class="mic-dot" id="mic-status-dot"></span>
-                  <span id="mic-status-label">Microphone Ready (Web Audio Studio Stream)</span>
-                </div>
-                <div class="mic-time-limit-note">Automatic 10-minute cap prevents session hogging</div>
-              </div>
-
-              <div class="mic-meter-container">
-                <div class="vu-meter-bar horizontal" id="studio-vu-meter">
-                  <div class="vu-seg"></div><div class="vu-seg"></div><div class="vu-seg"></div>
-                  <div class="vu-seg"></div><div class="vu-seg"></div><div class="vu-seg"></div>
-                  <div class="vu-seg"></div><div class="vu-seg"></div><div class="vu-seg red"></div>
-                </div>
-                <canvas id="studio-mic-canvas" class="studio-mic-canvas" width="400" height="40"></canvas>
-              </div>
-            </div>
-
-            <div class="cockpit-actions-bar">
-              <button id="btn-start-live-transmit" class="liquid-btn btn-danger-gradient btn-live-transmit">
-                <span class="pulse-beacon-red"></span>
-                <span id="btn-transmit-label">🔴 Transmit Live Across GyanSetu Network</span>
-              </button>
-              <button id="btn-relock-studio" class="liquid-btn btn-secondary-glass btn-sm">
-                <span>Lock Studio</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tab 3: Submit / Record Episode (Global Voice Vault) -->
+        <!-- Tab 2: Submit / Propose Episode (Global Voice Vault) -->
         <div id="tab-content-collaborate" class="studio-tab-pane">
           <div class="collaborate-container">
             <div class="collab-intro-card">
               <h4 class="collab-heading">Lend Your Voice to GyanSetu</h4>
               <p class="collab-prose">
-                Knowledge is a universal human heritage. If you have an inquiry into chemistry, African or Asian oral histories, medicinal botany, or scientific philosophy, GyanSetu provides the stage completely free. Record right here or upload your recording.
+                Knowledge is a universal human heritage. If you have an inquiry into chemistry, oral histories, medicinal botany, or scientific philosophy, GyanSetu provides the stage completely free. Record right here or upload your recording for Simran to review.
               </p>
             </div>
 
@@ -1435,7 +1565,7 @@
                 </div>
                 <div class="studio-field">
                   <label for="collab-language">Episode Language</label>
-                  <input type="text" id="collab-language" class="studio-text-input" placeholder="e.g. English, Swahili, Yoruba, Hindi" required>
+                  <input type="text" id="collab-language" class="studio-text-input" placeholder="e.g. English, Swahili, Hindi, Marathi" required>
                 </div>
                 <div class="studio-field full-width">
                   <label for="collab-title">Proposed Episode Title</label>
@@ -1456,7 +1586,7 @@
                   </label>
                   <label class="choice-radio-label">
                     <input type="radio" name="audio-mode-choice" value="record">
-                    <span>🎙️ Record Voice in Browser (Studio Mode)</span>
+                    <span>🎙️ Record Voice in Browser</span>
                   </label>
                 </div>
 
@@ -1494,13 +1624,13 @@
               </div>
             </form>
 
-            <!-- Success Receipt Box (Shown upon submission) -->
+            <!-- Success Receipt Box -->
             <div id="collab-receipt-box" class="collab-receipt-box hidden">
               <div class="receipt-emblem">✓</div>
               <h4 class="receipt-title">Transmission Logged Successfully!</h4>
               <p class="receipt-code">OFFICIAL PROPOSAL RECEIPT: <strong id="receipt-id-tag">GS-SUB-9842</strong></p>
               <p class="receipt-prose">
-                Your episode proposal has been securely logged into the Lead Curator review queue. <strong>Simran Ailani</strong> reviews all submissions for scientific truth and conversational pedagogical clarity. Once approved, it will be scheduled for global broadcast and added to the official library.
+                Your episode proposal has been securely logged into the Lead Curator review queue. <strong>Simran Ailani</strong> reviews all submissions for scientific truth and conversational pedagogical clarity. Once approved, it will be scheduled for broadcast and added to the official catalog.
               </p>
               <button type="button" id="btn-reset-collab-form" class="liquid-btn btn-secondary-glass btn-sm">
                 <span>Submit Another Proposal</span>
@@ -1509,7 +1639,7 @@
           </div>
         </div>
 
-        <!-- Tab 4: Curator & Lead Host Command Deck (HOST ONLY) -->
+        <!-- Tab 3: Curator & Lead Host Command Deck (HOST ONLY) -->
         <div id="tab-content-curator" class="studio-tab-pane host-only-pane">
           <div class="curator-desk-header">
             <div>
@@ -1517,74 +1647,33 @@
                 <span class="green-live-dot"></span>
                 <span id="curator-logged-in-label">Lead Host Session Active: Simran Ailani</span>
               </div>
-              <h4 class="curator-heading">Station Curator &amp; Broadcast Management Deck</h4>
-              <p class="curator-sub">Review global student submissions &bull; Mint 10-minute guest passcodes &bull; Control live feed</p>
+              <h4 class="curator-heading">Station Curator &amp; Editorial Deck</h4>
+              <p class="curator-sub">Review community curiosity questions &bull; Evaluate student episode submissions &bull; Manage broadcast catalog</p>
             </div>
             <button type="button" id="btn-host-deck-logout" class="liquid-btn btn-secondary-glass btn-sm">
               <span>🚪 Sign Out</span>
             </button>
           </div>
 
-          <!-- Section A: 10-Minute Guest Broadcast Passcode Mint -->
-          <div class="host-panel-card passcode-mint-card">
+          <!-- Section A: Incoming Mailbag Questions Queue -->
+          <div class="host-panel-card submissions-vault-card">
             <div class="panel-card-header">
-              <div class="panel-icon">⚡</div>
+              <div class="panel-icon">📬</div>
               <div>
-                <h5 class="panel-title">Mint 10-Minute Guest Broadcast Passcode</h5>
-                <p class="panel-desc">Authorize a collaborator from Africa, Asia, or anywhere in the world to go live on the station for exactly 10 minutes.</p>
+                <h5 class="panel-title">Incoming Student Mailbag Questions</h5>
+                <p class="panel-desc">Curate and star top inquiries to answer in the next GyanSetu episode segment.</p>
               </div>
             </div>
 
-            <div class="passcode-mint-form">
-              <div class="mint-field-grid">
-                <div class="mint-field">
-                  <label for="mint-guest-name">Guest Name / Speaker</label>
-                  <input type="text" id="mint-guest-name" class="studio-text-input" placeholder="e.g. Kwame Mensah">
-                </div>
-                <div class="mint-field">
-                  <label for="mint-guest-country">Country / Institution</label>
-                  <input type="text" id="mint-guest-country" class="studio-text-input" placeholder="e.g. Nairobi, Kenya • UoN">
-                </div>
-                <div class="mint-field full-width">
-                  <label for="mint-guest-topic">Broadcast Topic</label>
-                  <input type="text" id="mint-guest-topic" class="studio-text-input" placeholder="e.g. Solar Micro-Grids in Rural East Africa">
-                </div>
-              </div>
-
-              <div class="mint-actions-row">
-                <button type="button" id="btn-mint-passcode" class="liquid-btn btn-primary-gradient">
-                  <span>🔑 Mint Single-Use Passcode</span>
-                </button>
-              </div>
-
-              <!-- Newly Minted Code Result Display -->
-              <div id="minted-code-result-box" class="minted-code-box hidden">
-                <div class="minted-code-banner">
-                  <span class="minted-label">NEW BROADCAST PASSCODE GENERATED:</span>
-                  <div class="minted-code-display" id="minted-code-text">GS-AFRICA-9412</div>
-                  <button type="button" id="btn-copy-minted-code" class="liquid-btn btn-secondary-glass btn-sm">
-                    <span id="copy-btn-label">📋 Copy Code</span>
-                  </button>
-                </div>
-                <p class="minted-instructions">
-                  Send this code to your guest collaborator. When they enter it into the "Go Live" tab, their microphone will unlock for exactly 10 minutes.
-                </p>
-              </div>
-
-              <!-- Active Codes Table -->
-              <div class="active-codes-table-wrap">
-                <h6 class="active-codes-title">Station Authorization Registry</h6>
-                <div id="active-codes-list" class="active-codes-list">
-                  <!-- Dynamically populated via JS -->
-                </div>
-              </div>
+            <div id="mailbag-inbox-list" class="mailbag-inbox-list">
+              <!-- Dynamically populated via JS -->
             </div>
           </div>
 
           <!-- Section B: Incoming Student Proposals Vault -->
           <div class="host-panel-card submissions-vault-card">
             <div class="panel-card-header">
-              <div class="panel-icon">📬</div>
+              <div class="panel-icon">🎙️</div>
               <div>
                 <h5 class="panel-title">Incoming Student Proposals &amp; Voice Recordings</h5>
                 <p class="panel-desc">Review proposals submitted by listeners worldwide. Approve high-quality episodes to instantly add them to the official station broadcast catalog.</p>
@@ -1635,7 +1724,7 @@
             <div class="choice-icon-bubble host-bubble">🛡️</div>
             <div class="choice-content">
               <h4 class="choice-title">Lead Host &amp; Curator</h4>
-              <p class="choice-desc">Authorized station management: review global student submissions, mint 10-minute guest broadcast codes, and control the live feed.</p>
+              <p class="choice-desc">Authorized station management: review student curiosity mailbag questions, evaluate story proposals, and curate the broadcast catalog.</p>
             </div>
             <div class="choice-action-arrow host-arrow">
               <span>Host Login &rarr;</span>
