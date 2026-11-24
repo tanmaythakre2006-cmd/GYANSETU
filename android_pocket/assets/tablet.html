@@ -1265,6 +1265,33 @@
       border-color: #f97c22;
       color: #ffbb77;
     }
+
+    /* Live Space Weather HUD */
+    .space-weather-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(0, 20, 40, 0.7);
+      border: 1px solid rgba(0, 200, 255, 0.35);
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #38bdf8;
+      letter-spacing: 0.04em;
+      margin-top: 6px;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+    }
+
+    .sw-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 6px #38bdf8;
+      animation: pulse 1.8s infinite;
+    }
+
   </style>
 </head>
 <body>
@@ -1336,9 +1363,8 @@
           </div>
           <div class="lcd-chips-row">
             <span class="lcd-chip">STEREO HI-FI</span>
-            <span class="lcd-chip">320 KBPS</span>
-            <span class="lcd-chip visual-chip" id="lcd-visual-chip" title="Click to view archive visual & comments">
-              👁 ARCHIVE LENS & NOTES
+            <span class="lcd-chip visual-chip" id="lcd-visual-chip" title="Click to view archive visual & notes">
+              👁 ARCHIVE LENS &amp; NOTES
             </span>
           </div>
         </div>
@@ -1409,6 +1435,10 @@
               <span class="beacon-label">● LIVE ON AIR</span>
             </div>
             <span class="broadcast-telemetry-tag">TRANSMITTER ACTIVE</span>
+          </div>
+          <div class="space-weather-pill" id="space-weather-indicator" title="Real-time Solar & Ionospheric HF Sky-Wave Propagation">
+            <span class="sw-pulse-dot"></span>
+            <span>IONOSPHERE: SFI 148 • SKY-WAVE OPTIMAL</span>
           </div>
 
           <!-- Dual Backlit Analog VU Meters (Moving Needle Element) -->
@@ -2509,6 +2539,9 @@
       tuneToEpisode(0, false);
       showToast('GyanSetu Flagship Restomod Console Ready');
     });
+
+  </script>
+</body>
 
   </script>
 </body>
